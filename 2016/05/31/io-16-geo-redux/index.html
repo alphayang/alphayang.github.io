@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Google IO 2016 地图开发技术回顾 - 一场地理数据开发创新博览会 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Maps API,Cloud,Big Data,AI">
+    <meta name="description" content="会场Shoreline AmphitheaterGoogle IO 2016首次将会场从位于旧金山市区的Moscone Center West移师到了Google Campus一路之隔的露天大剧场，有了更大的会场，将以往2天的会期延长到了3天，都是满满的干货，技术控表示太开心了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google IO 2016 地图开发技术回顾 - 一场地理数据开发创新博览会">
+<meta property="og:url" content="http://alphayang.github.io/2016/05/31/io-16-geo-redux/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="会场Shoreline AmphitheaterGoogle IO 2016首次将会场从位于旧金山市区的Moscone Center West移师到了Google Campus一路之隔的露天大剧场，有了更大的会场，将以往2天的会期延长到了3天，都是满满的干货，技术控表示太开心了。">
+<meta property="og:image" content="http://alphayang.github.io/img/io-16-geo-redux/14648384214170.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/io-16-geo-redux/14648389440652.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/io-16-geo-redux/14648383619058.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/io-16-geo-redux/14648400239942.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/io-16-geo-redux/14648405615630.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/io-16-geo-redux/14648411191734.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/io-16-geo-redux/14648412803522.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/io-16-geo-redux/14648408759523.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/io-16-geo-redux/14648457273867.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/io-16-geo-redux/14648459280956.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/io-16-geo-redux/14648459365750.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/io-16-geo-redux/14648461112856.jpg">
+<meta property="og:updated_time" content="2016-06-02T06:04:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Google IO 2016 地图开发技术回顾 - 一场地理数据开发创新博览会">
+<meta name="twitter:description" content="会场Shoreline AmphitheaterGoogle IO 2016首次将会场从位于旧金山市区的Moscone Center West移师到了Google Campus一路之隔的露天大剧场，有了更大的会场，将以往2天的会期延长到了3天，都是满满的干货，技术控表示太开心了。">
+<meta name="twitter:image" content="http://alphayang.github.io/img/io-16-geo-redux/14648384214170.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Google IO 2016 地图开发技术回顾 - 一场地理数据开发创新博览会</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Google IO 2016 地图开发技术回顾 - 一场地理数据开发创新博览会</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-05-31T11:30:35.000Z" itemprop="datePublished" class="page-time">
+  2016-05-31
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develop/">develop</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#会场"><span class="post-toc-number">1.</span> <span class="post-toc-text">会场</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Shoreline-Amphitheater"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Shoreline Amphitheater</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IO大巴实时地图"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">IO大巴实时地图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CODE-THE-ROAD"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">CODE THE ROAD</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#360度全景展示大巴内景"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">360度全景展示大巴内景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#大巴外景全景图"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">大巴外景全景图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#大巴车顶全景图"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">大巴车顶全景图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#虚拟赛道"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">虚拟赛道</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Terra-Bella-satellite-imagery"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">Terra Bella satellite imagery</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Google-Maps-API-beta-program"><span class="post-toc-number">2.</span> <span class="post-toc-text">Google Maps API beta program</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#地图开发演讲"><span class="post-toc-number">3.</span> <span class="post-toc-text">地图开发演讲</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Streamlining-developer-experiences-with-the-Google-Maps-APIs"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Streamlining developer experiences with the Google Maps APIs</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Understand-your-Place-in-this-world"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Understand your Place in this world</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Location-and-Proximity-Superpowers-Eddystone-Google-Beacon-Platform"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">Location and Proximity Superpowers: Eddystone + Google Beacon Platform</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Building-Geo-services-that-scale"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">Building Geo services that scale</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#reCAPTCHA-Tough-on-Bots-Easy-on-Humans-Great-on-Mobile"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">reCAPTCHA: Tough on Bots, Easy on Humans, Great on Mobile</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#无人驾驶汽车"><span class="post-toc-number">4.</span> <span class="post-toc-text">无人驾驶汽车</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#气球计划"><span class="post-toc-number">5.</span> <span class="post-toc-text">气球计划</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-io-16-geo-redux"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Google IO 2016 地图开发技术回顾 - 一场地理数据开发创新博览会</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年05月31日 19:30" datetime="2016-05-31T11:30:35.000Z"  itemprop="datePublished">2016-05-31</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develop/">develop</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="会场"><a href="#会场" class="headerlink" title="会场"></a>会场</h1><h2 id="Shoreline-Amphitheater"><a href="#Shoreline-Amphitheater" class="headerlink" title="Shoreline Amphitheater"></a>Shoreline Amphitheater</h2><p>Google IO 2016首次将会场从位于旧金山市区的Moscone Center West移师到了Google Campus一路之隔的露天大剧场，有了更大的会场，将以往2天的会期延长到了3天，都是满满的干货，技术控表示太开心了。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/io-16-geo-redux/14648384214170.jpg" alt="Shoreline" title="">
+                </div>
+                <div class="image-caption">Shoreline</div>
+            </figure></p>
+<h2 id="IO大巴实时地图"><a href="#IO大巴实时地图" class="headerlink" title="IO大巴实时地图"></a>IO大巴实时地图</h2><p>如何从酒店到会场，Maps来帮你了解摆渡车安排<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/io-16-geo-redux/14648389440652.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h2 id="CODE-THE-ROAD"><a href="#CODE-THE-ROAD" class="headerlink" title="CODE THE ROAD"></a>CODE THE ROAD</h2><p>到了地图博览会的核心地带，CODE THE ROAD大巴，从去年IO开始出发，足迹已经遍布了整个美国，今年再次从起点出发。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/io-16-geo-redux/14648383619058.jpg" alt="大巴全景" title="">
+                </div>
+                <div class="image-caption">大巴全景</div>
+            </figure></p>
+<h2 id="360度全景展示大巴内景"><a href="#360度全景展示大巴内景" class="headerlink" title="360度全景展示大巴内景"></a>360度全景展示大巴内景</h2><p>原片地址(需梯子），使用鼠标或键盘控制全景方位<br><a href="https://www.youtube.com/watch?v=z8RR0BMYLco&amp;feature=youtu.be?utm_source=twitter&amp;utm_medium=social&amp;utm_campaign=2016-geo-na-other-orgsocial-twitter-us-GoogleIO&amp;utm_content=BusTour" target="_blank" rel="external">https://www.youtube.com/watch?v=z8RR0BMYLco</a></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/io-16-geo-redux/14648400239942.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>技术控说：在Chrome中查看视频，是标准的HTML5 Video标签，使用全影录像设备生成的内容，都可以使用标准的Web技术来提供访问。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/io-16-geo-redux/14648405615630.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h2 id="大巴外景全景图"><a href="#大巴外景全景图" class="headerlink" title="大巴外景全景图"></a>大巴外景全景图</h2><p><a href="https://www.google.com/maps/place/Shoreline+Amphitheatre/@37.4243714,-122.0792483,3a,75y,259.73h,73.31t/data=!3m8!1e1!3m6!1s-IjD1C01azV4%2FVzy-b7YPWHI%2FAAAAAAAAAA8%2FGz-4TU2b8ysP8a2F7VA8eEgUvzR42NGQQCLIB!2e4!3e11!6s%2F%2Flh6.googleusercontent.com%2F-IjD1C01azV4%2FVzy-b7YPWHI%2FAAAAAAAAAA8%2FGz-4TU2b8ysP8a2F7VA8eEgUvzR42NGQQCLIB%2Fw203-h101-n-k-no%2F!7i5376!8i2688!4m5!3m4!1s0x808fb9f776f5e165:0x1ddf014a1b553f3d!8m2!3d37.4267739!4d-122.0807037!6m1!1e1" target="_blank" rel="external">猛击访问</a><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/io-16-geo-redux/14648411191734.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h2 id="大巴车顶全景图"><a href="#大巴车顶全景图" class="headerlink" title="大巴车顶全景图"></a>大巴车顶全景图</h2><p><a href="https://www.google.com/maps/place/Shoreline+Amphitheatre/@37.4243011,-122.0791626,3a,75y,216.15h,87.26t/data=!3m8!1e1!3m6!1s-_hKHc9UPuDE%2FVz3vrshT44I%2FAAAAAAAAABM%2F8q5Ayh7HSCIagUk2c0YJo5svCqwr_T2wQCLIB!2e4!3e11!6s%2F%2Flh6.googleusercontent.com%2F-_hKHc9UPuDE%2FVz3vrshT44I%2FAAAAAAAAABM%2F8q5Ayh7HSCIagUk2c0YJo5svCqwr_T2wQCLIB%2Fw203-h101-n-k-no%2F!7i5376!8i2688!4m5!3m4!1s0x808fb9f776f5e165:0x1ddf014a1b553f3d!8m2!3d37.4267739!4d-122.0807037!6m1!1e1" target="_blank" rel="external">猛击访问</a><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/io-16-geo-redux/14648412803522.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br><strong><em>制作全景图可以使用<a href="https://www.google.com/maps/streetview/publish/" target="_blank" rel="external">https://www.google.com/maps/streetview/publish/</a></em></strong></p>
+<h2 id="虚拟赛道"><a href="#虚拟赛道" class="headerlink" title="虚拟赛道"></a>虚拟赛道</h2><p>After Hour的自行车比赛。可以选用Google街景的任意路线做为赛道，沉浸式的骑行体验，让健身乐趣无穷。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/io-16-geo-redux/14648408759523.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h2 id="Terra-Bella-satellite-imagery"><a href="#Terra-Bella-satellite-imagery" class="headerlink" title="Terra Bella satellite imagery"></a>Terra Bella satellite imagery</h2><p><a href="https://terrabella.google.com" target="_blank" rel="external">https://terrabella.google.com</a><br>收购的Skymap，改名为Terra Bella，使得大众化的卫星实时数据查看和开发在不久的将来得以实现。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/io-16-geo-redux/14648457273867.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h1 id="Google-Maps-API-beta-program"><a href="#Google-Maps-API-beta-program" class="headerlink" title="Google Maps API beta program"></a>Google Maps API beta program</h1><p>地图开发者参加Beta计划，得到最优先使用前沿开发资料。<br><a href="https://developers.google.com/maps/beta/" target="_blank" rel="external">点击加入Beta Program</a></p>
+<h1 id="地图开发演讲"><a href="#地图开发演讲" class="headerlink" title="地图开发演讲"></a>地图开发演讲</h1><h2 id="Streamlining-developer-experiences-with-the-Google-Maps-APIs"><a href="#Streamlining-developer-experiences-with-the-Google-Maps-APIs" class="headerlink" title="Streamlining developer experiences with the Google Maps APIs"></a>Streamlining developer experiences with the Google Maps APIs</h2><p>最新的Google地图开发汇总<br><a href="https://www.youtube.com/watch?v=WJY2tGVQDGQ" target="_blank" rel="external">Youtube Video</a></p>
+<h2 id="Understand-your-Place-in-this-world"><a href="#Understand-your-Place-in-this-world" class="headerlink" title="Understand your Place in this world"></a>Understand your Place in this world</h2><p>如何使用全球最全的的POI数据来开发你的超酷应用<br><a href="https://www.youtube.com/watch?v=QR3PIg0RDnk" target="_blank" rel="external">Youtube Video</a><br><a href="https://code-labs.cn/io2016?cat=Geo" target="_blank" rel="external">Code Lab</a></p>
+<h2 id="Location-and-Proximity-Superpowers-Eddystone-Google-Beacon-Platform"><a href="#Location-and-Proximity-Superpowers-Eddystone-Google-Beacon-Platform" class="headerlink" title="Location and Proximity Superpowers: Eddystone + Google Beacon Platform"></a>Location and Proximity Superpowers: Eddystone + Google Beacon Platform</h2><p>使用Eddystone和Google Beacon Platform开发基于位置和周边的服务<br><a href="https://www.youtube.com/watch?v=3nYyApSiSLQ" target="_blank" rel="external">Youtube Video</a></p>
+<h2 id="Building-Geo-services-that-scale"><a href="#Building-Geo-services-that-scale" class="headerlink" title="Building Geo services that scale"></a>Building Geo services that scale</h2><p>搭配Google Cloud Platform和Google Maps API开发安全和可扩展的位置服务<br><a href="https://events.google.com/io2016/schedule?filters=Location%20%26%20Maps&amp;sid=8e621cfd-0bef-e511-a517-00155d5066d7#day2/8e621cfd-0bef-e511-a517-00155d5066d7" target="_blank" rel="external">Session</a></p>
+<h2 id="reCAPTCHA-Tough-on-Bots-Easy-on-Humans-Great-on-Mobile"><a href="#reCAPTCHA-Tough-on-Bots-Easy-on-Humans-Great-on-Mobile" class="headerlink" title="reCAPTCHA: Tough on Bots, Easy on Humans, Great on Mobile"></a>reCAPTCHA: Tough on Bots, Easy on Humans, Great on Mobile</h2><p>利用位置信息提高验证系统的用户体验<br><a href="https://www.youtube.com/watch?v=r-HlJyNWfoY" target="_blank" rel="external">Youtube Video</a></p>
+<h1 id="无人驾驶汽车"><a href="#无人驾驶汽车" class="headerlink" title="无人驾驶汽车"></a>无人驾驶汽车</h1><p>地图，导航，大数据，云计算，人工智能……，一辆无人驾驶汽车，就是将位置数据开发利用的集大成者，让多少人魂牵梦萦，利用这次大场地的活动，Google将自家的原型车搬到了会场，让与会开发者一饱眼福。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/io-16-geo-redux/14648459280956.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/io-16-geo-redux/14648459365750.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h1 id="气球计划"><a href="#气球计划" class="headerlink" title="气球计划"></a>气球计划</h1><p>气球互联网计划也是首次在IO大会上露出真容，希望这种普惠式的网络访问方式能够早一天在地球实现！<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/io-16-geo-redux/14648461112856.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-06-02T06:04:44.000Z" itemprop="dateUpdated">2016年6月2日 14:04</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2016/05/31/io-16-geo-redux/" target="_blank" rel="external">http://alphayang.github.io/2016/05/31/io-16-geo-redux/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Big-Data/">Big Data</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cloud/">Cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maps-API/">Maps API</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2016/05/31/io-16-geo-redux/&title=《Google IO 2016 地图开发技术回顾 - 一场地理数据开发创新博览会》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2016/05/31/io-16-geo-redux/&title=《Google IO 2016 地图开发技术回顾 - 一场地理数据开发创新博览会》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2016/05/31/io-16-geo-redux/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Google IO 2016 地图开发技术回顾 - 一场地理数据开发创新博览会》 — Geek Dev&url=http://alphayang.github.io/2016/05/31/io-16-geo-redux/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2016/05/31/io-16-geo-redux/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/08/16/disable-android-file-transfer-auto-start/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">禁止Android File Transfer自动启动</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/05/29/client-security-from-google/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">client-security-from-google</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="io-16-geo-redux" data-title="Google IO 2016 地图开发技术回顾 - 一场地理数据开发创新博览会" data-url="http://alphayang.github.io/2016/05/31/io-16-geo-redux/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2016/05/31/io-16-geo-redux/&title=《Google IO 2016 地图开发技术回顾 - 一场地理数据开发创新博览会》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2016/05/31/io-16-geo-redux/&title=《Google IO 2016 地图开发技术回顾 - 一场地理数据开发创新博览会》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2016/05/31/io-16-geo-redux/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Google IO 2016 地图开发技术回顾 - 一场地理数据开发创新博览会》 — Geek Dev&url=http://alphayang.github.io/2016/05/31/io-16-geo-redux/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2016/05/31/io-16-geo-redux/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNklEQVR42u3aSW7DQAwFUd3/0s42WahVn7QCNLu0CjzI/RyA5nRd+Posr/Xrfz9y98q7d335kiFDxrYMckTyLMd0Hr+lypAh4wAGCYVrPAmgd4dY32F9NhkyZMhYH46kietcLv36ZMiQISMNgjyhJJha6StDhoxzGLxM5SVo7dnXa3EZMmRsyEjTuP/8+5X5hgwZMrZifMKLt8xIMO2c5M/dZMiQMZrBAxxJ7/g4k6SJ/DwyZMiYzSA34gVt2mjrjDwvHullyJCxOaO2WvFdcLq68cCTIUPGaEZtPJm+l48kedErQ4aMExj8I9ODpgGUr4DIkCFDRi3U8mDKBwxBEStDhoxjGOluQwrjxSo51W3AlSFDxjhGGhZ5My5NAWvNOxkyZMxmpEG21pjjh06XzIJtERkyZGzLqDW2+CCTJHbk1yAoYmXIkDGOwUtE3gKrpZi1AI1SQxkyZGzO6LTp+SAh/ZT4F0OGDBmjGenYkhSWfOWillY+BFkZMmSMY/C2V7ryxcMlb7QFkw0ZMmQMZaQNfcJIi9jOcFSGDBknMMgwMh0rcipPJR/yXBkyZIxm1A5UW+Ti7bmgVpUhQ8ZQRqfR33m21nSL/w8yZMgYwegMODtpX+2XgS98yJAhYx6DjyH5SLLzzRUDrgwZMg5gpIGvv3hRS/XQYECGDBky2h/PlzyC1Q0ZMmTIwMXqGwGX3EGGDBknMNJClA8SeDlaw8iQIeMERq10JKle2pLrZHoyZMgYyvgBkp9/rZ2FyrUAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

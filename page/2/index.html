@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Geek">
+    <meta name="description" content="Of the Geek, By the Geek, For the Geek">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Geek Dev">
+<meta property="og:url" content="http://alphayang.github.io/page/2/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="Of the Geek, By the Geek, For the Geek">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Geek Dev">
+<meta name="twitter:description" content="Of the Geek, By the Geek, For the Geek">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Geek Dev</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header index-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Geek Dev</h1>
+        <h5 class="subtitle">
+            
+                Enjoy Geek Dev Life
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+<div class="container body-wrap">
+
+    <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-service-side-security-from-google"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年11月14日 10:39" datetime="2015-11-14T02:39:21.000Z"  itemprop="datePublished">2015-11-14</time>
+
+        
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/11/14/service-side-security-from-google/">向Google学习，打造安全的服务</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        引子网易邮箱过亿数据泄漏（涉及邮箱账号/密码/用户密保等）http://www.wooyun.org/bugs/wooyun-2015-0147763如果重大的安全事件，发生在曾经的三大门户之一并且是唯一以工程师起家的服务上，实在是让人心寒。互联网已经是现代生活的基础，基础设施的安全关系到我们每一个人，开发者，普通使用者。开发者对安全应该有更高的要求，更高的追求。
+携程携程的安全事件2015...
+    
+
+        <a href="/2015/11/14/service-side-security-from-google/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cloud/">cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-android-dev-emulator"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年11月05日 11:33" datetime="2015-11-05T03:33:28.000Z"  itemprop="datePublished">2015-11-05</time>
+
+        
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/11/05/android-dev-emulator/">Android 应用开发模拟器的选用</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        在 Android 应用开发过程中无论是调试还是测试都要用到 Android 系统，有模拟器（虚拟机）和真机两种选择。
+ABIABI（Applicaton Binary Interface），主要是 CPU 指令集和内存分页这两个最重要的硬件配置，现在已经运行在7个ABI：armeabi，armeabi-v7a (armeabi-v7a-hard)，arm64-v8a，x86，x86_64，...
+    
+
+        <a href="/2015/11/05/android-dev-emulator/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-useful-tools-and-links-for-svg-and-material-design"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月31日 10:39" datetime="2015-10-31T02:39:21.000Z"  itemprop="datePublished">2015-10-31</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/31/useful-tools-and-links-for-svg-and-material-design/">Android开发中处理 SVG 和 Material Design 相关的有小工具和链接</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        SVGVectorDrawable 和 AnimatedVectorDrawable向前兼容支持 API14+，官方只支持 API21+。https://github.com/wnafee/vector-compat
+将原始的 SVG 文件转换为 Android 的 XML 资源https://github.com/inloop/svg2android
+将 SVG 中的 Circle 和El...
+    
+
+        <a href="/2015/10/31/useful-tools-and-links-for-svg-and-material-design/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-all-about-brillo-and-weave"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月30日 19:17" datetime="2015-10-30T11:17:07.000Z"  itemprop="datePublished">2015-10-30</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/30/all-about-brillo-and-weave/">关于 Brillo 和 Weave， 开发者应该知道的</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        背景
+                
+                    
+                    
+                
+                
+            
+在 Google IO 2015中宣布的 Android for IoT – Brillo和配套的协议 Weave 终于要揭开神秘的面纱了。Google 在2014年1月以32...
+    
+
+        <a href="/2015/10/30/all-about-brillo-and-weave/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-android-sdk-ok"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月29日 18:45" datetime="2015-10-29T10:45:51.000Z"  itemprop="datePublished">2015-10-29</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/29/android-sdk-ok/">国内 Android SDK 更新不用科学上网了</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        做 Android 开发的同学们，最近更新 Android SDK 发现都是不需科学上网，下载速度基本上可以利用全部带宽，刚开始以为是 GFW 抽风了，但一直稳定的更新，刚才 dig 了一下，所有下载流量已经解析到了北京机房。
+可以不用再配置代理，也不会从 SDK 和 Android Studio 引入 AndroidGhost 了。
+网络 dig运营商：上海长城宽带123456789101...
+    
+
+        <a href="/2015/10/29/android-sdk-ok/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-using-bigquery-with-gas-on-hacker-news-dateset"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月25日 15:53" datetime="2015-10-25T07:53:07.000Z"  itemprop="datePublished">2015-10-25</time>
+
+        
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/">15分钟，使用BigQuery和Google Sheets对Hacker News历史数据进行在线分析</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Felipe Hoffa使用 Hacker News API将Hacker News的数据导出到了Big Query，https://bigquery.cloud.google.com/table/fh-bigquery:hackernews.comments
+这是一个共享的表，BigQuery每天有1000次的免费查询额度，再利用Google Sheets来保存查询结果并进行数据可视化，实...
+    
+
+        <a href="/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/big-data/">big data</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cloud/">cloud</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-predict-future-travel-time"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月24日 16:43" datetime="2015-10-24T08:43:47.000Z"  itemprop="datePublished">2015-10-24</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/google-maps-api/">google maps api</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/24/predict-future-travel-time/">利用Google Maps API预测未来</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        引子大数据，云计算。。。这些词汇越来越多的出现在开发者和普通人的语境里，对于这些技术，不同的角度可以有不同的解读，但目的应该是统一明确的：存储分析利用过去的数据，当然是越多越好，也就是大数据，以最快的计算速度和最低的计算成本来组织、处理、分析这些数据（云计算），为解决当下的问题提供依据，如果还能够预测未来，让资源配置更优就更好了。
+路线规划在现实世界中，人、财、物时时刻刻都在流动，为了达到最...
+    
+
+        <a href="/2015/10/24/predict-future-travel-time/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/google-maps-api/">google maps api</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-re-enable-osx-el-captian-dashboard"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月20日 20:43" datetime="2015-10-20T12:43:47.000Z"  itemprop="datePublished">2015-10-20</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/osx/">osx</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/20/re-enable-osx-el-captian-dashboard/">找回Mac OSX El Captian默认隐藏的Dashboard</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        升级到最新的10.11，出现了几个不爽的地方。
+
+TotalTermial停止更新，不支持10.11。没关系，换用iTerm 2。
+
+XtraFinder不支持10.11。找到了Snap，商店下载。App Store热键唤起Finder，并且可直接不用再点击Dock上的图标进行应用切换，直接使用快捷键Command+1,Command+2。。。，够犀利。比之前提高了效率。
+
+Dashboar...
+    
+
+        <a href="/2015/10/20/re-enable-osx-el-captian-dashboard/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/osx/">osx</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-distribute-android-library-to-jcetner"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月19日 22:03" datetime="2015-10-19T14:03:01.000Z"  itemprop="datePublished">2015-10-19</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develop/">develop</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/19/distribute-android-library-to-jcetner/">在Android Studio中发布Library到jCenter公共仓库</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        引论在Android开发，关于aar你应该知道的一文中掌握了如何引用本地的aar，更多情况下我们是直接从网络上获取公开的第三方库来进行开发，而这个网络位置就是jCenter，在gradle中使用：123repositories &#123;        jcenter()    &#125;
+jCenter是Bintray提供的公开下载服务，使用自身开发的artifactory开源应用搭建...
+    
+
+        <a href="/2015/10/19/distribute-android-library-to-jcetner/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andorid/">Andorid</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andorid-Studio/">Andorid Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-support-library-group-in-gradle"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015年10月18日 21:33" datetime="2015-10-18T13:33:52.000Z"  itemprop="datePublished">2015-10-18</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develop/">develop</a></li></ul>
+
+
+
+        
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/18/support-library-group-in-gradle/">如何在Android Studio Project中集中管理Android Support Library依赖</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        问题有时候一个Project中包含了好几个module，每个module都要用到Android Support Library，每当升级Support Library时要改好几处，相当麻烦。12345678root 	--module1 		--build.gradle	--module2		--build.gradle	--module3 		--build.gradle 	--build...
+    
+
+        <a href="/2015/10/18/support-library-group-in-gradle/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andorid/">Andorid</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andorid-Studio/">Andorid Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+    </ul>
+
+    
+<nav id="page-nav">
+    <div class="inner">
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+    </div>
+</nav>
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/page/2/&title=Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/page/2/&title=Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/page/2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Geek Dev&url=http://alphayang.github.io/page/2/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/page/2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAB0ElEQVR42u3aQW4CMQwFUO5/aSp1VYlO5jsmLqpeVmiA8IaF5fnO4xGv5/d6vfJzXX1r/e7jxMLFxW1zn8v1uvXeu8n+68/g4uLOc9eFZr1FTlnvHxU7XFzcD+Pmr5MruLi4/4ObP+TkTQ8uLu4nc/falLwkJbf35mc1XFzcBrcamJ54fTDfxcXFLXKfxZXv0C9ev+yJi4s7ws3jjHVsmpenvIW63AcXF3eEWw4miscv9n7x5uEHFxd3hFsNQNdFMLleHeLi4uLOcKvhZvXH8mIUfRcXF3eQmx+cysOL6pWo/OHi4o5z82MT+eGMvZuJpsG4uLjHuNWhyIm2pvotXFzcSe5mQWm3RHnDhIuL+7fcDqhapKrRKi4u7mnu3sCjOjTdC0qiUQouLu4Bbj5ALT+WNAa3NyNbXFzcw9xOFFI4zZH8Z0lpw8XFHeRWG5ROdNIqf7i4uIPcanzZj0STc1ab/xkuLm6bWy0o+dAlaYPyz28OX3FxcRvcvTFnpyXKD3Bcpji4uLgj3HykulfO9g5s3YxScHFxP4CbFLJkKJKMWi93w8XF/UhutTWpQm/iElxc3EFuP9zs396bYxFcXNwGtx+YVhua6oMWLi7uIPcL81psw6Y20XIAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

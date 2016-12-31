@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android开发，不可不知的so文件知识大全 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Andorid Studio,Gradle,Andorid">
+    <meta name="description" content="引论如果你是做Android系统开发，对于so文件应该不会默认；如果是做应用开发，可能更了解jar或aar文件，但你也会不经意的在开发中或是要用到的第三库/SDK中看到so的身影，那你应该往下看，全面了解Android应用在运行时的另一个重要文件类型so。
+什么是so文件so是shared object的缩写，见名思义就是共享的对象，机器可以直接运行的二进制代码。大到操作系统，小到一个专用软件，都">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发，不可不知的so文件知识大全">
+<meta property="og:url" content="http://alphayang.github.io/2015/11/27/so-files-guide/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="引论如果你是做Android系统开发，对于so文件应该不会默认；如果是做应用开发，可能更了解jar或aar文件，但你也会不经意的在开发中或是要用到的第三库/SDK中看到so的身影，那你应该往下看，全面了解Android应用在运行时的另一个重要文件类型so。
+什么是so文件so是shared object的缩写，见名思义就是共享的对象，机器可以直接运行的二进制代码。大到操作系统，小到一个专用软件，都">
+<meta property="og:image" content="http://alphayang.github.io/img/so_in_wechat.png">
+<meta property="og:image" content="http://alphayang.github.io/img/so_in_drive.png">
+<meta property="og:image" content="http://alphayang.github.io/img/so_in_youtube.png">
+<meta property="og:image" content="http://alphayang.github.io/img/gmaps_apk_size_info.png">
+<meta property="og:image" content="http://alphayang.github.io/img/multi_abi_apks.png">
+<meta property="og:image" content="http://alphayang.github.io/img/upload_apks_adv_mode.png">
+<meta property="og:image" content="http://alphayang.github.io/img/we_are_just_begining.png">
+<meta property="og:updated_time" content="2015-11-27T14:36:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android开发，不可不知的so文件知识大全">
+<meta name="twitter:description" content="引论如果你是做Android系统开发，对于so文件应该不会默认；如果是做应用开发，可能更了解jar或aar文件，但你也会不经意的在开发中或是要用到的第三库/SDK中看到so的身影，那你应该往下看，全面了解Android应用在运行时的另一个重要文件类型so。
+什么是so文件so是shared object的缩写，见名思义就是共享的对象，机器可以直接运行的二进制代码。大到操作系统，小到一个专用软件，都">
+<meta name="twitter:image" content="http://alphayang.github.io/img/so_in_wechat.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android开发，不可不知的so文件知识大全</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android开发，不可不知的so文件知识大全</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-27T12:30:35.000Z" itemprop="datePublished" class="page-time">
+  2015-11-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develope/">develope</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develope/android/">android</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#引论"><span class="post-toc-number">1.</span> <span class="post-toc-text">引论</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#什么是so文件"><span class="post-toc-number">2.</span> <span class="post-toc-text">什么是so文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#so-vs-a"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">.so vs .a</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#a-archive"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">.a:archive</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#so-shared-object"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">.so:shared object</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android中的so"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Android中的so</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#为什么使用"><span class="post-toc-number">3.</span> <span class="post-toc-text">为什么使用</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#如何使用"><span class="post-toc-number">4.</span> <span class="post-toc-text">如何使用</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#可能会出现的问题"><span class="post-toc-number">5.</span> <span class="post-toc-text">可能会出现的问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#避免问题的途径"><span class="post-toc-number">6.</span> <span class="post-toc-text">避免问题的途径</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#主要针对so文件的提供者："><span class="post-toc-number">6.1.</span> <span class="post-toc-text">主要针对so文件的提供者：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对于采用so的应用开发者"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">对于采用so的应用开发者</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#针对Google-Play进行分ABI上传"><span class="post-toc-number">7.</span> <span class="post-toc-text">针对Google Play进行分ABI上传</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">8.</span> <span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#引用"><span class="post-toc-number">9.</span> <span class="post-toc-text">引用</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-so-files-guide"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android开发，不可不知的so文件知识大全</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月27日 20:30" datetime="2015-11-27T12:30:35.000Z"  itemprop="datePublished">2015-11-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develope/">develope</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develope/android/">android</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="引论"><a href="#引论" class="headerlink" title="引论"></a>引论</h1><p>如果你是做Android系统开发，对于so文件应该不会默认；如果是做应用开发，可能更了解jar或<a href="http://alphayang.github.io/2015/10/17/all-about-aar/">aar</a>文件，但你也会不经意的在开发中或是要用到的第三库/SDK中看到so的身影，那你应该往下看，全面了解Android应用在运行时的另一个重要文件类型so。</p>
+<h1 id="什么是so文件"><a href="#什么是so文件" class="headerlink" title="什么是so文件"></a>什么是so文件</h1><p>so是shared object的缩写，见名思义就是共享的对象，机器可以直接运行的二进制代码。大到操作系统，小到一个专用软件，都离不开so。参见<a href="https://en.wikipedia.org/wiki/Library_(computing" target="_blank" rel="external">https://en.wikipedia.org/wiki/Library_(computing</a>)<br>so主要存在于Unix和Linux系统中。</p>
+<h2 id="so-vs-a"><a href="#so-vs-a" class="headerlink" title=".so vs .a"></a>.so vs .a</h2><h3 id="a-archive"><a href="#a-archive" class="headerlink" title=".a:archive"></a>.a:archive</h3><p>存档的含义，是unix系统中对于静态库的文件后缀，在软件打包时和主程序表态链接在一起，表现形式是在链接成同一个文件。<a href="https://www.golang.org" target="_blank" rel="external">go lang</a>即广泛采用这一形式，对于软件分发只有一个文件。对于打包好的软件来讲，这是专属库，所有都在出厂前打包在一起了，好处是不受外界影响，坏处是任何改动要全部分发。对于安装应用的系统来讲，当然是共享的越多越好，既省内存又省硬盘。</p>
+<h3 id="so-shared-object"><a href="#so-shared-object" class="headerlink" title=".so:shared object"></a>.so:shared object</h3><p>共享库，用过Windows的同学应该都或多或少碰到过找不到DLL或DLL错误之类的问题，其中最为著名的问题就是DLL Hell（某个著名的库，软件a使用1.0，新装的软件b使用1.0.1，导致软件a运行异常），DLL即Dynamic Link Library的缩写，和shared object表示同样的事物，只是名字不同而已。运行时按需加载，不论是系统提供的共享库还是自带的共享库，最大化利用软件分治的原理，修Bug也是更新所在so文件，不需全部更新。</p>
+<h2 id="Android中的so"><a href="#Android中的so" class="headerlink" title="Android中的so"></a>Android中的so</h2><p>so是与平台相关的二进制机器码，与ABI（Application Binary Interface）相对应，一个ABI表示相应的CPU的指令集与内存页管理，也对应于不同的C运行环境，所以so是有不同的系统版本的。<br>随着Android系统的快速发展，搭载Android的硬件平台也早已多样化了（对比WinTel联盟，直到2012年才新发展了Windows RT来适配ARM平台，2015年的Win10才进入 Raspberry Pi 2这类基于ARM的新型设备中），现在已经运行在7个ABI：armeabi，armeabi-v7a (armeabi-v7a-hard)，arm64-v8a，x86，x86_64，mips 和 mips64。</p>
+<h1 id="为什么使用"><a href="#为什么使用" class="headerlink" title="为什么使用"></a>为什么使用</h1><p>上面主要从软件开发的角度说明了为什么设计so以及开发者为什么使用so，由于Android基于Linux Kernl的，也继承了Linux中所有so相关的设计。除了系统方面的原因，Android开发者还要知道以下几点：</p>
+<ul>
+<li>so机制让开发者最大化利用已有的C和C++代码，达到重用的效果，利用软件世界积累了几十年的优秀代码</li>
+<li>so是二进制，没有解释编译的开消，用so实现的功能比纯java实现的功能要快</li>
+<li>so内存分配不受Dalivik/ART的单个应用限制，减少OOM<br>基于以上的各种好处，so在Android开发中大量使用，利用<a href="https://play.google.com/store/apps/details?id=com.xh.nativelibsmonitor.app" target="_blank" rel="external">Native Lib Monitor</a>可以看到：<br>微信（将近30个）：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/so_in_wechat.png" alt="so" title="">
+                </div>
+                <div class="image-caption">so</div>
+            </figure>
+Google Drive：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/so_in_drive.png" alt="so" title="">
+                </div>
+                <div class="image-caption">so</div>
+            </figure>
+Youtube:<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/so_in_youtube.png" alt="so" title="">
+                </div>
+                <div class="image-caption">so</div>
+            </figure>
+</li>
+</ul>
+<p><em>PS1</em>：从Youtube中的so文件可以看出安装后的应用混合使用arm和arm64两种ABI，体现了硬件的兼容性。ARM64和X86可以运行ARMv7，X86对ARMv7采用软件兼容，在CPU层面多一个指令集翻译环节，所以如果你是so文件的提供者，就算是增加工作量，也最好提供覆盖全渐ABI，让最终APP的性能不因为你而打折，这一点非常重要；作为应用开发者，在有选择的情况下，尽量选用覆盖全部ABI的库，体现为背后的技术实力。<br><em>PS2</em>：一个APK包中可以包含多个ABI的Library，而Android在安装APK时，会选择与自己最匹配的ABI安装到应用中。<br><em>PS3</em>：由PS1引发的一个问题：深爱广大Android开发者喜欢的Genymotion模拟器是基于virtualbox的x86架构，如果使用了不含x86 ABI的so库，就不能安装到Genymtion中。另外，如果Genymotion没有提供Play Service，如果开发需要的话，要安装Googel Apps x86。可以到<a href="https://basketbuild.com/gapps" target="_blank" rel="external"></a>根据你的模拟器系统版本下载合适的安装包，直接把下载好的zip包拖到Genymtion模拟器中，赚慢的话，也可以直接从我的<a href="http://pan.baidu.com/s/1hqrWNi8" target="_blank" rel="external">百度网盘</a>下载。</p>
+<h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><ul>
+<li>Android Studio，将得到的ABI放到jniLibs/ABI<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">├── AndroidManifest.xml</div><div class="line">└── jniLibs</div><div class="line">    ├── armeabi</div><div class="line">    │   └── libsnappydb-native.so</div><div class="line">    ├── armeabi-v7a</div><div class="line">    │   └── libsnappydb-native.so</div><div class="line">    ├── mips</div><div class="line">    │   └── libsnappydb-native.so</div><div class="line">    └── x86</div><div class="line">        └── libsnappydb-native.so</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>或者使用jniLibs.srcDir属性指定：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    <span class="built_in">source</span>Sets &#123;</div><div class="line">        main &#123;</div><div class="line">            jni.srcDirs = [] //<span class="built_in">disable</span> automatic ndk-build call</div><div class="line">            jniLibs.srcDir <span class="string">'main/libs'</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>eclipse中直接放到libs/ABI目录。</li>
+<li>在<a href="http://alphayang.github.io/2015/10/17/all-about-aar/">aar</a>文件中，so处于jni/ABI目录中，对于库开发者和应用开发者都不必关注，全部自动处理。</li>
+<li>在生成的APK中，所有so文件对应于lib/ABI中。</li>
+<li>当APK安装到Android系统中时，so文件位置:<br><strong>Android&lt;5.0，/data/data/PACKAGE_NAME/lib</strong><br><strong>Android&gt;=5.0，/data/app/PACKAGE_NAME/lib/CPU_ARCH/和/data/data/PACKAGE_NAME/lib</strong></li>
+</ul>
+<h1 id="可能会出现的问题"><a href="#可能会出现的问题" class="headerlink" title="可能会出现的问题"></a>可能会出现的问题</h1><p>使用了so本地库后，开发者可能会遇到“UnsatisfiedLinkError”，“dlopen: failed”等等能看见的问题，还会引发应用崩溃或性能低下等更隐蔽的问题。</p>
+<h1 id="避免问题的途径"><a href="#避免问题的途径" class="headerlink" title="避免问题的途径"></a>避免问题的途径</h1><h2 id="主要针对so文件的提供者："><a href="#主要针对so文件的提供者：" class="headerlink" title="主要针对so文件的提供者："></a>主要针对so文件的提供者：</h2><ul>
+<li>请尽量覆盖全部ABI</li>
+<li>Android NDK向前但不向后兼容，可以适当忽略“compile against the latest platform”这类优化提示。简单说，利用NDK针对android-17生成的so文件可以在android-22上运行，反之却不行。这点与Android SDK的兼容性不一样，在SDK14上编译的应用，在API23上也是可以运行的；在SDk23上的编译的应用，只要minSdkVersion小于14，同样在API14上可以运行。.</li>
+</ul>
+<h2 id="对于采用so的应用开发者"><a href="#对于采用so的应用开发者" class="headerlink" title="对于采用so的应用开发者"></a>对于采用so的应用开发者</h2><p>尽量保证你所使用的so文件编译编译的一致性，要了解你使用的库，在选择新库时要全面考虑。</p>
+<h1 id="针对Google-Play进行分ABI上传"><a href="#针对Google-Play进行分ABI上传" class="headerlink" title="针对Google Play进行分ABI上传"></a>针对Google Play进行分ABI上传</h1><p>上文中提到尽量使用覆盖全部ABI的库，其直接结果是让APK变大了好多，显然增加上用户下载负担，因为最终只会用到一个ABI，而下载的其它ABI就白白浪费了。<br>我们来看Google的明星产品Maps是如何做的。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/gmaps_apk_size_info.png" alt="gmaps_apk_size_info" title="">
+                </div>
+                <div class="image-caption">gmaps_apk_size_info</div>
+            </figure><br>用户下载的安装包大小是不固定的，也就是根据用户设备的ABI自动选择相应的安装包。这是Google Play开发者和用户提供的一大功能。<br>做为开发者，可以很方便的生成ABI对应的APK，只需在Module/build.gralde中添加：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">android&#123;</div><div class="line">	...</div><div class="line">	 splits &#123;</div><div class="line">        abi &#123;</div><div class="line">            <span class="built_in">enable</span> <span class="literal">true</span></div><div class="line">            reset()</div><div class="line">            include <span class="string">'x86'</span>, <span class="string">'x86_64'</span>, <span class="string">'armeabi-v7a'</span>, <span class="string">'arm64-v8a'</span> //select ABIs to build APKs <span class="keyword">for</span></div><div class="line">            //universalApk <span class="literal">true</span> //generate an additional APK that contains all the ABIs</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">	    // map <span class="keyword">for</span> the version code</div><div class="line">    project.ext.versionCodes = [<span class="string">'armeabi'</span>: 1, <span class="string">'armeabi-v7a'</span>: 2, <span class="string">'arm64-v8a'</span>: 3, <span class="string">'mips'</span>: 5, <span class="string">'mips64'</span>: 6, <span class="string">'x86'</span>: 8, <span class="string">'x86_64'</span>: 9]</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    android.applicationVariants.all &#123; variant -&gt;</div><div class="line">        // assign different version code <span class="keyword">for</span> each output</div><div class="line">        variant.outputs.each &#123; output -&gt;</div><div class="line">            output.versionCodeOverride =</div><div class="line">                    project.ext.versionCodes.get(output.getFilter(</div><div class="line">                            com.android.build.OutputFile.ABI), 0) * 1000000 + android.defaultConfig.versionCode</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>生成的APKs：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/multi_abi_apks.png" alt="multi_abi_apks.png" title="">
+                </div>
+                <div class="image-caption">multi_abi_apks.png</div>
+            </figure><br>上传Google Play Developer Console时使用<em>Advnaced Mode</em>：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/upload_apks_adv_mode.png" alt="upload_apks_adv_mode.png" title="">
+                </div>
+                <div class="image-caption">upload_apks_adv_mode.png</div>
+            </figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Android开发给我们开发者提供了so这样一种机制，掌握它，利用它，让你的开发工作变得更轻松，让你写出的应用运行更流畅。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/we_are_just_begining.png" alt="we_are_just_begining.png" title="">
+                </div>
+                <div class="image-caption">we_are_just_begining.png</div>
+            </figure></p>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p><a href="http://stackoverflow.com/questions/9688200/difference-between-shared-objects-so-static-libraries-a-and-dlls-so" target="_blank" rel="external">http://stackoverflow.com/questions/9688200/difference-between-shared-objects-so-static-libraries-a-and-dlls-so</a><br><a href="http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html" target="_blank" rel="external">http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html</a><br><a href="http://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html" target="_blank" rel="external">http://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html</a><br><a href="https://developer.android.com/ndk/guides/abis.html" target="_blank" rel="external">https://developer.android.com/ndk/guides/abis.html</a><br><a href="https://software.intel.com/en-us/blogs/2012/11/12/how-to-publish-your-apps-on-google-play-for-x86-based-android-devices-using" target="_blank" rel="external">https://software.intel.com/en-us/blogs/2012/11/12/how-to-publish-your-apps-on-google-play-for-x86-based-android-devices-using</a><br><a href="http://stackoverflow.com/questions/31666412/how-to-order-multiple-apks-with-native-libraries-in-google-play-store" target="_blank" rel="external">http://stackoverflow.com/questions/31666412/how-to-order-multiple-apks-with-native-libraries-in-google-play-store</a><br><a href="http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits" target="_blank" rel="external">http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits</a><br><a href="https://androidbycode.wordpress.com/2015/07/07/android-ndk-a-guide-to-deploying-apps-with-native-libraries/" target="_blank" rel="external">https://androidbycode.wordpress.com/2015/07/07/android-ndk-a-guide-to-deploying-apps-with-native-libraries/</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-27T14:36:44.000Z" itemprop="dateUpdated">2015年11月27日 22:36</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2015/11/27/so-files-guide/" target="_blank" rel="external">http://alphayang.github.io/2015/11/27/so-files-guide/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andorid/">Andorid</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andorid-Studio/">Andorid Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/11/27/so-files-guide/&title=《Android开发，不可不知的so文件知识大全》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/11/27/so-files-guide/&title=《Android开发，不可不知的so文件知识大全》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/11/27/so-files-guide/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android开发，不可不知的so文件知识大全》 — Geek Dev&url=http://alphayang.github.io/2015/11/27/so-files-guide/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/11/27/so-files-guide/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/28/android-studio-20/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android Studio 2.0</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/25/hack-android-for-display-only/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hack Andorid，使设备变身专用信息显示屏</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="so-files-guide" data-title="Android开发，不可不知的so文件知识大全" data-url="http://alphayang.github.io/2015/11/27/so-files-guide/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/11/27/so-files-guide/&title=《Android开发，不可不知的so文件知识大全》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/11/27/so-files-guide/&title=《Android开发，不可不知的so文件知识大全》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/11/27/so-files-guide/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android开发，不可不知的so文件知识大全》 — Geek Dev&url=http://alphayang.github.io/2015/11/27/so-files-guide/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/11/27/so-files-guide/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3a204DMQxF0f7/Tw+vIJh0H3uKFGfnqZqWNAsk40teL7yuX4s///7kbue7n3p4yZAhY1vGtVzr4xJMf4f12WTIkHEOg4RCHojTQ6zx67PJkCFDRvqapHrrFFCGDBkynmWk+/DwLUOGDBm1IpYcjix+9I/U4jJkyNiQwbvu///6I/MNGTJkbMW4wsXb/XwkUDvJj91kyJAxmsEDHDkob7HV2nBvPilDhoyhjFpji3xZeqB0tPDAJEGGDBlbMfrFJB8tdJK/W54MGTIOY9QwvGTtjz//eFeGDBkHMHhi17nm1R9t3v6aZMiQMZpBKsHaNYuUR56gVFWGDBmjGbzd3yl6CZgf/fZdGTJkjGak1yPSgNtJN1sDAxkyZIxg8KYbb9/XhqZpAipDhozZjLThxUMnD9m1sjn4/yBDhozNGby5nw4P0iDLE1CUGsqQIWMQg48SyRF5idu/hIFmpDJkyBjESI+YlpqdyxkIJkOGjNGMzrgxvQyRhub0MzJkyJjNIA21zlCz1ryLS2IZMmQcxiheG+1ckgCjhTfJqwwZMo5kpOGvk1CmAwkZMmScw7jClQ4YeMOOX4e9/TvIkCFjKKOT8NWuU6SFay3FlCFDxjwGCZdpG64YEMM9ZciQcRrj2fhNStYaG9XiMmTIkFEKzWlCGV9TkyFDhoxGTcz3abXzZMiQcQCDhFEysExHlen44YF2mwwZMjZkpKUjb/d3Llh0hhAyZMgYxPgCWtBLqcnn4hoAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

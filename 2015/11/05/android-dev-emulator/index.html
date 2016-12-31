@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android 应用开发模拟器的选用 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android">
+    <meta name="description" content="在 Android 应用开发过程中无论是调试还是测试都要用到 Android 系统，有模拟器（虚拟机）和真机两种选择。
+ABIABI（Applicaton Binary Interface），主要是 CPU 指令集和内存分页这两个最重要的硬件配置，现在已经运行在7个ABI：armeabi，armeabi-v7a (armeabi-v7a-hard)，arm64-v8a，x86，x86_64，mip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 应用开发模拟器的选用">
+<meta property="og:url" content="http://alphayang.github.io/2015/11/05/android-dev-emulator/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="在 Android 应用开发过程中无论是调试还是测试都要用到 Android 系统，有模拟器（虚拟机）和真机两种选择。
+ABIABI（Applicaton Binary Interface），主要是 CPU 指令集和内存分页这两个最重要的硬件配置，现在已经运行在7个ABI：armeabi，armeabi-v7a (armeabi-v7a-hard)，arm64-v8a，x86，x86_64，mip">
+<meta property="og:image" content="http://alphayang.github.io/img/android-emulator/14466966330238.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-emulator/14466970330574.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-emulator/14466972444832.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-emulator/14466980422298.jpg">
+<meta property="og:updated_time" content="2015-11-05T04:49:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 应用开发模拟器的选用">
+<meta name="twitter:description" content="在 Android 应用开发过程中无论是调试还是测试都要用到 Android 系统，有模拟器（虚拟机）和真机两种选择。
+ABIABI（Applicaton Binary Interface），主要是 CPU 指令集和内存分页这两个最重要的硬件配置，现在已经运行在7个ABI：armeabi，armeabi-v7a (armeabi-v7a-hard)，arm64-v8a，x86，x86_64，mip">
+<meta name="twitter:image" content="http://alphayang.github.io/img/android-emulator/14466966330238.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android 应用开发模拟器的选用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android 应用开发模拟器的选用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-05T03:33:28.000Z" itemprop="datePublished" class="page-time">
+  2015-11-05
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ABI"><span class="post-toc-number">1.</span> <span class="post-toc-text">ABI</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#真机"><span class="post-toc-number">2.</span> <span class="post-toc-text">真机</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#模拟器"><span class="post-toc-number">3.</span> <span class="post-toc-text">模拟器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android-SDK"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Android SDK</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Genymotion"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Genymotion</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#后记"><span class="post-toc-number">4.</span> <span class="post-toc-text">后记</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-android-dev-emulator"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android 应用开发模拟器的选用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月05日 11:33" datetime="2015-11-05T03:33:28.000Z"  itemprop="datePublished">2015-11-05</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在 Android 应用开发过程中无论是调试还是测试都要用到 Android 系统，有模拟器（虚拟机）和真机两种选择。</p>
+<h2 id="ABI"><a href="#ABI" class="headerlink" title="ABI"></a>ABI</h2><p>ABI（Applicaton Binary Interface），主要是 CPU 指令集和内存分页这两个最重要的硬件配置，现在已经运行在7个ABI：armeabi，armeabi-v7a (armeabi-v7a-hard)，arm64-v8a，x86，x86_64，mips 和 mips64。</p>
+<h2 id="真机"><a href="#真机" class="headerlink" title="真机"></a>真机</h2><p>真机在购买时已经选定了硬件ABI，ROM 的更新取决于 ROM 提供商， 就算解决了科学上网问题，Play Service 是否能正常运行也是个问题（国内 ROM 不会主动去通过 CTS 测试）。但做为 Andorid 开发者，真机还是必不可少的装备，Google Nexus系是首选，不必是最新的机型（除非做最新硬件适配），旧的硬件配置上应用性能没问题的话，更新的硬件应用性能自然更好。</p>
+<h2 id="模拟器"><a href="#模拟器" class="headerlink" title="模拟器"></a>模拟器</h2><h3 id="Android-SDK"><a href="#Android-SDK" class="headerlink" title="Android SDK"></a>Android SDK</h3><p>Android官方模拟器，基于 qemu，在 Android SDK 以 system image 展现。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-emulator/14466966330238.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br><strong>特点：</strong></p>
+<ul>
+<li>更新快</li>
+<li>有 Preview Channel</li>
+<li>Googel APIs 原生支持 play service<br><strong>缺点：</strong><br>基于 qemu 的虚拟机，慢！<br><strong>Tips</strong><br>使用 x86 的 System Images，省去 arm虚拟机到 x86物理机的指令转换开销。<h3 id="Genymotion"><a href="#Genymotion" class="headerlink" title="Genymotion"></a>Genymotion</h3><a href="https://www.genymotion.com" target="_blank" rel="external">https://www.genymotion.com</a><br>基于 VirtualBox 的模拟器，专注于模拟器产品，还提供更多功能的商业支持。<br>安装后运行：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-emulator/14466970330574.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-emulator/14466972444832.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ul>
+<p><strong> 特点： </strong></p>
+<ul>
+<li>基于不断更新的 VirtualBox，快! </li>
+<li>更好用的模拟器控制（右边栏）。</li>
+</ul>
+<p><strong> 缺点：</strong></p>
+<ul>
+<li>原生不支持 play service</li>
+<li>Android 版本支持慢<br><strong> 安装 play service</strong><br>下载 play service 相关 APK，注意选 x86，virtualbox 是 x86架构。<br><a href="http://opengapps.org/" target="_blank" rel="external">http://opengapps.org/</a><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-emulator/14466980422298.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+把下载的 zip 直接拖到运行的 genymotion 模拟器中就行了。</li>
+</ul>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>真机/官方模拟器/Genymotion 配合使用，各取所长。</p>
+<p>如果引入了第三方库，导致应用不能正常安装或运行，检查引入第三方库的 ABI 支持。例如国内很多 SDK 没有x86的支持，在开发时就只能使用 arm ABI。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-05T04:49:01.000Z" itemprop="dateUpdated">2015年11月5日 12:49</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2015/11/05/android-dev-emulator/" target="_blank" rel="external">http://alphayang.github.io/2015/11/05/android-dev-emulator/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/11/05/android-dev-emulator/&title=《Android 应用开发模拟器的选用》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/11/05/android-dev-emulator/&title=《Android 应用开发模拟器的选用》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/11/05/android-dev-emulator/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 应用开发模拟器的选用》 — Geek Dev&url=http://alphayang.github.io/2015/11/05/android-dev-emulator/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/11/05/android-dev-emulator/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/14/service-side-security-from-google/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">向Google学习，打造安全的服务</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/10/31/useful-tools-and-links-for-svg-and-material-design/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android开发中处理 SVG 和 Material Design 相关的有小工具和链接</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="android-dev-emulator" data-title="Android 应用开发模拟器的选用" data-url="http://alphayang.github.io/2015/11/05/android-dev-emulator/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/11/05/android-dev-emulator/&title=《Android 应用开发模拟器的选用》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/11/05/android-dev-emulator/&title=《Android 应用开发模拟器的选用》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/11/05/android-dev-emulator/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 应用开发模拟器的选用》 — Geek Dev&url=http://alphayang.github.io/2015/11/05/android-dev-emulator/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/11/05/android-dev-emulator/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACI0lEQVR42u3aMXKFMAwFwH//S5M2DfwnCTLBXleZScBaCkWS/fnE6/i1kt8eJ+vs2WSXGxYGBsZrGcflysPKn7p+tvcGDAyMHRhJKpwHdx3o9b5fYsbAwMAoptfeGzAwMDDuTbjXJV3y/qSJxcDAwKgWcMn2yUp2f7AXx8DAeCEjn7r//c+PnG9gYGC8ijFJlElD2ysfy1FhYGAszcgTXF6Q5UO0fAAX7YKBgbEZI9kyGYf10nS++5dQMDAwlmPMR2zV7nIy8jtNuBgYGMsx8kH8PPTqkWSesjEwMNZmzFvHJI32ePlnwsDA2IdReOCmFrT6hi8fGgMDY1HGZEDfu6qVH3OOKlwMDIzlGJOrD/lgrveXhXEbBgbGooy8TOxdp8gTbnUA16x2MTAwlmPko7RqA1y92BFdtsDAwFiU0Rv05wVcLxGXC0cMDIxtGNXQJ8P9arMa/ZfAwMBYlPFE45qM5MpXvpJoMTAwlmbko/y70uikiS0cCWBgYCzEyIdcvcJxUgIWnsLAwNiMcW/CrTalvStiGBgY+zCqlyHyY878E/TaaQwMjFUZR3ElpWQ1xF6yxsDA2IdRvS6WBJfwqlfTekcLGBgYKzHyJNs7gKx+s7xUxcDA2I1RDaXalOafqZeOMTAwMKpXuHqN6+SdGBgYGNWw8tQ8YT+ScDEwMP4xo3oYMPltdbh287gNAwPjhYxe69i7EJYfLcz/DWBgYCzB+AFYG4mH0EChdAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

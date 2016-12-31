@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android Things-物联网开发 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android,IOT">
+    <meta name="description" content="Android Things正式接替Brillo亮相，名称的改变带来了什么新的内容，广大Android开发者如何进入这一新的领域，通过本文，你不仅会了解Android Things的来龙去脉，也会直接通过代码来体验开发带给你的魅力。
+Android Everywhere一张Google IO 2015上的旧图，清晰的展示了Android的历史和未来。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Things-物联网开发">
+<meta property="og:url" content="http://alphayang.github.io/2016/12/24/android-things-for-iot-era/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="Android Things正式接替Brillo亮相，名称的改变带来了什么新的内容，广大Android开发者如何进入这一新的领域，通过本文，你不仅会了解Android Things的来龙去脉，也会直接通过代码来体验开发带给你的魅力。
+Android Everywhere一张Google IO 2015上的旧图，清晰的展示了Android的历史和未来。">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825416438921.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14829170702041.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14829170626446.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14829170553859.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14829170440133.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14829170194979.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825453655189.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825448372155.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825452661795.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825452944655.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14827190513384.png">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14827188154251.png">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14827189953432.png">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825482944588.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825484418536.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825485077055.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825487342056.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825489744413.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825490058992.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825490371488.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825491377983.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825493309616.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825493507447.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825497185723.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14825504065215.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-things/14827191554472.jpg">
+<meta property="og:updated_time" content="2016-12-31T03:29:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Things-物联网开发">
+<meta name="twitter:description" content="Android Things正式接替Brillo亮相，名称的改变带来了什么新的内容，广大Android开发者如何进入这一新的领域，通过本文，你不仅会了解Android Things的来龙去脉，也会直接通过代码来体验开发带给你的魅力。
+Android Everywhere一张Google IO 2015上的旧图，清晰的展示了Android的历史和未来。">
+<meta name="twitter:image" content="http://alphayang.github.io/img/android-things/14825416438921.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android Things-物联网开发</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android Things-物联网开发</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-12-24T00:50:09.000Z" itemprop="datePublished" class="page-time">
+  2016-12-24
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-Everywhere"><span class="post-toc-number">1.</span> <span class="post-toc-text">Android Everywhere</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Android</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android-TV"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Android TV</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android-Wear"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Android Wear</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android-Auto"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Android Auto</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android-Chromebook"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">Android Chromebook</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android-Things"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">Android Things</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-Things全解析"><span class="post-toc-number">2.</span> <span class="post-toc-text">Android Things全解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#广泛的硬件平台支持"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">广泛的硬件平台支持</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Hello-Android-Things"><span class="post-toc-number">3.</span> <span class="post-toc-text">Hello Android Things</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Flash-image-刷机"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Flash image(刷机)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Connecting-WIFI-联网"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Connecting WIFI(联网)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Hello-Android-Things项目"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">Hello Android Things项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android-Studio中新建项目"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">Android Studio中新建项目</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#添加activity"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">添加activity</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#运行输出"><span class="post-toc-number">3.3.3.</span> <span class="post-toc-text">运行输出</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Peripheral-I-O"><span class="post-toc-number">4.</span> <span class="post-toc-text">Peripheral I/O</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Code"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Code</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#更多"><span class="post-toc-number">5.</span> <span class="post-toc-text">更多</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-android-things-for-iot-era"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android Things-物联网开发</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年12月24日 8:50" datetime="2016-12-24T00:50:09.000Z"  itemprop="datePublished">2016-12-24</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Android Things正式接替Brillo亮相，名称的改变带来了什么新的内容，广大Android开发者如何进入这一新的领域，通过本文，你不仅会了解Android Things的来龙去脉，也会直接通过代码来体验开发带给你的魅力。</p>
+<h1 id="Android-Everywhere"><a href="#Android-Everywhere" class="headerlink" title="Android Everywhere"></a>Android Everywhere</h1><p>一张Google IO 2015上的旧图，清晰的展示了Android的历史和未来。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825416438921.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14829170702041.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>处于中心的Android Mobile，已经占据了全球手机市场绝大多数份额，几十亿部Androd手机，构成了Android生态系统最坚实的基础。</p>
+<h2 id="Android-TV"><a href="#Android-TV" class="headerlink" title="Android TV"></a>Android TV</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14829170626446.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>随着着电视大屏发展的脚步，Android TV也成了所有电视盒子和智能电视的不二之选，主要归功于Android硬件系统的开放、庞大的开发者群体、完整的工具链。如果说手机端还有iOS将近20%的份额，在TV端，目测tvOS不到2%，Android TV也就代表了整个智能电视，国内更是100%的Android TV,Apple TV没有国行版本。</p>
+<h2 id="Android-Wear"><a href="#Android-Wear" class="headerlink" title="Android Wear"></a>Android Wear</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14829170553859.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>让你的应用跑在手表上，同样使用熟悉的开发工具，主要是面向海外的应用，由于国内Android Mobile严重分裂，而Android Wear需要依赖手机的支持。</p>
+<h2 id="Android-Auto"><a href="#Android-Auto" class="headerlink" title="Android Auto"></a>Android Auto</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14829170440133.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>针对汽车的使用场景进行优化，有了Android Auto就不用上车后就是找电源线，然后开导航，再把手机放到各种架子上，而是直接把Android Mobile放到原生底座上，直接使用语音和易操作的中控大屏。</p>
+<h2 id="Android-Chromebook"><a href="#Android-Chromebook" class="headerlink" title="Android Chromebook"></a>Android Chromebook</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14829170194979.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>从 Chrome 操作系统版本 M53 开始，可以直接使用Chromebook中的Google Play Store下载和使用Android应用，现在使用的Gogole Chrome版本是55，那么绝大多数已有Chromebook都已经支持Android应用，新的Chromebook自然都会支持。<br><a href="https://developer.android.com/topic/arc/index.html" target="_blank" rel="external">针对 Chromebook 优化应用</a><br><a href="https://www.chromium.org/chromium-os/chrome-os-systems-supporting-android-apps" target="_blank" rel="external">支持Android应用的Chromebook列表</a><br>Android和Chrome两大系统的合并，除了带来了Android丰富的应用以外，对于用户最大的好处就是自动更新了，Chrome自动下载更新，下次重新打开/启动时自动应用更新，从Android Nougat开始，Android系统也将使用这种更新机制。<br>根据<a href="http://www.theverge.com/2016/5/19/11711714/chromebooks-outsold-macs-us-idc-figures" target="_blank" rel="external">IDC报告</a>,Chromebook在2016年第一季度的出货量已经在美国市场超越了Mac，特别是由于教育市场的大量需求。<br>这里，还要注意,Chromebook使用的Chrome OS和Google Chrome高度共享代码，既然Android应用可以在Chromebook上运行，当未来在Mac/Windows/Linux上可以时，你也不要感到惊讶。</p>
+<h2 id="Android-Things"><a href="#Android-Things" class="headerlink" title="Android Things"></a>Android Things</h2><p>终于到了今天的主角登场，Android Things！先看外表。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825453655189.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>再看内部核心硬件。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825448372155.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>它的愿景就是将无数的的设备连接起来，Android Things作为物联网的大脑，使用公开协议<a href="https://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/">Weave</a>与广大的传感器/外部设备进行对话。<br>不像Android其它系统，Android Things大多数情况下只在后台以服务方式运行，没有显示屏，默默的与打印机、门锁、烤箱、灯泡、插座这些设备一起提供服务。</p>
+<h1 id="Android-Things全解析"><a href="#Android-Things全解析" class="headerlink" title="Android Things全解析"></a>Android Things全解析</h1><p>##　Android Things架构</p>
+<p>先看Brillo和Android Things的架构图进行对比。<br>这是Brillo，<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825452661795.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>这是Android Things，<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825452944655.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>可以很清楚的看出来：</p>
+<ul>
+<li>Brillo使用C/C++基于NDK进行开发,Android Things通过Java API面向广大的Android和Java开发者，就算是新手，Android的也是极易上手的。各位苦于嵌入式开发各种工具坑的福音到了，对于性能和底层要求高的部分仍然可以用NDK编写，在Android Studio里调试NDK代码也和Java代码一样的简单。</li>
+<li>Android Studio，Android SDK，Play service和Firebase,这些工具和Service形成了完整易用的工具链。</li>
+<li>Android Things出生最晚，更新条件也是最好的，直接使用Android Nougat的自动后台更新机制，最大限度的提高系统的安全性。<h2 id="广泛的硬件平台支持"><a href="#广泛的硬件平台支持" class="headerlink" title="广泛的硬件平台支持"></a>广泛的硬件平台支持</h2>现在支持以下3款硬件<br><a href="https://developer.android.com/things/hardware/edison.html" target="_blank" rel="external">Intel Edison</a><br>开发版中的贵族。<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14827190513384.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<a href="https://developer.android.com/things/hardware/edison.html" target="_blank" rel="external">NXP Pico</a><br>中规中矩的中间阶层。<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14827188154251.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ul>
+<p><a href="https://developer.android.com/things/hardware/raspberrypi.html" target="_blank" rel="external">Raspberry Pi 3</a><br>少了草根精英树莓派怎么行。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14827189953432.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h1 id="Hello-Android-Things"><a href="#Hello-Android-Things" class="headerlink" title="Hello Android Things"></a>Hello Android Things</h1><p>买到的开发版都是没有装操作系统系统的，第一步先把Android Things刷到板子里。</p>
+<h2 id="Flash-image-刷机"><a href="#Flash-image-刷机" class="headerlink" title="Flash image(刷机)"></a>Flash image(刷机)</h2><p><a href="https://developer.android.com/things/hardware/index.html" target="_blank" rel="external">官方刷机教程</a><br>以Intel Edison为例:<br>0.Android SDK Platform Tools 25.0.3以上，fastboot工具添加到PATH环境变量中，以便从任意目录运行。<br>1.下载后打Intel Flash Tool，加打开下载好的对应刷机包。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825482944588.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<ol>
+<li><p>使用USB线链接Edison，如果Edison没有显示，换USB口和线试试。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825484418536.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+<li><p>Start to Flash（开始刷机）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825485077055.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ol>
+<p>4.使用Fastboot刷入系统镜像，此时需要几十秒，光System.img就有500多M。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825487342056.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825489744413.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>5.刷入Google Service镜像。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825490058992.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>6.刷入OEM镜像。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825490371488.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>7.重启</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fastboot reboot</div></pre></td></tr></table></figure>
+<p>8.验证系统状态。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825491377983.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>如果出现以下Error，把Intel Flash Tool关掉，重新连接下USB。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">List of devices attached</div><div class="line">adb server version (35) doesn<span class="string">'t match this client (36); killing...</span></div><div class="line">adb E 69469 2714428 usb_osx.cpp:327] Could not open interface: e00002c5</div><div class="line">adb E 69469 2714428 usb_osx.cpp:289] Could not find device interface</div><div class="line">error: could not install *smartsocket* listener: Address already in use</div><div class="line">ADB server didn't ACK</div><div class="line">* failed to start daemon *</div><div class="line">error: cannot connect to daemon</div></pre></td></tr></table></figure></p>
+<h2 id="Connecting-WIFI-联网"><a href="#Connecting-WIFI-联网" class="headerlink" title="Connecting WIFI(联网)"></a>Connecting WIFI(联网)</h2><p>依然是熟悉的adb命令和服务启动参数<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ adb shell am startservice \</div><div class="line">    -n com.google.wifisetup/.WifiSetupService \</div><div class="line">    <span class="_">-a</span> WifiSetupService.Connect \</div><div class="line">    <span class="_">-e</span> ssid SSID \</div><div class="line">    <span class="_">-e</span> passphrase password</div></pre></td></tr></table></figure></p>
+<p>用logcat查看网络状态<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ adb logcat <span class="_">-d</span> | grep Wifi</div><div class="line">...</div><div class="line">V WifiWatcher: Network state changed to CONNECTED</div><div class="line">V WifiWatcher: SSID changed: ...</div><div class="line">I WifiConfigurator: Successfully connected to ...</div></pre></td></tr></table></figure></p>
+<p>Ping检测<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ adb shell ping 114.114.114.114</div><div class="line">PING 114.114.114.114 (114.114.114.114) 56(84) bytes of data.</div><div class="line">64 bytes from 114.114.114.114: icmp_seq=1 ttl=57 time=6.67 ms</div><div class="line">64 bytes from 114.114.114.114: icmp_seq=2 ttl=57 time=55.5 ms</div><div class="line">64 bytes from 114.114.114.114: icmp_seq=3 ttl=57 time=23.0 ms</div><div class="line">64 bytes from 114.114.114.114: icmp_seq=4 ttl=57 time=245 ms</div></pre></td></tr></table></figure></p>
+<h2 id="Hello-Android-Things项目"><a href="#Hello-Android-Things项目" class="headerlink" title="Hello Android Things项目"></a>Hello Android Things项目</h2><h3 id="Android-Studio中新建项目"><a href="#Android-Studio中新建项目" class="headerlink" title="Android Studio中新建项目"></a>Android Studio中新建项目</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825493309616.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825493507447.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>在build.gralde中添加依赖com.google.android.things:androidthings</p>
+<script src="//gist.github.com/ff7fc6cff9050d0df90a101576bb93f1.js"></script>
+<p>此处依赖方式是provided，让Android Things使用系统中的库。</p>
+<h3 id="添加activity"><a href="#添加activity" class="headerlink" title="添加activity"></a>添加activity</h3><p>添加一个主activity并配置AndroidManifest.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">          <span class="attr">package</span>=<span class="string">"com.geekdev.alpha.androidthings"</span>&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">application</span></span></div><div class="line">    <span class="attr">android:allowBackup</span>=<span class="string">"true"</span></div><div class="line">    <span class="attr">android:icon</span>=<span class="string">"@mipmap/ic_launcher"</span></div><div class="line">    <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span></div><div class="line">    <span class="attr">android:supportsRtl</span>=<span class="string">"true"</span></div><div class="line">    <span class="attr">android:theme</span>=<span class="string">"@style/AppTheme"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">uses-library</span> <span class="attr">android:name</span>=<span class="string">"com.google.android.things"</span>/&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".MainActivity"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MAIN"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.LAUNCHER"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MAIN"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.IOT_LAUNCHER"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">application</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>在Activity中输出Hello Android Things<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = MainActivity.class.getSimpleName();</div><div class="line"></div><div class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(@Nullable Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">    Log.d(TAG, <span class="string">"Hello Android Things!"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="运行输出"><a href="#运行输出" class="headerlink" title="运行输出"></a>运行输出</h3><p>直接Command+R，可以在logcat窗口中看到结果了。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825497185723.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h1 id="Peripheral-I-O"><a href="#Peripheral-I-O" class="headerlink" title="Peripheral I/O"></a>Peripheral I/O</h1><p>不满足于Hello Android Things，继续来使用Android Things对外设进行操作。<br>使用Button driver对LED灯进行开关操作。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.geekdev.alpha.androidthings;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.app.Activity;</div><div class="line"><span class="keyword">import</span> android.os.Bundle;</div><div class="line"><span class="keyword">import</span> android.util.Log;</div><div class="line"><span class="keyword">import</span> android.view.KeyEvent;</div><div class="line"><span class="keyword">import</span> android.widget.Button;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.google.android.things.contrib.driver.button.ButtonInputDriver;</div><div class="line"><span class="keyword">import</span> com.google.android.things.pio.Gpio;</div><div class="line"><span class="keyword">import</span> com.google.android.things.pio.PeripheralManagerService;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by Alpha.</div><div class="line"> * &lt;p&gt;</div><div class="line"> * Example of using Button driver for toggling a LED.</div><div class="line"> * &lt;p&gt;</div><div class="line"> * This activity initialize an InputDriver to emit key events when the button GPIO pin state change</div><div class="line"> * and flip the state of the LED GPIO pin.</div><div class="line"> * &lt;p&gt;</div><div class="line"> * You need to connect an LED and a push button switch to pins specified in &#123;<span class="doctag">@link</span> BoardDefaults&#125;</div><div class="line"> * according to the schematic provided above.</div><div class="line"> */</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = MainActivity.class.getSimpleName();</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">private</span> Gpio mLedGpio;</div><div class="line">    <span class="keyword">private</span> ButtonInputDriver mButtonInputDriver;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        Log.d(TAG, <span class="string">"Hello Android Things!"</span>);</div><div class="line">        Log.i(TAG, <span class="string">"Starting ButtonActivity"</span>);</div><div class="line"></div><div class="line">        PeripheralManagerService pioService = <span class="keyword">new</span> PeripheralManagerService();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Log.i(TAG, <span class="string">"Configuring GPIO pins"</span>);</div><div class="line">            mLedGpio = pioService.openGpio(BoardDefaults.getGPIOForLED());</div><div class="line">            mLedGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);</div><div class="line"></div><div class="line">            Log.i(TAG, <span class="string">"Registering button driver"</span>);</div><div class="line">            <span class="comment">// Initialize and register the InputDriver that will emit SPACE key events</span></div><div class="line">            <span class="comment">// on GPIO state changes.</span></div><div class="line">            mButtonInputDriver = <span class="keyword">new</span> ButtonInputDriver(</div><div class="line">                    BoardDefaults.getGPIOForButton(),</div><div class="line">                    Button.LogicState.PRESSED_WHEN_LOW,</div><div class="line">                    KeyEvent.KEYCODE_SPACE);</div><div class="line">            mButtonInputDriver.register();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            Log.e(TAG, <span class="string">"Error configuring GPIO pins"</span>, e);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onKeyDown</span><span class="params">(<span class="keyword">int</span> keyCode, KeyEvent event)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (keyCode == KeyEvent.KEYCODE_SPACE) &#123;</div><div class="line">            <span class="comment">// Turn on the LED</span></div><div class="line">            setLedValue(<span class="keyword">true</span>);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onKeyDown(keyCode, event);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onKeyUp</span><span class="params">(<span class="keyword">int</span> keyCode, KeyEvent event)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (keyCode == KeyEvent.KEYCODE_SPACE) &#123;</div><div class="line">            <span class="comment">// Turn off the LED</span></div><div class="line">            setLedValue(<span class="keyword">false</span>);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onKeyUp(keyCode, event);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Update the value of the LED output.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setLedValue</span><span class="params">(<span class="keyword">boolean</span> value)</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            mLedGpio.setValue(value);</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            Log.e(TAG, <span class="string">"Error updating GPIO value"</span>, e);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onDestroy();</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (mButtonInputDriver != <span class="keyword">null</span>) &#123;</div><div class="line">            mButtonInputDriver.unregister();</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                mButtonInputDriver.close();</div><div class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                Log.e(TAG, <span class="string">"Error closing Button driver"</span>, e);</div><div class="line">            &#125; <span class="keyword">finally</span> &#123;</div><div class="line">                mButtonInputDriver = <span class="keyword">null</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (mLedGpio != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                mLedGpio.close();</div><div class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                Log.e(TAG, <span class="string">"Error closing LED GPIO"</span>, e);</div><div class="line">            &#125; <span class="keyword">finally</span> &#123;</div><div class="line">                mLedGpio = <span class="keyword">null</span>;</div><div class="line">            &#125;</div><div class="line">            mLedGpio = <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>添加一个开发板的处理工具类BoardDefaults.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.geekdev.alpha.androidthings;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.os.Build;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.google.android.things.pio.PeripheralManagerService;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by Alpha.</div><div class="line"> */</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BoardDefaults</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEVICE_EDISON_ARDUINO = <span class="string">"edison_arduino"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEVICE_EDISON = <span class="string">"edison"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEVICE_RPI3 = <span class="string">"rpi3"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEVICE_NXP = <span class="string">"imx6ul"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String sBoardVariant = <span class="string">""</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Return the GPIO pin that the LED is connected on.</div><div class="line">     * For example, on Intel Edison Arduino breakout, pin "IO13" is connected to an onboard LED</div><div class="line">     * that turns on when the GPIO pin is HIGH, and off when low.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getGPIOForLED</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">switch</span> (getBoardVariant()) &#123;</div><div class="line">            <span class="keyword">case</span> DEVICE_EDISON_ARDUINO:</div><div class="line">                <span class="keyword">return</span> <span class="string">"IO13"</span>;</div><div class="line">            <span class="keyword">case</span> DEVICE_EDISON:</div><div class="line">                <span class="keyword">return</span> <span class="string">"GP45"</span>;</div><div class="line">            <span class="keyword">case</span> DEVICE_RPI3:</div><div class="line">                <span class="keyword">return</span> <span class="string">"BCM6"</span>;</div><div class="line">            <span class="keyword">case</span> DEVICE_NXP:</div><div class="line">                <span class="keyword">return</span> <span class="string">"GPIO4_IO21"</span>;</div><div class="line">            <span class="keyword">default</span>:</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Unknown Build.DEVICE "</span> + Build.DEVICE);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Return the GPIO pin that the Button is connected on.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getGPIOForButton</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">switch</span> (getBoardVariant()) &#123;</div><div class="line">            <span class="keyword">case</span> DEVICE_EDISON_ARDUINO:</div><div class="line">                <span class="keyword">return</span> <span class="string">"IO12"</span>;</div><div class="line">            <span class="keyword">case</span> DEVICE_EDISON:</div><div class="line">                <span class="keyword">return</span> <span class="string">"GP44"</span>;</div><div class="line">            <span class="keyword">case</span> DEVICE_RPI3:</div><div class="line">                <span class="keyword">return</span> <span class="string">"BCM21"</span>;</div><div class="line">            <span class="keyword">case</span> DEVICE_NXP:</div><div class="line">                <span class="keyword">return</span> <span class="string">"GPIO4_IO20"</span>;</div><div class="line">            <span class="keyword">default</span>:</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Unknown Build.DEVICE "</span> + Build.DEVICE);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getBoardVariant</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!sBoardVariant.isEmpty()) &#123;</div><div class="line">            <span class="keyword">return</span> sBoardVariant;</div><div class="line">        &#125;</div><div class="line">        sBoardVariant = Build.DEVICE;</div><div class="line">        <span class="comment">// For the edison check the pin prefix</span></div><div class="line">        <span class="comment">// to always return Edison Breakout pin name when applicable.</span></div><div class="line">        <span class="keyword">if</span> (sBoardVariant.equals(DEVICE_EDISON)) &#123;</div><div class="line">            PeripheralManagerService pioService = <span class="keyword">new</span> PeripheralManagerService();</div><div class="line">            List&lt;String&gt; gpioList = pioService.getGpioList();</div><div class="line">            <span class="keyword">if</span> (gpioList.size() != <span class="number">0</span>) &#123;</div><div class="line">                String pin = gpioList.get(<span class="number">0</span>);</div><div class="line">                <span class="keyword">if</span> (pin.startsWith(<span class="string">"IO"</span>)) &#123;</div><div class="line">                    sBoardVariant = DEVICE_EDISON_ARDUINO;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sBoardVariant;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行到如下的Raspberry Pi 3中，使用按钮来控制LED灯。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14825504065215.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>所有示例项目代码可有<a href="https://github.com/alphayang/android-things-start" target="_blank" rel="external">Github</a>中找到.</p>
+<h1 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h1><p>到这里，你已经了解Android Things的历史，特点和开发。更多关于Google技术的内容，欢迎加入G tech online meetup微信群进行交流。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-things/14827191554472.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-12-31T03:29:34.000Z" itemprop="dateUpdated">2016年12月31日 11:29</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2016/12/24/android-things-for-iot-era/" target="_blank" rel="external">http://alphayang.github.io/2016/12/24/android-things-for-iot-era/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IOT/">IOT</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2016/12/24/android-things-for-iot-era/&title=《Android Things-物联网开发》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2016/12/24/android-things-for-iot-era/&title=《Android Things-物联网开发》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2016/12/24/android-things-for-iot-era/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android Things-物联网开发》 — Geek Dev&url=http://alphayang.github.io/2016/12/24/android-things-for-iot-era/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2016/12/24/android-things-for-iot-era/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/08/21/test-low-speed-load-for-web/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">利器系列-Web网络模拟工具，测试应用在低速不稳定网络中的表现</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="android-things-for-iot-era" data-title="Android Things-物联网开发" data-url="http://alphayang.github.io/2016/12/24/android-things-for-iot-era/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2016/12/24/android-things-for-iot-era/&title=《Android Things-物联网开发》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2016/12/24/android-things-for-iot-era/&title=《Android Things-物联网开发》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2016/12/24/android-things-for-iot-era/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android Things-物联网开发》 — Geek Dev&url=http://alphayang.github.io/2016/12/24/android-things-for-iot-era/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2016/12/24/android-things-for-iot-era/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACq0lEQVR42u3aMVIDMRAEQP7/aUgJbDOj1RqKakVXYHRqB5KY3Y+PeHx+G89+++yTZ8+v57k88PDw8AZLfz118oJkQQmm/aunM+Dh4eGt8fKFvp4u+Un7peSHBB4eHt5f5s1v8TkJDw8P7z/x8v/9X39mEmrg4eHh/Rav3Yg3ots8RF7JWvDw8PBi3uT6+1vPK/U9PDw8vHFVPdlw8xDhrMyWHwYP5sTDw8Nb4LUFqnwpbeEq39vbdeLh4eG9h3d2wU2OkPb4yUOQp2vDw8PDewvvrMyfvHKenRSlLzw8PLw13tnGnYcUbbQxPyTw8PDwtnmTuHYyTxIx5NRRnoGHh4cX85ILbrKgNlbIQ432+v6gvoeHh4d3ldc2NiWhw+SraeOGaOV4eHh4C7x2454X+M/aFIrDAA8PD2+NN2mBOgsp2gMjn+HBJ/Hw8PAWeHmxv92mz5aVl+KKkBcPDw/vKu8sMK0bnuIDJmkpuNY0gIeHh3eJ1455c0DOrlu18PDw8BZ47eY+uTRPYt+2EeEw0sXDw8Mb3D8TdhtA3Ipu8wgDDw8Pb4OXb+iTRqg8Gk6OiiIQwcPDw3sLLyn8t8FuMkMeKBdNY3h4eHjLvDZKmLcdHG73+TGGh4eHt8BLLsd5O1QyTwtuL+hFSo2Hh4c34LWRxBmmXVz79qhpAA8PD2+Bl2/l+cvmZa3DdgE8PDy8ZV4bpN5tDpgEuFEMgYeHh3eJ91mOCxfcowAiby940HSFh4eHd5XXbrhtA8HZDO3zhYGHh4dX8uZlrfwAyK/a7cHwQwEMDw8Pb4HXNjblkcFZ68DkALvQt4WHh4f3Fl4b/uZhRD4PHh4e3t/knW3lbTPBPE/Aw8PD2+bljVYbJatJEeuHt+Dh4eEt8M629UkDa4u/AMDDw8O7w/sCdlsW2+ugoLgAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

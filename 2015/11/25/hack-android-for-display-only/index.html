@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Hack Andorid，使设备变身专用信息显示屏 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android">
+    <meta name="description" content="引论机场、车站、高速服务区随处可见信息显示屏，有的高悬只做单向显示，有的在地面只可在屏幕上进行操作如导航、查询等，在Andorid之前这块是嵌入式以及Win Embed的领域。现在Android设备的成本以及性能，Andorid App开发技术和开发人员的丰富，用Android驱动信息展示机已是更为合理的趋势。
+在这类设备上，绝大多数都是使用物理遮盖或硬件定制，将正常的Andorid系统所必需的控">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hack Andorid，使设备变身专用信息显示屏">
+<meta property="og:url" content="http://alphayang.github.io/2015/11/25/hack-android-for-display-only/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="引论机场、车站、高速服务区随处可见信息显示屏，有的高悬只做单向显示，有的在地面只可在屏幕上进行操作如导航、查询等，在Andorid之前这块是嵌入式以及Win Embed的领域。现在Android设备的成本以及性能，Andorid App开发技术和开发人员的丰富，用Android驱动信息展示机已是更为合理的趋势。
+在这类设备上，绝大多数都是使用物理遮盖或硬件定制，将正常的Andorid系统所必需的控">
+<meta property="og:image" content="http://alphayang.github.io/img/android_control_buttons.png">
+<meta property="og:updated_time" content="2015-11-27T14:14:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hack Andorid，使设备变身专用信息显示屏">
+<meta name="twitter:description" content="引论机场、车站、高速服务区随处可见信息显示屏，有的高悬只做单向显示，有的在地面只可在屏幕上进行操作如导航、查询等，在Andorid之前这块是嵌入式以及Win Embed的领域。现在Android设备的成本以及性能，Andorid App开发技术和开发人员的丰富，用Android驱动信息展示机已是更为合理的趋势。
+在这类设备上，绝大多数都是使用物理遮盖或硬件定制，将正常的Andorid系统所必需的控">
+<meta name="twitter:image" content="http://alphayang.github.io/img/android_control_buttons.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Hack Andorid，使设备变身专用信息显示屏</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Hack Andorid，使设备变身专用信息显示屏</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-25T11:30:35.000Z" itemprop="datePublished" class="page-time">
+  2015-11-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develop/">develop</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#引论"><span class="post-toc-number">1.</span> <span class="post-toc-text">引论</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#分析"><span class="post-toc-number">2.</span> <span class="post-toc-text">分析</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Happy-Hack"><span class="post-toc-number">3.</span> <span class="post-toc-text">Happy Hack</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自启动"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">自启动</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#返回键"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">返回键</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Home键"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">Home键</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用切换键"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">应用切换键</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#音量键"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">音量键</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#电源键"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">电源键</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#短按"><span class="post-toc-number">3.6.1.</span> <span class="post-toc-text">短按</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#长按"><span class="post-toc-number">3.6.2.</span> <span class="post-toc-text">长按</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#防止屏幕自动关闭屏幕"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">防止屏幕自动关闭屏幕</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开关"><span class="post-toc-number">3.8.</span> <span class="post-toc-text">开关</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#开启"><span class="post-toc-number">3.8.1.</span> <span class="post-toc-text">开启</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关闭"><span class="post-toc-number">3.8.2.</span> <span class="post-toc-text">关闭</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#结论"><span class="post-toc-number">4.</span> <span class="post-toc-text">结论</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Reference"><span class="post-toc-number">5.</span> <span class="post-toc-text">Reference</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-hack-android-for-display-only"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Hack Andorid，使设备变身专用信息显示屏</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月25日 19:30" datetime="2015-11-25T11:30:35.000Z"  itemprop="datePublished">2015-11-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develop/">develop</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="引论"><a href="#引论" class="headerlink" title="引论"></a>引论</h1><p>机场、车站、高速服务区随处可见信息显示屏，有的高悬只做单向显示，有的在地面只可在屏幕上进行操作如导航、查询等，在Andorid之前这块是嵌入式以及Win Embed的领域。现在Android设备的成本以及性能，Andorid App开发技术和开发人员的丰富，用Android驱动信息展示机已是更为合理的趋势。</p>
+<p>在这类设备上，绝大多数都是使用物理遮盖或硬件定制，将正常的Andorid系统所必需的控制按键进行了处理，使用过程中普通用户接触不到控制键，达到专用（不可退出，只能使用既定功能）的上的。</p>
+<p>我们现在就来看看如何把一个正常的Android设备，通过软件Hack的方式，打造成这类的专用设备。</p>
+<p>PS:Google官方的Cardboard应用即属此类，交互方式只剩下一个按垫片了。</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>Andorid系统本身是为移动设备开发的，包括UI和硬件交互设施：</p>
+<ul>
+<li>返回键</li>
+<li>Home键</li>
+<li>应用切换键</li>
+<li>音量键</li>
+<li>电源键<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android_control_buttons.png" alt="android_control_buttons" title="">
+                </div>
+                <div class="image-caption">android_control_buttons</div>
+            </figure>
+</li>
+</ul>
+<p>除了屏蔽按键，应用需要系统启动后自动启动。<br>UI根据需要按照App正常开发方法进行裁剪。</p>
+<p>还需要注意的点：</p>
+<ul>
+<li>健全的退出机制（任何情况下都要有的设计，类似后门）</li>
+<li>普通用户必须知道如何退出，特别是通过应用商店分发（定制化场景不考虑退出）</li>
+<li>软件方式只能覆盖一些应用场景，效果也不是最好，软硬结合才是王道。</li>
+</ul>
+<h1 id="Happy-Hack"><a href="#Happy-Hack" class="headerlink" title="Happy Hack"></a>Happy Hack</h1><p>##准备<br>添加MyApplication全局入口<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">application</span></span></div><div class="line">        <span class="attr">android:name</span>=<span class="string">"com.geekdev.alpha.hack4andriodbuttons.MyApplication"</span></div><div class="line">        <span class="attr">android:allowBackup</span>=<span class="string">"true"</span></div><div class="line">        <span class="attr">android:icon</span>=<span class="string">"@mipmap/ic_launcher"</span></div><div class="line">        <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span></div><div class="line">        <span class="attr">android:supportsRtl</span>=<span class="string">"true"</span></div><div class="line">        <span class="attr">android:theme</span>=<span class="string">"@style/AppTheme"</span>&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">application</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>添加一个MainActivity<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">activity</span></span></div><div class="line">    <span class="attr">android:name</span>=<span class="string">"com.geekdev.alpha.hack4andriodbuttons.MainActivity"</span></div><div class="line">    <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MAIN"</span> /&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.LAUNCHER"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>利用SharedPreference添加一个开关,Preference.java:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PreferenceUtils</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String PREF_NoButtons_MODE = <span class="string">"pref_NoButtons_mode"</span>;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isNoButtonsModeActive</span><span class="params">(<span class="keyword">final</span> Context context)</span> </span>&#123;</div><div class="line">        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);</div><div class="line">        <span class="keyword">return</span> sp.getBoolean(PREF_NoButtons_MODE, <span class="keyword">false</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setNoButtonsModeActive</span><span class="params">(<span class="keyword">final</span> <span class="keyword">boolean</span> active, <span class="keyword">final</span> Context context)</span> </span>&#123;</div><div class="line">        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);</div><div class="line">        sp.edit().putBoolean(PREF_NoButtons_MODE, active).commit();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="自启动"><a href="#自启动" class="headerlink" title="自启动"></a>自启动</h2><p>在Android.manifest中添加权限和Receiver：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.RECEIVE_BOOT_COMPLETED"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>添加启动广播Receiver：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:name</span>=<span class="string">"com.geekdev.alpha.hack4andriodbuttons.BootReceiver"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.BOOT_COMPLETED"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p> BootReceiver.java:<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BootReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</div><div class="line">        Intent myIntent = <span class="keyword">new</span> Intent(context, MainActivity.class);</div><div class="line">        myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</div><div class="line">        context.startActivity(myIntent);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="返回键"><a href="#返回键" class="headerlink" title="返回键"></a>返回键</h2><p>重写MainActivity中的onBackPressed方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBackPressed</span><span class="params">()</span> </span>&#123;</div><div class="line">       Log.i(TAG,<span class="string">"can't back"</span>);</div><div class="line"></div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<h2 id="Home键"><a href="#Home键" class="headerlink" title="Home键"></a>Home键</h2><p>重头戏，由于Android不允许改变Home键的行为，所以只能做一些Workaround来绕过限制。<br>起一个Service，作为守护Service，死循环，每隔3s检查应用是否在前台运行，没有运行则唤醒。由于Android设置了Home键放开后延迟5s才执行Service起动Activity的逻辑，小于5s的轮询都可以，为了绕过这个5s限制，ROOT后的系统把应用移动到/system/app且取”android.permission.STOP_APP_SWITCHES”权限。当然如果硬件上把Home键做处理，就自然不会有这个5s延迟了。<br>在AndroidManifest中声明Service：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">service</span></span></div><div class="line">    <span class="attr">android:name</span>=<span class="string">"com.geekdev.alpha.hack4andriodbuttons.NoButtonsService"</span></div><div class="line">    <span class="attr">android:exported</span>=<span class="string">"false"</span> /&gt;</div></pre></td></tr></table></figure></p>
+<p>在MyApplication应用启动时启动NoButtonsService：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate();</div><div class="line">        instance = <span class="keyword">this</span>;</div><div class="line">        startNoButtonsService();</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">startNoButtonsService</span><span class="params">()</span> </span>&#123;</div><div class="line">        startService(<span class="keyword">new</span> Intent(<span class="keyword">this</span>, NoButtonsService.class));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在NoButtonsService中实现守护逻辑:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoButtonsService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> INTERVAL = TimeUnit.SECONDS.toMillis(<span class="number">3</span>);</div><div class="line">    <span class="comment">// 3s 轮询</span></div><div class="line">    <span class="comment">// Home button pressed, user app service has 5s delay in order to make sure user has full choice</span></div><div class="line">    <span class="comment">//if the system is rooted, move user app to system app, 5s delay removed</span></div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = NoButtonsService.class.getSimpleName();</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">private</span> Thread t = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">private</span> Context ctx = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> running = <span class="keyword">false</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        Log.i(TAG, <span class="string">"Stopping service 'NoButtonsService'"</span>);</div><div class="line">        running =<span class="keyword">false</span>;</div><div class="line">        <span class="keyword">super</span>.onDestroy();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>&#123;</div><div class="line">        Log.i(TAG, <span class="string">"Starting service 'NoButtonsService'"</span>);</div><div class="line">        running = <span class="keyword">true</span>;</div><div class="line">        ctx = <span class="keyword">this</span>;</div><div class="line"></div><div class="line">        <span class="comment">// start a thread that periodically checks if your app is in the foreground</span></div><div class="line">        t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">do</span> &#123;</div><div class="line">                    handleNoButtonsMode();</div><div class="line">                    <span class="keyword">try</span> &#123;</div><div class="line">                        Thread.sleep(INTERVAL);</div><div class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                        Log.i(TAG, <span class="string">"Thread interrupted: 'NoButtonsService'"</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;<span class="keyword">while</span>(running);</div><div class="line">                stopSelf();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        t.start();</div><div class="line">        <span class="keyword">return</span> Service.START_NOT_STICKY;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">handleNoButtonsMode</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// is NoButtons Mode active?</span></div><div class="line">        <span class="keyword">if</span>(PreferenceUtils.isNoButtonsModeActive(ctx)) &#123;</div><div class="line">            <span class="comment">// is App in background?</span></div><div class="line">            <span class="keyword">if</span>(isInBackground()) &#123;</div><div class="line">                restoreApp(); <span class="comment">// restore!</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isInBackground</span><span class="params">()</span> </span>&#123;</div><div class="line">        ActivityManager am = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);</div><div class="line"></div><div class="line">        List&lt;ActivityManager.RunningTaskInfo&gt; taskInfo = am.getRunningTasks(<span class="number">1</span>);</div><div class="line">        ComponentName componentInfo = taskInfo.get(<span class="number">0</span>).topActivity;</div><div class="line">        <span class="keyword">return</span> (!ctx.getApplicationContext().getPackageName().equals(componentInfo.getPackageName()));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">restoreApp</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// Restart activity</span></div><div class="line">        Intent i = <span class="keyword">new</span> Intent(ctx, MainActivity.class);</div><div class="line">        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</div><div class="line">        ctx.startActivity(i);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="应用切换键"><a href="#应用切换键" class="headerlink" title="应用切换键"></a>应用切换键</h2><p>在MainActivity中重写onPause方法，直接用ActivityManager把MainActivity放在最前：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</div><div class="line">       <span class="keyword">super</span>.onPause();</div><div class="line"></div><div class="line">       ActivityManager activityManager = (ActivityManager) getApplicationContext()</div><div class="line">               .getSystemService(Context.ACTIVITY_SERVICE);</div><div class="line"></div><div class="line">       activityManager.moveTaskToFront(getTaskId(), <span class="number">0</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>别忘了添加权限：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.REORDER_TASKS"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="音量键"><a href="#音量键" class="headerlink" title="音量键"></a>音量键</h2><p>在MainActivity中定义音量键并重写dispatchKeyEvent:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> List blockedKeys = <span class="keyword">new</span> ArrayList(Arrays.asList(KeyEvent.KEYCODE_VOLUME_DOWN, KeyEvent.KEYCODE_VOLUME_UP));</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">dispatchKeyEvent</span><span class="params">(KeyEvent event)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (blockedKeys.contains(event.getKeyCode())) &#123;</div><div class="line">    <span class="comment">//检测到音量键直接return</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.dispatchKeyEvent(event);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="电源键"><a href="#电源键" class="headerlink" title="电源键"></a>电源键</h2><h3 id="短按"><a href="#短按" class="headerlink" title="短按"></a>短按</h3><p>短按是为了关闭屏幕，监听OnScreenOff的系统广播，在应用启动时注册。<br>OnScreenOffRecever：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OnScreenOffReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(Intent.ACTION_SCREEN_OFF.equals(intent.getAction()))&#123;</div><div class="line">            MyApplication ctx = (MyApplication) context.getApplicationContext();</div><div class="line">            <span class="comment">// is NoButtons Mode active?</span></div><div class="line">            <span class="keyword">if</span>(PreferenceUtils.isNoButtonsModeActive(ctx)) &#123;</div><div class="line">                wakeUpDevice(ctx);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">wakeUpDevice</span><span class="params">(MyApplication context)</span> </span>&#123;</div><div class="line">        PowerManager.WakeLock wakeLock = context.getWakeLock(); <span class="comment">// get WakeLock reference via MyApplication</span></div><div class="line">        <span class="keyword">if</span> (wakeLock.isHeld()) &#123;</div><div class="line">            wakeLock.release(); <span class="comment">// release old wake lock</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// create a new wake lock...</span></div><div class="line">        wakeLock.acquire();</div><div class="line"></div><div class="line">        <span class="comment">// ... and release again</span></div><div class="line">        wakeLock.release();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>应用启动时注册:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> MyApplication instance;</div><div class="line">    <span class="keyword">private</span> PowerManager.WakeLock wakeLock;</div><div class="line">    <span class="keyword">private</span> OnScreenOffReceiver onScreenOffReceiver;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate();</div><div class="line">        instance = <span class="keyword">this</span>;</div><div class="line">        registerNoButtonsModeScreenOffReceiver();</div><div class="line">        startNoButtonsService();</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">registerNoButtonsModeScreenOffReceiver</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// register screen off receiver</span></div><div class="line">        <span class="keyword">final</span> IntentFilter filter = <span class="keyword">new</span> IntentFilter(Intent.ACTION_SCREEN_OFF);</div><div class="line">        onScreenOffReceiver = <span class="keyword">new</span> OnScreenOffReceiver();</div><div class="line">        registerReceiver(onScreenOffReceiver, filter);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> PowerManager.<span class="function">WakeLock <span class="title">getWakeLock</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(wakeLock == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="comment">// lazy loading: first call, create wakeLock via PowerManager.</span></div><div class="line">            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);</div><div class="line">            wakeLock = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP, <span class="string">"wakeup"</span>);</div><div class="line"></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> wakeLock;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">startNoButtonsService</span><span class="params">()</span> </span>&#123; </div><div class="line">        startService(<span class="keyword">new</span> Intent(<span class="keyword">this</span>, NoButtonsService.class));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>别忘了添加WAKE_LOCK权限：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.WAKE_LOCK"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="长按"><a href="#长按" class="headerlink" title="长按"></a>长按</h3><p>长按是为了关机，直接把系统的关机弹出对话框处理掉，这里只要系统对话框都关掉。<br>在MainActivity中重写onWindowFocusChanged焦点变化时：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onWindowFocusChanged</span><span class="params">(<span class="keyword">boolean</span> hasFocus)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onWindowFocusChanged(hasFocus);</div><div class="line">        <span class="keyword">if</span>(!hasFocus) &#123;</div><div class="line">            <span class="comment">// Close every kind of system dialog</span></div><div class="line">            Intent closeDialog = <span class="keyword">new</span> Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);</div><div class="line">            sendBroadcast(closeDialog);</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<h2 id="防止屏幕自动关闭屏幕"><a href="#防止屏幕自动关闭屏幕" class="headerlink" title="防止屏幕自动关闭屏幕"></a>防止屏幕自动关闭屏幕</h2><p>在Layout文件中添加为根视图添加属性:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android:keepScreenOn="true"</div></pre></td></tr></table></figure></p>
+<p>在MainActivity的onCreate方法中添加，要放在setContentView之前:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);</div><div class="line">getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);</div></pre></td></tr></table></figure></p>
+<h2 id="开关"><a href="#开关" class="headerlink" title="开关"></a>开关</h2><h3 id="开启"><a href="#开启" class="headerlink" title="开启"></a>开启</h3><p>放在MainActivity的onResume而不是onCreate，避免开关关闭后，离开应用而应用没有被系统回收，再次打开应用时onCreate没有开启开关。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onResume();</div><div class="line">        PreferenceUtils.setNoButtonsModeActive(<span class="keyword">true</span>, getApplicationContext());</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="关闭"><a href="#关闭" class="headerlink" title="关闭"></a>关闭</h3><p>设置一个Button监听事件：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Button fab = (Button) findViewById(R.id.hiddenExitButton);</div><div class="line">        fab.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">                PreferenceUtils.setNoButtonsModeActive(<span class="keyword">false</span>, getApplicationContext());</div><div class="line">                Snackbar.make(view, <span class="string">"可以退出了"</span>, Snackbar.LENGTH_SHORT)</div><div class="line">                        .setAction(<span class="string">"Action"</span>, <span class="keyword">null</span>).show();</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>我们通过以上Hack步骤，将一个Android设备变成了专用机，可以看到Android以其独特的开放特性可以覆盖足够多的使用场景，也符合Google提出的Android is everywhere的口号。</p>
+<p>项目地址：<a href="https://github.com/alphayang/HackAndroid4NoButtons" target="_blank" rel="external">github</a></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://developer.android.com/intl/zh-cn/reference/android/view/WindowManager.LayoutParams.html#FLAG_DISMISS_KEYGUARD" target="_blank" rel="external">http://developer.android.com/intl/zh-cn/reference/android/view/WindowManager.LayoutParams.html#FLAG_DISMISS_KEYGUARD</a><br><a href="http://developer.android.com/intl/zh-cn/training/scheduling/wakelock.html" target="_blank" rel="external">http://developer.android.com/intl/zh-cn/training/scheduling/wakelock.html</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-27T14:14:16.000Z" itemprop="dateUpdated">2015年11月27日 22:14</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2015/11/25/hack-android-for-display-only/" target="_blank" rel="external">http://alphayang.github.io/2015/11/25/hack-android-for-display-only/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/11/25/hack-android-for-display-only/&title=《Hack Andorid，使设备变身专用信息显示屏》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/11/25/hack-android-for-display-only/&title=《Hack Andorid，使设备变身专用信息显示屏》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/11/25/hack-android-for-display-only/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Hack Andorid，使设备变身专用信息显示屏》 — Geek Dev&url=http://alphayang.github.io/2015/11/25/hack-android-for-display-only/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/11/25/hack-android-for-display-only/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/27/so-files-guide/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android开发，不可不知的so文件知识大全</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/15/gif-movie-by-street-view-api/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">利用 Street View API 制作街景小动画</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="hack-android-for-display-only" data-title="Hack Andorid，使设备变身专用信息显示屏" data-url="http://alphayang.github.io/2015/11/25/hack-android-for-display-only/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/11/25/hack-android-for-display-only/&title=《Hack Andorid，使设备变身专用信息显示屏》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/11/25/hack-android-for-display-only/&title=《Hack Andorid，使设备变身专用信息显示屏》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/11/25/hack-android-for-display-only/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Hack Andorid，使设备变身专用信息显示屏》 — Geek Dev&url=http://alphayang.github.io/2015/11/25/hack-android-for-display-only/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/11/25/hack-android-for-display-only/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACpklEQVR42u3aQXICMQwEQP7/afIAsstIsgip6j1RAYzbB8sZ6/GIn+fy8/pb968PP3h4eHhHp/76mau/3H/yaor31Ht2slh4eHh4e7xkuPtddzKJfIR8znh4eHjfxst/srpk90g8PDy8/8hLNve8nCSFpFqo8PDw8D7Dqw596i/z8Y9lLXh4eHgxL79F+p7XK/d7eHh4eAsNAcmV1f0Gnb9bLQa/fAsPDw9vgVeNX89eg+Vh8WieeHh4eAu86rabh7bJdM9GHs0wFw8PD6/Iyy/AJmlHrxVg0nyAh4eHt8Gbh6eT2KI3Tt6IgIeHh7fNywfqtWpVA47y/wRJxcPDw8Nb4OURbXUheiPkccbl/R4eHh7eAu/N1Xtx0PwSa95c9eZbeHh4eGu8/Hhd3e577VmTdis8PDy8v+JVA4J8CXq5Qa/Y4OHh4e3x8u27GkNUC0bv3cvlxsPDw/s4r/fD1RB2UoqaWQseHh7eGq8aDfQijF7jQjR/PDw8vAVe9UqpdzE2mlArjLgcEw8PD2/MSw6mvUnkE6oe8fNDPx4eHt4er9eE2nt3IyYuNF3h4eHhjXnVqLR6LE4O5cni5kUFDw8P7zO8QlZRbLrqHZTzchItIh4eHt4CbxIQHLjgLxaSQhiBh4eHt8bLB02Os5Pmg14Tw2Nye4aHh4d3iNcLFKoRQ/VAf7ji4eHh4Y15eUPVqYXIGxcekwcPDw/vKO9ZfHJSr5Gr2g77Zsnw8PDwFninikdy2E2OxfeMA/0ReHh4eId4STGobuKTM20vdLicLR4eHt4arxqbVmG9CPhAAcPDw8P7Gl510nkZyNsIoqM2Hh4e3tfwqht0EmdUPxOFtnh4eHhrvCQgOBUizItBUnLw8PDw9njVaKAaRlRLxQoADw8P7wzvB4bAu2AwZhL7AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

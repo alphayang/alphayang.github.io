@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>在Android Studio中发布Library到jCenter公共仓库 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Andorid Studio,Gradle,Andorid">
+    <meta name="description" content="引论在Android开发，关于aar你应该知道的一文中掌握了如何引用本地的aar，更多情况下我们是直接从网络上获取公开的第三方库来进行开发，而这个网络位置就是jCenter，在gradle中使用：123repositories &amp;#123;        jcenter()    &amp;#125;
+jCenter是Bintray提供的公开下载服务，使用自身开发的artifactory开源应用搭建，后绪">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Android Studio中发布Library到jCenter公共仓库">
+<meta property="og:url" content="http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="引论在Android开发，关于aar你应该知道的一文中掌握了如何引用本地的aar，更多情况下我们是直接从网络上获取公开的第三方库来进行开发，而这个网络位置就是jCenter，在gradle中使用：123repositories &amp;#123;        jcenter()    &amp;#125;
+jCenter是Bintray提供的公开下载服务，使用自身开发的artifactory开源应用搭建，后绪">
+<meta property="og:image" content="http://alphayang.github.io/img/JCenter_architecture.png">
+<meta property="og:image" content="http://alphayang.github.io/img/create_maven_repo.png">
+<meta property="og:image" content="http://alphayang.github.io/img/add_new_package_to_maven_repo.png">
+<meta property="og:image" content="http://alphayang.github.io/img/create_package_details.png">
+<meta property="og:image" content="http://alphayang.github.io/img/new_project.png">
+<meta property="og:image" content="http://alphayang.github.io/img/new_library.png">
+<meta property="og:image" content="http://alphayang.github.io/img/project_structure.png">
+<meta property="og:image" content="http://alphayang.github.io/img/upload_done.png">
+<meta property="og:image" content="http://alphayang.github.io/img/library_version.png">
+<meta property="og:image" content="http://alphayang.github.io/img/library_files_list.png">
+<meta property="og:image" content="http://alphayang.github.io/img/add_to_jcenter.png">
+<meta property="og:image" content="http://alphayang.github.io/img/jCenter_approve_request.png">
+<meta property="og:image" content="http://alphayang.github.io/img/approve_result.png">
+<meta property="og:image" content="http://alphayang.github.io/img/jCenter_files.png">
+<meta property="og:updated_time" content="2015-10-19T14:03:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在Android Studio中发布Library到jCenter公共仓库">
+<meta name="twitter:description" content="引论在Android开发，关于aar你应该知道的一文中掌握了如何引用本地的aar，更多情况下我们是直接从网络上获取公开的第三方库来进行开发，而这个网络位置就是jCenter，在gradle中使用：123repositories &amp;#123;        jcenter()    &amp;#125;
+jCenter是Bintray提供的公开下载服务，使用自身开发的artifactory开源应用搭建，后绪">
+<meta name="twitter:image" content="http://alphayang.github.io/img/JCenter_architecture.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">在Android Studio中发布Library到jCenter公共仓库</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">在Android Studio中发布Library到jCenter公共仓库</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-10-19T14:03:01.000Z" itemprop="datePublished" class="page-time">
+  2015-10-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develop/">develop</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#引论"><span class="post-toc-number">1.</span> <span class="post-toc-text">引论</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#什么是jCenter"><span class="post-toc-number">2.</span> <span class="post-toc-text">什么是jCenter</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-Studio为什么使用jCenter"><span class="post-toc-number">3.</span> <span class="post-toc-text">Android Studio为什么使用jCenter</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#发布到jCenter"><span class="post-toc-number">4.</span> <span class="post-toc-text">发布到jCenter</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#帐户"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">帐户</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建私有Maven仓库"><span class="post-toc-number">4.1.2.</span> <span class="post-toc-text">创建私有Maven仓库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#添加Package"><span class="post-toc-number">4.1.3.</span> <span class="post-toc-text">添加Package</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Andorid-Studio中的工作"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">Andorid Studio中的工作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#New-Project"><span class="post-toc-number">4.2.1.</span> <span class="post-toc-text">New Project</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#New-Module"><span class="post-toc-number">4.2.2.</span> <span class="post-toc-text">New Module</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#添加上传的Gradle脚本支持"><span class="post-toc-number">4.2.3.</span> <span class="post-toc-text">添加上传的Gradle脚本支持</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#发布"><span class="post-toc-number">4.2.4.</span> <span class="post-toc-text">发布</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#发布成功"><span class="post-toc-number">4.2.5.</span> <span class="post-toc-text">发布成功</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#添加到jCenter公共仓库"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">添加到jCenter公共仓库</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">5.</span> <span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#后记"><span class="post-toc-number">6.</span> <span class="post-toc-text">后记</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Reference"><span class="post-toc-number">7.</span> <span class="post-toc-text">Reference</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-distribute-android-library-to-jcetner"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">在Android Studio中发布Library到jCenter公共仓库</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年10月19日 22:03" datetime="2015-10-19T14:03:01.000Z"  itemprop="datePublished">2015-10-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develop/">develop</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="引论"><a href="#引论" class="headerlink" title="引论"></a>引论</h1><p>在<a href="http://alphayang.github.io/2015/10/17/all-about-aar/">Android开发，关于aar你应该知道的</a>一文中掌握了如何引用本地的aar，更多情况下我们是直接从网络上获取公开的第三方库来进行开发，而这个网络位置就是<a href="https://bintray.com/bintray/jcenter" target="_blank" rel="external">jCenter</a>，在gradle中使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">        jcenter()</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>jCenter是Bintray提供的公开下载服务，使用自身开发的artifactory开源应用搭建，后绪会介绍如何使用artifactory来搭建团队内部的私有仓库。</p>
+<h1 id="什么是jCenter"><a href="#什么是jCenter" class="headerlink" title="什么是jCenter"></a>什么是jCenter</h1><p>artifactory其实就是带有版本管理的文件服务器，基本功能和FTP服务相同，公开服务是jCenter，还提供托管的私有仓库，同github一样，提供企业收费服务，更多的功能，更快的下载速度。</p>
+<p>开发者先将Library提交到自己的私有库，再同步到公共jCenter库，其它开发就可以简单的来添加依赖了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">compile <span class="string">'com.squareup.retrofit:retrofit:1.9.0'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/JCenter_architecture.png" alt="jCenter" title="">
+                </div>
+                <div class="image-caption">jCenter</div>
+            </figure>
+<p>在这个架构图中，还有一个maven central和ivy仓库，都提供类似的下载托管功能，但要么太老了，要么太少人使用。</p>
+<p>再说下maven仓库引用的格式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile <span class="string">'com.squareup.retrofit:retrofit:1.9.0'</span></div></pre></td></tr></table></figure></p>
+<p>定义为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GROUP_ID:ARTIFACT_ID:VERSION</div></pre></td></tr></table></figure></p>
+<p>GROUP_ID:com.squareup.retrofit，组，方便公司或团队进行逻辑上的管理。<br>ARTIFACT_ID:retrofit，Library名称。<br>VERSION:1.9.0，Library指定版本。<br>Module中的完整依赖：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">    compile fileTree(dir: <span class="string">'libs'</span>, include: [<span class="string">'*.jar'</span>])</div><div class="line">    <span class="built_in">test</span>Compile <span class="string">'junit:junit:4.12'</span></div><div class="line">    compile <span class="string">'com.android.support:appcompat-v7:23.0.1'</span></div><div class="line">    compile <span class="string">'com.squareup.okhttp:okhttp-urlconnection:2.0.0'</span></div><div class="line">    compile <span class="string">'com.squareup.okhttp:okhttp:2.0.0'</span></div><div class="line">    compile <span class="string">'com.squareup.retrofit:retrofit:1.9.0'</span></div><div class="line">    compile <span class="string">'com.google.code.gson:gson:2.3'</span></div><div class="line">    compile <span class="string">'io.reactivex:rxjava:1.0.11'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong><em>在依赖中不要使用动态版本号</em></strong><br>Gradle中支持使用<code>+</code>来引用动态版本，人生苦短，不要使用它！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile <span class="string">'com.android.support:appcompat-v7:23.0.+'</span></div></pre></td></tr></table></figure></p>
+<p>任何依赖的改变，你都应该被显式的知晓，以便知道自己的项目中有除了自己的代码，依赖都发生了哪些变化。<br>这个<code>+</code>，会大大增加你代码的不确定性！！<br>理由：</p>
+<ul>
+<li>依赖也是你应用的一部分，任何变更，都要知道。</li>
+<li>每个人的开发不尽相同，在你的机器上可以运行，在其它机器上可能运行不起来，因为依赖版本不一样。</li>
+<li>同样的，在你的机器上也会出现由于版本不同而运行失败，昨天好好的，今天怎么就跑不进来了？那是因为早晨另一个项目中升级了本地依赖！</li>
+<li>版本回滚，显示的版本号支持精准的回滚。</li>
+<li>不要自动依赖升级，任何依赖更新都有可能引入安全问题，回到第一点，任何变更，都要知道，升级要验证。</li>
+</ul>
+<p>不要犯懒，依赖管理很重要，程序开发过程就是消除不确定性的过程，一个<code>+</code>的犯懒，可能会让你和项目消耗极大的精力。<br>不要假设依赖总是好的，是人都会犯错误，任何的开发在减少不确定性的时候也同时在引入新的不确定性。</p>
+<p>PS：jCenter不只支持maven和gradle,还提供Yum, Apt, Vagrant and Docker。</p>
+<h1 id="Android-Studio为什么使用jCenter"><a href="#Android-Studio为什么使用jCenter" class="headerlink" title="Android Studio为什么使用jCenter"></a>Android Studio为什么使用jCenter</h1><p>Java的构建工具从ant,maven到现在的gradle，依赖包仓库也经历了maven central和jCenter，同样Android Studio中的Gradle默认仓库也经历了先使用maven central后来又升级到了jCenter的过程，简单来说：</p>
+<ul>
+<li>jCenter完全兼容maven，maven central中有的，jCenter有，maven central中没有的，jCenter也有，是maven central的超集，现在是全球包含Java和Android开源项目最大的仓库。</li>
+<li>使用CDN加速下载，基于https安全传输，Google最喜欢的传输方式，杜绝在传输过程中偷梁换柱，造成类似xcodeghost的惨剧。</li>
+<li>包的上传和管理操作更简便，流程更优（让包开发者更懒）</li>
+<li>支持一键同步到maven central（尊重历史，还有什么理由不用）</li>
+</ul>
+<p>让gradle使用maven central（团队内部库/被jCenter拒了/偷懒不进jCenter）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">        mavenCentral()</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>还有一种情况是使用私有Maven仓库：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">    maven &#123;</div><div class="line">        url  <span class="string">"http://dl.bintray.com/alphayang/maven"</span> </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="发布到jCenter"><a href="#发布到jCenter" class="headerlink" title="发布到jCenter"></a>发布到jCenter</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="帐户"><a href="#帐户" class="headerlink" title="帐户"></a>帐户</h3><p>在<a href="https://bintray.com" target="_blank" rel="external">https://bintray.com</a>上注册，可使用github登陆。</p>
+<h3 id="创建私有Maven仓库"><a href="#创建私有Maven仓库" class="headerlink" title="创建私有Maven仓库"></a>创建私有Maven仓库</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/create_maven_repo.png" alt="create_maven_repo" title="">
+                </div>
+                <div class="image-caption">create_maven_repo</div>
+            </figure>
+<h3 id="添加Package"><a href="#添加Package" class="headerlink" title="添加Package"></a>添加Package</h3><p>新建包<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/add_new_package_to_maven_repo.png" alt="add_new_package_to_maven_repo" title="">
+                </div>
+                <div class="image-caption">add_new_package_to_maven_repo</div>
+            </figure><br>包名，License和代码码本管理必填。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/create_package_details.png" alt="create_package_details" title="">
+                </div>
+                <div class="image-caption">create_package_details</div>
+            </figure></p>
+<h2 id="Andorid-Studio中的工作"><a href="#Andorid-Studio中的工作" class="headerlink" title="Andorid Studio中的工作"></a>Andorid Studio中的工作</h2><h3 id="New-Project"><a href="#New-Project" class="headerlink" title="New Project"></a>New Project</h3><p><code>File</code> -&gt; <code>New Project</code><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/new_project.png" alt="new_project" title="">
+                </div>
+                <div class="image-caption">new_project</div>
+            </figure><br>New Project默认都是先创建一个Application Module，正常创建就好，正好可以用来做Library的Demo App。</p>
+<h3 id="New-Module"><a href="#New-Module" class="headerlink" title="New Module"></a>New Module</h3><p>创建Library Module<br><code>File</code> -&gt; <code>New Module</code><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/new_library.png" alt="new_library" title="">
+                </div>
+                <div class="image-caption">new_library</div>
+            </figure><br>新建的Library与正常的Application最大区别是module build.gradle中是apply plugin: ‘com.android.library’ 而不是 apply plugin: ‘com.android.application’。<br>在这里发挥才智实现功能。<br>完整的Project Structure:<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/project_structure.png" alt="project_structure" title="">
+                </div>
+                <div class="image-caption">project_structure</div>
+            </figure></p>
+<h3 id="添加上传的Gradle脚本支持"><a href="#添加上传的Gradle脚本支持" class="headerlink" title="添加上传的Gradle脚本支持"></a>添加上传的Gradle脚本支持</h3><p>在weatherlib/build.gradle中：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">apply plugin: <span class="string">'com.novoda.bintray-release'</span> // 这一行必须添加在java / com.android.library plugin之后</div><div class="line"></div><div class="line">buildscript &#123;</div><div class="line">    repositories &#123;</div><div class="line">        jcenter()</div><div class="line">    &#125;</div><div class="line">    dependencies &#123;</div><div class="line">        classpath <span class="string">'com.novoda:bintray-release:0.3.4'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在weatherlib/build.gradle中添加Package信息，当然这里的信息都是Package相关的，使用时要改成自己的:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">publish &#123;</div><div class="line">    userOrg = <span class="string">'alphayang'</span></div><div class="line">    groupId = <span class="string">'com.geekdev'</span></div><div class="line">    artifactId = <span class="string">'weatherlib'</span></div><div class="line">    publishVersion = <span class="string">'0.2.5'</span></div><div class="line">    desc = <span class="string">'Simple ForecastIO client'</span></div><div class="line">    website = <span class="string">'https://github.com/alphayang/WeatherLibe'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><p><code>⌘F9</code>，上传前Build下代码，确保正常。<br>然后在Terminal Panel中执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ./gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=<span class="literal">false</span></div></pre></td></tr></table></figure></p>
+<p><code>BINTRAY_USERNAME</code>和<code>BINTRAY_KEY</code>在bintry profile页面获取，注意username不是name。<br><a href="https://bintray.com/profile/edit" target="_blank" rel="external">https://bintray.com/profile/edit</a></p>
+<h3 id="发布成功"><a href="#发布成功" class="headerlink" title="发布成功"></a>发布成功</h3><p>在bintray界面：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/upload_done.png" alt="upload_done" title="">
+                </div>
+                <div class="image-caption">upload_done</div>
+            </figure><br>上传的版本：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/library_version.png" alt="library_version" title="">
+                </div>
+                <div class="image-caption">library_version</div>
+            </figure><br>上传的文件列表：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/library_files_list.png" alt="file" title="">
+                </div>
+                <div class="image-caption">file</div>
+            </figure></p>
+<h2 id="添加到jCenter公共仓库"><a href="#添加到jCenter公共仓库" class="headerlink" title="添加到jCenter公共仓库"></a>添加到jCenter公共仓库</h2><p>一键添加到jCenter<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/add_to_jcenter.png" alt="add" title="">
+                </div>
+                <div class="image-caption">add</div>
+            </figure><br>添加到jCenter公共仓库需要简单的人工审核<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/jCenter_approve_request.png" alt="approve" title="">
+                </div>
+                <div class="image-caption">approve</div>
+            </figure><br>等几个小时，会有邮件通知审核结果。这个审核是必要的，公共仓库还是要有人把守，要不然鱼龙混杂，不好用了。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/approve_result.png" alt="approve" title="">
+                </div>
+                <div class="image-caption">approve</div>
+            </figure><br>OK了，你的包已经自动同步到jCenter，任何人可以公开获取使用了。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/jCenter_files.png" alt="jcenter" title="">
+                </div>
+                <div class="image-caption">jcenter</div>
+            </figure><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile <span class="string">'com.geekdev:weatherlib:0.2.5'</span></div></pre></td></tr></table></figure></p>
+<p><a href="http://jcenter.bintray.com/" target="_blank" rel="external">http://jcenter.bintray.com/</a>里有jCenter全部的公开库。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>jCenter是现在最好用公开Android库，对于使用还是使用者都提供了最好的使用体验。<br>BinTray开发一个artifactory提供三种形态：个人私有库，公开社区库和商业库，保证了整个业务的良性发展，也是这一类开发者服务最好的商业模式。</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>由于Maven Central已经老去，从jCenter同步到Maven Central的步骤本文不做介绍了（同理ivy）。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://blog.bintray.com/2015/02/09/android-studio-migration-from-maven-central-to-jcenter/" target="_blank" rel="external">Android Studio – Migration from Maven Central to JCenter</a><br><a href="https://github.com/novoda/bintray-release/blob/master/README.md" target="_blank" rel="external">bintray-release</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-10-19T14:03:40.000Z" itemprop="dateUpdated">2015年10月19日 22:03</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2015/10/19/distribute-android-library-to-jcetner/" target="_blank" rel="external">http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andorid/">Andorid</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andorid-Studio/">Andorid Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/&title=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/&title=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&url=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/10/20/re-enable-osx-el-captian-dashboard/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">找回Mac OSX El Captian默认隐藏的Dashboard</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/10/18/support-library-group-in-gradle/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">如何在Android Studio Project中集中管理Android Support Library依赖</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="distribute-android-library-to-jcetner" data-title="在Android Studio中发布Library到jCenter公共仓库" data-url="http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/&title=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/&title=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&url=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrElEQVR42u3aQW4jMQwEQP//07vXBbKedJNS4AClk+FMNCoFkBiSr1c8/vwz3v303TdfP38d7971bp7DAw8PD2+x9Oep82cS6jPmeXOT9eDh4eHd5j0f98mi82tjf/0U78LDw8P7AF57fD9j2kgYDw8P7zfykqW0+YHkssHDw8P7NF5+EG8WlG9l/s2xXAseHh5ezMvTBJ/z+Up9Dw8PD29dVU8K/G2iYVboGq4WDw8P7wIvP3Bb5Knwd/M8Hh4e3g1e22KVvLItlbWpjSL4xsPDw7vAS8LcTYi8bwXYvBEPDw/vHi8vMuXhcj5DMs/smsHDw8O7wctbl2aNBW2SYpYE+eYvhoeHh3eUN2sO2FweeTojhxWdZXh4eHhrXnIo59fG7EyetSZE1wMeHh7eNd6+8N+W0PLwfTU/Hh4e3jVecijPXpDDZlvwzTx4eHh413gz2KzFanMB5EE5Hh4e3j3ebLRXwixB3G7QioSHh4cX85L0a7KITbmrfaao7OHh4eH9IC+HzZK27X11LBmBh4eHt+btg+a8maBNW5xKTODh4eGd5eW/3CYa2ssmmS2Zv6iw4eHh4R3l5VfCrLtpcyUUm46Hh4d3gTcrxudp1nzjZqWvaG14eHh4F3jtUZ4HvrMU7awlK8q14OHh4R3itYWu/PhuL4m8kavYSjw8PLwf4Z0KZ9skQpvsiN6Ch4eHd43XBsptemIDe5XjPyE1Hh4e3iHeLMCdbccmAZFfM3h4eHi3ee1ROwuOZ8WzYephNvDw8PBK3qa03x73mwRHm+TFw8PDu83LK0d5sjUp9u9TD6/NruPh4eH9OG/fdjCbs0hS4OHh4X0wL1/oLCncNmnh4eHh3eblRa92O9ow+nDLLB4eHt4FXvsffd5KtUlMtCW0YwkLPDw8vKfxFw+gNcoE8KZJAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

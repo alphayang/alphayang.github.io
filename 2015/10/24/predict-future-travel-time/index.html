@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>利用Google Maps API预测未来 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="google maps api">
+    <meta name="description" content="引子大数据，云计算。。。这些词汇越来越多的出现在开发者和普通人的语境里，对于这些技术，不同的角度可以有不同的解读，但目的应该是统一明确的：存储分析利用过去的数据，当然是越多越好，也就是大数据，以最快的计算速度和最低的计算成本来组织、处理、分析这些数据（云计算），为解决当下的问题提供依据，如果还能够预测未来，让资源配置更优就更好了。
+路线规划在现实世界中，人、财、物时时刻刻都在流动，为了达到最优路径">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用Google Maps API预测未来">
+<meta property="og:url" content="http://alphayang.github.io/2015/10/24/predict-future-travel-time/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="引子大数据，云计算。。。这些词汇越来越多的出现在开发者和普通人的语境里，对于这些技术，不同的角度可以有不同的解读，但目的应该是统一明确的：存储分析利用过去的数据，当然是越多越好，也就是大数据，以最快的计算速度和最低的计算成本来组织、处理、分析这些数据（云计算），为解决当下的问题提供依据，如果还能够预测未来，让资源配置更优就更好了。
+路线规划在现实世界中，人、财、物时时刻刻都在流动，为了达到最优路径">
+<meta property="og:image" content="http://alphayang.github.io/img/google_nav_plan.png">
+<meta property="og:image" content="http://alphayang.github.io/img/baidu_nav_plan.png">
+<meta property="og:image" content="http://alphayang.github.io/img/amap_nav_plan.png">
+<meta property="og:image" content="http://alphayang.github.io/img/traffic_mode_parameters.png">
+<meta property="og:image" content="http://alphayang.github.io/img/ptt_in_ent.png">
+<meta property="og:image" content="http://alphayang.github.io/img/ptt_in_consumer.png">
+<meta property="og:updated_time" content="2015-11-13T08:09:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用Google Maps API预测未来">
+<meta name="twitter:description" content="引子大数据，云计算。。。这些词汇越来越多的出现在开发者和普通人的语境里，对于这些技术，不同的角度可以有不同的解读，但目的应该是统一明确的：存储分析利用过去的数据，当然是越多越好，也就是大数据，以最快的计算速度和最低的计算成本来组织、处理、分析这些数据（云计算），为解决当下的问题提供依据，如果还能够预测未来，让资源配置更优就更好了。
+路线规划在现实世界中，人、财、物时时刻刻都在流动，为了达到最优路径">
+<meta name="twitter:image" content="http://alphayang.github.io/img/google_nav_plan.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">利用Google Maps API预测未来</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">利用Google Maps API预测未来</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-10-24T08:43:47.000Z" itemprop="datePublished" class="page-time">
+  2015-10-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/google-maps-api/">google maps api</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#引子"><span class="post-toc-number">1.</span> <span class="post-toc-text">引子</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#路线规划"><span class="post-toc-number">2.</span> <span class="post-toc-text">路线规划</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#预测未来"><span class="post-toc-number">3.</span> <span class="post-toc-text">预测未来</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#使用API"><span class="post-toc-number">4.</span> <span class="post-toc-text">使用API</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Bonus"><span class="post-toc-number">5.</span> <span class="post-toc-text">Bonus</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#典型用途"><span class="post-toc-number">6.</span> <span class="post-toc-text">典型用途</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#企业级应用"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">企业级应用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#消费级应用"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">消费级应用</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#使用授权"><span class="post-toc-number">7.</span> <span class="post-toc-text">使用授权</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#update"><span class="post-toc-number">8.</span> <span class="post-toc-text">update</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#http-mapsptt-appspot-com-getdirections"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">http://mapsptt.appspot.com/getdirections</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#http-mapsptt-appspot-com-getdistance"><span class="post-toc-number">8.2.</span> <span class="post-toc-text">http://mapsptt.appspot.com/getdistance</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#https-commutetraffic-appspot-com-ptt-directions-html"><span class="post-toc-number">8.3.</span> <span class="post-toc-text">https://commutetraffic.appspot.com/ptt-directions.html</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#声明-direction-service"><span class="post-toc-number">8.3.1.</span> <span class="post-toc-text">声明 direction service</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#发送请求处理回调"><span class="post-toc-number">8.3.2.</span> <span class="post-toc-text">发送请求处理回调</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#返回结果中的-leg-数据"><span class="post-toc-number">8.3.3.</span> <span class="post-toc-text">返回结果中的 leg 数据</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#https-commutetraffic-appspot-com-ptt-distanceMatrix-html"><span class="post-toc-number">8.4.</span> <span class="post-toc-text">https://commutetraffic.appspot.com/ptt-distanceMatrix.html</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">9.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-predict-future-travel-time"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">利用Google Maps API预测未来</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年10月24日 16:43" datetime="2015-10-24T08:43:47.000Z"  itemprop="datePublished">2015-10-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/google-maps-api/">google maps api</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h1><p>大数据，云计算。。。这些词汇越来越多的出现在开发者和普通人的语境里，对于这些技术，不同的角度可以有不同的解读，但目的应该是统一明确的：存储分析利用过去的数据，当然是越多越好，也就是大数据，以最快的计算速度和最低的计算成本来组织、处理、分析这些数据（云计算），为解决当下的问题提供依据，如果还能够预测未来，让资源配置更优就更好了。</p>
+<h1 id="路线规划"><a href="#路线规划" class="headerlink" title="路线规划"></a>路线规划</h1><p>在现实世界中，人、财、物时时刻刻都在流动，为了达到最优路径，路线规划就成了最本质最普适的计算需求。有需求就有相应的产品，以下是Google、百度、高德这三家地图市场占有率前三的路线规划功能：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/google_nav_plan.png" alt="google_nav_plan.png" title="">
+                </div>
+                <div class="image-caption">google_nav_plan.png</div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/baidu_nav_plan.png" alt="baidu_nav_plan.png" title="">
+                </div>
+                <div class="image-caption">baidu_nav_plan.png</div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/amap_nav_plan.png" alt="amap_nav_plan.png" title="">
+                </div>
+                <div class="image-caption">amap_nav_plan.png</div>
+            </figure><br><em>对比</em><br>相同点，三个地图中都有相应的路线规划功能，指定出发地点和到达地点，提供多条路径供选择。<br>不同点，在Google Maps中，对于路线规划多了指定出发时间的功能，在截图中箭头所指位置。使用Google Maps，指定未来时间，就可以回答：</p>
+<ul>
+<li>几点出发可以在下午3点前到达机场？</li>
+<li>我们的服务人员几点钟可以到达客户现场？</li>
+<li>下周二可以安排走访四个场地吗？<br>。。。。。。</li>
+</ul>
+<h1 id="预测未来"><a href="#预测未来" class="headerlink" title="预测未来"></a>预测未来</h1><p>指定出发时间，看似简单的一项功能，后边却包含了调用分析整个Google Maps累积的海量历史交通数据，利用Google的计算能力，在不影响API返回速度的提前下，对未来进行预测。</p>
+<h1 id="使用API"><a href="#使用API" class="headerlink" title="使用API"></a>使用API</h1><p>Google Maps API是Google Maps的技术支持，预测未来的这个功能，在API中也可以调用来让我们的应用，不论是LBS还是O2O，都变得更加智能。<br>可以在Direction和Matrix Distance中指定departure_time:<br><a href="https://developers.google.com/maps/documentation/directions/intro" target="_blank" rel="external">https://developers.google.com/maps/documentation/directions/intro</a><br><a href="https://developers.google.com/maps/documentation/distance-matrix/intro" target="_blank" rel="external">https://developers.google.com/maps/documentation/distance-matrix/intro</a><br>输入参数：departure_time,从1970/01/01,00:00:00开始的整数，单位是s。</p>
+<h1 id="Bonus"><a href="#Bonus" class="headerlink" title="Bonus"></a>Bonus</h1><p>还有一个配置预测的参数，没有在API文档中列出来，那就是traffic_model，用来手工影响预测结果。<br>best_guess，默认值。<br>pessimistic<br>optimistic<br>一图胜千言：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/traffic_mode_parameters.png" alt="traffic_mode_parameters" title="">
+                </div>
+                <div class="image-caption">traffic_mode_parameters</div>
+            </figure></p>
+<h1 id="典型用途"><a href="#典型用途" class="headerlink" title="典型用途"></a>典型用途</h1><h2 id="企业级应用"><a href="#企业级应用" class="headerlink" title="企业级应用"></a>企业级应用</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/ptt_in_ent.png" alt="ptt_in_ent" title="">
+                </div>
+                <div class="image-caption">ptt_in_ent</div>
+            </figure>
+<h2 id="消费级应用"><a href="#消费级应用" class="headerlink" title="消费级应用"></a>消费级应用</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/ptt_in_consumer.png" alt="ptt_in_comsumer" title="">
+                </div>
+                <div class="image-caption">ptt_in_comsumer</div>
+            </figure>
+<h1 id="使用授权"><a href="#使用授权" class="headerlink" title="使用授权"></a>使用授权</h1><p>由于这个功能要消耗大量的计算资源，现在只在<a href="https://developers.google.com/maps/documentation/business/" target="_blank" rel="external">Google Maps API for Work</a>中指定departure_time才会有效。</p>
+<h1 id="update"><a href="#update" class="headerlink" title="update"></a>update</h1><p>20151111<br>两个在线示例</p>
+<h2 id="http-mapsptt-appspot-com-getdirections"><a href="#http-mapsptt-appspot-com-getdirections" class="headerlink" title="http://mapsptt.appspot.com/getdirections"></a><a href="http://mapsptt.appspot.com/getdirections" target="_blank" rel="external">http://mapsptt.appspot.com/getdirections</a></h2><p><a href="http://mapsptt.appspot.com/getdirections?origin=SFO,%20San%20Francisco,%20CA,%20United%20States&amp;destination=Googleplex,%20Amphitheatre%20Parkway,%20Mountain%20View,%20CA,%20United%20States&amp;client=gme-addictive&amp;departure_time=1457254000" target="_blank" rel="external">http://mapsptt.appspot.com/getdirections?origin=SFO,%20San%20Francisco,%20CA,%20United%20States&amp;destination=Googleplex,%20Amphitheatre%20Parkway,%20Mountain%20View,%20CA,%20United%20States&amp;client=gme-addictive&amp;departure_time=1457254000</a></p>
+<p><a href="http://mapsptt.appspot.com/getdirections?origin=SFO,%20San%20Francisco,%20CA,%20United%20States&amp;destination=Googleplex,%20Amphitheatre%20Parkway,%20Mountain%20View,%20CA,%20United%20States&amp;client=gme-addictive&amp;departure_time=1467254000" target="_blank" rel="external">http://mapsptt.appspot.com/getdirections?origin=SFO,%20San%20Francisco,%20CA,%20United%20States&amp;destination=Googleplex,%20Amphitheatre%20Parkway,%20Mountain%20View,%20CA,%20United%20States&amp;client=gme-addictive&amp;departure_time=1467254000</a></p>
+<h2 id="http-mapsptt-appspot-com-getdistance"><a href="#http-mapsptt-appspot-com-getdistance" class="headerlink" title="http://mapsptt.appspot.com/getdistance"></a><a href="http://mapsptt.appspot.com/getdistance" target="_blank" rel="external">http://mapsptt.appspot.com/getdistance</a></h2><p><a href="http://mapsptt.appspot.com/getdistance?origin=SFO,%20San%20Francisco,%20CA,%20United%20States&amp;destination=Googleplex,%20Amphitheatre%20Parkway,%20Mountain%20View,%20CA,%20United%20States&amp;client=gme-addictive&amp;departure_time=1457254000" target="_blank" rel="external">http://mapsptt.appspot.com/getdistance?origin=SFO,%20San%20Francisco,%20CA,%20United%20States&amp;destination=Googleplex,%20Amphitheatre%20Parkway,%20Mountain%20View,%20CA,%20United%20States&amp;client=gme-addictive&amp;departure_time=1457254000</a></p>
+<p><a href="http://mapsptt.appspot.com/getdistance?origin=SFO,%20San%20Francisco,%20CA,%20United%20States&amp;destination=Googleplex,%20Amphitheatre%20Parkway,%20Mountain%20View,%20CA,%20United%20States&amp;client=gme-addictive&amp;departure_time=1467254000" target="_blank" rel="external">http://mapsptt.appspot.com/getdistance?origin=SFO,%20San%20Francisco,%20CA,%20United%20States&amp;destination=Googleplex,%20Amphitheatre%20Parkway,%20Mountain%20View,%20CA,%20United%20States&amp;client=gme-addictive&amp;departure_time=1467254000</a></p>
+<p>20151113<br>另外两个示例</p>
+<h2 id="https-commutetraffic-appspot-com-ptt-directions-html"><a href="#https-commutetraffic-appspot-com-ptt-directions-html" class="headerlink" title="https://commutetraffic.appspot.com/ptt-directions.html"></a><a href="https://commutetraffic.appspot.com/ptt-directions.html" target="_blank" rel="external">https://commutetraffic.appspot.com/ptt-directions.html</a></h2><h3 id="声明-direction-service"><a href="#声明-direction-service" class="headerlink" title="声明 direction service"></a>声明 direction service</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Declare the Directions Service</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> directionsService = <span class="keyword">new</span> google.maps.DirectionsService();</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"></div><div class="line">* Use the Places Autocomplete Place IDs for the origin and</div><div class="line"></div><div class="line">* destination to reduce chances of errors.</div><div class="line"></div><div class="line">* The departure time is in milliseconds and MUST be in the future.</div><div class="line"></div><div class="line">* Travel mode is Driving.</div><div class="line"></div><div class="line">*/</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> request = &#123;</div><div class="line"></div><div class="line">                <span class="attr">origin</span>: &#123;</div><div class="line"></div><div class="line">                    <span class="attr">placeId</span>: <span class="string">"ChIJyYfhZ79ZwokRMtXcL6CYxkA"</span> &#125;</div><div class="line"></div><div class="line">                &#125;,</div><div class="line"></div><div class="line">                <span class="attr">destination</span>: &#123;</div><div class="line"></div><div class="line">                    <span class="attr">placeId</span>: <span class="string">"ChIJvwJZrWH4wokRNBcFMQ0ohIE"</span></div><div class="line"></div><div class="line">                &#125;,</div><div class="line"></div><div class="line">                <span class="attr">travelMode</span>: google.maps.TravelMode.DRIVING,</div><div class="line"></div><div class="line">                <span class="attr">drivingOptions</span>: &#123;</div><div class="line"></div><div class="line">                    <span class="attr">departureTime</span>: <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">1447621200000</span>),</div><div class="line"></div><div class="line">                    <span class="attr">trafficModel</span>: google.maps.TrafficModel.BEST_GUESS</div><div class="line"></div><div class="line">                &#125;</div></pre></td></tr></table></figure>
+<h3 id="发送请求处理回调"><a href="#发送请求处理回调" class="headerlink" title="发送请求处理回调"></a>发送请求处理回调</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">directionsService.route(request, <span class="function"><span class="keyword">function</span>(<span class="params">result, status</span>) </span>&#123;</div><div class="line"></div><div class="line">  <span class="comment">// Check to see if the Service responded as expected</span></div><div class="line"></div><div class="line">  <span class="keyword">if</span> (status == google.maps.DirectionsStatus.OK) &#123;</div><div class="line"></div><div class="line">  <span class="keyword">var</span> routesLegs = result.routes[<span class="number">0</span>].legs[<span class="number">0</span>];</div><div class="line"></div><div class="line">  <span class="keyword">var</span> durationText = routesLegs.duration.text;</div><div class="line"></div><div class="line">  <span class="keyword">var</span> durationInTrafficText = routesLegs.duration_in_traffic.text;</div><div class="line"></div><div class="line">  <span class="keyword">var</span> duration = routesLegs.duration.value;</div><div class="line"></div><div class="line">  <span class="keyword">var</span> durationInTraffic = routesLegs.duration_in_traffic.value;</div><div class="line"></div><div class="line">    <span class="comment">// Create a "Traffic Factor" score between typical and predicted travel times</span></div><div class="line"></div><div class="line">    <span class="keyword">var</span> trafficFactor = (durationInTraffic / duration);</div><div class="line"></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">    <span class="comment">// Alert why the Directions Service Request failed.</span></div><div class="line"></div><div class="line">    alert(<span class="string">'Directions request failed due to '</span> + status);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="返回结果中的-leg-数据"><a href="#返回结果中的-leg-数据" class="headerlink" title="返回结果中的 leg 数据"></a>返回结果中的 leg 数据</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="string">"legs"</span>: [</div><div class="line"></div><div class="line">        &#123;</div><div class="line"></div><div class="line">          <span class="string">"duration"</span>: &#123;</div><div class="line"></div><div class="line">            <span class="string">"text"</span>: <span class="string">"25 mins"</span>,</div><div class="line"></div><div class="line">            <span class="string">"value"</span>: <span class="number">1471</span></div><div class="line"></div><div class="line">          &#125;,</div><div class="line"></div><div class="line">          <span class="string">"duration_in_traffic"</span>: &#123;</div><div class="line"></div><div class="line">            <span class="string">"text"</span>: <span class="string">"28 mins"</span>,</div><div class="line"></div><div class="line">            <span class="string">"value"</span>: <span class="number">1687</span></div><div class="line"></div><div class="line">          &#125;</div><div class="line">      ...</div></pre></td></tr></table></figure>
+<h2 id="https-commutetraffic-appspot-com-ptt-distanceMatrix-html"><a href="#https-commutetraffic-appspot-com-ptt-distanceMatrix-html" class="headerlink" title="https://commutetraffic.appspot.com/ptt-distanceMatrix.html"></a><a href="https://commutetraffic.appspot.com/ptt-distanceMatrix.html" target="_blank" rel="external">https://commutetraffic.appspot.com/ptt-distanceMatrix.html</a></h2><p>和上个示例一样，使用 Distance Matrix API</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p> 关于如何实现预测：<br> <a href="http://onlinepubs.trb.org/Onlinepubs/IDEA/FinalReports/Reliability/FINALREPORTL15A%20.pdf" target="_blank" rel="external">http://onlinepubs.trb.org/Onlinepubs/IDEA/FinalReports/Reliability/FINALREPORTL15A%20.pdf</a><br> <a href="http://people.orie.cornell.edu/woodard/WoodNogiKoch15.pdf" target="_blank" rel="external">http://people.orie.cornell.edu/woodard/WoodNogiKoch15.pdf</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-13T08:09:50.000Z" itemprop="dateUpdated">2015年11月13日 16:09</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2015/10/24/predict-future-travel-time/" target="_blank" rel="external">http://alphayang.github.io/2015/10/24/predict-future-travel-time/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/google-maps-api/">google maps api</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/24/predict-future-travel-time/&title=《利用Google Maps API预测未来》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/24/predict-future-travel-time/&title=《利用Google Maps API预测未来》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/24/predict-future-travel-time/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《利用Google Maps API预测未来》 — Geek Dev&url=http://alphayang.github.io/2015/10/24/predict-future-travel-time/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/24/predict-future-travel-time/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">15分钟，使用BigQuery和Google Sheets对Hacker News历史数据进行在线分析</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/10/20/re-enable-osx-el-captian-dashboard/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">找回Mac OSX El Captian默认隐藏的Dashboard</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="predict-future-travel-time" data-title="利用Google Maps API预测未来" data-url="http://alphayang.github.io/2015/10/24/predict-future-travel-time/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/24/predict-future-travel-time/&title=《利用Google Maps API预测未来》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/24/predict-future-travel-time/&title=《利用Google Maps API预测未来》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/24/predict-future-travel-time/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《利用Google Maps API预测未来》 — Geek Dev&url=http://alphayang.github.io/2015/10/24/predict-future-travel-time/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/24/predict-future-travel-time/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrklEQVR42u3awW4iMRAE0Pz/T7NSTishoKp7POTwfEIEGD8f7E61f37i8fgdz6+fP/P/ePX55J33c7h44OHh4Y2m/mo8f6ad0KtvPeLRfhcPDw/vHl5yGLz6ieQx7VPyZfrwFDw8PLyv8q6aXH5sbOaDh4eH93d4s5I3n/RVy42Hh4d3mpcHAftNPH8nCUcuy1rw8PDwYt6mAfat1zf19/Dw8PDKrnq74bYtsX1j7MNs8fDw8A7w2uAgDxHyhlmyTLNrCnh4eHgneMnW3/51dnWgnUkUf+Dh4eEd5p3DtKVzG4i8nCEeHh7eYd4sDkjaV+0Cta2vlwuBh4eHd4BXX2BatMfaiwX7ch8PDw/vBG9T+Latsn1sURfxeHh4eAd4m8fkO3DbVEuOiqKUx8PDwzvAK4LREbVta7WfjJYPDw8P70ZeO5U8eJ29PzzM8PDw8C7l5VttMqH2glT7TnvJAA8PD+8c76r+UR4i5MV6G3bg4eHh3clrQ9ikzG3DjnzTjw4ePDw8vEt5eeHbXhfYF9MXXEfAw8PDO8Dbt75m4e/s1/ICHQ8PD+8cr41l25K33sTbq1Tvn4KHh4f3JV79o6NoOC/H88MDDw8P7wRvNtop5hez2vh4c4Tg4eHhXcvLA9zZdNuSuoXh4eHhneO9n27bpmovEOzj4w//BuDh4eHdyNs08ovHj0r2/Cl4eHh4J3ibCDWPbjcle5uaRP8r4OHh4S14j3LsG055ONsW8dG5h4eHh7fmbZpe+UK0F7ZyxjClxsPDw1vz2hbX7DCYbev7OAMPDw/vHG/WrMoB7dWBfBGLexB4eHh4t/PaeLeNMJKZtDPEw8PD+8u89kgYbvRBpDssqfHw8PBKXjvRJFyYjU1MfEHWgoeHhxfw9i3/TcSwueC1X0o8PDy8kvcPIKeccenRsZcAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

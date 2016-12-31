@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>加速Android Studio中的Gradle Build | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="gradle">
+    <meta name="description" content="问题Gradle Sync或Build越来越慢，已经快不能忍受了，硬件配置并不差呀！
+分析两个方面：1，项目越来越大,依赖越来越多；2，Gradle本身为了兼容配置太中庸。
+解决办法针对1，将公用代码分离出来，以aar格式导出，使用时加本地aar或网络引用 。2，对Gradle进行优化配置。
+升级gradle版本，此法向前向后兼容现在Android Studio默认的Gradle版本为2.4，而最">
+<meta property="og:type" content="article">
+<meta property="og:title" content="加速Android Studio中的Gradle Build">
+<meta property="og:url" content="http://alphayang.github.io/2015/10/16/speed-up-android-studio-build/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="问题Gradle Sync或Build越来越慢，已经快不能忍受了，硬件配置并不差呀！
+分析两个方面：1，项目越来越大,依赖越来越多；2，Gradle本身为了兼容配置太中庸。
+解决办法针对1，将公用代码分离出来，以aar格式导出，使用时加本地aar或网络引用 。2，对Gradle进行优化配置。
+升级gradle版本，此法向前向后兼容现在Android Studio默认的Gradle版本为2.4，而最">
+<meta property="og:image" content="http://alphayang.github.io/img/project_structure_dialog.png">
+<meta property="og:image" content="http://alphayang.github.io/img/gradle_wrapper_folder.png">
+<meta property="og:updated_time" content="2016-05-29T09:29:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="加速Android Studio中的Gradle Build">
+<meta name="twitter:description" content="问题Gradle Sync或Build越来越慢，已经快不能忍受了，硬件配置并不差呀！
+分析两个方面：1，项目越来越大,依赖越来越多；2，Gradle本身为了兼容配置太中庸。
+解决办法针对1，将公用代码分离出来，以aar格式导出，使用时加本地aar或网络引用 。2，对Gradle进行优化配置。
+升级gradle版本，此法向前向后兼容现在Android Studio默认的Gradle版本为2.4，而最">
+<meta name="twitter:image" content="http://alphayang.github.io/img/project_structure_dialog.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">加速Android Studio中的Gradle Build</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">加速Android Studio中的Gradle Build</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-10-16T06:45:17.000Z" itemprop="datePublished" class="page-time">
+  2015-10-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develop/">develop</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#分析"><span class="post-toc-number">2.</span> <span class="post-toc-text">分析</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解决办法"><span class="post-toc-number">3.</span> <span class="post-toc-text">解决办法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#升级gradle版本，此法向前向后兼容"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">升级gradle版本，此法向前向后兼容</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#build-gradle"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">build.gradle</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Project属性"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">Project属性</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置Gradle"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">配置Gradle</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Gradle运行期环境增强配置"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">Gradle运行期环境增强配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Gradle-Build增量模式"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">Gradle Build增量模式</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#后记"><span class="post-toc-number">4.</span> <span class="post-toc-text">后记</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#One-more-thing"><span class="post-toc-number">5.</span> <span class="post-toc-text">One more thing</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#更新20151205"><span class="post-toc-number">6.</span> <span class="post-toc-text">更新20151205</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Gradle-最新版本为2-9"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">Gradle 最新版本为2.9</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#升级-Android-Plugin"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">升级 Android Plugin</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开发使用SDK-21"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">开发使用SDK=21</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-speed-up-android-studio-build"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">加速Android Studio中的Gradle Build</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年10月16日 14:45" datetime="2015-10-16T06:45:17.000Z"  itemprop="datePublished">2015-10-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develop/">develop</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>Gradle Sync或Build越来越慢，已经快不能忍受了，硬件配置并不差呀！</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>两个方面：1，项目越来越大,依赖越来越多；2，Gradle本身为了兼容配置太中庸。</p>
+<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>针对1，将公用代码分离出来，以aar格式导出，使用时加本地aar或网络引用 。<br>2，对Gradle进行优化配置。</p>
+<h2 id="升级gradle版本，此法向前向后兼容"><a href="#升级gradle版本，此法向前向后兼容" class="headerlink" title="升级gradle版本，此法向前向后兼容"></a>升级gradle版本，此法向前向后兼容</h2><p>现在Android Studio默认的Gradle版本为2.4，而最新的Gradle版本为2.7，稳妥起见，升级到次新版2.6</p>
+<h3 id="build-gradle"><a href="#build-gradle" class="headerlink" title="build.gradle"></a>build.gradle</h3><p>添加下边的代码到project的build.gradle<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">task wrapper(<span class="string">type:</span> Wrapper) &#123;</div><div class="line">    gradleVersion = <span class="string">'2.6'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在Android Studio的Terminal中运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./gradlew wrapper</div></pre></td></tr></table></figure></p>
+<p>或在Android Studio的Gradle Panel展开Project-&gt;Project(root)-&gt;Tasks-&gt;other,找见wrapper任务，单击执行。</p>
+<h3 id="Project属性"><a href="#Project属性" class="headerlink" title="Project属性"></a>Project属性</h3><p>快捷键⌘+;打开项目属性，更新Gradle版本<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/project_structure_dialog.png" alt="project" title="">
+                </div>
+                <div class="image-caption">project</div>
+            </figure></p>
+<h2 id="配置Gradle"><a href="#配置Gradle" class="headerlink" title="配置Gradle"></a>配置Gradle</h2><h3 id="Gradle运行期环境增强配置"><a href="#Gradle运行期环境增强配置" class="headerlink" title="Gradle运行期环境增强配置"></a>Gradle运行期环境增强配置</h3><p>在Project根目录下的gradle.properties文件中添加<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">org.gradle.daemon=<span class="literal">true</span></div><div class="line">org.gradle.parallel=<span class="literal">true</span></div><div class="line">org.gradle.jvmargs=-Xmx2g</div><div class="line">org.gradle.java.home=<span class="regexp">/path/</span>to/jvm</div></pre></td></tr></table></figure></p>
+<p>Daemon,守护进程，避免冷启动，Andorid Studio已默认开启，添加确保在Terminal下使用gradlew也使用。更多<a href="http://gradle.org/docs/current/userguide/gradle_daemon.html#when_should_i_not_use_the_gradle_daemon" target="_blank" rel="external">http://gradle.org/docs/current/userguide/gradle_daemon.html#when_should_i_not_use_the_gradle_daemon</a><br>Parallel,并发，充分利用硬件的多核性能，可能会让你的项目Build失败，那是因为项目结构没有解藕。更多<a href="http://gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects" target="_blank" rel="external">http://gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects</a><br>jvmargs，grovvy寄宿在jvm中运行，加大jvm的内存，给gradle更大的展现空间，比如-Xmx将heap size加大到2g，<br>java.home，使用与项目不同的java运行时，通常是Android开发使用JDK7，Gradle使用JDK8获得更好的性能。<br>Gradle的完整配置可以参考<a href="http://gradle.org/docs/current/userguide/userguide_single.html#sec:gradle_configuration_properties" target="_blank" rel="external">http://gradle.org/docs/current/userguide/userguide_single.html#sec:gradle_configuration_properties</a></p>
+<p>这个配置同样可做为全局配置，添加到</p>
+<ul>
+<li><code>~/.gradle/gradle.properties</code></li>
+</ul>
+<h3 id="Gradle-Build增量模式"><a href="#Gradle-Build增量模式" class="headerlink" title="Gradle Build增量模式"></a>Gradle Build增量模式</h3><p>在Module的build.gradle中添加<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">android&#123;</div><div class="line">...</div><div class="line">	dexOptions &#123;</div><div class="line">        incremental <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">&#123;</div></pre></td></tr></table></figure></p>
+<p>指定APK的DEX环节使用增量模式。</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>还不够快，你该升级你的硬件设备了！</p>
+<h1 id="One-more-thing"><a href="#One-more-thing" class="headerlink" title="One more thing"></a>One more thing</h1><p>Gradle wrapper是如何工作的？<br>gradle作为一个独立的软件，之前都需要自己安装，像上边的过程中怎么只改了下数字，就全部搞定了呢？<br>如下图，Android Studio的Project中除了build.gradle,gradle.settings,gradle.properties之外，还有一个gradle目录。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/gradle_wrapper_folder.png" alt="gradle" title="">
+                </div>
+                <div class="image-caption">gradle</div>
+            </figure><br>这个jar文件只是一个钩子，每个project都有，调用功能时，由钩子调用实际的本地应用，位置如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Downloads  ls ~/.gradle/wrapper/dists/gradle-</div><div class="line">gradle-1.8-bin/    gradle-2.2.1-all/  gradle-2.4-bin/    gradle-2.6-all/</div><div class="line">gradle-2.2-all/    gradle-2.4-all/    gradle-2.5-all/    gradle-2.7-all/</div></pre></td></tr></table></figure></p>
+<p>而这些版本是全局共享的，我们升级版本，Android Studio会自动下载本地没有的版本到这里。</p>
+<h1 id="更新20151205"><a href="#更新20151205" class="headerlink" title="更新20151205"></a>更新20151205</h1><h2 id="Gradle-最新版本为2-9"><a href="#Gradle-最新版本为2-9" class="headerlink" title="Gradle 最新版本为2.9"></a>Gradle 最新版本为2.9</h2><h2 id="升级-Android-Plugin"><a href="#升级-Android-Plugin" class="headerlink" title="升级 Android Plugin"></a>升级 Android Plugin</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">buildscrpt &#123;</div><div class="line">  dependencies &#123;</div><div class="line">    classpath &apos;com.android.tools.build:gradle:1.5.0&apos;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="开发使用SDK-21"><a href="#开发使用SDK-21" class="headerlink" title="开发使用SDK=21"></a>开发使用SDK=21</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">  productFlavors &#123;</div><div class="line">    dev &#123;</div><div class="line">        minSdkVersion 21</div><div class="line">    &#125;</div><div class="line">    prod &#123;</div><div class="line">        minSdkVersion 14</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>原理：API&gt;=21，使用 ART，在 Build 时只做 class to dex，不做 mergeing dex，省时间。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-05-29T09:29:54.000Z" itemprop="dateUpdated">2016年5月29日 17:29</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2015/10/16/speed-up-android-studio-build/" target="_blank" rel="external">http://alphayang.github.io/2015/10/16/speed-up-android-studio-build/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gradle/">gradle</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/16/speed-up-android-studio-build/&title=《加速Android Studio中的Gradle Build》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/16/speed-up-android-studio-build/&title=《加速Android Studio中的Gradle Build》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/16/speed-up-android-studio-build/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《加速Android Studio中的Gradle Build》 — Geek Dev&url=http://alphayang.github.io/2015/10/16/speed-up-android-studio-build/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/16/speed-up-android-studio-build/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/10/17/all-about-aar/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android开发，关于aar你应该知道的</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/10/15/gradle-dependence-tree/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android Studio中Gradle依赖树查看</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="speed-up-android-studio-build" data-title="加速Android Studio中的Gradle Build" data-url="http://alphayang.github.io/2015/10/16/speed-up-android-studio-build/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/16/speed-up-android-studio-build/&title=《加速Android Studio中的Gradle Build》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/16/speed-up-android-studio-build/&title=《加速Android Studio中的Gradle Build》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/16/speed-up-android-studio-build/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《加速Android Studio中的Gradle Build》 — Geek Dev&url=http://alphayang.github.io/2015/10/16/speed-up-android-studio-build/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/16/speed-up-android-studio-build/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACxElEQVR42u3ay25iMRAE0Pz/T2ekrCIxmKq2TVicu0K8ro+R3KbaX1/x9f1z/X78+5nH9zy+8/HVZ59KxnD4wsPDwxsN/dm1fs8av56I/F75Xf4zBXh4eHjXeHkxWA83X5/X5WT9/UWZwcPDw/tTXoJpy8n6Lsl48PDw8D6fl2/H80U/iRvw8PDwPo2Xxw1rZF5a2gj4etaCh4eHF/NmDbC/fXy9v4eHh4c36qrnIcI6XJhFEvsXHh4e3g1e25rKo4HZdOTttHxbj4eHh/ceXnvsKT9utd9aa4MPPDw8vLO82ZI9O2h1rxQ9HRUeHh7eBV7eakqW5lnYmocaefnBw8PDu8dr2/k7i34y9J2t+VZegoeHh1eu0kUzqbx9GyLcOOCFh4eHd5bXLruzQwZJ7JuEFPnU4OHh4d3m5YA2Gmhj2bZt9mIi8PDw8K7xZgvxztScCotfTAQeHh7eBd5+w75dxNsoOT9w8CJrwcPDwzvEO9xqihtj+bGttmy82FLj4eHhbfPaBtj+0GdRb1tI8PDw8O7x8kA23yjnW+RTh66ilBoPDw/vEK894TkDtIt+gml/GDw8PLyzvLzxP5u52XTMopDoHwMeHh7eId6whmws6EnckN8FDw8P7528NiCYbZ2T0GG2Tf/arzN4eHh4G7xTg6sb/NsFJvoZ8PDw8LZ5s6MAeaS7z2gPEODh4eG9n9d+0Y0otg2Cnz6Dh4eHd4HXbljzwGJ2TKodQzFxeHh4eId43+W1XqzXpGSm8wij3lLj4eHhHeLNNsRt1Jt/Kg87ZmUJDw8P7xQvKQan2v9tYyyJkl8ExHh4eHjXePlWuC0Ds8bYTiwSvYyHh4f3Ft4+qT0i0JaZp60vPDw8vA/jzQKFaENcBr5bW2o8PDy8kpeHEXl77NRmelZy8PDw8O7xdg42tYt+2xibgesLDw8PL+X9A4CZSt/6KqXvAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

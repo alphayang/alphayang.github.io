@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>如何在Android Studio Project中集中管理Android Support Library依赖 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Andorid Studio,Gradle,Andorid">
+    <meta name="description" content="问题有时候一个Project中包含了好几个module，每个module都要用到Android Support Library，每当升级Support Library时要改好几处，相当麻烦。12345678root 	--module1 		--build.gradle	--module2		--build.gradle	--module3 		--build.gradle 	--build.gr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在Android Studio Project中集中管理Android Support Library依赖">
+<meta property="og:url" content="http://alphayang.github.io/2015/10/18/support-library-group-in-gradle/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="问题有时候一个Project中包含了好几个module，每个module都要用到Android Support Library，每当升级Support Library时要改好几处，相当麻烦。12345678root 	--module1 		--build.gradle	--module2		--build.gradle	--module3 		--build.gradle 	--build.gr">
+<meta property="og:updated_time" content="2015-10-18T13:53:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何在Android Studio Project中集中管理Android Support Library依赖">
+<meta name="twitter:description" content="问题有时候一个Project中包含了好几个module，每个module都要用到Android Support Library，每当升级Support Library时要改好几处，相当麻烦。12345678root 	--module1 		--build.gradle	--module2		--build.gradle	--module3 		--build.gradle 	--build.gr">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">如何在Android Studio Project中集中管理Android Support Library依赖</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">如何在Android Studio Project中集中管理Android Support Library依赖</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-10-18T13:33:52.000Z" itemprop="datePublished" class="page-time">
+  2015-10-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develop/">develop</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#利用Gradle的apply-from进行拆分"><span class="post-toc-number">2.</span> <span class="post-toc-text">利用Gradle的apply from进行拆分</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#应用"><span class="post-toc-number">3.</span> <span class="post-toc-text">应用</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-support-library-group-in-gradle"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">如何在Android Studio Project中集中管理Android Support Library依赖</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年10月18日 21:33" datetime="2015-10-18T13:33:52.000Z"  itemprop="datePublished">2015-10-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develop/">develop</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>有时候一个Project中包含了好几个module，每个module都要用到Android Support Library，每当升级Support Library时要改好几处，相当麻烦。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">root </div><div class="line">	--module1 </div><div class="line">		--build.gradle</div><div class="line">	--module2</div><div class="line">		--build.gradle</div><div class="line">	--module3 </div><div class="line">		--build.gradle </div><div class="line">	--build.gradle</div></pre></td></tr></table></figure></p>
+<h1 id="利用Gradle的apply-from进行拆分"><a href="#利用Gradle的apply-from进行拆分" class="headerlink" title="利用Gradle的apply from进行拆分"></a>利用Gradle的apply from进行拆分</h1><p>Gradle基于Groovy脚本语言，本身使用Plugin机制提供扩展和模块化，也支持文件间的引用包含apply from，跟C的include,Java的import一样，那么我们就把Android Support Library相关的部分单独提取到root/gradleScript/dependencies.gradle中。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">root </div><div class="line">	--gradleScript </div><div class="line">		--dependencies.gradle</div><div class="line">	--module1 </div><div class="line">		--build.gradle</div><div class="line">	--module2</div><div class="line">		--build.gradle</div><div class="line">	--module3 </div><div class="line">		--build.gradle </div><div class="line">	--build.gradle</div></pre></td></tr></table></figure></p>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>在<code>root/gradleScript/dependencies.gradle</code>中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">ext &#123;</div><div class="line">    //Version</div><div class="line">    supportLibrary = &apos;22.2.0&apos;</div><div class="line"></div><div class="line">    //Support Libraries dependencies</div><div class="line">    supportDependencies = [</div><div class="line">            design           :    &quot;com.android.support:design:$&#123;supportLibrary&#125;&quot;,</div><div class="line">            recyclerView     :    &quot;com.android.support:recyclerview-v7:$&#123;supportLibrary&#125;&quot;,</div><div class="line">            cardView         :    &quot;com.android.support:cardview-v7:$&#123;supportLibrary&#125;&quot;,</div><div class="line">            appCompat        :    &quot;com.android.support:appcompat-v7:$&#123;supportLibrary&#125;&quot;,</div><div class="line">            supportAnnotation:    &quot;com.android.support:support-annotations:$&#123;supportLibrary&#125;&quot;,</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在<code>root/build.gradle</code>中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">buildscript &#123;</div><div class="line">    repositories &#123;</div><div class="line">        jcenter()</div><div class="line">    &#125;</div><div class="line">    dependencies &#123;</div><div class="line">        classpath &apos;com.android.tools.build:gradle:1.3.0&apos;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 引用gradle文件</div><div class="line">apply from: &apos;gradleScript/dependencies.gradle&apos;</div></pre></td></tr></table></figure></p>
+<p>在<code>module/build.gradle</code>中使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">    //......</div><div class="line">    compile supportDependencies.appCompat</div><div class="line">    compile supportDependencies.design</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Gradle利用Grovvy，其动态脚本语言的特性，跟JavaScript一样，运行时将所有Plugin和自写代码载入到一个上下文中，Plugin可以看成是Groovy的一个jar包，独立出来的gradle文件是一个只有一个文件的jar包，其自身的扩展性潜力无限，这也是Android Studio选择Gradle Build System的原因。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-10-18T13:53:28.000Z" itemprop="dateUpdated">2015年10月18日 21:53</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2015/10/18/support-library-group-in-gradle/" target="_blank" rel="external">http://alphayang.github.io/2015/10/18/support-library-group-in-gradle/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andorid/">Andorid</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andorid-Studio/">Andorid Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/18/support-library-group-in-gradle/&title=《如何在Android Studio Project中集中管理Android Support Library依赖》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/18/support-library-group-in-gradle/&title=《如何在Android Studio Project中集中管理Android Support Library依赖》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/18/support-library-group-in-gradle/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《如何在Android Studio Project中集中管理Android Support Library依赖》 — Geek Dev&url=http://alphayang.github.io/2015/10/18/support-library-group-in-gradle/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/18/support-library-group-in-gradle/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/10/19/distribute-android-library-to-jcetner/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">在Android Studio中发布Library到jCenter公共仓库</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/10/17/all-about-aar/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android开发，关于aar你应该知道的</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="support-library-group-in-gradle" data-title="如何在Android Studio Project中集中管理Android Support Library依赖" data-url="http://alphayang.github.io/2015/10/18/support-library-group-in-gradle/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/18/support-library-group-in-gradle/&title=《如何在Android Studio Project中集中管理Android Support Library依赖》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/18/support-library-group-in-gradle/&title=《如何在Android Studio Project中集中管理Android Support Library依赖》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/18/support-library-group-in-gradle/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《如何在Android Studio Project中集中管理Android Support Library依赖》 — Geek Dev&url=http://alphayang.github.io/2015/10/18/support-library-group-in-gradle/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/18/support-library-group-in-gradle/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrUlEQVR42u3awY4aMRAE0P3/n95IOUVKgOpqeyHSmxNCg8fPh7Gp7q+v+Pr+ff39zZ/ffwfX85EffX70zbELDw8Pr5r68wk9n2I30eRZz8eMFhEPDw/vGi+ZbnJnTup+m88ZDw8P7xN4yUs/eYknk37OxsPDw/sfefvoIZ80Hh4e3mfykoAgCXCnC5RMdxoZ4+Hh4d3mTQtgn/D5Yn0PDw8Pb1FVz4PX7il5eNFdeHh4eDd409JU1wI1Pex2+9vgHwMeHh7eUd5zcN4WkIe5XWvXIA7Gw8PDu8brXtn54TjZijakh3fi4eHhXeDtJ7cpPk3LWl2DAh4eHt5ZXvLj/Ju8FaAbeRxz4OHh4V3jJdvAJrzoWrUOZy14eHh4a95mit0xdxNeJNvPPzoj8PDw8H6EN4V1LQLJ+N05+UCygoeHhxfzppFrEr920UOXRr8IcPHw8PDWvM3kkqNtsmF0S5wEFnh4eHj3eNObNuCu0JWMMz7W4+Hh4VW8LpbtYovuAL15Ch4eHt5tXh65jtueqhd9V1R7uDHg4eHhXeCd3Rg2IUIyQnQ0x8PDw3sTL68lncpFupCi3Bjw8PDwFrxpULtpKRiX//eVPTw8PLxrvK7VaVromrYslO0IeHh4eBd4+WO6wtU+Vkh+9WLzwMPDwzvKy//2b4Ld7rWeNBDg4eHhvZe3iWK7toNuIfIQGQ8PD+8GL3nAqbLWdLr51PHw8PB+ktfFENOl6RYuiX1fLC4eHh7eBV5+bR6WF8amccb07wEeHh7eKd6m3HW2iDWdw7j1Cg8PD+8o71Q8kRzHkyXIc5QX9+Ph4eG9lTdtusoP5flMxiPg4eHhfQBvQz1Vrxsc6PHw8PCu8TaA5JWdF6i6gONK1oKHh4c3bMPKh9hEBt1Re1XNw8PDw+t5vwDc6rtgfytDKgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

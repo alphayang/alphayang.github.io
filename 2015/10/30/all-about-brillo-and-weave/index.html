@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>关于 Brillo 和 Weave， 开发者应该知道的 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android">
+    <meta name="description" content="背景
+                
+                    
+                    
+                
+                
+            
+在 Google IO 2015中宣布的 Android for IoT – Brillo和配套的协议 Weave 终于要揭开神秘的面纱了。Google 在2014年1月以32亿美元">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于 Brillo 和 Weave， 开发者应该知道的">
+<meta property="og:url" content="http://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="背景
+                
+                    
+                    
+                
+                
+            
+在 Google IO 2015中宣布的 Android for IoT – Brillo和配套的协议 Weave 终于要揭开神秘的面纱了。Google 在2014年1月以32亿美元">
+<meta property="og:image" content="http://alphayang.github.io/img/media/14462116526573.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/media/14462114396315.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/media/14462095693163.jpg">
+<meta property="og:updated_time" content="2015-10-31T02:48:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于 Brillo 和 Weave， 开发者应该知道的">
+<meta name="twitter:description" content="背景
+                
+                    
+                    
+                
+                
+            
+在 Google IO 2015中宣布的 Android for IoT – Brillo和配套的协议 Weave 终于要揭开神秘的面纱了。Google 在2014年1月以32亿美元">
+<meta name="twitter:image" content="http://alphayang.github.io/img/media/14462116526573.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">关于 Brillo 和 Weave， 开发者应该知道的</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">关于 Brillo 和 Weave， 开发者应该知道的</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-10-30T11:17:07.000Z" itemprop="datePublished" class="page-time">
+  2015-10-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">背景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Brillo"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Brillo</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Weave"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Weave</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#可以用来开发什么"><span class="post-toc-number">2.</span> <span class="post-toc-text">可以用来开发什么</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#通过-Weave-通信"><span class="post-toc-number">3.</span> <span class="post-toc-text">通过 Weave 通信</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#需要的开发准备"><span class="post-toc-number">4.</span> <span class="post-toc-text">需要的开发准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#申请开发者资格"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">申请开发者资格</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习-Android-NDK"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">学习 Android NDK</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#工具"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">工具</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-all-about-brillo-and-weave"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">关于 Brillo 和 Weave， 开发者应该知道的</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年10月30日 19:17" datetime="2015-10-30T11:17:07.000Z"  itemprop="datePublished">2015-10-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/media/14462116526573.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>在 Google IO 2015中宣布的 Android for IoT – Brillo和配套的协议 Weave 终于要揭开神秘的面纱了。<br>Google 在2014年1月以32亿美元收购了物联网公司 Nest Lab，其实最主要还是看中了 Nest 在物联网操作系统和低功耗传输协议方面的杰出成就，经过快2年的磨合和消化，推出了 Brillo 和 Weave。</p>
+<h2 id="Brillo"><a href="#Brillo" class="headerlink" title="Brillo"></a>Brillo</h2><p>万物互联网上的 Android（Android for IoT），从名称上就可以看出与 Android、Android Wear、Android Auto、Android TV不同，因为其可以运行的硬件最低配置公为32M内存和128M存储，是一个非常精剪的 Androd 运行时环境，不会有 ART，可以看成只运行Linux 内核和部分 Android 本地库的Android系统。</p>
+<h2 id="Weave"><a href="#Weave" class="headerlink" title="Weave"></a>Weave</h2><p>Weave 的前身是 <a href="http://threadgroup.org/" target="_blank" rel="external">Thread</a>，是一种基于 IP-V6用来解决智能家居应用场景中的网络传输，跟Thread 相对应的是 BLE（Bluetooth Low Energy）和 Zigbee，由 Nest 发起，成员有 Samsung, ARM Holdings, Freescale, Silicon Labs, Big Ass Fans， Yale。。。<br>熟悉 Android 应用开发的同学都知道 Android 中进行 BLE 通讯是非常的方便，所以对于 Weave，会提供更加方便的 API 供开发者使用。</p>
+<p>PS：在 IO2015的 Nest 展位上和Nest 一位资深工程师聊天，提到为什么有了 BLE和 Zigbee，Nest还要开发一种新的通讯协议，他提到说由于 Nest 对于物联网的投入比较早，当时根本找不到一个合适的协议来满足Nest 的网络传输需要，那就自己动手，丰衣足食了，并且基于 IP-V6也是与其它协议有着明显的优势，对传输速率和功耗进行了最优化的平衡设计。</p>
+<h1 id="可以用来开发什么"><a href="#可以用来开发什么" class="headerlink" title="可以用来开发什么"></a>可以用来开发什么</h1><p>有嵌入式，物联网，智能家居，Android 应用领域开发者，都可以利用 Brillo和 Weave 这样的开发平台和开放协议来进行富有创新性的开发，让用户有更多的选择，真正做到 Android is Everywhere。</p>
+<p>以前用户在选择物联网和智能家居时，所有数据都会依赖于某一个产品提供商，形成数据孤岛，通过Brillo，解藕了特定产品和系统，硬件和软件都可以肆意的各自创新，像 Android 手机百花齐放一样，Brillo 迅速的进入家庭应用场景。</p>
+<p>由于 Android 的开放性，掌握 Android 开发技能的人也越来越多，配合 NDK 的开发来切入这些风口领域，获得更广阔的职业发展前景。</p>
+<p>由于Brillo极低的运行硬件要求，以及 Android 内核丰富的硬件架构支持，从硬件的发展上会有更大的飞跃和更多的产品，从32M内存配置向上不断延伸。</p>
+<h1 id="通过-Weave-通信"><a href="#通过-Weave-通信" class="headerlink" title="通过 Weave 通信"></a>通过 Weave 通信</h1><p>Brillo 原生支持 Weave，Brillo 推出了最新的 Android 肯定会集成 Weave 的支持，并且还会以某种容易发布安装的形式支持 Android 之前的版本。<br>OnHub 路由器原生支持 Weave，通信可以不通过 Android 设备，利用路由器进行直接的云端交互。<br>由于 Weave 基于 IP-V6，理论上来讲，iOS 和 WP 都有支持的可能性。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/media/14462114396315.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h1 id="需要的开发准备"><a href="#需要的开发准备" class="headerlink" title="需要的开发准备"></a>需要的开发准备</h1><h2 id="申请开发者资格"><a href="#申请开发者资格" class="headerlink" title="申请开发者资格"></a>申请开发者资格</h2><p><a href="https://developers.google.com/brillo/?hl=en" target="_blank" rel="external">https://developers.google.com/brillo/?hl=en</a><br>先申请，可以在第一时间收到开发相关的更新。</p>
+<h2 id="学习-Android-NDK"><a href="#学习-Android-NDK" class="headerlink" title="学习 Android NDK"></a>学习 Android NDK</h2><p><a href="http://developer.android.com/tools/sdk/ndk/index.html" target="_blank" rel="external">http://developer.android.com/tools/sdk/ndk/index.html</a><br>Brillo 应该只允许运行 NDK 生成的 so 模块，对于 Android 应用开发者来讲需要学习或温习 NDK 相关的开发，而对于从事嵌入式开发的同学需要了解下 Android 的 Java 与 NDk 是如何协同工作的，NDK 是C\C++的开发环境，可能与你之前的开发环境会有一些支持库不同，但相信可以很快上手。</p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>Android Studio1.4已经集成 NDK 的下载，不用再单独下载并手动配置。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/media/14462095693163.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>在独立的 SDK 管理界面还没有 NDK，可以看出 Android Studio 作为官方开发工具进一步集成的趋势，类似于 XCode，全部内部管理 SDK。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>官方 Blog 公告<br><a href="http://googledevelopers.blogspot.sg/2015/10/building-brillo-iant-devices-with-weave_27.html" target="_blank" rel="external">http://googledevelopers.blogspot.sg/2015/10/building-brillo-iant-devices-with-weave_27.html</a><br>公告中文版：<br><a href="http://chinagdg.org/2015/10/building-brillo-iant-devices-with-weave/" target="_blank" rel="external">http://chinagdg.org/2015/10/building-brillo-iant-devices-with-weave/</a></p>
+<p>视频简介墙外无广告版：<br><a href="https://youtu.be/2rPkbyyviGI" target="_blank" rel="external">https://youtu.be/2rPkbyyviGI</a><br><a href="https://youtu.be/uIIZD4KuIJM" target="_blank" rel="external">https://youtu.be/uIIZD4KuIJM</a><br>视频简介墙内插入广告版：<br><a href="http://v.youku.com/v_show/id_XMTM3MTMzNjM0OA==.html" target="_blank" rel="external">http://v.youku.com/v_show/id_XMTM3MTMzNjM0OA==.html</a><br><a href="http://v.youku.com/v_show/id_XMTM3MTQyODI1Mg==.html" target="_blank" rel="external">http://v.youku.com/v_show/id_XMTM3MTQyODI1Mg==.html</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-10-31T02:48:49.000Z" itemprop="dateUpdated">2015年10月31日 10:48</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2015/10/30/all-about-brillo-and-weave/" target="_blank" rel="external">http://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/&title=《关于 Brillo 和 Weave， 开发者应该知道的》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/&title=《关于 Brillo 和 Weave， 开发者应该知道的》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《关于 Brillo 和 Weave， 开发者应该知道的》 — Geek Dev&url=http://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/10/31/useful-tools-and-links-for-svg-and-material-design/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android开发中处理 SVG 和 Material Design 相关的有小工具和链接</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/10/29/android-sdk-ok/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">国内 Android SDK 更新不用科学上网了</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="all-about-brillo-and-weave" data-title="关于 Brillo 和 Weave， 开发者应该知道的" data-url="http://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/&title=《关于 Brillo 和 Weave， 开发者应该知道的》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/&title=《关于 Brillo 和 Weave， 开发者应该知道的》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《关于 Brillo 和 Weave， 开发者应该知道的》 — Geek Dev&url=http://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtElEQVR42u3aUW4jIRAEUN//0t4DREyqaIhmpTdflu0wvIkEuLo/n/j6Lq7nT1ffTF4/j3P4wsPDwzs09edb/pzWzzFX30lGXs2wfgR4eHh413j5FFcDrd5JFvT5I1u+j4eHh/caXn2bQ5sHHh4e3v/IyxOAZMPItx88PDy8t/H24tcbG0xyNL+SteDh4eFdqCK95/WV+h4eHh7euKr+vOCe+mZ7jC5mi4eHh3eB10auk5apSajRFtLw8PDwbvOSA3S+3M/Pt20ZLGliwMPDwzvFmyz3SXS7V/5vo5DlOHh4eHjXeO208qJUu4XsFeGKGAIPDw/vEO9UFDs/IufhQrTB4OHh4V3m1X9cRhh5Q8DeA/qlvoeHh4d3iJcECnu33IuDT7V/fZLIGg8PD2+LN/qpvzW5FpAHH8t9Dw8PD+8oL19222as9nidRBKj3Q8PDw/vEG9SiGpLX/NTbntfPDw8vNu8vKifV5cm28mB1is8PDy8y7y2rDV5f69R4FjpCw8PD+8QrwhDgyN4mwbsBbu/bBJ4eHh413hJ29PZpoH2vm0cjIeHh3eb1y79c1jboNC2iBW/GPDw8PBKXn7w3Qsv2qhi0tqFh4eH9ze8Nnh9pibTbZf1SWEMDw8P7wYvJ02OwhNw23S1LIPh4eHh/SEvbyZoS2Lf4GpX+KI6h4eHh3eIt1e+mn+abzB1UIKHh4d3mdcejpNgIplivdzvhbl4eHh4Y963vPaaDE6V3Np/AB4eHt4NXrvgtjfLt4pk5LaJAQ8PD+8ery355+X/yVG73RjqMAIPDw9vzMubmZIYYt46MN/G8PDw8N7D2yuMJZhkzPZx4+Hh4b2Btxfy7rUatJWsY0dqPDw8vICXHHwnxbC2laqNPJZ/hYeHh3eB1/68z6OEdrnfG+dweoGHh4f3dP0D2NnkKYQIDssAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

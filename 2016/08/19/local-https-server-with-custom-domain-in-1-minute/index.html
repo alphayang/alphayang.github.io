@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>1分钟搭建自定义域名的本地HTTPS开发服务器 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Dev,OS X">
+    <meta name="description" content="越来越多的Web API调用依赖HTTPS环境，比如Web Bluetooth API，Web Geo API,Web Notificaiton API等等，以下步骤快速搭建一个HTTPS开发服务器。
+环境准备OS X 10.11.6（El Capitan)Python 2.7.10 (OS自带)OpenSSL 1.0.2h  3 May 2016(brew install openssl)Goo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1分钟搭建自定义域名的本地HTTPS开发服务器">
+<meta property="og:url" content="http://alphayang.github.io/2016/08/19/local-https-server-with-custom-domain-in-1-minute/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="越来越多的Web API调用依赖HTTPS环境，比如Web Bluetooth API，Web Geo API,Web Notificaiton API等等，以下步骤快速搭建一个HTTPS开发服务器。
+环境准备OS X 10.11.6（El Capitan)Python 2.7.10 (OS自带)OpenSSL 1.0.2h  3 May 2016(brew install openssl)Goo">
+<meta property="og:image" content="http://alphayang.github.io/img/https-server-in-minute/14715989422211.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/https-server-in-minute/14715990422592.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/https-server-in-minute/14715990770634.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/https-server-in-minute/14715992254930.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/https-server-in-minute/14715993769062.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/https-server-in-minute/14715994111087.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/https-server-in-minute/14715995068978.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/https-server-in-minute/14715995938717.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/https-server-in-minute/14715996351079.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/https-server-in-minute/14715997272632.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/https-server-in-minute/14715997977182.jpg">
+<meta property="og:updated_time" content="2016-08-19T10:19:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1分钟搭建自定义域名的本地HTTPS开发服务器">
+<meta name="twitter:description" content="越来越多的Web API调用依赖HTTPS环境，比如Web Bluetooth API，Web Geo API,Web Notificaiton API等等，以下步骤快速搭建一个HTTPS开发服务器。
+环境准备OS X 10.11.6（El Capitan)Python 2.7.10 (OS自带)OpenSSL 1.0.2h  3 May 2016(brew install openssl)Goo">
+<meta name="twitter:image" content="http://alphayang.github.io/img/https-server-in-minute/14715989422211.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">1分钟搭建自定义域名的本地HTTPS开发服务器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">1分钟搭建自定义域名的本地HTTPS开发服务器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-08-19T09:32:30.000Z" itemprop="datePublished" class="page-time">
+  2016-08-19
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#环境准备"><span class="post-toc-number">1.</span> <span class="post-toc-text">环境准备</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#生成证书"><span class="post-toc-number">2.</span> <span class="post-toc-text">生成证书</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#使用证书"><span class="post-toc-number">3.</span> <span class="post-toc-text">使用证书</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#启动https服务器"><span class="post-toc-number">4.</span> <span class="post-toc-text">启动https服务器</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Chrome访问"><span class="post-toc-number">5.</span> <span class="post-toc-text">Chrome访问</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#添加证书到可性"><span class="post-toc-number">6.</span> <span class="post-toc-text">添加证书到可性</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#添加域名到-etc-hosts"><span class="post-toc-number">7.</span> <span class="post-toc-text">添加域名到/etc/hosts</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#结果"><span class="post-toc-number">8.</span> <span class="post-toc-text">结果</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-local-https-server-with-custom-domain-in-1-minute"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">1分钟搭建自定义域名的本地HTTPS开发服务器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年08月19日 17:32" datetime="2016-08-19T09:32:30.000Z"  itemprop="datePublished">2016-08-19</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>越来越多的Web API调用依赖HTTPS环境，比如Web Bluetooth API，Web Geo API,Web Notificaiton API等等，以下步骤快速搭建一个HTTPS开发服务器。</p>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><p>OS X 10.11.6（El Capitan)<br>Python 2.7.10 (OS自带)<br>OpenSSL 1.0.2h  3 May 2016(brew install openssl)<br>Google Chrome Version 52.0.2743.116 (64-bit)</p>
+<h1 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl req -new -x509 -keyout server.pem -out server.pem -days 365 -nodes</div></pre></td></tr></table></figure>
+<p>证书信息都可以留空，只有Common Name填写自定义域名，此处使用通二级域名<br>Common Name (e.g. server FQDN or YOUR name) []:*.alpha.me<br>会在当前目录下生成server.pem证书。</p>
+<h1 id="使用证书"><a href="#使用证书" class="headerlink" title="使用证书"></a>使用证书</h1><p>vi https-server.py<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> BaseHTTPServer, SimpleHTTPServer</div><div class="line"></div><div class="line"><span class="keyword">import</span> ssl</div><div class="line"></div><div class="line">httpd = BaseHTTPServer.HTTPServer((<span class="string">'localhost'</span>, <span class="number">4443</span>), SimpleHTTPServer.SimpleHTTPRequestHandler)</div><div class="line"></div><div class="line">httpd.socket = ssl.wrap_socket (httpd.socket, certfile=<span class="string">'./server.pem'</span>, server_side=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">httpd.serve_forever()</div></pre></td></tr></table></figure></p>
+<h1 id="启动https服务器"><a href="#启动https服务器" class="headerlink" title="启动https服务器"></a>启动https服务器</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python simple-https-server.py</div></pre></td></tr></table></figure>
+<h1 id="Chrome访问"><a href="#Chrome访问" class="headerlink" title="Chrome访问"></a>Chrome访问</h1><p><a href="https://localhost:4443" target="_blank" rel="external">https://localhost:4443</a><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/https-server-in-minute/14715989422211.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>不受信的证书提醒</p>
+<h1 id="添加证书到可性"><a href="#添加证书到可性" class="headerlink" title="添加证书到可性"></a>添加证书到可性</h1><p>查看证书信息<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/https-server-in-minute/14715990422592.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/https-server-in-minute/14715990770634.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/https-server-in-minute/14715992254930.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>将证书样的图片拖到桌面，在桌面生成一个*.alpha.me.cer的文件，双击直接导入到Keychain Access</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/https-server-in-minute/14715993769062.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>双击打开新添加的证书<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/https-server-in-minute/14715994111087.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>设置为总是信任<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/https-server-in-minute/14715995068978.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>关闭证书信息，需要输入用户密码<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/https-server-in-minute/14715995938717.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>图标变成蓝十字，说明更改成功<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/https-server-in-minute/14715996351079.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h1 id="添加域名到-etc-hosts"><a href="#添加域名到-etc-hosts" class="headerlink" title="添加域名到/etc/hosts"></a>添加域名到/etc/hosts</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/hosts</div></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/https-server-in-minute/14715997272632.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h1 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h1><p>重启Chrome，浏览器<a href="https://1.alpha.me:4443" target="_blank" rel="external">https://1.alpha.me:4443</a></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/https-server-in-minute/14715997977182.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-08-19T10:19:30.000Z" itemprop="dateUpdated">2016年8月19日 18:19</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2016/08/19/local-https-server-with-custom-domain-in-1-minute/" target="_blank" rel="external">http://alphayang.github.io/2016/08/19/local-https-server-with-custom-domain-in-1-minute/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dev/">Dev</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS-X/">OS X</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2016/08/19/local-https-server-with-custom-domain-in-1-minute/&title=《1分钟搭建自定义域名的本地HTTPS开发服务器》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2016/08/19/local-https-server-with-custom-domain-in-1-minute/&title=《1分钟搭建自定义域名的本地HTTPS开发服务器》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2016/08/19/local-https-server-with-custom-domain-in-1-minute/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《1分钟搭建自定义域名的本地HTTPS开发服务器》 — Geek Dev&url=http://alphayang.github.io/2016/08/19/local-https-server-with-custom-domain-in-1-minute/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2016/08/19/local-https-server-with-custom-domain-in-1-minute/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/08/21/test-low-speed-load-for-web/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">利器系列-Web网络模拟工具，测试应用在低速不稳定网络中的表现</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/08/16/disable-android-file-transfer-auto-start/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">禁止Android File Transfer自动启动</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="local-https-server-with-custom-domain-in-1-minute" data-title="1分钟搭建自定义域名的本地HTTPS开发服务器" data-url="http://alphayang.github.io/2016/08/19/local-https-server-with-custom-domain-in-1-minute/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2016/08/19/local-https-server-with-custom-domain-in-1-minute/&title=《1分钟搭建自定义域名的本地HTTPS开发服务器》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2016/08/19/local-https-server-with-custom-domain-in-1-minute/&title=《1分钟搭建自定义域名的本地HTTPS开发服务器》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2016/08/19/local-https-server-with-custom-domain-in-1-minute/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《1分钟搭建自定义域名的本地HTTPS开发服务器》 — Geek Dev&url=http://alphayang.github.io/2016/08/19/local-https-server-with-custom-domain-in-1-minute/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2016/08/19/local-https-server-with-custom-domain-in-1-minute/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADMklEQVR42u3a0W7qMBAEUP7/p7mvlXpJZ9ahwu7JU0Uh8VmkTr3rxyO+nl+u61e+//br6/k9rz/7/T6Pd1zY2NjYm7Cfl1fynuR6VZoW3Jb75d2wsbGxj2NfB0MbEuslm60teT82NjY2dh45+XaiLVD79WBjY2Nj57fLo6htVLXbEmxsbOy/xm63BEn7KQmz2R1+tZeGjY2N/fHsWZPoM39+y3wbGxsb+4PZKy37NpDW2/3J6DdSYGNjYx/EzgMg3x7ksNlz77oPNjY29nnsWRTNgqeNopWx8dI3iY2Njb0hO2+7t3dbKXFS1npIgI2NjX0Qe/1ve36IpwW0baP2a8DGxsbenZ0f0Mn/0c+HCncd9ElKUCc2NjY29lbsJH7aYcCsWHkQrkQsNjY29kns9WMxSVsn3360wTaLT2xsbOxT2XeNV+sOVjwkng16fwgwbGxs7M3ZeWtmZbibLCjZeLQFevlEbGxs7IPYswhpx7or0ZVvb4brwcbGxt6cncfD7HDP7DhOHnhtIf6T29jY2NhHsGcj2PVFtLPX2ZZpaR6CjY2NvRV79uC8EO/Y3gzviY2NjX0Qu42H/LhM3ki6Zsy2N8WFjY2NfRC7XdysTLOSzVpUsyE0NjY29hns9SFBuxWZlW/lWA82Njb2GeykvZ60e/KltCnaPrE4nYSNjY19BDvB50dqZhH4jtLUgwFsbGzszdntwLUdpraFm4118wYTNjY29nns/GhO3qnKI7AF5IX74bPY2NjYx7HvatAvpejyMaP8SBA2Njb2SezZsPaugz5tY2t9eICNjY19HnuFNzvQ0zazVuKq3opgY2Njb85eH+ImLaFkoW345bGHjY2NfTZ7hr+30X9XcNa9NGxsbOwN2c/yyoe7yWAgeT0fMySNqrp/ho2Njf3x7JWRanLTdon3bo3ydhU2Njb27uw2tGZLyVtFbQjlcfiYPR4bGxt7E/Y1pj2ss/7ZdotSrx8bGxv7z7PzhSYD4Lbc7Wbm5ZEdbGxs7D/Pbls/K038WW/sZexhY2NjH8fOmzs5ddb6mW1p6jjExsbGPoidD3rb8e1Ko6r9AmYjCmxsbOzN2f8AlnTjX6xWLCMAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

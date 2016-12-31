@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Java，ruby，python包管理使用国内镜像 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="tools">
+    <meta name="description" content="针对国内的网络，下载依赖包是很头疼的事，下面是我的tweak:
+Java Maven使用oschina提供的maven库。
+gradle中
+1234// 设置 maven 库地址repositories &amp;#123;      maven &amp;#123; url &apos;http://maven.oschina.net/content/groups/public/&apos; &amp;#125;&amp;#125;
+Ruby">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java，ruby，python包管理使用国内镜像">
+<meta property="og:url" content="http://alphayang.github.io/2015/10/14/package-manage-for-china/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="针对国内的网络，下载依赖包是很头疼的事，下面是我的tweak:
+Java Maven使用oschina提供的maven库。
+gradle中
+1234// 设置 maven 库地址repositories &amp;#123;      maven &amp;#123; url &apos;http://maven.oschina.net/content/groups/public/&apos; &amp;#125;&amp;#125;
+Ruby">
+<meta property="og:updated_time" content="2015-10-31T02:26:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java，ruby，python包管理使用国内镜像">
+<meta name="twitter:description" content="针对国内的网络，下载依赖包是很头疼的事，下面是我的tweak:
+Java Maven使用oschina提供的maven库。
+gradle中
+1234// 设置 maven 库地址repositories &amp;#123;      maven &amp;#123; url &apos;http://maven.oschina.net/content/groups/public/&apos; &amp;#125;&amp;#125;
+Ruby">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Java，ruby，python包管理使用国内镜像</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Java，ruby，python包管理使用国内镜像</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-10-14T02:24:23.000Z" itemprop="datePublished" class="page-time">
+  2015-10-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/general/">general</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Java-Maven"><span class="post-toc-number">1.</span> <span class="post-toc-text">Java Maven</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Ruby-Gem"><span class="post-toc-number">2.</span> <span class="post-toc-text">Ruby Gem</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Python-Pip"><span class="post-toc-number">3.</span> <span class="post-toc-text">Python Pip</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-package-manage-for-china"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Java，ruby，python包管理使用国内镜像</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年10月14日 10:24" datetime="2015-10-14T02:24:23.000Z"  itemprop="datePublished">2015-10-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/general/">general</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p> 针对国内的网络，下载依赖包是很头疼的事，下面是我的tweak:</p>
+<h3 id="Java-Maven"><a href="#Java-Maven" class="headerlink" title="Java Maven"></a>Java Maven</h3><p>使用<a href="maven.oschina.net/help.html">oschina</a>提供的maven库。</p>
+<p>gradle中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 设置 maven 库地址</div><div class="line">repositories &#123;  </div><div class="line">    maven &#123; url <span class="string">'http://maven.oschina.net/content/groups/public/'</span> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Ruby-Gem"><a href="#Ruby-Gem" class="headerlink" title="Ruby Gem"></a>Ruby Gem</h3><p>rubygems.org存放在s3上的资源极由于国内网络原因极不稳定，gem install rack或bundle install时让人抓狂。<br>使用taobao提供的gem源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/</div><div class="line">$ gem sources <span class="_">-l</span></div><div class="line">*** CURRENT SOURCES ***</div><div class="line"></div><div class="line">https://ruby.taobao.org</div><div class="line"><span class="comment"># 请确保只有 ruby.taobao.org</span></div><div class="line">$ gem install rails</div></pre></td></tr></table></figure>
+<p>使用bundle时,在Gemfile里指定source:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">source</span> <span class="string">'http://ruby.taobao.org/'</span></div></pre></td></tr></table></figure>
+<p>rvm使用taobao源，提供ruby安装速度</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed -i .bak <span class="string">'s!ftp.ruby-lang.org/pub/ruby!ruby.taobao.org/mirrors/ruby!'</span> <span class="variable">$rvm_path</span>/config/db</div></pre></td></tr></table></figure>
+<h3 id="Python-Pip"><a href="#Python-Pip" class="headerlink" title="Python Pip"></a>Python Pip</h3><p>douban大量使用了python，也对社区做贡献，速度快。<br>直接使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install -i http://pypi.douban.com/simple simplejson</div></pre></td></tr></table></figure>
+<p>全局使用<br>vi ~/.pip/pip.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[global]</div><div class="line">index-url = http://pypi.douban.com/simple</div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-10-31T02:26:03.000Z" itemprop="dateUpdated">2015年10月31日 10:26</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2015/10/14/package-manage-for-china/" target="_blank" rel="external">http://alphayang.github.io/2015/10/14/package-manage-for-china/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/14/package-manage-for-china/&title=《Java，ruby，python包管理使用国内镜像》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/14/package-manage-for-china/&title=《Java，ruby，python包管理使用国内镜像》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/14/package-manage-for-china/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java，ruby，python包管理使用国内镜像》 — Geek Dev&url=http://alphayang.github.io/2015/10/14/package-manage-for-china/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/14/package-manage-for-china/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/10/15/gradle-dependence-tree/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android Studio中Gradle依赖树查看</h4>
+      </a>
+    </div>
+  
+
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="package-manage-for-china" data-title="Java，ruby，python包管理使用国内镜像" data-url="http://alphayang.github.io/2015/10/14/package-manage-for-china/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/14/package-manage-for-china/&title=《Java，ruby，python包管理使用国内镜像》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/14/package-manage-for-china/&title=《Java，ruby，python包管理使用国内镜像》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/14/package-manage-for-china/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java，ruby，python包管理使用国内镜像》 — Geek Dev&url=http://alphayang.github.io/2015/10/14/package-manage-for-china/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/14/package-manage-for-china/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuElEQVR42u3ay24jMQwEwPz/T2evARYed5OSN1jUnAw/5Kk5SESTX1/x9f3j+vudn+8/f5q/fv7t4QsPDw9vcevPS7e3+4xPvpn/6uUKeHh4eNd4yXLPv9ps6KcOCTw8PLzfz3t1Kwksf3x4eHh4/xOvjTDaAj0p3/Hw8PD+FS8JI3J8Xi7nsOtZCx4eHl7My7tIv+f1lf4eHh4e3rqrng8HtA2qvM22WhMPDw/vAm8TKzyXsKcGp9pyGQ8PD+8zvHbbPXWj+TGQRxLDMBcPDw8v5m1Go2ZB8D47SYr7OmnGw8PDG/HaQrbdpts1k2GFNyU+Hh4e3jVeEjEkf5mHv0mckf/vgQQFDw8Pr6xXn8vcBJyUy+1AwOaBvjz98PDw8Na8vLGU3GJbgs9aa0WYgoeHh/cR3mbIaXaLeVBbH0t4eHh4F3j5Fr+59fYhzlYoTg88PDy8Na8NBWYtsTyS2B8/wzECPDw8vJiXbM1tC78dk9oHGS/vHA8PD+8jvLzk3QxRbQLiqLOHh4eHd5k3i1P3xXeLrwcO8PDw8I7y8mGpPELNI4l8oGoYB+Ph4eFd4M2a8XnMOotuN52sqAuHh4eHd4iXUNvQoY05oiGqko2Hh4d3ltdu6LMjIY8nZu+/XB8PDw/vAq9tQc0C2VmD7dQ7eHh4eDd4s1Bg39pvxxHadfDw8PA+wzu16efHTPtpPbKAh4eH93HebARqMxwwzJ5f/QoPDw/vKO+7vNpKddb+z0cW3qyAh4eHd4HXbrVt1DuLHvLS/OvUhYeHh3dhxCpv4SclcvIg2oOhmI/Aw8PDO8SbzSnlBfTmwW0OMDw8PLzfwNscJ+0Bk0chxw4GPDw8vGs15ya6nWFmcTMeHh7ePV6yxReLli2r/Pv1v+Dh4eFd4BVjTPEhkYQL+yDjcH8PDw8P7/31B1pUkpcs6HfIAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

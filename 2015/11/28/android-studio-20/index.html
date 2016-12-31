@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android Studio 2.0 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android">
+    <meta name="description" content="Android Studio 1.5刚推出几天，2.0就正式在 Canary 通道中放了出来，从1到2是一个大的版本升级，最主要就是体现在“快”这一个字上，也就是提速 app 的 build 和 deployment。
+获取2.0全新安装下载
+修改 update channel‘Command+,’">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Studio 2.0">
+<meta property="og:url" content="http://alphayang.github.io/2015/11/28/android-studio-20/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="Android Studio 1.5刚推出几天，2.0就正式在 Canary 通道中放了出来，从1到2是一个大的版本升级，最主要就是体现在“快”这一个字上，也就是提速 app 的 build 和 deployment。
+获取2.0全新安装下载
+修改 update channel‘Command+,’">
+<meta property="og:image" content="http://alphayang.github.io/img/android-studio-20/14487648883118.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-studio-20/14487675338632.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-studio-20/14487811008208.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-studio-20/14487817415883.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-studio-20/14487814931362.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/android-studio-20/14487821405132.jpg">
+<meta property="og:updated_time" content="2015-11-29T07:49:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Studio 2.0">
+<meta name="twitter:description" content="Android Studio 1.5刚推出几天，2.0就正式在 Canary 通道中放了出来，从1到2是一个大的版本升级，最主要就是体现在“快”这一个字上，也就是提速 app 的 build 和 deployment。
+获取2.0全新安装下载
+修改 update channel‘Command+,’">
+<meta name="twitter:image" content="http://alphayang.github.io/img/android-studio-20/14487648883118.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android Studio 2.0</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android Studio 2.0</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-28T11:45:34.000Z" itemprop="datePublished" class="page-time">
+  2015-11-28
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取2-0"><span class="post-toc-number">1.</span> <span class="post-toc-text">获取2.0</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#全新安装"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">全新安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#修改-update-channel"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">修改 update channel</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#改进"><span class="post-toc-number">2.</span> <span class="post-toc-text">改进</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#dx"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">dx</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ProGuard"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">ProGuard</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#multi-dex"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">multi-dex</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#更快速的发布"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">更快速的发布</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#adb"><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text">adb</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#针对所连接设备进行-debug-构建，只在-Android-Studio-中才有特性"><span class="post-toc-number">2.4.2.</span> <span class="post-toc-text">针对所连接设备进行 debug 构建，只在 Android Studio 中才有特性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Instant-Run"><span class="post-toc-number">2.4.3.</span> <span class="post-toc-text">Instant Run</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Emulator"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">Emulator</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#后记"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">后记</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-android-studio-20"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android Studio 2.0</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月28日 19:45" datetime="2015-11-28T11:45:34.000Z"  itemprop="datePublished">2015-11-28</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Android Studio 1.5刚推出几天，2.0就正式在 Canary 通道中放了出来，从1到2是一个大的版本升级，最主要就是体现在“快”这一个字上，也就是提速 app 的 build 和 deployment。</p>
+<h2 id="获取2-0"><a href="#获取2-0" class="headerlink" title="获取2.0"></a>获取2.0</h2><h3 id="全新安装"><a href="#全新安装" class="headerlink" title="全新安装"></a>全新安装</h3><p><a href="http://tools.android.com/download/studio/canary" target="_blank" rel="external">下载</a></p>
+<h3 id="修改-update-channel"><a href="#修改-update-channel" class="headerlink" title="修改 update channel"></a>修改 update channel</h3><p>‘Command+,’<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-studio-20/14487648883118.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>Tips：Canary，Dev，Beta，Stable 四个 Channel 从 Chrome 项目中借鉴过来，也几乎变成了 Google 发布客户端更新的官方范式</p>
+<ul>
+<li>Canary：weekly build(chrome 中 Canary 为 daily build)</li>
+<li>发布依次由 Canary-&gt; Dev-&gt; Beta-&gt; Stable 不断推进，让 Bug 尽早发现并修复</li>
+</ul>
+<h2 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h2><h3 id="dx"><a href="#dx" class="headerlink" title="dx"></a>dx</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-studio-20/14487675338632.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>dx工具负责将所有经过 javac编译生成的.class文件转换并合并成一个.dex（dalivk executable）文件</p>
+<ul>
+<li>优化的 dx merger<ul>
+<li>Build Tools 23.0.2+.</li>
+</ul>
+</li>
+<li><p>后台运行 dx(Run dx in process)，把 dx 工作分散到平时默默进行，不用挤到 build 时，降低 build 时间峰值</p>
+<ul>
+<li>Gradle 2.4+</li>
+<li>Plugin 2.0.0+</li>
+<li>Build Tools 23.0.2+</li>
+<li>在 build.gradle 中启用<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    dexOptions &#123;</div><div class="line">        dexInProcess = true</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>配置 gradle 最大 jvm 内存使用,dex.jar 运行在 gradle 内存空间中，gradle以 daemon 进程一直存活代替之前的按需启动的短生命周期实例。在 project 下的 gradle.properties 中设置</p>
+<ul>
+<li><code>org.gradle.jvmargs=-Xmx4096m</code>，</li>
+</ul>
+</li>
+<li>并行 dexer<ul>
+<li>最多可并行4个 dexer 任务</li>
+<li>在 project 下的 gradle.properties 中使用android.dexerPoolSize环境变量来指定并行数量</li>
+</ul>
+</li>
+</ul>
+<h3 id="ProGuard"><a href="#ProGuard" class="headerlink" title="ProGuard"></a>ProGuard</h3><ul>
+<li>不足：<ul>
+<li>不支持增量模式，每次都是全部处理一遍</li>
+<li>阻止 pre-dexing，只支持单个 dex 输出且每次执行都是全部 re-dexing</li>
+</ul>
+</li>
+<li>改进：<ul>
+<li>部分增量模式支持</li>
+<li>可以 pre-dexing</li>
+</ul>
+</li>
+<li>使用，不需额外配置，得到的好处就是快了<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    buildTypes &#123;</div><div class="line">        debug &#123;</div><div class="line">            minifyEnabled true</div><div class="line">            useProguard false</div><div class="line">        &#125;</div><div class="line">        release &#123;</div><div class="line">            minifyEnabled true</div><div class="line">            useProguard true</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="multi-dex"><a href="#multi-dex" class="headerlink" title="multi-dex"></a>multi-dex</h3><p>根据 connected Device API level:</p>
+<ul>
+<li><blockquote>
+<p>=21，即 art 上，运行时原生支持加载多个 dex 文件，在安装编译时将多个 dex 编译合在一起，</p>
+</blockquote>
+</li>
+<li><21，即 dalivk="" 上，打包时使用="" legacy="" multi-dex="" 模式，="" <figure="" class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile &apos;com.android.support:multidex:1.0.0&apos;</div></pre></td></tr></table>
+
+</21，即></li>
+</ul>
+<p>这个选择是Android Studio 自动的，配置好后，不需要手动干预。</p>
+<h3 id="更快速的发布"><a href="#更快速的发布" class="headerlink" title="更快速的发布"></a>更快速的发布</h3><h4 id="adb"><a href="#adb" class="headerlink" title="adb"></a>adb</h4><p>新的 adb，提供更稳定高速的连接通路</p>
+<h4 id="针对所连接设备进行-debug-构建，只在-Android-Studio-中才有特性"><a href="#针对所连接设备进行-debug-构建，只在-Android-Studio-中才有特性" class="headerlink" title="针对所连接设备进行 debug 构建，只在 Android Studio 中才有特性"></a>针对所连接设备进行 debug 构建，只在 Android Studio 中才有特性</h4><p>通常情况下APK 包含了多 dpi 支持，但开发设备上的 dpi 是已知的（如 mdpi），所以构建APK 时自动只包含需要的 dpi 资源，减少 apk 体积。<br>后续还将对 ABIs 和 multi-dex 进行过滤，进一步减小 apk 体积。</p>
+<h4 id="Instant-Run"><a href="#Instant-Run" class="headerlink" title="Instant Run"></a>Instant Run</h4><p>算是一项突破性的改进，比正常的开发安装调试周期快50倍。<br>新的 build 流程<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-studio-20/14487811008208.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p><em>原理：</em></p>
+<ul>
+<li>只发布更改过的部分</li>
+<li>避免安装</li>
+<li>无需关闭再重启应用</li>
+</ul>
+<p><em>应用场景：</em></p>
+<ul>
+<li>Hot swap</li>
+<li>Warm swap</li>
+<li>Cold swap</li>
+<li>Rebuild&amp;Reinstall<br>在2.0中新建的项目自动开启 Instant Run ，针对老项目需要手动开启。<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-studio-20/14487817415883.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ul>
+<p>有了这项技术支持，对于 UI 和 Code 的更改，都可以用秒杀的形式反映出来，真正做到即时编程。<br>注意的是 Hot swap 使用的是替换内存技术，如果关闭应用，再打开，还是旧代码。<br>Instant Run 与正常的 Run 和 Debug 同时存在，只是icon 上加了一道闪电。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-studio-20/14487814931362.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h3 id="Emulator"><a href="#Emulator" class="headerlink" title="Emulator"></a>Emulator</h3><p>难得ADK Team 还记得要改进下这个慢牛模拟器。</p>
+<ul>
+<li>CPU，支持多核。</li>
+<li>GPU，支持 GL ES1.0，将要运行2.0。</li>
+<li>I/O，可以向模拟器里拖图片、APK，任意想传的，并且传输速度比 USB 真机快。<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/android-studio-20/14487821405132.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li>新的 UI，更易操作。</li>
+<li>GPS，接收 KML 和 GPX 文件，模拟移动的 GPS 位置。</li>
+<li>Network，模拟不同网络类型，如2G，3G等。</li>
+<li>支持指纹的模拟。</li>
+<li>支持拖动缩放。</li>
+<li>横竖屏翻转。</li>
+</ul>
+<p>模拟器本身还是基于 qemu，不像 Genymtion 基于 virtualbox 那样启动飞快，但还在改进，可以和 Genymotion 配合使用，测试一些最新的系统，不像之前根本不会去用。</p>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>随着 Brillo 发布的临近，相信 Android Studio 在 NDK 以及性能上还有更多的进步，节省开发者的时间，从 Instant Run 上还是看出来有在用心做的，不再只满足于Just work 的状态。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-29T07:49:00.000Z" itemprop="dateUpdated">2015年11月29日 15:49</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2015/11/28/android-studio-20/" target="_blank" rel="external">http://alphayang.github.io/2015/11/28/android-studio-20/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/11/28/android-studio-20/&title=《Android Studio 2.0》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/11/28/android-studio-20/&title=《Android Studio 2.0》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/11/28/android-studio-20/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android Studio 2.0》 — Geek Dev&url=http://alphayang.github.io/2015/11/28/android-studio-20/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/11/28/android-studio-20/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/05/29/client-security-from-google/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">client-security-from-google</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/27/so-files-guide/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android开发，不可不知的so文件知识大全</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="android-studio-20" data-title="Android Studio 2.0" data-url="http://alphayang.github.io/2015/11/28/android-studio-20/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/11/28/android-studio-20/&title=《Android Studio 2.0》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/11/28/android-studio-20/&title=《Android Studio 2.0》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/11/28/android-studio-20/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android Studio 2.0》 — Geek Dev&url=http://alphayang.github.io/2015/11/28/android-studio-20/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/11/28/android-studio-20/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACFUlEQVR42u3aQW7DMAwEwPz/0+m1F7e7lBPA0vhUNI6j8WEhiny94ut9cSX3//7P1Z1X37r5wsDAeCzj/efVLqt98tWd7RMwMDBOYCRR2Abr+gtK1oaBgYFxdU+7WUziFQMDA+MuRhu+eaTOSl8MDIxzGMkGLi8423j9ai2OgYHxQEa+mfv+3x/pb2BgYDyK8S6vtvXYtjyHq8LAwNiasd6MjMrLETtfDwYGxjmMJFiTY7U8atvn3NZtwMDAeBQjD81ZCOaRunLkh4GBsTejPctaD9z2xeWlLwYGxsmMvD3QBm5yZ7uRxcDA2JvRjnDl4XhXebxUkWNgYDyWsT7u0B7x55FdbA0xMDAOY8wyO3lO/mn9HAwMjGMYbezORi7ye4ohMwwMjGMYeRPxO6OrxUvBwMDYmtFu72bx2rYT2u9iYGDszcjjNS87Z29x6eAPAwPjAEZexM5IbQGctEsxMDDOYcxaAvnS2+mz/Bf/GQjDwMA4gPGJo7FkGzorgzEwMM5htF+bhWP+surYxcDAOIZx10+2LdL1kVkMDIxdGe/yag/FZi+ibUhgYGDszZgdhM02fyulcnHohoGBsSkjH11daXPmkZ0fyWFgYJzGyIMvX9xs2zeLYwwMDIyVWKwXNBvdwMDAwIhL07u2mMmgxg2Bi4GB8ShG8vOz2P3EOCwGBsZpjHYbl2/18iBeGeDAwMDYmvEDSlbk83jKnJ8AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

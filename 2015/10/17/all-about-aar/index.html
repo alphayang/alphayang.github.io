@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android开发，关于aar你应该知道的 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Andorid Studio,Gradle,Andorid">
+    <meta name="description" content="背景在软件工程中，分治是最基本的设计原理，就如同现实中的砖、瓦、钢筋、水泥一样，模块化、组件化的分工，让我们整个软件世界变得井井有序，丰富多彩。
+Java jar在Java开发中，添加组件简单的以添加jar文件依赖为途径，jar有两个含义：
+
+jar文件格式：Java Archive，就是zip文件格式，文件名后缀是jar，包含了java class，metadata，资源（文本、图片等）。
+Ja">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发，关于aar你应该知道的">
+<meta property="og:url" content="http://alphayang.github.io/2015/10/17/all-about-aar/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="背景在软件工程中，分治是最基本的设计原理，就如同现实中的砖、瓦、钢筋、水泥一样，模块化、组件化的分工，让我们整个软件世界变得井井有序，丰富多彩。
+Java jar在Java开发中，添加组件简单的以添加jar文件依赖为途径，jar有两个含义：
+
+jar文件格式：Java Archive，就是zip文件格式，文件名后缀是jar，包含了java class，metadata，资源（文本、图片等）。
+Ja">
+<meta property="og:image" content="http://alphayang.github.io/img/new_android_library.png">
+<meta property="og:updated_time" content="2015-10-18T14:56:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android开发，关于aar你应该知道的">
+<meta name="twitter:description" content="背景在软件工程中，分治是最基本的设计原理，就如同现实中的砖、瓦、钢筋、水泥一样，模块化、组件化的分工，让我们整个软件世界变得井井有序，丰富多彩。
+Java jar在Java开发中，添加组件简单的以添加jar文件依赖为途径，jar有两个含义：
+
+jar文件格式：Java Archive，就是zip文件格式，文件名后缀是jar，包含了java class，metadata，资源（文本、图片等）。
+Ja">
+<meta name="twitter:image" content="http://alphayang.github.io/img/new_android_library.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android开发，关于aar你应该知道的</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android开发，关于aar你应该知道的</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-10-17T11:45:17.000Z" itemprop="datePublished" class="page-time">
+  2015-10-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develop/">develop</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">背景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java-jar"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Java jar</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#jar在Android开发中的不足"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">jar在Android开发中的不足</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#aar"><span class="post-toc-number">2.</span> <span class="post-toc-text">aar</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是aar"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">什么是aar</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#生成aar"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">生成aar</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用aar"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">使用aar</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#关于AndroidManifest-xml合并"><span class="post-toc-number">3.</span> <span class="post-toc-text">关于AndroidManifest.xml合并</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#后记"><span class="post-toc-number">4.</span> <span class="post-toc-text">后记</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#引用"><span class="post-toc-number">5.</span> <span class="post-toc-text">引用</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-all-about-aar"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android开发，关于aar你应该知道的</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年10月17日 19:45" datetime="2015-10-17T11:45:17.000Z"  itemprop="datePublished">2015-10-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/develop/">develop</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在软件工程中，分治是最基本的设计原理，就如同现实中的砖、瓦、钢筋、水泥一样，模块化、组件化的分工，让我们整个软件世界变得井井有序，丰富多彩。</p>
+<h2 id="Java-jar"><a href="#Java-jar" class="headerlink" title="Java jar"></a>Java jar</h2><p>在Java开发中，添加组件简单的以添加jar文件依赖为途径，jar有两个含义：</p>
+<ul>
+<li><a href="http://download.oracle.com/javase/6/docs/technotes/guides/jar/jarGuide.html" target="_blank" rel="external">jar文件格式</a>：Java Archive，就是zip文件格式，文件名后缀是jar，包含了java class，metadata，资源（文本、图片等）。</li>
+<li>Java archive tool: JDK中的工具，用来生成jar包的工具。</li>
+</ul>
+<h2 id="jar在Android开发中的不足"><a href="#jar在Android开发中的不足" class="headerlink" title="jar在Android开发中的不足"></a>jar在Android开发中的不足</h2><p>在Android应用资源中，Java Source，Resouce以及所需的so文件和jar包，用jar格式可以很好的处理Java Source,但对于目录比较复杂的Android Res目录，二进制依赖so文件和jar包则显得的乏力。当你收到一个第三方SDK zip包，要添加到自己的项目中，解压后是一个jar包和一堆文件夹，不停的复制粘贴甚至解决冲突的时候，心里肯定开始不满意这血吸虫组件分发方式了。</p>
+<h1 id="aar"><a href="#aar" class="headerlink" title="aar"></a>aar</h1><h2 id="什么是aar"><a href="#什么是aar" class="headerlink" title="什么是aar"></a>什么是aar</h2><p>为了解决Android开发中组件引用的问题，引入aar格式。也是简单的<strong>zip</strong>格式。<br>定义：The ‘aar’ bundle is the binary distribution of an Android Library Project.<br>Zip包中的内容有：</p>
+<ul>
+<li>/AndroidManifest.xml (mandatory)</li>
+<li>/classes.jar (mandatory)</li>
+<li>/res/ (mandatory)</li>
+<li>/R.txt (mandatory)</li>
+<li>/assets/ (optional)</li>
+<li>/libs/*.jar (optional)</li>
+<li>/jni/<abi>/*.so (optional)</abi></li>
+<li>/proguard.txt (optional)</li>
+<li>/lint.jar (optional)<br>其中，R.txt是aapt –output-text-symbols命令的输出。</li>
+</ul>
+<h2 id="生成aar"><a href="#生成aar" class="headerlink" title="生成aar"></a>生成aar</h2><p>在Android Studio1.4中，New project，先默认新建一个Applicaton module，接后<code>File</code> &gt; <code>New</code> &gt; <code>New Module</code>，选择<code>Androd Library</code> &gt; <code>Next</code>，指定Library Name和Module Name。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/new_android_library.png" alt="new" title="">
+                </div>
+                <div class="image-caption">new</div>
+            </figure><br>新建的Library与正常的Application最大区别是module build.gradle中是apply plugin: ‘com.android.library’ 而不是 apply plugin: ‘com.android.application’.</p>
+<p><code>Build</code> &gt; <code>Make project</code>(⌘F9),自动生成aar文件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">| build</div><div class="line">	| outputs</div><div class="line">		| aar</div><div class="line">			| mylibrary-debug.aar</div><div class="line">			| mylibrary-release.aar</div></pre></td></tr></table></figure></p>
+<h2 id="使用aar"><a href="#使用aar" class="headerlink" title="使用aar"></a>使用aar</h2><p>aar可通过以下三种方式引入到项目中：</p>
+<ul>
+<li>公共Maven仓库</li>
+<li>私有Maven仓库</li>
+<li>复制粘贴aar文件<br>前两种引入方式涉及到Gradle发布Library到Maven，另文介绍。<br>重点介绍第三种方式：</li>
+<li>把aar粘贴到要引入库的Application Module/libs目录下，如没有libs目录，创建就好。注意要在Application Module根目录下，不是Project根目录下。</li>
+<li>在Application Module/build.gradle中添加<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">    flatDir &#123;</div><div class="line">        <span class="built_in">dirs</span> <span class="string">'libs'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><a href="https://docs.gradle.org/current/userguide/dependency_management.html#sec:flat_dir_resolver" target="_blank" rel="external"><strong>flatDir repositories</strong></a>用来声明文件目录做为依赖库，’libs’路径是build.gradle的相对路径，目录名称可以任意，也可以同时声明多个dirs。</p>
+<ul>
+<li>在Application Module/build.gradle中添加依赖<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">    compile(name:<span class="string">'mylibrary-debug'</span>, ext:<span class="string">'aar'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="关于AndroidManifest-xml合并"><a href="#关于AndroidManifest-xml合并" class="headerlink" title="关于AndroidManifest.xml合并"></a>关于AndroidManifest.xml合并</h1><p>在上文中看到aar文件中还包含了库中的AndroidManifest.xml文件，但是最终应用APK中只能有一个AndroidManifest.xml，就涉及到应用AndroidManifest.xml和所有库AndroidManifest.xml的合并。</p>
+<p>合并顺序：</p>
+<ul>
+<li>1.与Produt flavors和build types指定的清单文件</li>
+<li>2.application module的主清单文件</li>
+<li>3.library module的清单文件</li>
+</ul>
+<p>大多数情况下合并不会造成什么问题，如果发现合并后出现了问题：</p>
+<ul>
+<li>检查最终的AndroidManifest.xml</li>
+<li>检查合并报告（app\build\outputs\logs\），<a href="http://tools.android.com/tech-docs/new-build-system/user-guide/manifest-merger" target="_blank" rel="external">日志文件的格式和内容</a></li>
+</ul>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>本文中所用的项目代码托管在<a href="https://github.com/alphayang/LocalAARReference" target="_blank" rel="external">github</a>。</p>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p> AAR File Format<br><a href="http://tools.android.com/tech-docs/new-build-system/aar-format" target="_blank" rel="external">http://tools.android.com/tech-docs/new-build-system/aar-format</a></p>
+<p>Manifest merging user guide<br><a href="http://tools.android.com/tech-docs/new-build-system/user-guide/manifest-merger" target="_blank" rel="external">http://tools.android.com/tech-docs/new-build-system/user-guide/manifest-merger</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-10-18T14:56:10.000Z" itemprop="dateUpdated">2015年10月18日 22:56</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2015/10/17/all-about-aar/" target="_blank" rel="external">http://alphayang.github.io/2015/10/17/all-about-aar/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andorid/">Andorid</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andorid-Studio/">Andorid Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/17/all-about-aar/&title=《Android开发，关于aar你应该知道的》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/17/all-about-aar/&title=《Android开发，关于aar你应该知道的》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/17/all-about-aar/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android开发，关于aar你应该知道的》 — Geek Dev&url=http://alphayang.github.io/2015/10/17/all-about-aar/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/17/all-about-aar/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/10/18/support-library-group-in-gradle/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">如何在Android Studio Project中集中管理Android Support Library依赖</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/10/16/speed-up-android-studio-build/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">加速Android Studio中的Gradle Build</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="all-about-aar" data-title="Android开发，关于aar你应该知道的" data-url="http://alphayang.github.io/2015/10/17/all-about-aar/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/17/all-about-aar/&title=《Android开发，关于aar你应该知道的》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/17/all-about-aar/&title=《Android开发，关于aar你应该知道的》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/17/all-about-aar/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android开发，关于aar你应该知道的》 — Geek Dev&url=http://alphayang.github.io/2015/10/17/all-about-aar/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/17/all-about-aar/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIklEQVR42u3aQY6DMAwF0N7/0sy2Uhn0bdMZkbysqkJJHgs3tvN6xeN4G+/ffH5O7r++5/PO2wYGBsZjGcflSCZIvs+fn/zqZEYMDIwNGMki8gXlQTaZK3pxGBgYGON7euEbAwMDY7LEXlKaADAwMDAmSWy+Zbx+frWQd3MujoGB8UBGXnX/+89f6W9gYGA8inEUR3X6XogsrwoDA2NpRh7gku1dr53ZA2NgYOzGyBddDcTJZJPy3Kv37jEwMB7IqC4r2cZVl9Xbkp78b2BgYCzHmJfpk9CZBN/8ANnJrzAwMJZmVAPr/PhXEkzzWTAwMPZh5Fu9Xtmrt0GctBYwMDBWYlRT1urVvKlZTWJ/3eFiYGAsyugturrEvBlQTacxMDB2Y/SOO1RT0PxIWSELx8DAWJTR28xNwnT1sEV+cA0DA2MHxl3hdZL6jippGBgYSzNywP+2OUcDAwNjIcYklZ0X1KohGAMDYx/GMR5JKf+uJLZQbsPAwFiUUZ0sX3ShJRm0B06uYmBgbMPolbSqIbjXfoiqhhgYGBsw8lpWHkbnBztu+9/AwMB4IOOuZLVXtkueHx0jw8DAWJoxaWQmSWZv+mr4xsDA2IGRB9kk7Zy/ueoaMDAw9mFUA181WZ00FQq5OAYGBkbrnjxkVzed5XNkGBgYmzHykJonpb1XgIGBsQ+juqX79max2jrFwMBYm1FNHZO2wTwQzzejGBgYSzB+ABlviYcDm9W8AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>利器系列-Web网络模拟工具，测试应用在低速不稳定网络中的表现 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Dev,Web,Test,Tool">
+    <meta name="description" content="在开发环境中，由于开发者对设备和网络通常是最高标准的要求，用以提高自己的生产效率，会产生灯下黑的情况，开发出的产品在稳定的高速网络下表现优异，这很重要，但要进行换位思考，还需要更上一层楼，Web产品的使用者越来越多的是移动网络，而移动网络的特点就是不稳定以及龟速的GPRS还有很多人在用，为了在开发和测试环境中做到用户环境的网络模拟，我们需要使用一系列工具来帮助我们开发测试更好的Web。
+Chrom">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利器系列-Web网络模拟工具，测试应用在低速不稳定网络中的表现">
+<meta property="og:url" content="http://alphayang.github.io/2016/08/21/test-low-speed-load-for-web/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="在开发环境中，由于开发者对设备和网络通常是最高标准的要求，用以提高自己的生产效率，会产生灯下黑的情况，开发出的产品在稳定的高速网络下表现优异，这很重要，但要进行换位思考，还需要更上一层楼，Web产品的使用者越来越多的是移动网络，而移动网络的特点就是不稳定以及龟速的GPRS还有很多人在用，为了在开发和测试环境中做到用户环境的网络模拟，我们需要使用一系列工具来帮助我们开发测试更好的Web。
+Chrom">
+<meta property="og:image" content="http://alphayang.github.io/img/test-low-speed-load-for-web/14717654037442.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/test-low-speed-load-for-web/14717659599075.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/test-low-speed-load-for-web/14717657537304.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/test-low-speed-load-for-web/14717656363124.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/test-low-speed-load-for-web/14717656027035.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/test-low-speed-load-for-web/14717656730855.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/test-low-speed-load-for-web/14717694253486.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/test-low-speed-load-for-web/14717663810820.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/test-low-speed-load-for-web/14717670501540.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/test-low-speed-load-for-web/14717689392914.jpg">
+<meta property="og:updated_time" content="2016-08-21T08:54:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利器系列-Web网络模拟工具，测试应用在低速不稳定网络中的表现">
+<meta name="twitter:description" content="在开发环境中，由于开发者对设备和网络通常是最高标准的要求，用以提高自己的生产效率，会产生灯下黑的情况，开发出的产品在稳定的高速网络下表现优异，这很重要，但要进行换位思考，还需要更上一层楼，Web产品的使用者越来越多的是移动网络，而移动网络的特点就是不稳定以及龟速的GPRS还有很多人在用，为了在开发和测试环境中做到用户环境的网络模拟，我们需要使用一系列工具来帮助我们开发测试更好的Web。
+Chrom">
+<meta name="twitter:image" content="http://alphayang.github.io/img/test-low-speed-load-for-web/14717654037442.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">利器系列-Web网络模拟工具，测试应用在低速不稳定网络中的表现</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">利器系列-Web网络模拟工具，测试应用在低速不稳定网络中的表现</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-08-21T07:28:26.000Z" itemprop="datePublished" class="page-time">
+  2016-08-21
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Chrome浏览器"><span class="post-toc-number">1.</span> <span class="post-toc-text">Chrome浏览器</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#系统"><span class="post-toc-number">2.</span> <span class="post-toc-text">系统</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Android</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Mac"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Mac</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Win"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Win</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#网络"><span class="post-toc-number">3.</span> <span class="post-toc-text">网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Augmented-Traffic-Control"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Augmented Traffic Control</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自制ATC-enabled路由器"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">自制ATC-enabled路由器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#刷DD-WRT"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">刷DD-WRT</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置ATC存储"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">配置ATC存储</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装opkg包管理器"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">安装opkg包管理器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装其它依赖"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">安装其它依赖</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装ATC依赖"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">安装ATC依赖</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建一个Django项目"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">创建一个Django项目</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置ACT"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">配置ACT</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启动ACT"><span class="post-toc-number">3.8.</span> <span class="post-toc-text">启动ACT</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Bonus"><span class="post-toc-number">3.9.</span> <span class="post-toc-text">Bonus</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#SAAS"><span class="post-toc-number">4.</span> <span class="post-toc-text">SAAS</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-test-low-speed-load-for-web"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">利器系列-Web网络模拟工具，测试应用在低速不稳定网络中的表现</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年08月21日 15:28" datetime="2016-08-21T07:28:26.000Z"  itemprop="datePublished">2016-08-21</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在开发环境中，由于开发者对设备和网络通常是最高标准的要求，用以提高自己的生产效率，会产生灯下黑的情况，开发出的产品在稳定的高速网络下表现优异，这很重要，但要进行换位思考，还需要更上一层楼，Web产品的使用者越来越多的是移动网络，而移动网络的特点就是不稳定以及龟速的GPRS还有很多人在用，为了在开发和测试环境中做到用户环境的网络模拟，我们需要使用一系列工具来帮助我们开发测试更好的Web。</p>
+<h1 id="Chrome浏览器"><a href="#Chrome浏览器" class="headerlink" title="Chrome浏览器"></a>Chrome浏览器</h1><p>做为Web开发平台，Chrome提供了网络模拟，可以使用<a href="https://developers.google.com/web/tools/chrome-devtools/profile/network-performance/network-conditions?hl=en" target="_blank" rel="external">Chrome DevTools Network Panel</a>内置或自定义的网络条件。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/test-low-speed-load-for-web/14717654037442.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h1 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h1><h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><p>Android模拟器提供了网络设置<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/test-low-speed-load-for-web/14717659599075.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/test-low-speed-load-for-web/14717657537304.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h2><p>Network Link Conditioner，安装了<a href="https://developer.apple.com/downloads/?q=Hardware%20IO%20Tools" target="_blank" rel="external">Hardware IO Tools</a> for XCode后，System Preference中会添加这个工具。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/test-low-speed-load-for-web/14717656363124.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/test-low-speed-load-for-web/14717656027035.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/test-low-speed-load-for-web/14717656730855.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="Win"><a href="#Win" class="headerlink" title="Win"></a>Win</h2><p><a href="http://www.telerik.com/fiddler" target="_blank" rel="external">Fiddler</a>可以提供网速模拟，还可以搭配[GeoEdge] (<a href="http://www.geoedge.com/faq" target="_blank" rel="external">http://www.geoedge.com/faq</a>) 模拟异地网络访问。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/test-low-speed-load-for-web/14717694253486.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="Augmented-Traffic-Control"><a href="#Augmented-Traffic-Control" class="headerlink" title="Augmented Traffic Control"></a>Augmented Traffic Control</h2><p>使用Facebook的<a href="http://facebook.github.io/augmented-traffic-control/" target="_blank" rel="external">Augmented Traffic Control</a>，使用启用了ATC网络的用户，都可以轻松选择控制自己的上网速度设置。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/test-low-speed-load-for-web/14717663810820.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>开发者只需要在浏览器页面上选择自己的网络配置，立即生效。<br>这个工具要赞一个FB，FB还设立了2G Tuesdays项目，在周二的时候就弹出使用2G网络的提示，让开发者切身感受用户的使用体验。</p>
+<h2 id="自制ATC-enabled路由器"><a href="#自制ATC-enabled路由器" class="headerlink" title="自制ATC-enabled路由器"></a>自制ATC-enabled路由器</h2><p>设备：Netgear R7000，某东就有售<br>步骤：</p>
+<h3 id="刷DD-WRT"><a href="#刷DD-WRT" class="headerlink" title="刷DD-WRT"></a>刷DD-WRT</h3><p>详细指南<a href="https://dd-wrt.com/wiki/index.php/DD-WRT_on_R7000" target="_blank" rel="external">DD-WRT on R7000</a>，下载<a href="http://www.desipro.de/ddwrt-ren/K3-AC-Arm/Initial/" target="_blank" rel="external">刷机文件</a>，使用Netgear Web Tool的Update Tool上传文件。<br>使用路由器Web管理界面的用户名和密码SSH到路由器。<br>刷机命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ddup --flash-latest</div></pre></td></tr></table></figure></p>
+<h3 id="配置ATC存储"><a href="#配置ATC存储" class="headerlink" title="配置ATC存储"></a>配置ATC存储</h3><p>开启USB存储<br>把U盘格式化为ext3，此处先让U盘自动加载，不要填UUID到/opt，刷新页面后会出现UUID，填到/opt并保存。重新拔插U盘后刷新页面。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/test-low-speed-load-for-web/14717670501540.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h2 id="安装opkg包管理器"><a href="#安装opkg包管理器" class="headerlink" title="安装opkg包管理器"></a>安装opkg包管理器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /tmp </div><div class="line">wget http://qnapware.zyxmon.org/binaries-armv7/installer/entware_install_arm.sh chmod +x entware_install_arm.sh </div><div class="line">./entware_install_arm.sh</div></pre></td></tr></table></figure>
+<p>验证安装:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">opkg update</div></pre></td></tr></table></figure></p>
+<p>opkg安装成本，继续安装其它依赖。</p>
+<h2 id="安装其它依赖"><a href="#安装其它依赖" class="headerlink" title="安装其它依赖"></a>安装其它依赖</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">opkg install ca-certificates python-base python-crypto python-logging nano</div></pre></td></tr></table></figure>
+<p>easy_setup<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl https://bootstrap.pypa.io/ez_setup.py -k &gt; ez_setup.py</div><div class="line">python ez_setup.py</div></pre></td></tr></table></figure></p>
+<p>pip<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl https://bootstrap.pypa.io/get-pip.py -k &gt; get-pip.py </div><div class="line">python get-pip.py</div></pre></td></tr></table></figure></p>
+<h2 id="安装ATC依赖"><a href="#安装ATC依赖" class="headerlink" title="安装ATC依赖"></a>安装ATC依赖</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install atc_thrift atcd django-atc-api django-atc-demo-ui django-atc-profile-storage</div></pre></td></tr></table></figure>
+<h2 id="创建一个Django项目"><a href="#创建一个Django项目" class="headerlink" title="创建一个Django项目"></a>创建一个Django项目</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mkdir /opt/var/django </div><div class="line"><span class="built_in">cd</span> /opt/var/django </div><div class="line">django-admin startproject atcui </div><div class="line"><span class="built_in">cd</span> atcui</div></pre></td></tr></table></figure>
+<h2 id="配置ACT"><a href="#配置ACT" class="headerlink" title="配置ACT"></a>配置ACT</h2><p>编辑atcui/settings.py添加ATC到INSTALLED_APPS<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">INSTALLED_APPS = (</div><div class="line">    ...</div><div class="line">    <span class="comment"># Django ATC API</span></div><div class="line">    <span class="string">'rest_framework'</span>,</div><div class="line">    <span class="string">'atc_api'</span>,</div><div class="line">    <span class="comment"># Django ATC Demo UI</span></div><div class="line">    <span class="string">'bootstrap_themes'</span>,</div><div class="line">    <span class="string">'django_static_jquery'</span>,</div><div class="line">    <span class="string">'atc_demo_ui'</span>,</div><div class="line">    <span class="comment"># Django ATC Profile Storage</span></div><div class="line">    <span class="string">'atc_profile_storage'</span>,</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>编辑atcui/urls.py将ACT路由添加以urlpatterns<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.views.generic.base <span class="keyword">import</span> RedirectView </div><div class="line">urlpatterns = patterns(<span class="string">''</span>,     </div><div class="line"><span class="meta">... </span>    </div><div class="line"><span class="comment"># Django ATC API     url(r'^api/v1/', include('atc_api.urls')),     </span></div><div class="line"><span class="comment"># Django ATC Demo UI     url(r'^atc_demo_ui/', include('atc_demo_ui.urls')),     </span></div><div class="line"><span class="comment"># Django ATC profile storage     </span></div><div class="line">url(<span class="string">r'^api/v1/profiles/'</span>, include(<span class="string">'atc_profile_storage.urls'</span>)),     </div><div class="line">url(<span class="string">r'^$'</span>, RedirectView.as_view(url=<span class="string">'/atc_demo_ui/'</span>, permanent=<span class="keyword">False</span>)), )</div></pre></td></tr></table></figure></p>
+<p>django-bootstrap-themes patch:详见<a href="https://github.com/facebook/augmented-traffic-control/issues/216" target="_blank" rel="external">issue</a><br>编辑/opt/lib/python2.7/site-packages/atc_demo_ui/templates/atc_demo_ui</p>
+<p>更新Django DB<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python manage.py migrate</div></pre></td></tr></table></figure></p>
+<h2 id="启动ACT"><a href="#启动ACT" class="headerlink" title="启动ACT"></a>启动ACT</h2><p>启动守护进程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo atcd</div></pre></td></tr></table></figure></p>
+<p>启动UI<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python manage.py runserver 0.0.0.0:8000</div></pre></td></tr></table></figure></p>
+<p>测试<a href="http://192.168.18.1:8000,当然要换成你的路由器地址。" target="_blank" rel="external">http://192.168.18.1:8000,当然要换成你的路由器地址。</a></p>
+<h2 id="Bonus"><a href="#Bonus" class="headerlink" title="Bonus"></a>Bonus</h2><p>###全员参与<br>设置一个nocatsplash到act的web ui,<a href="http://192.168.1.1:8000/atc_demo_ui/，用网的时候自动跳转的ACT配置界面。" target="_blank" rel="external">http://192.168.1.1:8000/atc_demo_ui/，用网的时候自动跳转的ACT配置界面。</a></p>
+<p>###ACTD开机自启<br>在/opt/start下加一个startup.sh<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#!/bin/sh </div><div class="line">atcd --atcd-wan vlan2 --atcd-lan br0 --atcd-mode unsecure --atcd-iptables /usr/sbin/iptables --daemon </div><div class="line">nohup python /opt/var/django/atcui/manage.py runserver 0.0.0.0:8000 &amp;</div></pre></td></tr></table></figure></p>
+<p>然后在DD-WRT的Web管理界面设置为startup script.</p>
+<h1 id="SAAS"><a href="#SAAS" class="headerlink" title="SAAS"></a>SAAS</h1><p><a href="https://webpagetest.org/" target="_blank" rel="external">WebPageTest</a>是一个在线服务，可以指定不同的浏览器版本和所在地，进行测试并提供详细的加载时间报表，用来优化页面访问。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/test-low-speed-load-for-web/14717689392914.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>WebPageTest还提供OpenAPI访问，用以把异地网络加载测试集成到整个构建测试流程中。</p>
+<p>#小结<br>现实世界遵循二八原理，为20%的用户开发的同时，也不要忘了还有更大的80%的用户君体，让你的Web产品提供最好的用户体验给最多的人，可以让这些工具来帮助我们。欲善其事，先利其器！</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-08-21T08:54:25.000Z" itemprop="dateUpdated">2016年8月21日 16:54</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2016/08/21/test-low-speed-load-for-web/" target="_blank" rel="external">http://alphayang.github.io/2016/08/21/test-low-speed-load-for-web/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dev/">Dev</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Test/">Test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tool/">Tool</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2016/08/21/test-low-speed-load-for-web/&title=《利器系列-Web网络模拟工具，测试应用在低速不稳定网络中的表现》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2016/08/21/test-low-speed-load-for-web/&title=《利器系列-Web网络模拟工具，测试应用在低速不稳定网络中的表现》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2016/08/21/test-low-speed-load-for-web/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《利器系列-Web网络模拟工具，测试应用在低速不稳定网络中的表现》 — Geek Dev&url=http://alphayang.github.io/2016/08/21/test-low-speed-load-for-web/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2016/08/21/test-low-speed-load-for-web/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/12/24/android-things-for-iot-era/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android Things-物联网开发</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/08/19/local-https-server-with-custom-domain-in-1-minute/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">1分钟搭建自定义域名的本地HTTPS开发服务器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="test-low-speed-load-for-web" data-title="利器系列-Web网络模拟工具，测试应用在低速不稳定网络中的表现" data-url="http://alphayang.github.io/2016/08/21/test-low-speed-load-for-web/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2016/08/21/test-low-speed-load-for-web/&title=《利器系列-Web网络模拟工具，测试应用在低速不稳定网络中的表现》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2016/08/21/test-low-speed-load-for-web/&title=《利器系列-Web网络模拟工具，测试应用在低速不稳定网络中的表现》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2016/08/21/test-low-speed-load-for-web/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《利器系列-Web网络模拟工具，测试应用在低速不稳定网络中的表现》 — Geek Dev&url=http://alphayang.github.io/2016/08/21/test-low-speed-load-for-web/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2016/08/21/test-low-speed-load-for-web/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsUlEQVR42u3awYpbMQwF0Pn/n55CV4WSN/dKdprCeathSGIfByxF0tdX/Hz/fvJX/vk8f8Kr12/2UD94eHh4o62/epJN/73wM+yZlBxQsmc8PDy827znizjZyvNn5geUrJLsGQ8PD+8TePlGZ8EmZ+Ph4eH9X7zkQ2fBJl8FDw8P7xN4yTWdv+tUkr15DR4eHt49XtsA+4S/L/b38PDw8BZd9VmQyFd5Tqz3Dx4eHt4N3mZMqg0kbfOsDQnFLwY8PDy8o7z9hZ6His2QVlFWxsPDw3sLry3atqn2rPA62xUeHh7eWd6spXSg4RQk0Hlh92WYwcPDw7vAa0sMeYKblHT3CXRxuHh4eHgXeG07qqW2w1htuTYKV3h4eHhrXtGAj8uvefrbttzq8gceHh7eNV77g/85MOzHC/LAUNda8PDw8K7xZg2nvEnWHtms5IGHh4d3g5df022SnbSp2i3mO8HDw8N7Dy/ZSr5MHgzyYsTma8DDw8M7xZuVDNol2/8nh1v/YsDDw8O7xsuv+wMjUKNhhSJ9x8PDw7vAm6XCm8u6LRznAwQ/7BYPDw/vEK9NZ2fFhbykm49zRWEGDw8P7wIvH2maXet5Wnw2rcfDw8O7x0tKse01nQeDzcHVZVw8PDy8Q7wcNhuBaq/4/ODyw8XDw8M7y0sCwGzsKX/XpuAb9ffw8PDwLvNm13dbCN4UcIvSMx4eHt4FXkvNiwibo9kc0+qbxMPDwwt43+WTj1i1I1mbAkeUUuPh4eEd4m3S3BawGdI6tQc8PDy8U7w8GMwS6E1jbFbywMPDw3sPb58K70cHZkXhH16Dh4eH9095+WJtkGgT6KIZhoeHh/cxvFlp4MBFH/e28PDw8G7z2mJEvUwcNvLVk8PFw8PDu8GbNcBODRBsGmOzwSw8PDy8Be8XzvAiFqp3biYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

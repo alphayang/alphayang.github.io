@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>利用 Street View API 制作街景小动画 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Google Maps api">
+    <meta name="description" content="效果Google街景小车开启了地图与现实结合的大门，也让我们可以利用 Google Maps 浏览全世界的美丽风光。街景车采集的数据简单来说就是加了经纬度的图片，我们也可以利用这些图片来制作街景小动画，上香港示例（大陆没有Google 街景数据）：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用 Street View API 制作街景小动画">
+<meta property="og:url" content="http://alphayang.github.io/2015/11/15/gif-movie-by-street-view-api/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="效果Google街景小车开启了地图与现实结合的大门，也让我们可以利用 Google Maps 浏览全世界的美丽风光。街景车采集的数据简单来说就是加了经纬度的图片，我们也可以利用这些图片来制作街景小动画，上香港示例（大陆没有Google 街景数据）：">
+<meta property="og:image" content="http://alphayang.github.io/img/hongkong_street_view.gif">
+<meta property="og:updated_time" content="2015-11-15T12:16:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用 Street View API 制作街景小动画">
+<meta name="twitter:description" content="效果Google街景小车开启了地图与现实结合的大门，也让我们可以利用 Google Maps 浏览全世界的美丽风光。街景车采集的数据简单来说就是加了经纬度的图片，我们也可以利用这些图片来制作街景小动画，上香港示例（大陆没有Google 街景数据）：">
+<meta name="twitter:image" content="http://alphayang.github.io/img/hongkong_street_view.gif">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">利用 Street View API 制作街景小动画</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">利用 Street View API 制作街景小动画</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-15T11:30:35.000Z" itemprop="datePublished" class="page-time">
+  2015-11-15
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#效果"><span class="post-toc-number">1.</span> <span class="post-toc-text">效果</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Coding"><span class="post-toc-number">2.</span> <span class="post-toc-text">Coding</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Git-仓库"><span class="post-toc-number">3.</span> <span class="post-toc-text">Git 仓库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#更多"><span class="post-toc-number">4.</span> <span class="post-toc-text">更多</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Tips"><span class="post-toc-number">5.</span> <span class="post-toc-text">Tips</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-gif-movie-by-street-view-api"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">利用 Street View API 制作街景小动画</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年11月15日 19:30" datetime="2015-11-15T11:30:35.000Z"  itemprop="datePublished">2015-11-15</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>Google街景小车开启了地图与现实结合的大门，也让我们可以利用 Google Maps 浏览全世界的美丽风光。街景车采集的数据简单来说就是加了经纬度的图片，我们也可以利用这些图片来制作街景小动画，上香港示例（大陆没有Google 街景数据）：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/hongkong_street_view.gif" alt="movie" title="">
+                </div>
+                <div class="image-caption">movie</div>
+            </figure></p>
+<h2 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h2><p>使用 Direction API 进行两地间导航，利用 Street View API 将街景图片预加载，使用了 <a href="https://github.com/TeehanLax/Hyperlapse.js/" target="_blank" rel="external">Hyperlaps.js</a>，Hyperlapse.js依赖 GSVPano 和 three 两个 js 库。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span> </div><div class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Simple Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span> </div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://maps.googleapis.com/maps/api/js?v=3.exp"</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </div><div class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/three.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/GSVPano.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/Hyperlapse.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"> </span></div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">			<span class="keyword">var</span> hyperlapse = <span class="keyword">new</span> Hyperlapse(<span class="built_in">document</span>.getElementById(<span class="string">'pano'</span>), &#123;</div><div class="line">				<span class="attr">lookat</span>: <span class="keyword">new</span> google.maps.LatLng(<span class="number">37.81409525128964</span>,<span class="number">-122.4775045005249</span>),</div><div class="line">				<span class="attr">zoom</span>: <span class="number">1</span>,</div><div class="line">				<span class="attr">use_lookat</span>: <span class="literal">true</span>,</div><div class="line">				<span class="attr">elevation</span>: <span class="number">50</span></div><div class="line">			&#125;);</div><div class="line"></div><div class="line">			hyperlapse.onError = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">				<span class="built_in">console</span>.log(e);</div><div class="line">			&#125;;</div><div class="line"></div><div class="line">			hyperlapse.onRouteComplete = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">				hyperlapse.load();</div><div class="line">			&#125;;</div><div class="line"></div><div class="line">			hyperlapse.onLoadComplete = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">				hyperlapse.play();</div><div class="line">			&#125;;</div><div class="line"></div><div class="line">			<span class="comment">// Google Maps API stuff here...</span></div><div class="line">			<span class="keyword">var</span> directions_service = <span class="keyword">new</span> google.maps.DirectionsService();</div><div class="line">			<span class="comment">//设置起始点，进行导航</span></div><div class="line">			<span class="keyword">var</span> route = &#123;</div><div class="line">				<span class="attr">request</span>:&#123;</div><div class="line">					<span class="attr">origin</span>: <span class="keyword">new</span> google.maps.LatLng(<span class="number">22.2962259</span>,<span class="number">114.1724561</span>),</div><div class="line">					<span class="attr">destination</span>: <span class="keyword">new</span> google.maps.LatLng(<span class="number">22.3025739</span>,<span class="number">114.1720511</span>),</div><div class="line">					<span class="attr">travelMode</span>: google.maps.DirectionsTravelMode.DRIVING</div><div class="line">				&#125;</div><div class="line">			&#125;;</div><div class="line"></div><div class="line">			directions_service.route(route.request, <span class="function"><span class="keyword">function</span>(<span class="params">response, status</span>) </span>&#123;</div><div class="line">				<span class="keyword">if</span> (status == google.maps.DirectionsStatus.OK) &#123;</div><div class="line">					hyperlapse.generate( &#123;<span class="attr">route</span>:response&#125; );</div><div class="line">				&#125; <span class="keyword">else</span> &#123;</div><div class="line">					<span class="built_in">console</span>.log(status);</div><div class="line">				&#125;</div><div class="line">			&#125;);</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="built_in">window</span>.onload = init;</div><div class="line">		</div><div class="line">	<span class="tag">&lt;/<span class="name">script</span>&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span> </div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"pano"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="Git-仓库"><a href="#Git-仓库" class="headerlink" title="Git 仓库"></a>Git 仓库</h2><p><a href="https://github.com/alphayang/hongkong_fast_street_view" target="_blank" rel="external">https://github.com/alphayang/hongkong_fast_street_view</a></p>
+<h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2><p>新车试驾，旅游规则，展览。。。</p>
+<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>加载 maps api 需<strong>科学上网</strong>，加载图片时间视需下载街景图片数据而不同，由于是全部下载完成再开始播放，需要些耐心。<br>由于国内 google maps api 还没有街景资源，此处不能用使用国内<a href="http://www.google.cn/maps/api/js" target="_blank" rel="external">http://www.google.cn/maps/api/js</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2015-11-15T12:16:50.000Z" itemprop="dateUpdated">2015年11月15日 20:16</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2015/11/15/gif-movie-by-street-view-api/" target="_blank" rel="external">http://alphayang.github.io/2015/11/15/gif-movie-by-street-view-api/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Google-Maps-api/">Google Maps api</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/11/15/gif-movie-by-street-view-api/&title=《利用 Street View API 制作街景小动画》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/11/15/gif-movie-by-street-view-api/&title=《利用 Street View API 制作街景小动画》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/11/15/gif-movie-by-street-view-api/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《利用 Street View API 制作街景小动画》 — Geek Dev&url=http://alphayang.github.io/2015/11/15/gif-movie-by-street-view-api/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/11/15/gif-movie-by-street-view-api/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/25/hack-android-for-display-only/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Hack Andorid，使设备变身专用信息显示屏</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/14/service-side-security-from-google/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">向Google学习，打造安全的服务</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="gif-movie-by-street-view-api" data-title="利用 Street View API 制作街景小动画" data-url="http://alphayang.github.io/2015/11/15/gif-movie-by-street-view-api/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/11/15/gif-movie-by-street-view-api/&title=《利用 Street View API 制作街景小动画》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/11/15/gif-movie-by-street-view-api/&title=《利用 Street View API 制作街景小动画》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/11/15/gif-movie-by-street-view-api/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《利用 Street View API 制作街景小动画》 — Geek Dev&url=http://alphayang.github.io/2015/11/15/gif-movie-by-street-view-api/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/11/15/gif-movie-by-street-view-api/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACu0lEQVR42u3awW4bMQwEUP//T7tATwFauzOk5KTA25ORONp9exCZER+P+Hr+vr5+/vqT9kpWeL64HjcuPDw8vMXNXi3X/vY9Jn/0P/8qf2Y8PDy827x86dk321fzvhQlz4yHh4f3E3jFdpzceFQG8PDw8P5HXv5f/waQlw08PDy87+IlcUMeMczYLe9w1oKHh4c3737rZvfzn6+f7+Hh4eGNTtVnV9uaJyVn9rR4eHh4N3hJXLu58WyEK2mji3gXDw8P7wJvdrS/HyDYN9NFw42Hh4d3lNcWgNkYVrv1t3HwP1JqPDw8vI/w8i0+CRf2B1r5EdrLMAIPDw/vEG920NVGt21j/f41zcbC8PDw8E7xkg06fwWnikoyKFCHEXh4eHiHeMeqyqgMtCNfebCLh4eHd4OXN76z+KB9xDyAGM5E4OHh4R3itYHp5mg/Ly0t8i8WPDw8vAu8vJ1tl97cOH+5NQYPDw9vzZsdz2+i1VPtchT+4uHh4V3g5cFoOw41Gy/IRwqSQoWHh4d3m9dGBrPjq3awoD2ii8oDHh4e3pqXN77tLduD/xmvrnh4eHh4C147bJoEB7M2Pdno8yADDw8P7zavHajaxxZ5aJvc/eUKeHh4eBd4swBiFrPOVmi/+bKxxsPDwzvEmx1l5d+ZbfSbgLiejMDDw8Mree1YVRsfzMatZoUkGgvDw8PDW/NmcermuOsZX6v/EvDw8PCu8drykFSYWXTbxhltScPDw8M7xXuWV3uQPwsOTg0c4OHh4d3gbQLTzUafRx5tc4+Hh4f3Gd7siCtpppO7zNZfhbl4eHh4h3izJrgNYWeFJy9dL+cj8PDw8L6Vtxm92gfBdXHCw8PD+1ZeEuPm4M0BW/FXeHh4eNd4m00/KSSzcGFWEg5kLXh4eHjbiabHZtH89SVrzvB4eHh4h3i/AN9ekpecJmHYAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

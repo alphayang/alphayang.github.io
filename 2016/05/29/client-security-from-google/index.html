@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>client-security-from-google | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="引子XcodeGhostStagefrighthttp://www.theguardian.com/technology/2015/jul/28/stagefright-android-vulnerability-heartbleed-mobilehttp://www.androidcentral.com/stagefrighthttp://www.digitaltrends.com/mobile">
+<meta property="og:type" content="article">
+<meta property="og:title" content="client-security-from-google">
+<meta property="og:url" content="http://alphayang.github.io/2016/05/29/client-security-from-google/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="引子XcodeGhostStagefrighthttp://www.theguardian.com/technology/2015/jul/28/stagefright-android-vulnerability-heartbleed-mobilehttp://www.androidcentral.com/stagefrighthttp://www.digitaltrends.com/mobile">
+<meta property="og:updated_time" content="2016-05-29T09:32:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="client-security-from-google">
+<meta name="twitter:description" content="引子XcodeGhostStagefrighthttp://www.theguardian.com/technology/2015/jul/28/stagefright-android-vulnerability-heartbleed-mobilehttp://www.androidcentral.com/stagefrighthttp://www.digitaltrends.com/mobile">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">client-security-from-google</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">client-security-from-google</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-05-29T09:32:30.000Z" itemprop="datePublished" class="page-time">
+  2016-05-29
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#引子"><span class="post-toc-number">1.</span> <span class="post-toc-text">引子</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#XcodeGhost"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">XcodeGhost</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Stagefright"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Stagefright</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#开发者"><span class="post-toc-number">2.</span> <span class="post-toc-text">开发者</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开发人员坚持从官方更新开发工具，-保持干净的系统，安全意识很重要"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">开发人员坚持从官方更新开发工具， 保持干净的系统，安全意识很重要</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#用户"><span class="post-toc-number">3.</span> <span class="post-toc-text">用户</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设备购买"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">设备购买</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#iOS"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">iOS</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">Android</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#远程锁定和数据抹除"><span class="post-toc-number">3.1.3.</span> <span class="post-toc-text">远程锁定和数据抹除</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#密码策略"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">密码策略</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#开启2步验证"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">开启2步验证</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#密码管理软件"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">密码管理软件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一个服务一个密码"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">一个服务一个密码</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#浏览器"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">浏览器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Chrome"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">Chrome</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#更多"><span class="post-toc-number">4.</span> <span class="post-toc-text">更多</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#恶意网页检测API"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">恶意网页检测API</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Andorid-和-Chrome-的漏洞报告奖励"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">Andorid 和 Chrome 的漏洞报告奖励</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android-Rewards"><span class="post-toc-number">4.2.1.</span> <span class="post-toc-text">Android Rewards</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Chrome-Rewards"><span class="post-toc-number">4.2.2.</span> <span class="post-toc-text">Chrome Rewards</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#案例"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">案例</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-client-security-from-google"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">client-security-from-google</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年05月29日 17:32" datetime="2016-05-29T09:32:30.000Z"  itemprop="datePublished">2016-05-29</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h1><h2 id="XcodeGhost"><a href="#XcodeGhost" class="headerlink" title="XcodeGhost"></a>XcodeGhost</h2><h2 id="Stagefright"><a href="#Stagefright" class="headerlink" title="Stagefright"></a>Stagefright</h2><p><a href="http://www.theguardian.com/technology/2015/jul/28/stagefright-android-vulnerability-heartbleed-mobile" target="_blank" rel="external">http://www.theguardian.com/technology/2015/jul/28/stagefright-android-vulnerability-heartbleed-mobile</a><br><a href="http://www.androidcentral.com/stagefright" target="_blank" rel="external">http://www.androidcentral.com/stagefright</a><br><a href="http://www.digitaltrends.com/mobile/android-stagefright-mms-hack-news/" target="_blank" rel="external">http://www.digitaltrends.com/mobile/android-stagefright-mms-hack-news/</a><br>在彩信中插入恶意小视频，系统会自动在用户看到前触发Stagefright，中招。<br>利用Android 5.1.1, build LMY48I系统更新。</p>
+<h1 id="开发者"><a href="#开发者" class="headerlink" title="开发者"></a>开发者</h1><h2 id="开发人员坚持从官方更新开发工具，-保持干净的系统，安全意识很重要"><a href="#开发人员坚持从官方更新开发工具，-保持干净的系统，安全意识很重要" class="headerlink" title="开发人员坚持从官方更新开发工具， 保持干净的系统，安全意识很重要"></a>开发人员坚持从官方更新开发工具， 保持干净的系统，安全意识很重要</h2><p>团队提供稳定的网络环境，不只有利于团队人员的技术成长，更是打造竞争力产品的需要。<br><strong>老话：安全，至关重要。</strong></p>
+<h1 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h1><h2 id="设备购买"><a href="#设备购买" class="headerlink" title="设备购买"></a>设备购买</h2><p>购买设备时，不只比拼硬件的参数，系统的持续更新能力不止体现在更多的功能，也表示更好的系统安全保证。</p>
+<h3 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h3><p>系统更新是包含在购买价格中的，全球所有用户都可以处于同一安全水平。</p>
+<h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><p>选购Android比较复杂：</p>
+<ul>
+<li>Google的Nexus首选，纯净系统与最新最快的系统更新，不只需要硬件海淘，还要有稳定的科学上网能力；</li>
+<li>次选MIUI，拥有系统的持续更新能力；</li>
+<li>只使用Google Play市场，Google最有动力也最有实力保证市场中应用的安全性；</li>
+<li>不Root，即使刷机后要把BootLoader重新锁上；<h3 id="远程锁定和数据抹除"><a href="#远程锁定和数据抹除" class="headerlink" title="远程锁定和数据抹除"></a>远程锁定和数据抹除</h3>Android和iOS都支持找回手机功能，利用原理一样，设备检测到网络即报告自己的位置信息，已经有不少新闻报道提到通过这种方式找回了丢失的手机。同样的原理，移动设备在丢失后可以远程抹除数据</li>
+</ul>
+<h2 id="密码策略"><a href="#密码策略" class="headerlink" title="密码策略"></a>密码策略</h2><h3 id="开启2步验证"><a href="#开启2步验证" class="headerlink" title="开启2步验证"></a>开启2步验证</h3><p>主力帐户，如 Google Account, Apple ID，支付宝，微信，LastPass等开启两步验证。即使密码泄漏，还需要手机验证码才能访问帐户。</p>
+<p>2 step verification<br>apple id的保护：apple id, recovery key， password有两项才可解锁帐户，使用密码登陆时使用绑定手机或设备接收4位验证码。</p>
+<h3 id="密码管理软件"><a href="#密码管理软件" class="headerlink" title="密码管理软件"></a>密码管理软件</h3><p>推荐 LastPass，推荐链接<br>类似于自家保险柜和银行保险柜的差别，不只是只记一个密码了，密码信息保护能力有了质的提升。</p>
+<h3 id="一个服务一个密码"><a href="#一个服务一个密码" class="headerlink" title="一个服务一个密码"></a>一个服务一个密码</h3><p>登陆帐户无所不在，配合 LastPass 实施一个帐户一个密码，也不排队有异常能力的人可以通过一定的规则来人工实现这一增强机制。</p>
+<h2 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h2><h3 id="Chrome"><a href="#Chrome" class="headerlink" title="Chrome"></a>Chrome</h3><p>简单就是最好，使用Google Chrome帐户同步，基于 Chrome 的安全快速特性，不只保持浏览器网页时的安全，也将浏览数据保护起来，如果设备丢失，<br>检测是否能远程删除同步数据</p>
+<h1 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h1><h2 id="恶意网页检测API"><a href="#恶意网页检测API" class="headerlink" title="恶意网页检测API"></a>恶意网页检测API</h2><p>浏览器开发者可以利用 Google 的恶意网页检测API来增强用户浏览的安全性，让你的浏览器可以拥有和 Chrome 一样的安全网页检测功能。</p>
+<h2 id="Andorid-和-Chrome-的漏洞报告奖励"><a href="#Andorid-和-Chrome-的漏洞报告奖励" class="headerlink" title="Andorid 和 Chrome 的漏洞报告奖励"></a>Andorid 和 Chrome 的漏洞报告奖励</h2><h3 id="Android-Rewards"><a href="#Android-Rewards" class="headerlink" title="Android Rewards"></a>Android Rewards</h3><p><a href="https://www.google.com.sg/about/appsecurity/android-rewards/" target="_blank" rel="external">https://www.google.com.sg/about/appsecurity/android-rewards/</a></p>
+<h3 id="Chrome-Rewards"><a href="#Chrome-Rewards" class="headerlink" title="Chrome Rewards"></a>Chrome Rewards</h3><p><a href="https://www.google.com.sg/about/appsecurity/chrome-rewards/" target="_blank" rel="external">https://www.google.com.sg/about/appsecurity/chrome-rewards/</a></p>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p>应用泄露用户信息，因为应用加密做的很差，公开后才引起重视<br><a href="https://www.larrysalibra.com/how-chinese-tinder-clone-screws-you/" target="_blank" rel="external">https://www.larrysalibra.com/how-chinese-tinder-clone-screws-you/</a><br><a href="https://www.larrysalibra.com/tantan-responds-promises-encryption/" target="_blank" rel="external">https://www.larrysalibra.com/tantan-responds-promises-encryption/</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-05-29T09:32:30.000Z" itemprop="dateUpdated">2016年5月29日 17:32</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2016/05/29/client-security-from-google/" target="_blank" rel="external">http://alphayang.github.io/2016/05/29/client-security-from-google/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2016/05/29/client-security-from-google/&title=《client-security-from-google》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2016/05/29/client-security-from-google/&title=《client-security-from-google》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2016/05/29/client-security-from-google/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《client-security-from-google》 — Geek Dev&url=http://alphayang.github.io/2016/05/29/client-security-from-google/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2016/05/29/client-security-from-google/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/05/31/io-16-geo-redux/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Google IO 2016 地图开发技术回顾 - 一场地理数据开发创新博览会</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/28/android-studio-20/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android Studio 2.0</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="client-security-from-google" data-title="client-security-from-google" data-url="http://alphayang.github.io/2016/05/29/client-security-from-google/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2016/05/29/client-security-from-google/&title=《client-security-from-google》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2016/05/29/client-security-from-google/&title=《client-security-from-google》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2016/05/29/client-security-from-google/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《client-security-from-google》 — Geek Dev&url=http://alphayang.github.io/2016/05/29/client-security-from-google/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2016/05/29/client-security-from-google/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrElEQVR42u3aS04DMRAFwNz/0mELQjN5/XEIUnmFIMm4jGR3XvvxiMfzYlRfPx+PEwMPDw9vaerfPy55zO/fJ1PMJ30/n8u54eHh4R3jJR+XPGZyqOTLly8xHh4e3v/i3f+mV5Tj4eHh/V/eJDKoLtwfHAx4eHh4AS/fiJPtPgkmEsb9a5azFjw8PLwDXaTP+flIfw8PDw9v3FVPgob8AMiD2kkp/+MT8PDw8A7w8g13Hj1UA9m8wfZi+fDw8PAO8HoXAnpha/WVk+ADDw8P7wSvF7bOm/pJmJvHItFhgIeHh7fE6wUESaE8L4jzI6fQ38PDw8Nb4lUvWvXaY9Udu1pYL/Tx8PDw8Iq8vETutfzzrTz5azlcxsPDw1viVeOAPKSYLMfkKthlZw8PDw9vlVcNbfPJTa5t9ZYVDw8P7z28fAtOjo1JgJv/NTpU8PDw8A7wJpOrbvR5LnKkQMfDw8Nb5VUfXA0pthpszSADDw8Pb5WXHwB5YyyZSvW9y1kLHh4e3pjXu+qUP753COVhxOXM8fDw8A7zJl/+JyFCfhUgL6zx8PDwzvEmbbDqY6pFc7UJt9zlw8PDwys2vaoRbbmRX0xc88sHzZIaDw8Pb8yrXgvIlyOPLXqFePSNAQ8PD2/Am5fL1dAhj2vzAykKhfHw8PBWefPAtBoTVI+KUZCBh4eH90ZeUvJOIoacWl2m6GDAw8PDG/N2J5oX0PMIuNAGw8PDwxvznsXRO0jmoXBzifHw8PAO8HrFcTUhrl7Pqr53YeDh4eEVeflhkG/Bz9aYRMZRjIuHh4e3yptsypPy+vjAw8PD+wBefuEgCYLnZfqLp+Ph4eF9AK8XTNxPNMHkeDw8PLz38PLJ9bb+3sGQ/DNevAsPDw/vAG/yjT7f4udLNpkbHh4e3hLvC3ARkpeuAvJ4AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

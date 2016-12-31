@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>15分钟，使用BigQuery和Google Sheets对Hacker News历史数据进行在线分析 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="cloud,big data">
+    <meta name="description" content="Felipe Hoffa使用 Hacker News API将Hacker News的数据导出到了Big Query，https://bigquery.cloud.google.com/table/fh-bigquery:hackernews.comments
+这是一个共享的表，BigQuery每天有1000次的免费查询额度，再利用Google Sheets来保存查询结果并进行数据可视化，实现一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="15分钟，使用BigQuery和Google Sheets对Hacker News历史数据进行在线分析">
+<meta property="og:url" content="http://alphayang.github.io/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="Felipe Hoffa使用 Hacker News API将Hacker News的数据导出到了Big Query，https://bigquery.cloud.google.com/table/fh-bigquery:hackernews.comments
+这是一个共享的表，BigQuery每天有1000次的免费查询额度，再利用Google Sheets来保存查询结果并进行数据可视化，实现一个">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457616467137.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457619545454.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457603691205.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457604686047.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457605774093.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457607195395.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457607886658.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457609019011.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457611479369.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457612298813.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457612418204.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457613378093.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457613514484.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457614778875.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457615312728.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457615848032.jpg">
+<meta property="og:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457617653903.jpg">
+<meta property="og:updated_time" content="2016-12-31T02:30:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="15分钟，使用BigQuery和Google Sheets对Hacker News历史数据进行在线分析">
+<meta name="twitter:description" content="Felipe Hoffa使用 Hacker News API将Hacker News的数据导出到了Big Query，https://bigquery.cloud.google.com/table/fh-bigquery:hackernews.comments
+这是一个共享的表，BigQuery每天有1000次的免费查询额度，再利用Google Sheets来保存查询结果并进行数据可视化，实现一个">
+<meta name="twitter:image" content="http://alphayang.github.io/img/big-query-with-hacker-news/14457616467137.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">15分钟，使用BigQuery和Google Sheets对Hacker News历史数据进行在线分析</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">15分钟，使用BigQuery和Google Sheets对Hacker News历史数据进行在线分析</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-10-25T07:53:07.000Z" itemprop="datePublished" class="page-time">
+  2015-10-25
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#环境准备"><span class="post-toc-number">1.</span> <span class="post-toc-text">环境准备</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#查询数据"><span class="post-toc-number">2.</span> <span class="post-toc-text">查询数据</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新建一个Google-Sheets"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">新建一个Google Sheets</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开启BigQuery支持"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">开启BigQuery支持</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取数据"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">获取数据</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#使用图表"><span class="post-toc-number">3.</span> <span class="post-toc-text">使用图表</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#后记"><span class="post-toc-number">5.</span> <span class="post-toc-text">后记</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-using-bigquery-with-gas-on-hacker-news-dateset"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">15分钟，使用BigQuery和Google Sheets对Hacker News历史数据进行在线分析</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年10月25日 15:53" datetime="2015-10-25T07:53:07.000Z"  itemprop="datePublished">2015-10-25</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><a href="http://twitter.com/felipehoffa" target="_blank" rel="external">Felipe Hoffa</a>使用 <a href="https://github.com/HackerNews/API" target="_blank" rel="external">Hacker News API</a>将Hacker News的数据导出到了Big Query，<br><a href="https://bigquery.cloud.google.com/table/fh-bigquery:hackernews.comments" target="_blank" rel="external">https://bigquery.cloud.google.com/table/fh-bigquery:hackernews.comments</a></p>
+<p>这是一个共享的表，BigQuery每天有1000次的免费查询额度，再利用Google Sheets来保存查询结果并进行数据可视化，实现一个低成本的在线大数据分析流程。</p>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><p>不需要安装任何软件，只要有一个Google Account。打开以下两个页面：<br><a href="https://bigquery.cloud.google.com/table/fh-bigquery:hackernews.comments" target="_blank" rel="external">https://bigquery.cloud.google.com/table/fh-bigquery:hackernews.comments</a><br><a href="http://g.co/sheets" target="_blank" rel="external">http://g.co/sheets</a><br>Google Sheets不仅提供数据保存和可视化，还集成了Googel Apps Script，天然支持BigQuery查询。<br>打开<a href="https://bigquery.cloud.google.com/table/fh-bigquery:hackernews.comments" target="_blank" rel="external">https://bigquery.cloud.google.com/table/fh-bigquery:hackernews.comments</a><br>进行一次简单的测试查询<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> a.month <span class="keyword">month</span>, stories, comments, comment_authors, story_authors</div><div class="line"><span class="keyword">FROM</span> (</div><div class="line">  <span class="keyword">SELECT</span> STRFTIME_UTC_USEC(time_ts, <span class="string">'%Y-%m'</span>) <span class="keyword">month</span>, <span class="keyword">COUNT</span>(*) stories, EXACT_COUNT_DISTINCT(author) story_authors</div><div class="line">  <span class="keyword">FROM</span> [fh-bigquery:hackernews.stories]</div><div class="line">  <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="number">1</span></div><div class="line">) a</div><div class="line"><span class="keyword">JOIN</span> (</div><div class="line">  <span class="keyword">SELECT</span> STRFTIME_UTC_USEC(time_ts, <span class="string">'%Y-%m'</span>) <span class="keyword">month</span>, <span class="keyword">COUNT</span>(*) comments, EXACT_COUNT_DISTINCT(author) comment_authors</div><div class="line">  <span class="keyword">FROM</span> [fh-bigquery:hackernews.comments]</div><div class="line">  <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="number">1</span></div><div class="line">) b</div><div class="line"><span class="keyword">ON</span> a.month=b.month</div><div class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">1</span></div></pre></td></tr></table></figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457616467137.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>表中的记录数和表大小<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457619545454.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h1 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h1><h2 id="新建一个Google-Sheets"><a href="#新建一个Google-Sheets" class="headerlink" title="新建一个Google Sheets"></a>新建一个Google Sheets</h2><p>命名为<em>Play Hacker News With BigQuery</em><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457603691205.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h2 id="开启BigQuery支持"><a href="#开启BigQuery支持" class="headerlink" title="开启BigQuery支持"></a>开启BigQuery支持</h2><p>点击<code>Tools -&gt; Script Editor...</code>，打开Google Apps Script编程界面。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457604686047.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>点击<code>Resouces -&gt; Advanced Google Services...</code>，会先弹出保存保存项目对话框，输入项目名称，点击<code>OK</code>。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457605774093.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>启用BigQuery支持。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457607195395.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>点击<code>Google Developers Console</code>链接，在控制台上启用BigQuery。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457607886658.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>启用API，并记录下URL中的Project ID（纯数字，图中被涂部分），获取数据时会用到。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457609019011.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h2 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a>获取数据</h2><p>使用以下Googel Apps Script代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">runQuery</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">// Replace this value with your Google Developer project number (It is really a number.</span></div><div class="line">  <span class="comment">// Don't confuse it with an alphanumeric project id)</span></div><div class="line">  <span class="keyword">var</span> projectNumber = <span class="string">'替换为前边提到的ProjectID'</span>;</div><div class="line">  <span class="keyword">if</span> (projectNumber.length &lt; <span class="number">1</span>) &#123;</div><div class="line">      <span class="keyword">var</span> errMsg = <span class="string">"You forgot to set a project number - So no BQ for you!"</span>;</div><div class="line">      Logger.log(errMsg);</div><div class="line">      Browser.msgBox(errMsg);</div><div class="line">      <span class="keyword">return</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">var</span> sheet = SpreadsheetApp.getActiveSheet();</div><div class="line">  <span class="keyword">var</span> sql = <span class="string">'SELECT a.month month, stories, comments, comment_authors, story_authors FROM (SELECT STRFTIME_UTC_USEC(time_ts, \'%Y-%m\') month, '</span>+</div><div class="line">    <span class="string">'COUNT(*) stories, EXACT_COUNT_DISTINCT(author) story_authors FROM [fh-bigquery:hackernews.stories] GROUP BY 1 ) a JOIN '</span>+</div><div class="line">      <span class="string">'(SELECT STRFTIME_UTC_USEC(time_ts, \'%Y-%m\') month, COUNT(*) comments, EXACT_COUNT_DISTINCT(author) comment_authors '</span>+</div><div class="line">        <span class="string">'FROM [fh-bigquery:hackernews.comments] GROUP BY 1 ) b ON a.month=b.month ORDER BY 1;'</span>;</div><div class="line">  <span class="keyword">var</span> queryResults;</div><div class="line"></div><div class="line">  <span class="comment">// Inserts a Query Job</span></div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">var</span> queryRequest = BigQuery.newQueryRequest();</div><div class="line">    queryRequest.setQuery(sql).setTimeoutMs(<span class="number">100000</span>);</div><div class="line">    queryResults = BigQuery.Jobs.query(queryRequest, projectNumber);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">catch</span> (err) &#123;</div><div class="line">    Logger.log(err);</div><div class="line">    Browser.msgBox(err);</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// Check on status of the Query Job</span></div><div class="line">  <span class="keyword">while</span> (queryResults.getJobComplete() == <span class="literal">false</span>) &#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      queryResults = BigQuery.Jobs.getQueryResults(projectNumber, queryJob.getJobReference().getJobId());</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">catch</span> (err) &#123;</div><div class="line">      Logger.log(err);</div><div class="line">      Browser.msgBox(err);</div><div class="line">      <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// Update the amount of results</span></div><div class="line">  <span class="keyword">var</span> resultCount = queryResults.getTotalRows();</div><div class="line">  <span class="keyword">var</span> resultSchema = queryResults.getSchema();</div><div class="line"></div><div class="line">  <span class="comment">//get cloumn header</span></div><div class="line">  <span class="comment">// Append the headers.</span></div><div class="line">    <span class="keyword">var</span> headers = queryResults.schema.fields.map(<span class="function"><span class="keyword">function</span>(<span class="params">field</span>) </span>&#123;</div><div class="line">      <span class="keyword">return</span> field.name;</div><div class="line">    &#125;);</div><div class="line">    sheet.appendRow(headers);</div><div class="line"></div><div class="line"></div><div class="line">  <span class="keyword">var</span> resultValues = <span class="keyword">new</span> <span class="built_in">Array</span>(resultCount+<span class="number">1</span>);</div><div class="line"></div><div class="line">  <span class="keyword">var</span> tableRows = queryResults.getRows();</div><div class="line"></div><div class="line">  <span class="comment">// Iterate through query results</span></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; tableRows.length; i++) &#123;</div><div class="line">    <span class="keyword">var</span> cols = tableRows[i].getF();</div><div class="line">    resultValues[i] = <span class="keyword">new</span> <span class="built_in">Array</span>(cols.length);</div><div class="line">    <span class="comment">// For each column, add values to the result array</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; cols.length; j++) &#123;</div><div class="line">      resultValues[i][j] = cols[j].getV();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// Update the Spreadsheet with data from the resultValues array, starting from cell A1</span></div><div class="line">  sheet.getRange(<span class="number">2</span>, <span class="number">1</span>, resultCount, tableRows[<span class="number">0</span>].getF().length).setValues(resultValues);</div><div class="line"></div><div class="line">  Browser.msgBox(<span class="string">"Yo yo! We are done with updating the results"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// Insert our customize menu item</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">onOpen</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> sheet = SpreadsheetApp.getActiveSpreadsheet();</div><div class="line">  <span class="keyword">var</span> menuEntries = [ &#123;<span class="attr">name</span>: <span class="string">'Run Query'</span>, <span class="attr">functionName</span>: <span class="string">'runQuery'</span>&#125; ];</div><div class="line">  sheet.addMenu(<span class="string">'BigQuery Example'</span>, menuEntries);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457611479369.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>保存，在方法下拉框中选择runQuery，点击运行（小三角图标）。</p>
+<p>第一次运行需要一次性授权<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457612298813.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457612418204.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>授权完成，再点击一次运行。<br>运行完成，切换到新的Google Sheet页面，查看结果。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457613378093.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457613514484.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h1 id="使用图表"><a href="#使用图表" class="headerlink" title="使用图表"></a>使用图表</h1><p>利用Google Sheets提供的强大报表功能，让我们查询出来的数据变得更加具有表现力。<br>直接点击右下角的<code>Explorer</code><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457614778875.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>浏览自动生成的报表，选择喜欢的插入入到文档中。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457615312728.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>对报表再进行进一步的定制<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457615848032.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>最终的效果：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/big-query-with-hacker-news/14457617653903.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>Play Hacker News With BigQuery的链接，可以自由打开，先看下效果。<br><a href="https://docs.google.com/spreadsheets/d/1iMedOlxn_CBrvYERvap1kIz2l8mT2cqFag11OrmnIX4/edit?usp=sharing" target="_blank" rel="external">https://docs.google.com/spreadsheets/d/1iMedOlxn_CBrvYERvap1kIz2l8mT2cqFag11OrmnIX4/edit?usp=sharing</a></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>可以看出，对于大概4G的数据量进行BigQuery查询分析，是非常的快，并且利用Google Sheets进行结果展示，让大数据在云端飞起来。<br>希望看到更多利用大数据分析的应用来丰富我们的生活。</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>BigQuery的免费使用额度为：10000个查询每天，1000G存储每月。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-12-31T02:30:04.000Z" itemprop="dateUpdated">2016年12月31日 10:30</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/" target="_blank" rel="external">http://alphayang.github.io/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/big-data/">big data</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cloud/">cloud</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/&title=《15分钟，使用BigQuery和Google Sheets对Hacker News历史数据进行在线分析》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/&title=《15分钟，使用BigQuery和Google Sheets对Hacker News历史数据进行在线分析》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《15分钟，使用BigQuery和Google Sheets对Hacker News历史数据进行在线分析》 — Geek Dev&url=http://alphayang.github.io/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/10/29/android-sdk-ok/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">国内 Android SDK 更新不用科学上网了</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/10/24/predict-future-travel-time/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">利用Google Maps API预测未来</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="using-bigquery-with-gas-on-hacker-news-dateset" data-title="15分钟，使用BigQuery和Google Sheets对Hacker News历史数据进行在线分析" data-url="http://alphayang.github.io/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/&title=《15分钟，使用BigQuery和Google Sheets对Hacker News历史数据进行在线分析》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/&title=《15分钟，使用BigQuery和Google Sheets对Hacker News历史数据进行在线分析》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《15分钟，使用BigQuery和Google Sheets对Hacker News历史数据进行在线分析》 — Geek Dev&url=http://alphayang.github.io/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADIUlEQVR42u3aS27DMAwFwN7/0i7QbRv3kXSAmB6tiiSVNcqC4efrK17Hz0rePV6s3+/+3mH++YsXNjY29k3Yx+l6BTu/lGSHfFWfcr4PNjY29lZ2EpaSx1dDS/6/56/nFmxsbOwnsyehK9ktSUvyMImNjY2N3Us/8pBznkL0rh4bGxv7yey8rF8tyucBqddgeHstDRsbG/vj2dVG7yf//cb+NjY2NvZHso/Byh+Zpyh5SWt0cmxsbOxF7PwQkwPlCUNylb0U5Z+NsLGxsdex83JMb8imV9yvnvOfi8DGxsZewc5DV6GBOmgYJ6M81TD5x87Y2NjYi9jvrpZXW7m9ZnCvnYyNjY29id0r9MxTguTzVw0Jlb9zbGxs7Fuxe8dN6lXJoSf1sPxqsLGxsXez8y16vPnr85QDGxsbeyt7UkKaXNB5elMdyknO8LLRi42Njb2I3WvWTpKNq4pW5bEebGxs7HXsvFmbBJXeoE/vKaMAho2Njb2UPU8D8quctG977Cg2YmNjY9+KfVUz9ary0yQ45ZeOjY2NvYmdUOdlpmrikY9g9r4AbGxs7K3sJLAlJaH8mqrt4eppsbGxsZ/DnvB6hZ55/lRtUWBjY2PvZicfzUNUHoR66UevGVzoP2NjY2PfkJ23WpMw0wtmvaZybwAIGxsbexP7qqSiN3aTB6H8QqvDQ9jY2Ng72PkWSepSLSFN2rejMhY2Njb2IvakiZuEsSNYk7JUdUgIGxsbexN7nhL0ykzV5sGkSVDob2NjY2PfkJ0fpddYnRTu86fnCRI2Njb2VnYebHolp0lTtpeKJM/FxsbG3sfOf+j3YElAmpS38hIYNjY29m52/tO/Gip6xf18GCgf8cHGxsbexD6Kq5pO5OWq6pVNms3Y2NjYm9i9YFAd38kvsRe68h2wsbGxt7KrQSv5fDXwTIJccgZsbGzsJ7AnTd9qOJmEw15p6Y99sLGxsR/Mzov+1SurMvJXLghg2NjY2CvY0XYBvhquymlGEgKxsbGx17GrIzuTcZ/qQfPrKAwSYWNjYy9iX9XoTcJStVT0jq8EGxsbexH7G22uO05dQW1aAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
