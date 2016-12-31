@@ -1,6 +1,6 @@
 'use strict';
 
-const version = 'v20160422';
+const version = 'v20160423';
 const __DEVELOPMENT__ = false;
 const __DEBUG__ = false;
 const offlineResources = [
