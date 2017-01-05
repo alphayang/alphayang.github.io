@@ -36,7 +36,8 @@ ga('send', 'pageview');
                     
                     
                 
-                平行">
+                
+参">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android Studio中Gradle依赖树查看">
 <meta property="og:url" content="http://alphayang.github.io/2015/10/15/gradle-dependence-tree/index.html">
@@ -46,7 +47,8 @@ ga('send', 'pageview');
                     
                     
                 
-                平行">
+                
+参">
 <meta property="og:image" content="http://alphayang.github.io/img/graldle_flat_dep_tree.png">
 <meta property="og:image" content="http://alphayang.github.io/img/gradle_panel.png">
 <meta property="og:image" content="https://camo.githubusercontent.com/a225c529b7c49f449882f28647b46959e2094876/687474703a2f2f706c7567696e732e6a6574627261696e732e636f6d2f66696c65732f373135302f73637265656e73686f745f31343731302e706e67">
@@ -58,7 +60,8 @@ ga('send', 'pageview');
                     
                     
                 
-                平行">
+                
+参">
 <meta name="twitter:image" content="http://alphayang.github.io/img/graldle_flat_dep_tree.png">
     
         <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
@@ -210,8 +213,7 @@ ga('send', 'pageview');
                     <div class="overlay"></div>
                     <img src="/img/graldle_flat_dep_tree.png" alt="平行的依赖" title="">
                 </div>
-                <div class="image-caption">平行的依赖</div>
-            </figure></p>
+                </figure></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>在maven中提供了树形依赖来清晰的查看依赖关系<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn dependency:tree -Dverbose -Dincludes=commons-collections</div></pre></td></tr></table></figure></p>
 <p>结果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[INFO] [dependency:tree]</div><div class="line">[INFO] org.apache.maven.plugins:maven-dependency-plugin:maven-plugin:2.0-alpha-5-SNAPSHOT</div><div class="line">[INFO] +- org.apache.maven.reporting:maven-reporting-impl:jar:2.0.4:compile</div><div class="line">[INFO] |  \- commons-validator:commons-validator:jar:1.2.0:compile</div><div class="line">[INFO] |     \- commons-digester:commons-digester:jar:1.6:compile</div><div class="line">[INFO] |        \- (commons-collections:commons-collections:jar:2.1:compile - omitted <span class="keyword">for</span> conflict with 2.0)</div><div class="line">[INFO] \- org.apache.maven.doxia:doxia-site-renderer:jar:1.0-alpha-8:compile</div><div class="line">[INFO]    \- org.codehaus.plexus:plexus-velocity:jar:1.1.3:compile</div><div class="line">[INFO]       \- commons-collections:commons-collections:jar:2.0:compile</div></pre></td></tr></table></figure></p>
 <h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>在Gralde这里也可以达到相同的效果</p>
@@ -220,8 +222,7 @@ ga('send', 'pageview');
                     <div class="overlay"></div>
                     <img src="/img/gradle_panel.png" alt="Gradle" title="">
                 </div>
-                <div class="image-caption">Gradle</div>
-            </figure><br>运行输出：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">12:02:24 PM: Executing external task <span class="string">'androidDependencies'</span>...</div><div class="line">:core:androidDependencies</div><div class="line">debug</div><div class="line">+--- LOCAL: libGoogleAnalyticsV2.jar</div><div class="line">+--- LOCAL: CWAC-SackOfViewsAdapter.jar</div><div class="line">+--- LOCAL: ushahidi_sdk-1.1.jar</div><div class="line">+--- com.android.support:support-v4:22.2.0</div><div class="line">|    \--- LOCAL: internal_impl-22.2.0.jar</div><div class="line">\--- com.google.android.gms:play-services:8.1.0</div><div class="line">     +--- com.google.android.gms:play-services-ads:8.1.0</div><div class="line">     |    +--- com.google.android.gms:play-services-basement:8.1.0</div><div class="line">......</div></pre></td></tr></table></figure></p>
+                </figure><br>运行输出：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">12:02:24 PM: Executing external task <span class="string">'androidDependencies'</span>...</div><div class="line">:core:androidDependencies</div><div class="line">debug</div><div class="line">+--- LOCAL: libGoogleAnalyticsV2.jar</div><div class="line">+--- LOCAL: CWAC-SackOfViewsAdapter.jar</div><div class="line">+--- LOCAL: ushahidi_sdk-1.1.jar</div><div class="line">+--- com.android.support:support-v4:22.2.0</div><div class="line">|    \--- LOCAL: internal_impl-22.2.0.jar</div><div class="line">\--- com.google.android.gms:play-services:8.1.0</div><div class="line">     +--- com.google.android.gms:play-services-ads:8.1.0</div><div class="line">     |    +--- com.google.android.gms:play-services-basement:8.1.0</div><div class="line">......</div></pre></td></tr></table></figure></p>
 <h2 id="项目层添加gradle脚本"><a href="#项目层添加gradle脚本" class="headerlink" title="项目层添加gradle脚本"></a>项目层添加gradle脚本</h2><p>在项目根目录下build.gradle中添加<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">subprojects &#123;</div><div class="line">    task allDeps(<span class="string">type:</span> DependencyReportTask) &#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>在Android Studio Terminal下运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./gradlew allDeps</div></pre></td></tr></table></figure></p>
 <p>可以得到全部依赖的树形结构<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">androidJacocoAnt - The Jacoco ant tasks to use to get execute Gradle tasks.</div><div class="line">\--- org.jacoco:org.jacoco.ant:0.7.4.201502262128</div><div class="line">     +--- org.jacoco:org.jacoco.core:0.7.4.201502262128</div><div class="line">     |    \--- org.ow2.asm:asm-debug-all:5.0.1</div><div class="line">     +--- org.jacoco:org.jacoco.report:0.7.4.201502262128</div><div class="line">     |    +--- org.jacoco:org.jacoco.core:0.7.4.201502262128 (*)</div><div class="line">     |    \--- org.ow2.asm:asm-debug-all:5.0.1</div><div class="line">     \--- org.jacoco:org.jacoco.agent:0.7.4.201502262128</div></pre></td></tr></table></figure></p>
@@ -231,8 +232,7 @@ ga('send', 'pageview');
                     <div class="overlay"></div>
                     <img src="https://camo.githubusercontent.com/a225c529b7c49f449882f28647b46959e2094876/687474703a2f2f706c7567696e732e6a6574627261696e732e636f6d2f66696c65732f373135302f73637265656e73686f745f31343731302e706e67" alt="gradle" title="">
                 </div>
-                <div class="image-caption">gradle</div>
-            </figure></p>
+                </figure></p>
 <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>建议多种方法配合使用，脚本可搜索，但是每个项目需要自行添加，插件一劳永逸，可视化操作，但不支持搜索，当你要解决依赖冲突时，搜索是最快发现问题的途径。</p>
 
         </div>
@@ -412,7 +412,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.3');
     <div class="bottom">
         <p>
             <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>Geek Dev &copy; 2015 - 2016</span>
+            <span>Geek Dev &copy; 2015 - 2017</span>
         </p>
     </div>
 </footer>

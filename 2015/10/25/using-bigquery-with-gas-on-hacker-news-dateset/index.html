@@ -215,115 +215,98 @@ ga('send', 'pageview');
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457616467137.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure>
+                </figure>
 <p>表中的记录数和表大小<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457619545454.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure></p>
+                </figure></p>
 <h1 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h1><h2 id="新建一个Google-Sheets"><a href="#新建一个Google-Sheets" class="headerlink" title="新建一个Google Sheets"></a>新建一个Google Sheets</h2><p>命名为<em>Play Hacker News With BigQuery</em><br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457603691205.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure></p>
+                </figure></p>
 <h2 id="开启BigQuery支持"><a href="#开启BigQuery支持" class="headerlink" title="开启BigQuery支持"></a>开启BigQuery支持</h2><p>点击<code>Tools -&gt; Script Editor...</code>，打开Google Apps Script编程界面。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457604686047.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure><br>点击<code>Resouces -&gt; Advanced Google Services...</code>，会先弹出保存保存项目对话框，输入项目名称，点击<code>OK</code>。<br><figure class="image-bubble">
+                </figure><br>点击<code>Resouces -&gt; Advanced Google Services...</code>，会先弹出保存保存项目对话框，输入项目名称，点击<code>OK</code>。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457605774093.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure><br>启用BigQuery支持。<br><figure class="image-bubble">
+                </figure><br>启用BigQuery支持。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457607195395.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure><br>点击<code>Google Developers Console</code>链接，在控制台上启用BigQuery。<br><figure class="image-bubble">
+                </figure><br>点击<code>Google Developers Console</code>链接，在控制台上启用BigQuery。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457607886658.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure><br>启用API，并记录下URL中的Project ID（纯数字，图中被涂部分），获取数据时会用到。<br><figure class="image-bubble">
+                </figure><br>启用API，并记录下URL中的Project ID（纯数字，图中被涂部分），获取数据时会用到。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457609019011.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure></p>
+                </figure></p>
 <h2 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a>获取数据</h2><p>使用以下Googel Apps Script代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">runQuery</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">// Replace this value with your Google Developer project number (It is really a number.</span></div><div class="line">  <span class="comment">// Don't confuse it with an alphanumeric project id)</span></div><div class="line">  <span class="keyword">var</span> projectNumber = <span class="string">'替换为前边提到的ProjectID'</span>;</div><div class="line">  <span class="keyword">if</span> (projectNumber.length &lt; <span class="number">1</span>) &#123;</div><div class="line">      <span class="keyword">var</span> errMsg = <span class="string">"You forgot to set a project number - So no BQ for you!"</span>;</div><div class="line">      Logger.log(errMsg);</div><div class="line">      Browser.msgBox(errMsg);</div><div class="line">      <span class="keyword">return</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">var</span> sheet = SpreadsheetApp.getActiveSheet();</div><div class="line">  <span class="keyword">var</span> sql = <span class="string">'SELECT a.month month, stories, comments, comment_authors, story_authors FROM (SELECT STRFTIME_UTC_USEC(time_ts, \'%Y-%m\') month, '</span>+</div><div class="line">    <span class="string">'COUNT(*) stories, EXACT_COUNT_DISTINCT(author) story_authors FROM [fh-bigquery:hackernews.stories] GROUP BY 1 ) a JOIN '</span>+</div><div class="line">      <span class="string">'(SELECT STRFTIME_UTC_USEC(time_ts, \'%Y-%m\') month, COUNT(*) comments, EXACT_COUNT_DISTINCT(author) comment_authors '</span>+</div><div class="line">        <span class="string">'FROM [fh-bigquery:hackernews.comments] GROUP BY 1 ) b ON a.month=b.month ORDER BY 1;'</span>;</div><div class="line">  <span class="keyword">var</span> queryResults;</div><div class="line"></div><div class="line">  <span class="comment">// Inserts a Query Job</span></div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">var</span> queryRequest = BigQuery.newQueryRequest();</div><div class="line">    queryRequest.setQuery(sql).setTimeoutMs(<span class="number">100000</span>);</div><div class="line">    queryResults = BigQuery.Jobs.query(queryRequest, projectNumber);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">catch</span> (err) &#123;</div><div class="line">    Logger.log(err);</div><div class="line">    Browser.msgBox(err);</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// Check on status of the Query Job</span></div><div class="line">  <span class="keyword">while</span> (queryResults.getJobComplete() == <span class="literal">false</span>) &#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      queryResults = BigQuery.Jobs.getQueryResults(projectNumber, queryJob.getJobReference().getJobId());</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">catch</span> (err) &#123;</div><div class="line">      Logger.log(err);</div><div class="line">      Browser.msgBox(err);</div><div class="line">      <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// Update the amount of results</span></div><div class="line">  <span class="keyword">var</span> resultCount = queryResults.getTotalRows();</div><div class="line">  <span class="keyword">var</span> resultSchema = queryResults.getSchema();</div><div class="line"></div><div class="line">  <span class="comment">//get cloumn header</span></div><div class="line">  <span class="comment">// Append the headers.</span></div><div class="line">    <span class="keyword">var</span> headers = queryResults.schema.fields.map(<span class="function"><span class="keyword">function</span>(<span class="params">field</span>) </span>&#123;</div><div class="line">      <span class="keyword">return</span> field.name;</div><div class="line">    &#125;);</div><div class="line">    sheet.appendRow(headers);</div><div class="line"></div><div class="line"></div><div class="line">  <span class="keyword">var</span> resultValues = <span class="keyword">new</span> <span class="built_in">Array</span>(resultCount+<span class="number">1</span>);</div><div class="line"></div><div class="line">  <span class="keyword">var</span> tableRows = queryResults.getRows();</div><div class="line"></div><div class="line">  <span class="comment">// Iterate through query results</span></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; tableRows.length; i++) &#123;</div><div class="line">    <span class="keyword">var</span> cols = tableRows[i].getF();</div><div class="line">    resultValues[i] = <span class="keyword">new</span> <span class="built_in">Array</span>(cols.length);</div><div class="line">    <span class="comment">// For each column, add values to the result array</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; cols.length; j++) &#123;</div><div class="line">      resultValues[i][j] = cols[j].getV();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// Update the Spreadsheet with data from the resultValues array, starting from cell A1</span></div><div class="line">  sheet.getRange(<span class="number">2</span>, <span class="number">1</span>, resultCount, tableRows[<span class="number">0</span>].getF().length).setValues(resultValues);</div><div class="line"></div><div class="line">  Browser.msgBox(<span class="string">"Yo yo! We are done with updating the results"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// Insert our customize menu item</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">onOpen</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> sheet = SpreadsheetApp.getActiveSpreadsheet();</div><div class="line">  <span class="keyword">var</span> menuEntries = [ &#123;<span class="attr">name</span>: <span class="string">'Run Query'</span>, <span class="attr">functionName</span>: <span class="string">'runQuery'</span>&#125; ];</div><div class="line">  sheet.addMenu(<span class="string">'BigQuery Example'</span>, menuEntries);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457611479369.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure>
+                </figure>
 <p>保存，在方法下拉框中选择runQuery，点击运行（小三角图标）。</p>
 <p>第一次运行需要一次性授权<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457612298813.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure><br><figure class="image-bubble">
+                </figure><br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457612418204.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure></p>
+                </figure></p>
 <p>授权完成，再点击一次运行。<br>运行完成，切换到新的Google Sheet页面，查看结果。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457613378093.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure></p>
+                </figure></p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457613514484.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure>
+                </figure>
 <h1 id="使用图表"><a href="#使用图表" class="headerlink" title="使用图表"></a>使用图表</h1><p>利用Google Sheets提供的强大报表功能，让我们查询出来的数据变得更加具有表现力。<br>直接点击右下角的<code>Explorer</code><br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457614778875.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure></p>
+                </figure></p>
 <p>浏览自动生成的报表，选择喜欢的插入入到文档中。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457615312728.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure><br>对报表再进行进一步的定制<br><figure class="image-bubble">
+                </figure><br>对报表再进行进一步的定制<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457615848032.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure><br>最终的效果：<br><figure class="image-bubble">
+                </figure><br>最终的效果：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/big-query-with-hacker-news/14457617653903.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure></p>
+                </figure></p>
 <p>Play Hacker News With BigQuery的链接，可以自由打开，先看下效果。<br><a href="https://docs.google.com/spreadsheets/d/1iMedOlxn_CBrvYERvap1kIz2l8mT2cqFag11OrmnIX4/edit?usp=sharing" target="_blank" rel="external">https://docs.google.com/spreadsheets/d/1iMedOlxn_CBrvYERvap1kIz2l8mT2cqFag11OrmnIX4/edit?usp=sharing</a></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>可以看出，对于大概4G的数据量进行BigQuery查询分析，是非常的快，并且利用Google Sheets进行结果展示，让大数据在云端飞起来。<br>希望看到更多利用大数据分析的应用来丰富我们的生活。</p>
 <h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>BigQuery的免费使用额度为：10000个查询每天，1000G存储每月。</p>
@@ -505,7 +488,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.3');
     <div class="bottom">
         <p>
             <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>Geek Dev &copy; 2015 - 2016</span>
+            <span>Geek Dev &copy; 2015 - 2017</span>
         </p>
     </div>
 </footer>

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="T2b7aWnJwkCSK7f74DprdaKaHYtwklpXSDkHbpN_rJ0">
+    
+    
+    
+    <title>Tang+Daydream，刀剑合璧的Android VR开发 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Andorid Studio,Gradle,Andorid,Tango,Daydream,VR">
+    <meta name="description" content="随着ASUS在CES2017上宣布了全球第一款同时具有Tango和Daydream两种能力的ZenFone AR，终于使得AR/VR/MR这些近来全球开发圈内超级热门的词汇可以让我们国内的Android开发者直接利用手中的Android Studio和方便入手的Android设备来进行虚拟开发的探索了！
+三种交互AR增强现实，人眼接受到的光线包括了现实的光和AR设备屏幕发出的光，通过人眼的处理能力">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tang+Daydream，刀剑合璧的Android VR开发">
+<meta property="og:url" content="http://alphayang.github.io/2017/01/03/2017-01-03-tango-with-daydream-is-coming/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="随着ASUS在CES2017上宣布了全球第一款同时具有Tango和Daydream两种能力的ZenFone AR，终于使得AR/VR/MR这些近来全球开发圈内超级热门的词汇可以让我们国内的Android开发者直接利用手中的Android Studio和方便入手的Android设备来进行虚拟开发的探索了！
+三种交互AR增强现实，人眼接受到的光线包括了现实的光和AR设备屏幕发出的光，通过人眼的处理能力">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b50fe02edc.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b5782be50c.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b591c371bd.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/04/586c8783658a8.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b5b2555e34.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b6b8c5dcfa.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b6c59bd121.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b6b35a54c0.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b5b0519d91.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b507a19e3d.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b5171e0017.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b50fe02edc.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b4feda8e08.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b8f5c66b47.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b8fa716157.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b9096bf8c7.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b915f967ee.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b91a828f5b.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b91d009346.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b941ebc5b9.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b946c4f78e.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b94b3f2c22.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b962ae7e8e.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b9aead56d5.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b9b78a3a3d.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b9dc872bf3.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b9e092a637.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/03/586b9ea96e14e.png">
+<meta property="og:updated_time" content="2017-01-05T11:01:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tang+Daydream，刀剑合璧的Android VR开发">
+<meta name="twitter:description" content="随着ASUS在CES2017上宣布了全球第一款同时具有Tango和Daydream两种能力的ZenFone AR，终于使得AR/VR/MR这些近来全球开发圈内超级热门的词汇可以让我们国内的Android开发者直接利用手中的Android Studio和方便入手的Android设备来进行虚拟开发的探索了！
+三种交互AR增强现实，人眼接受到的光线包括了现实的光和AR设备屏幕发出的光，通过人眼的处理能力">
+<meta name="twitter:image" content="https://ooo.0o0.ooo/2017/01/03/586b50fe02edc.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Alpha Yang</h5>
+          <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Tang+Daydream，刀剑合璧的Android VR开发</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Tang+Daydream，刀剑合璧的Android VR开发</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-01-03T06:48:00.000Z" itemprop="datePublished" class="page-time">
+  2017-01-03
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三种交互"><span class="post-toc-number">1.</span> <span class="post-toc-text">三种交互</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AR"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">AR</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#VR"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">VR</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MR"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">MR</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#两大技术"><span class="post-toc-number">2.</span> <span class="post-toc-text">两大技术</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Tango（屠龙"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Tango（屠龙)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Daydream-倚天"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Daydream(倚天)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#硬件"><span class="post-toc-number">3.</span> <span class="post-toc-text">硬件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Phab-2-Pro"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Phab 2 Pro</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ZenFone-AR"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">ZenFone AR</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Tango开发"><span class="post-toc-number">4.</span> <span class="post-toc-text">Tango开发</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#环境准备"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">环境准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android-Studio-2-2"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">Android Studio 2.2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#USB-debugging"><span class="post-toc-number">4.1.2.</span> <span class="post-toc-text">USB debugging</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取示例代码"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">获取示例代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打开Java-Cloud-point-example"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">打开Java Cloud point example</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#更多"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">更多</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Daydream开发"><span class="post-toc-number">5.</span> <span class="post-toc-text">Daydream开发</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取代码"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">获取代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android-Studio"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">Android Studio</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">6.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-2017-01-03-tango-with-daydream-is-coming"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Tang+Daydream，刀剑合璧的Android VR开发</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年01月03日 14:48" datetime="2017-01-03T06:48:00.000Z"  itemprop="datePublished">2017-01-03</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>随着ASUS在CES2017上宣布了全球第一款同时具有Tango和Daydream两种能力的ZenFone AR，终于使得AR/VR/MR这些近来全球开发圈内超级热门的词汇可以让我们国内的Android开发者直接利用手中的Android Studio和方便入手的Android设备来进行虚拟开发的探索了！</p>
+<h1 id="三种交互"><a href="#三种交互" class="headerlink" title="三种交互"></a>三种交互</h1><h2 id="AR"><a href="#AR" class="headerlink" title="AR"></a>AR</h2><p>增强现实，人眼接受到的光线包括了现实的光和AR设备屏幕发出的光，通过人眼的处理能力进行合成，增强现实感。<br>Phab 2 Pro就是一款AR设备，可以拍摄可爱的小猫或小狗跟小宝宝一起玩的照片而不用担心安全，因为小动物都是虚拟的。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b50fe02edc.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103152130444.png" title="">
+                </div>
+                </figure></p>
+<h2 id="VR"><a href="#VR" class="headerlink" title="VR"></a>VR</h2><p>虚拟现在，使用头盔或Cardboard完全遮挡住现实的光线，人眼只接受VR设备发出的光，跟现实完全隔离。<br>Oculus Rift， PlayStation VR， Samsung Gear VR 以及 HTC Vive都属于此类设备。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b5782be50c.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103154906634.png" title="">
+                </div>
+                </figure></p>
+<h2 id="MR"><a href="#MR" class="headerlink" title="MR"></a>MR</h2><p>混合现实，MR设备自身具有三维坐标感知能力，随着人的移动，虚拟物体的显示也随着变化。<br>Hololens属于MR设备。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b591c371bd.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103155611338.png" title="">
+                </div>
+                </figure></p>
+<h1 id="两大技术"><a href="#两大技术" class="headerlink" title="两大技术"></a>两大技术</h1><h2 id="Tango（屠龙"><a href="#Tango（屠龙" class="headerlink" title="Tango（屠龙)"></a>Tango（屠龙)</h2><p>正如2000年时Sumsung在SCH-V200手机上上添加了摄像头，手机开始了睁眼看世界的能力，现在Tango摄像头为手机添加了真实三维世界的感知能力。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/04/586c8783658a8.png" alt="2017-01-03-tango-with-daydream-is-coming/20170104132625731.png" title="">
+                </div>
+                </figure><br>简单的讲，Tango具有以下三大功能：</p>
+<ul>
+<li>Motion tracking: 我在哪里，空间位置</li>
+<li>Area learning: 前边有什么，看到什么</li>
+<li>Depth perception: 前边有多远<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b5b2555e34.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103160452943.png" title="">
+                </div>
+                </figure>
+不论是使用ToF(Time of Flight)，通过传感器发出经调制的近红外光，遇物体后反射，传感器通过计算光线发射和反射时间差或相位差，来换算被拍摄景物的距离，以产生深度信息。<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b6b8c5dcfa.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103171451342.png" title="">
+                </div>
+                </figure>
+还是结构光计算，通过向检测空间内投射经过编码的激光光斑阵列，对空间进行标定并辅助计算三维空间位置。<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b6c59bd121.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103171814160.png" title="">
+                </div>
+                </figure>
+</li>
+</ul>
+<p>所得到的如下图中的cloud point数据，可以看到此时共采集到了12464个带有XYZ三维坐标的点。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b6b35a54c0.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103171324338.png" title="">
+                </div>
+                </figure></p>
+<h2 id="Daydream-倚天"><a href="#Daydream-倚天" class="headerlink" title="Daydream(倚天)"></a>Daydream(倚天)</h2><p>目的是要让用户得到最好的虚拟体验，通过定义了一组最低的硬件运行效果标准以及为开发者提供易用的Daydream API，消除了导致用户眩晕的画面延迟，做到最高性价比的虚拟体验。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b5b0519d91.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103160420398.png" title="">
+                </div>
+                </figure></p>
+<h1 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h1><h2 id="Phab-2-Pro"><a href="#Phab-2-Pro" class="headerlink" title="Phab 2 Pro"></a>Phab 2 Pro</h2><p>全球第一款消费级的Tango设备，使用骁龙652，4G内存和64G存储，重要的是国内版本和国外版本都具有完整的Tango功能。京东上可以直接下单，支持211的！<br>缺点是作为普通手机使用，6.4寸屏幕太大，顔值也不够高，整体偏笨。<br>Android感知三维世界的”眼睛”–Tango组件:<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b507a19e3d.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103151919100.png" title="">
+                </div>
+                </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b5171e0017.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103152329144.png" title="">
+                </div>
+                </figure><br>典型的应用场景:<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b50fe02edc.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103152130444.png" title="">
+                </div>
+                </figure></p>
+<h2 id="ZenFone-AR"><a href="#ZenFone-AR" class="headerlink" title="ZenFone AR"></a>ZenFone AR</h2><p>全球第一款消费级的Tango+Daydream设备，使用骁龙821来保证用户得到Daydream体验，第一款Daydream手机Google Pixel和Asus Zenphone 3也使用的是骁龙821。由于Daydream Viewer现在兼容的手机尺寸是5.0到5.7寸屏，那么ZenFone AR搭配Android 7(Nougat)的5.7寸屏用起来应当是相当顺手的。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b4feda8e08.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103151700773.png" title="">
+                </div>
+                </figure></p>
+<h1 id="Tango开发"><a href="#Tango开发" class="headerlink" title="Tango开发"></a>Tango开发</h1><p>首先，你需要一款Tango设备，因为<strong>还没有</strong>可以模拟Tango相关摄像头硬件的模拟器，上节中 <strong>Phab 2 Pro</strong> 是很不错的开发机！<br>现在以Java API开发为例来进入Tango APP的开发，如果你熟悉Unity 3D的开发，就直接用Unity 3D的package，因为80%的Tango APP都是用Unity 3D开发的，当然最多的就是游戏啦！</p>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="Android-Studio-2-2"><a href="#Android-Studio-2-2" class="headerlink" title="Android Studio 2.2"></a>Android Studio 2.2</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b8f5c66b47.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103194739549.png" title="">
+                </div>
+                </figure>
+<h3 id="USB-debugging"><a href="#USB-debugging" class="headerlink" title="USB debugging"></a>USB debugging</h3><p>Phab 2 Pro开启Developer option中的USB debugging，没有Developer option，那你肯定是Android开发新手，在Settings-&gt;About phone下连续点击7次Builｄ number就可以召唤出Developer option了。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b8fa716157.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103194853830.png" title="">
+                </div>
+                </figure></p>
+<h2 id="获取示例代码"><a href="#获取示例代码" class="headerlink" title="获取示例代码"></a>获取示例代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/googlesamples/tango-examples-java.git</div></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b9096bf8c7.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103195252363.png" title="">
+                </div>
+                </figure>
+<h2 id="打开Java-Cloud-point-example"><a href="#打开Java-Cloud-point-example" class="headerlink" title="打开Java Cloud point example"></a>打开Java Cloud point example</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b915f967ee.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103195614492.png" title="">
+                </div>
+                </figure>
+<p>直接 control + R<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b91a828f5b.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103195727424.png" title="">
+                </div>
+                </figure><br>选择Phab 2 Pro<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b91d009346.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103195807115.png" title="">
+                </div>
+                </figure><br>如果出现以下错误:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Error:Execution failed <span class="keyword">for</span> task <span class="string">':app:transformNative_libsWithStripDebugSymbolForDebug'</span>.</div><div class="line">&gt; java.lang.NullPointerException (no error message)</div></pre></td></tr></table></figure></p>
+<p>只需要将compileSdkVersion和targetSdkVersion的版本号跟buildToolsVersion保持一致。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b941ebc5b9.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103200757443.png" title="">
+                </div>
+                </figure></p>
+<p>安装成功<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b946c4f78e.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103200911758.png" title="">
+                </div>
+                </figure><br>在手机上可以看到Cloud point，实时的总点数和点的平均深度。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b94b3f2c22.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103201026653.png" title="">
+                </div>
+                </figure></p>
+<h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2><p><a href="https://github.com/lvonasek/tango/" target="_blank" rel="external">https://github.com/lvonasek/tango/</a><br>利用C API对采集到的Point cloud进行处理，实现三维重建的APP。<br>近似的扫描效果:<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b962ae7e8e.png" alt="2017-01-03-tang-with-daydream-is-coming/2017010320163332.png" title="">
+                </div>
+                </figure></p>
+<h1 id="Daydream开发"><a href="#Daydream开发" class="headerlink" title="Daydream开发"></a>Daydream开发</h1><p>再来重温下Daydream的目的，可以简单看到是Cardboard的升级版本，但却定义了一个可以满足用户体验的最低硬件标准并开发了一整套API来让开发者可以方便的开发出高质量体验的应用。<br>同样的Daydream APP需要一个Daydream ready的手机来运行或可以运行Cardboard apps且大于Android 4.4(kitkat)的手机，这里同样使用Phab 2 Pro。<br>使用Daydream主要用来完成以下开发任务:</p>
+<ul>
+<li>Lens distortion correction.</li>
+<li>Spatial audio.</li>
+<li>Head tracking.</li>
+<li>3D calibration.</li>
+<li>Side-by-side rendering.</li>
+<li>Stereo geometry configuration.</li>
+<li>User input event handling.</li>
+</ul>
+<h2 id="获取代码"><a href="#获取代码" class="headerlink" title="获取代码"></a>获取代码</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/googlevr/gvr-android-sdk.git</div></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b9aead56d5.png" alt="2017-01-03-tang-with-daydream-is-coming/20170103203649160.png" title="">
+                </div>
+                </figure>
+<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a>Android Studio</h2><p>打开gvr-android-sdk<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b9b78a3a3d.png" alt="2017-01-03-tango-with-daydream-is-coming/20170103203908964.png" title="">
+                </div>
+                </figure><br>运行（ control + R）sample-sdk-treasurehunt<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b9dc872bf3.png" alt="2017-01-03-tango-with-daydream-is-coming/20170103204906349.png" title="">
+                </div>
+                </figure><br>选择 Phab 2 Pro<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b9e092a637.png" alt="2017-01-03-tango-with-daydream-is-coming/2017010320501196.png" title="">
+                </div>
+                </figure><br>在手机上配合Cardboard或Daydream Viewer(当然国内的各种盒子也是可以的，由于Daydream Viewer自由没有添加计算能力，只是在操作手柄上加了外置九轴惯性测量单元来辅助精确追踪)<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/03/586b9ea96e14e.png" alt="2017-01-03-tango-with-daydream-is-coming/20170103205247126.png" title="">
+                </div>
+                </figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>使用ZenFone AR和Daydream Viewer，预计总价不会超过人民币5000元，就可以不用拖长长的连接线，也不用再专门配备一个高性能主机，在家里完全自由的沉浸在Google Street View， YouTube， Netflix， Hulu，  HBO以及诸如 Fantastic Beasts ， Where to Find Them， Need for Speed和Gunjack 2这些VR游戏中，不是安静的坐着，而是360度的自由视角。<br>完美VR的硬件和API已经准备好了，着手自己的开发计划吧！</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-01-05T11:01:37.000Z" itemprop="dateUpdated">2017年1月5日 19:01</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2017/01/03/2017-01-03-tango-with-daydream-is-coming/" target="_blank" rel="external">http://alphayang.github.io/2017/01/03/2017-01-03-tango-with-daydream-is-coming/</a>
+    </div>
+    <footer>
+        <a href="http://alphayang.github.io">
+            <img src="/img/profile.jpg" alt="Alpha Yang">
+            Alpha Yang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andorid/">Andorid</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andorid-Studio/">Andorid Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Daydream/">Daydream</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tango/">Tango</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VR/">VR</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2017/01/03/2017-01-03-tango-with-daydream-is-coming/&title=《Tang+Daydream，刀剑合璧的Android VR开发》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2017/01/03/2017-01-03-tango-with-daydream-is-coming/&title=《Tang+Daydream，刀剑合璧的Android VR开发》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2017/01/03/2017-01-03-tango-with-daydream-is-coming/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Tang+Daydream，刀剑合璧的Android VR开发》 — Geek Dev&url=http://alphayang.github.io/2017/01/03/2017-01-03-tango-with-daydream-is-coming/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2017/01/03/2017-01-03-tango-with-daydream-is-coming/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/12/24/android-things-for-iot-era/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android Things-物联网开发</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="2017-01-03-tango-with-daydream-is-coming" data-title="Tang+Daydream，刀剑合璧的Android VR开发" data-url="http://alphayang.github.io/2017/01/03/2017-01-03-tango-with-daydream-is-coming/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2017/01/03/2017-01-03-tango-with-daydream-is-coming/&title=《Tang+Daydream，刀剑合璧的Android VR开发》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2017/01/03/2017-01-03-tango-with-daydream-is-coming/&title=《Tang+Daydream，刀剑合璧的Android VR开发》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2017/01/03/2017-01-03-tango-with-daydream-is-coming/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Tang+Daydream，刀剑合璧的Android VR开发》 — Geek Dev&url=http://alphayang.github.io/2017/01/03/2017-01-03-tango-with-daydream-is-coming/&via=http://alphayang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2017/01/03/2017-01-03-tango-with-daydream-is-coming/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACt0lEQVR42u3aS27jQAwFwNz/0glmN0As6/HTjhallRHIbVUHaFIkv77i6/vien/n/3/J77z6lat1Fi48PDy8pUe/+uHf363e8/7XJxvxYgU8PDy8Y7yrRXNGwu5tQe8ePDw8vOfw8sBQ3YL5ynh4eHjP5OWfkxQ5XwEPDw/vabxqCfV9cpyUD6ph4HitBQ8PDy/m5V2k53w+0t/Dw8PDG3fVk6N8cqBXBxTKT4uHh4d3gJcfuL2hq0kS3Bu6wsPDw/skr1dEyO+pAvIwc5N84+Hh4R3gRW2kuHE1ebj86J9sKx4eHt4Wr5oKT1aYlCF6ZQ48PDy8LV5eos3b/JMCR1RcyJtheHh4eB/hJQf0+zT6RIGjmlK/6O/h4eHhLfGqRYFqCJkEm97414vv4uHh4a3y3j9udbypFwCqmzgat8LDw8Nb4vUS3N0gkQeDtZkIPDw8vBYvb1z12va9LZu0waL/IR4eHt6A1yvaVttm+ZqTcasoJODh4eGNeXlba7lyXGRUW254eHh4n+HljEIhtbjOVjEiemPAw8PDG/DyhZLl8gQ9b3TlxZGbBB0PDw9vzJuPBfTKB5MgURjqwsPDwzvA6x3HSYq8laznMe0m1uHh4eGt8qpHfw6oJtxJQt97DcDDw8M7x+sVbfM21SQFHw2B4eHh4a3yJq2s/FHyB6qGmeYbAx4eHt4Sb6vBPznQe+WGSyoeHh7eMV5StK0OVFULGUeKEXh4eHirvF65IedVt2lUTfm9Ah4eHt4BXn71DvG8LJv/fTRAgIeHh7fE67W1eoEhL+/2xhRuai14eHh4q7xJWbYXVJrpby+m4eHh4T2AVz3u88ZVdQThZtPx8PDwHsOrHvSTAYVRaMHDw8M7xkuKEVVA9dEn4ws3gQEPDw9vlbf1Rj9pqlXT7j8oWODh4eH9u34Ahl/kKcNkQtsAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

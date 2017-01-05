@@ -2,9 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://alphayang.github.io/2017/01/03/2017-01-03-tango-with-daydream-is-coming/</loc>
+    
+    <lastmod>2017-01-05T11:01:37.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://alphayang.github.io/sw.js</loc>
     
-    <lastmod>2016-12-31T14:28:09.000Z</lastmod>
+    <lastmod>2017-01-05T10:03:01.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://alphayang.github.io/offline.html</loc>
+    
+    <lastmod>2017-01-04T07:52:03.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://alphayang.github.io/404.html</loc>
+    
+    <lastmod>2017-01-04T07:47:41.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://alphayang.github.io/categories/index.html</loc>
+    
+    <lastmod>2017-01-04T07:27:09.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://alphayang.github.io/tags/index.html</loc>
+    
+    <lastmod>2017-01-04T07:26:52.000Z</lastmod>
     
   </url>
   
@@ -19,27 +54,6 @@
     <loc>http://alphayang.github.io/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/</loc>
     
     <lastmod>2016-12-31T02:30:04.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://alphayang.github.io/404.html</loc>
-    
-    <lastmod>2016-12-31T02:02:11.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://alphayang.github.io/categories/index.html</loc>
-    
-    <lastmod>2016-12-31T02:01:10.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://alphayang.github.io/tags/index.html</loc>
-    
-    <lastmod>2016-12-31T02:00:47.000Z</lastmod>
     
   </url>
   

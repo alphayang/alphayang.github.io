@@ -214,8 +214,7 @@ ga('send', 'pageview');
                     <div class="overlay"></div>
                     <img src="/img/project_structure_dialog.png" alt="project" title="">
                 </div>
-                <div class="image-caption">project</div>
-            </figure></p>
+                </figure></p>
 <h2 id="配置Gradle"><a href="#配置Gradle" class="headerlink" title="配置Gradle"></a>配置Gradle</h2><h3 id="Gradle运行期环境增强配置"><a href="#Gradle运行期环境增强配置" class="headerlink" title="Gradle运行期环境增强配置"></a>Gradle运行期环境增强配置</h3><p>在Project根目录下的gradle.properties文件中添加<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">org.gradle.daemon=<span class="literal">true</span></div><div class="line">org.gradle.parallel=<span class="literal">true</span></div><div class="line">org.gradle.jvmargs=-Xmx2g</div><div class="line">org.gradle.java.home=<span class="regexp">/path/</span>to/jvm</div></pre></td></tr></table></figure></p>
 <p>Daemon,守护进程，避免冷启动，Andorid Studio已默认开启，添加确保在Terminal下使用gradlew也使用。更多<a href="http://gradle.org/docs/current/userguide/gradle_daemon.html#when_should_i_not_use_the_gradle_daemon" target="_blank" rel="external">http://gradle.org/docs/current/userguide/gradle_daemon.html#when_should_i_not_use_the_gradle_daemon</a><br>Parallel,并发，充分利用硬件的多核性能，可能会让你的项目Build失败，那是因为项目结构没有解藕。更多<a href="http://gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects" target="_blank" rel="external">http://gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects</a><br>jvmargs，grovvy寄宿在jvm中运行，加大jvm的内存，给gradle更大的展现空间，比如-Xmx将heap size加大到2g，<br>java.home，使用与项目不同的java运行时，通常是Android开发使用JDK7，Gradle使用JDK8获得更好的性能。<br>Gradle的完整配置可以参考<a href="http://gradle.org/docs/current/userguide/userguide_single.html#sec:gradle_configuration_properties" target="_blank" rel="external">http://gradle.org/docs/current/userguide/userguide_single.html#sec:gradle_configuration_properties</a></p>
 <p>这个配置同样可做为全局配置，添加到</p>
@@ -230,8 +229,7 @@ ga('send', 'pageview');
                     <div class="overlay"></div>
                     <img src="/img/gradle_wrapper_folder.png" alt="gradle" title="">
                 </div>
-                <div class="image-caption">gradle</div>
-            </figure><br>这个jar文件只是一个钩子，每个project都有，调用功能时，由钩子调用实际的本地应用，位置如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Downloads  ls ~/.gradle/wrapper/dists/gradle-</div><div class="line">gradle-1.8-bin/    gradle-2.2.1-all/  gradle-2.4-bin/    gradle-2.6-all/</div><div class="line">gradle-2.2-all/    gradle-2.4-all/    gradle-2.5-all/    gradle-2.7-all/</div></pre></td></tr></table></figure></p>
+                </figure><br>这个jar文件只是一个钩子，每个project都有，调用功能时，由钩子调用实际的本地应用，位置如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Downloads  ls ~/.gradle/wrapper/dists/gradle-</div><div class="line">gradle-1.8-bin/    gradle-2.2.1-all/  gradle-2.4-bin/    gradle-2.6-all/</div><div class="line">gradle-2.2-all/    gradle-2.4-all/    gradle-2.5-all/    gradle-2.7-all/</div></pre></td></tr></table></figure></p>
 <p>而这些版本是全局共享的，我们升级版本，Android Studio会自动下载本地没有的版本到这里。</p>
 <h1 id="更新20151205"><a href="#更新20151205" class="headerlink" title="更新20151205"></a>更新20151205</h1><h2 id="Gradle-最新版本为2-9"><a href="#Gradle-最新版本为2-9" class="headerlink" title="Gradle 最新版本为2.9"></a>Gradle 最新版本为2.9</h2><h2 id="升级-Android-Plugin"><a href="#升级-Android-Plugin" class="headerlink" title="升级 Android Plugin"></a>升级 Android Plugin</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">buildscrpt &#123;</div><div class="line">  dependencies &#123;</div><div class="line">    classpath &apos;com.android.tools.build:gradle:1.5.0&apos;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="开发使用SDK-21"><a href="#开发使用SDK-21" class="headerlink" title="开发使用SDK=21"></a>开发使用SDK=21</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">  productFlavors &#123;</div><div class="line">    dev &#123;</div><div class="line">        minSdkVersion 21</div><div class="line">    &#125;</div><div class="line">    prod &#123;</div><div class="line">        minSdkVersion 14</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -414,7 +412,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.3');
     <div class="bottom">
         <p>
             <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>Geek Dev &copy; 2015 - 2016</span>
+            <span>Geek Dev &copy; 2015 - 2017</span>
         </p>
     </div>
 </footer>

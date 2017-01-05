@@ -1,10 +1,11 @@
 'use strict';
 
-const version = 'v20160429';
+const version = 'v20160432';
 const __DEVELOPMENT__ = false;
 const __DEBUG__ = false;
 const offlineResources = [
-  '/'
+  '/',
+  '/offline.html'
 ];
 
 const ignoreFetch = [

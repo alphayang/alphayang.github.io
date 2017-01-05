@@ -37,8 +37,7 @@ ga('send', 'pageview');
                     
                 
                 
-            
-在 Google IO 2015中宣布的 Android for IoT – Brillo和配套的协议 Weave 终于要揭开神秘的面纱了。Google 在2014年1月以32亿美元">
+在 Google IO 2015中宣布的 Android for IoT – Brillo和配套的协议 Weave 终于要揭开神秘的面纱了。Google 在2014年1月以32亿美元收购了物联网公司 Nest">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于 Brillo 和 Weave， 开发者应该知道的">
 <meta property="og:url" content="http://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/index.html">
@@ -49,8 +48,7 @@ ga('send', 'pageview');
                     
                 
                 
-            
-在 Google IO 2015中宣布的 Android for IoT – Brillo和配套的协议 Weave 终于要揭开神秘的面纱了。Google 在2014年1月以32亿美元">
+在 Google IO 2015中宣布的 Android for IoT – Brillo和配套的协议 Weave 终于要揭开神秘的面纱了。Google 在2014年1月以32亿美元收购了物联网公司 Nest">
 <meta property="og:image" content="http://alphayang.github.io/img/media/14462116526573.jpg">
 <meta property="og:image" content="http://alphayang.github.io/img/media/14462114396315.jpg">
 <meta property="og:image" content="http://alphayang.github.io/img/media/14462095693163.jpg">
@@ -63,8 +61,7 @@ ga('send', 'pageview');
                     
                 
                 
-            
-在 Google IO 2015中宣布的 Android for IoT – Brillo和配套的协议 Weave 终于要揭开神秘的面纱了。Google 在2014年1月以32亿美元">
+在 Google IO 2015中宣布的 Android for IoT – Brillo和配套的协议 Weave 终于要揭开神秘的面纱了。Google 在2014年1月以32亿美元收购了物联网公司 Nest">
 <meta name="twitter:image" content="http://alphayang.github.io/img/media/14462116526573.jpg">
     
         <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
@@ -220,8 +217,7 @@ ga('send', 'pageview');
                     <div class="overlay"></div>
                     <img src="/img/media/14462116526573.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure>
+                </figure>
 <p>在 Google IO 2015中宣布的 Android for IoT – Brillo和配套的协议 Weave 终于要揭开神秘的面纱了。<br>Google 在2014年1月以32亿美元收购了物联网公司 Nest Lab，其实最主要还是看中了 Nest 在物联网操作系统和低功耗传输协议方面的杰出成就，经过快2年的磨合和消化，推出了 Brillo 和 Weave。</p>
 <h2 id="Brillo"><a href="#Brillo" class="headerlink" title="Brillo"></a>Brillo</h2><p>万物互联网上的 Android（Android for IoT），从名称上就可以看出与 Android、Android Wear、Android Auto、Android TV不同，因为其可以运行的硬件最低配置公为32M内存和128M存储，是一个非常精剪的 Androd 运行时环境，不会有 ART，可以看成只运行Linux 内核和部分 Android 本地库的Android系统。</p>
 <h2 id="Weave"><a href="#Weave" class="headerlink" title="Weave"></a>Weave</h2><p>Weave 的前身是 <a href="http://threadgroup.org/" target="_blank" rel="external">Thread</a>，是一种基于 IP-V6用来解决智能家居应用场景中的网络传输，跟Thread 相对应的是 BLE（Bluetooth Low Energy）和 Zigbee，由 Nest 发起，成员有 Samsung, ARM Holdings, Freescale, Silicon Labs, Big Ass Fans， Yale。。。<br>熟悉 Android 应用开发的同学都知道 Android 中进行 BLE 通讯是非常的方便，所以对于 Weave，会提供更加方便的 API 供开发者使用。</p>
@@ -235,8 +231,7 @@ ga('send', 'pageview');
                     <div class="overlay"></div>
                     <img src="/img/media/14462114396315.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure></p>
+                </figure></p>
 <h1 id="需要的开发准备"><a href="#需要的开发准备" class="headerlink" title="需要的开发准备"></a>需要的开发准备</h1><h2 id="申请开发者资格"><a href="#申请开发者资格" class="headerlink" title="申请开发者资格"></a>申请开发者资格</h2><p><a href="https://developers.google.com/brillo/?hl=en" target="_blank" rel="external">https://developers.google.com/brillo/?hl=en</a><br>先申请，可以在第一时间收到开发相关的更新。</p>
 <h2 id="学习-Android-NDK"><a href="#学习-Android-NDK" class="headerlink" title="学习 Android NDK"></a>学习 Android NDK</h2><p><a href="http://developer.android.com/tools/sdk/ndk/index.html" target="_blank" rel="external">http://developer.android.com/tools/sdk/ndk/index.html</a><br>Brillo 应该只允许运行 NDK 生成的 so 模块，对于 Android 应用开发者来讲需要学习或温习 NDK 相关的开发，而对于从事嵌入式开发的同学需要了解下 Android 的 Java 与 NDk 是如何协同工作的，NDK 是C\C++的开发环境，可能与你之前的开发环境会有一些支持库不同，但相信可以很快上手。</p>
 <h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>Android Studio1.4已经集成 NDK 的下载，不用再单独下载并手动配置。<br><figure class="image-bubble">
@@ -244,8 +239,7 @@ ga('send', 'pageview');
                     <div class="overlay"></div>
                     <img src="/img/media/14462095693163.jpg" alt="" title="">
                 </div>
-                <div class="image-caption"></div>
-            </figure></p>
+                </figure></p>
 <p>在独立的 SDK 管理界面还没有 NDK，可以看出 Android Studio 作为官方开发工具进一步集成的趋势，类似于 XCode，全部内部管理 SDK。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>官方 Blog 公告<br><a href="http://googledevelopers.blogspot.sg/2015/10/building-brillo-iant-devices-with-weave_27.html" target="_blank" rel="external">http://googledevelopers.blogspot.sg/2015/10/building-brillo-iant-devices-with-weave_27.html</a><br>公告中文版：<br><a href="http://chinagdg.org/2015/10/building-brillo-iant-devices-with-weave/" target="_blank" rel="external">http://chinagdg.org/2015/10/building-brillo-iant-devices-with-weave/</a></p>
 <p>视频简介墙外无广告版：<br><a href="https://youtu.be/2rPkbyyviGI" target="_blank" rel="external">https://youtu.be/2rPkbyyviGI</a><br><a href="https://youtu.be/uIIZD4KuIJM" target="_blank" rel="external">https://youtu.be/uIIZD4KuIJM</a><br>视频简介墙内插入广告版：<br><a href="http://v.youku.com/v_show/id_XMTM3MTMzNjM0OA==.html" target="_blank" rel="external">http://v.youku.com/v_show/id_XMTM3MTMzNjM0OA==.html</a><br><a href="http://v.youku.com/v_show/id_XMTM3MTQyODI1Mg==.html" target="_blank" rel="external">http://v.youku.com/v_show/id_XMTM3MTQyODI1Mg==.html</a></p>
@@ -427,7 +421,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.3');
     <div class="bottom">
         <p>
             <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>Geek Dev &copy; 2015 - 2016</span>
+            <span>Geek Dev &copy; 2015 - 2017</span>
         </p>
     </div>
 </footer>
