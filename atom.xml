@@ -231,7 +231,7 @@
     <link href="http://alphayang.github.io/2016/12/24/android-things-for-iot-era/"/>
     <id>http://alphayang.github.io/2016/12/24/android-things-for-iot-era/</id>
     <published>2016-12-24T00:50:09.000Z</published>
-    <updated>2016-12-31T14:28:05.000Z</updated>
+    <updated>2017-01-06T13:29:41.000Z</updated>
     
     <content type="html"><![CDATA[<p>Android Things正式接替Brillo亮相，名称的改变带来了什么新的内容，广大Android开发者如何进入这一新的领域，通过本文，你不仅会了解Android Things的来龙去脉，也会直接通过代码来体验开发带给你的魅力。</p>
 <h1 id="Android-Everywhere"><a href="#Android-Everywhere" class="headerlink" title="Android Everywhere"></a>Android Everywhere</h1><p>一张Google IO 2015上的旧图，清晰的展示了Android的历史和未来。<br><figure class="image-bubble">
@@ -304,7 +304,7 @@
 <ul>
 <li>Brillo使用C/C++基于NDK进行开发,Android Things通过Java API面向广大的Android和Java开发者，就算是新手，Android的也是极易上手的。各位苦于嵌入式开发各种工具坑的福音到了，对于性能和底层要求高的部分仍然可以用NDK编写，在Android Studio里调试NDK代码也和Java代码一样的简单。</li>
 <li>Android Studio，Android SDK，Play service和Firebase,这些工具和Service形成了完整易用的工具链。</li>
-<li>Android Things出生最晚，更新条件也是最好的，直接使用Android Nougat的自动后台更新机制，最大限度的提高系统的安全性。<h2 id="广泛的硬件平台支持"><a href="#广泛的硬件平台支持" class="headerlink" title="广泛的硬件平台支持"></a>广泛的硬件平台支持</h2>现在支持以下3款硬件<br><a href="https://developer.android.com/things/hardware/edison.html" target="_blank" rel="external">Intel Edison</a><br>开发版中的贵族。<figure class="image-bubble">
+<li>Android Things出生最晚，更新条件也是最好的，直接使用Android Nougat的自动后台更新机制，最大限度的提高系统的安全性。<br>##广泛的硬件平台支持<br>现在支持以下3款硬件<br><a href="https://developer.android.com/things/hardware/edison.html" target="_blank" rel="external">Intel Edison</a><br>开发版中的贵族。<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/img/android-things/14827190513384.png" alt="" title="">
@@ -376,7 +376,7 @@
                     <div class="overlay"></div>
                     <img src="/img/android-things/14825491377983.jpg" alt="" title="">
                 </div>
-                </figure><br>如果出现以下Error，把Intel Flash Tool关掉，重新连接下USB。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">List of devices attached</div><div class="line">adb server version (35) doesn<span class="string">'t match this client (36); killing...</span></div><div class="line">adb E 69469 2714428 usb_osx.cpp:327] Could not open interface: e00002c5</div><div class="line">adb E 69469 2714428 usb_osx.cpp:289] Could not find device interface</div><div class="line">error: could not install *smartsocket* listener: Address already in use</div><div class="line">ADB server didn't ACK</div><div class="line">* failed to start daemon *</div><div class="line">error: cannot connect to daemon</div></pre></td></tr></table></figure></p>
+                </figure><br>如果出现以下Error，把Intel Flash Tool关掉，重新连接下USB。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">List of devices attached</div><div class="line">adb server version (35) doesn<span class="string">'t match this client (36); killing...</span></div><div class="line">adb E 69469 2714428 usb_osx.cpp:327] Could not open interface: e00002c5</div><div class="line">adb E 69469 2714428 usb_osx.cpp:289] Could not find device interface</div><div class="line">error: could not install *smartsocket* listener: Address already in use</div><div class="line">ADB server didn't ACK</div><div class="line">*   failed to start daemon *</div><div class="line">error: cannot connect to daemon</div></pre></td></tr></table></figure></p>
 <h2 id="Connecting-WIFI-联网"><a href="#Connecting-WIFI-联网" class="headerlink" title="Connecting WIFI(联网)"></a>Connecting WIFI(联网)</h2><p>依然是熟悉的adb命令和服务启动参数<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ adb shell am startservice \</div><div class="line">    -n com.google.wifisetup/.WifiSetupService \</div><div class="line">    <span class="_">-a</span> WifiSetupService.Connect \</div><div class="line">    <span class="_">-e</span> ssid SSID \</div><div class="line">    <span class="_">-e</span> passphrase password</div></pre></td></tr></table></figure></p>
 <p>用logcat查看网络状态<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ adb logcat <span class="_">-d</span> | grep Wifi</div><div class="line">...</div><div class="line">V WifiWatcher: Network state changed to CONNECTED</div><div class="line">V WifiWatcher: SSID changed: ...</div><div class="line">I WifiConfigurator: Successfully connected to ...</div></pre></td></tr></table></figure></p>
 <p>Ping检测<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ adb shell ping 114.114.114.114</div><div class="line">PING 114.114.114.114 (114.114.114.114) 56(84) bytes of data.</div><div class="line">64 bytes from 114.114.114.114: icmp_seq=1 ttl=57 time=6.67 ms</div><div class="line">64 bytes from 114.114.114.114: icmp_seq=2 ttl=57 time=55.5 ms</div><div class="line">64 bytes from 114.114.114.114: icmp_seq=3 ttl=57 time=23.0 ms</div><div class="line">64 bytes from 114.114.114.114: icmp_seq=4 ttl=57 time=245 ms</div></pre></td></tr></table></figure></p>
@@ -1862,7 +1862,7 @@ Youtube:<figure class="image-bubble">
     <link href="http://alphayang.github.io/2015/10/17/all-about-aar/"/>
     <id>http://alphayang.github.io/2015/10/17/all-about-aar/</id>
     <published>2015-10-17T11:45:17.000Z</published>
-    <updated>2015-10-18T14:56:10.000Z</updated>
+    <updated>2017-01-06T13:31:37.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在软件工程中，分治是最基本的设计原理，就如同现实中的砖、瓦、钢筋、水泥一样，模块化、组件化的分工，让我们整个软件世界变得井井有序，丰富多彩。</p>
 <h2 id="Java-jar"><a href="#Java-jar" class="headerlink" title="Java jar"></a>Java jar</h2><p>在Java开发中，添加组件简单的以添加jar文件依赖为途径，jar有两个含义：</p>
