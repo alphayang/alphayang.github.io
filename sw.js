@@ -1,6 +1,6 @@
 'use strict';
 
-const version = 'v20160436';
+const version = 'v20160437';
 const __DEVELOPMENT__ = false;
 const __DEBUG__ = false;
 const offlineResources = [
@@ -14,6 +14,7 @@ const ignoreFetch = [
   /https?:\/\/static.duoshuo.com\//,
   /https?:\/\/www.google-analytics.com\//,
   /https?:\/\/dn-lbstatics.qbox.me\//,
+  /https?:\/\/ajax.cloudflare.com\//,
 ];
 
 
