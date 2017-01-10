@@ -35,30 +35,30 @@ ga('send', 'pageview');
 jCenter是Bintray提供的公开下载服务，使用自身开发的artifactory开源应用搭建，后绪">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Android Studio中发布Library到jCenter公共仓库">
-<meta property="og:url" content="http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/index.html">
+<meta property="og:url" content="https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/index.html">
 <meta property="og:site_name" content="Geek Dev">
 <meta property="og:description" content="引论在Android开发，关于aar你应该知道的一文中掌握了如何引用本地的aar，更多情况下我们是直接从网络上获取公开的第三方库来进行开发，而这个网络位置就是jCenter，在gradle中使用：123repositories &amp;#123;        jcenter()    &amp;#125;
 jCenter是Bintray提供的公开下载服务，使用自身开发的artifactory开源应用搭建，后绪">
-<meta property="og:image" content="http://alphayang.github.io/img/JCenter_architecture.png">
-<meta property="og:image" content="http://alphayang.github.io/img/create_maven_repo.png">
-<meta property="og:image" content="http://alphayang.github.io/img/add_new_package_to_maven_repo.png">
-<meta property="og:image" content="http://alphayang.github.io/img/create_package_details.png">
-<meta property="og:image" content="http://alphayang.github.io/img/new_project.png">
-<meta property="og:image" content="http://alphayang.github.io/img/new_library.png">
-<meta property="og:image" content="http://alphayang.github.io/img/project_structure.png">
-<meta property="og:image" content="http://alphayang.github.io/img/upload_done.png">
-<meta property="og:image" content="http://alphayang.github.io/img/library_version.png">
-<meta property="og:image" content="http://alphayang.github.io/img/library_files_list.png">
-<meta property="og:image" content="http://alphayang.github.io/img/add_to_jcenter.png">
-<meta property="og:image" content="http://alphayang.github.io/img/jCenter_approve_request.png">
-<meta property="og:image" content="http://alphayang.github.io/img/approve_result.png">
-<meta property="og:image" content="http://alphayang.github.io/img/jCenter_files.png">
+<meta property="og:image" content="https://yangbo.tech/img/JCenter_architecture.png">
+<meta property="og:image" content="https://yangbo.tech/img/create_maven_repo.png">
+<meta property="og:image" content="https://yangbo.tech/img/add_new_package_to_maven_repo.png">
+<meta property="og:image" content="https://yangbo.tech/img/create_package_details.png">
+<meta property="og:image" content="https://yangbo.tech/img/new_project.png">
+<meta property="og:image" content="https://yangbo.tech/img/new_library.png">
+<meta property="og:image" content="https://yangbo.tech/img/project_structure.png">
+<meta property="og:image" content="https://yangbo.tech/img/upload_done.png">
+<meta property="og:image" content="https://yangbo.tech/img/library_version.png">
+<meta property="og:image" content="https://yangbo.tech/img/library_files_list.png">
+<meta property="og:image" content="https://yangbo.tech/img/add_to_jcenter.png">
+<meta property="og:image" content="https://yangbo.tech/img/jCenter_approve_request.png">
+<meta property="og:image" content="https://yangbo.tech/img/approve_result.png">
+<meta property="og:image" content="https://yangbo.tech/img/jCenter_files.png">
 <meta property="og:updated_time" content="2015-10-19T14:03:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Android Studio中发布Library到jCenter公共仓库">
 <meta name="twitter:description" content="引论在Android开发，关于aar你应该知道的一文中掌握了如何引用本地的aar，更多情况下我们是直接从网络上获取公开的第三方库来进行开发，而这个网络位置就是jCenter，在gradle中使用：123repositories &amp;#123;        jcenter()    &amp;#125;
 jCenter是Bintray提供的公开下载服务，使用自身开发的artifactory开源应用搭建，后绪">
-<meta name="twitter:image" content="http://alphayang.github.io/img/JCenter_architecture.png">
+<meta name="twitter:image" content="https://yangbo.tech/img/JCenter_architecture.png">
     
         <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
     
@@ -81,7 +81,7 @@ jCenter是Bintray提供的公开下载服务，使用自身开发的artifactory�
           <img src="/img/profile.jpg">
         </a>
         <hgroup class="introduce">
-          <h5 class="nickname">Alpha Yang</h5>
+          <h5 class="nickname">Yang Bo</h5>
           <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
         </hgroup>
       </div>
@@ -204,7 +204,7 @@ jCenter是Bintray提供的公开下载服务，使用自身开发的artifactory�
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="引论"><a href="#引论" class="headerlink" title="引论"></a>引论</h1><p>在<a href="http://alphayang.github.io/2015/10/17/all-about-aar/">Android开发，关于aar你应该知道的</a>一文中掌握了如何引用本地的aar，更多情况下我们是直接从网络上获取公开的第三方库来进行开发，而这个网络位置就是<a href="https://bintray.com/bintray/jcenter" target="_blank" rel="external">jCenter</a>，在gradle中使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">        jcenter()</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+            <h1 id="引论"><a href="#引论" class="headerlink" title="引论"></a>引论</h1><p>在<a href="http://alphayang.github.io/2015/10/17/all-about-aar/" target="_blank" rel="external">Android开发，关于aar你应该知道的</a>一文中掌握了如何引用本地的aar，更多情况下我们是直接从网络上获取公开的第三方库来进行开发，而这个网络位置就是<a href="https://bintray.com/bintray/jcenter" target="_blank" rel="external">jCenter</a>，在gradle中使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">        jcenter()</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
 <p>jCenter是Bintray提供的公开下载服务，使用自身开发的artifactory开源应用搭建，后绪会介绍如何使用artifactory来搭建团队内部的私有仓库。</p>
 <h1 id="什么是jCenter"><a href="#什么是jCenter" class="headerlink" title="什么是jCenter"></a>什么是jCenter</h1><p>artifactory其实就是带有版本管理的文件服务器，基本功能和FTP服务相同，公开服务是jCenter，还提供托管的私有仓库，同github一样，提供企业收费服务，更多的功能，更快的下载速度。</p>
 <p>开发者先将Library提交到自己的私有库，再同步到公共jCenter库，其它开发就可以简单的来添加依赖了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">compile <span class="string">'com.squareup.retrofit:retrofit:1.9.0'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -329,12 +329,12 @@ jCenter是Bintray提供的公开下载服务，使用自身开发的artifactory�
 </span><br>
 
 
-        这里写留言或版权声明：<a href="/2015/10/19/distribute-android-library-to-jcetner/" target="_blank" rel="external">http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/</a>
+        链接：<a href="/2015/10/19/distribute-android-library-to-jcetner/" target="_blank" rel="external">https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/</a>
     </div>
     <footer>
-        <a href="http://alphayang.github.io">
-            <img src="/img/profile.jpg" alt="Alpha Yang">
-            Alpha Yang
+        <a href="https://yangbo.tech">
+            <img src="/img/profile.jpg" alt="Yang Bo">
+            Yang Bo
         </a>
     </footer>
 </blockquote>
@@ -358,7 +358,7 @@ jCenter是Bintray提供的公开下载服务，使用自身开发的artifactory�
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/&title=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/&title=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&pic=https://yangbo.tech/img/profile.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -368,22 +368,22 @@ jCenter是Bintray提供的公开下载服务，使用自身开发的artifactory�
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/&title=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/&title=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&url=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/&via=http://alphayang.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&url=https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/&via=https://yangbo.tech" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -428,7 +428,7 @@ jCenter是Bintray提供的公开下载服务，使用自身开发的artifactory�
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="distribute-android-library-to-jcetner" data-title="在Android Studio中发布Library到jCenter公共仓库" data-url="http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/"></div>
+    <div class="ds-thread" data-thread-key="distribute-android-library-to-jcetner" data-title="在Android Studio中发布Library到jCenter公共仓库" data-url="https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -451,7 +451,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.3');
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <h3 class="reward-title">
         <i class="icon icon-quote-left"></i>
-        谢谢大爷~
+        多谢鼓励~
         <i class="icon icon-quote-right"></i>
     </h3>
     <ul class="reward-items">
@@ -501,7 +501,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.3');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/&title=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/&title=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&pic=https://yangbo.tech/img/profile.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -511,22 +511,22 @@ lazyScripts.push('/js/embed.min.js?v=1.4.3');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/&title=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/&title=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&url=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/&via=http://alphayang.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Android Studio中发布Library到jCenter公共仓库》 — Geek Dev&url=https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/&via=https://yangbo.tech" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -537,7 +537,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.3');
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrElEQVR42u3aQW4jMQwEQP//07vXBbKedJNS4AClk+FMNCoFkBiSr1c8/vwz3v303TdfP38d7971bp7DAw8PD2+x9Oep82cS6jPmeXOT9eDh4eHd5j0f98mi82tjf/0U78LDw8P7AF57fD9j2kgYDw8P7zfykqW0+YHkssHDw8P7NF5+EG8WlG9l/s2xXAseHh5ezMvTBJ/z+Up9Dw8PD29dVU8K/G2iYVboGq4WDw8P7wIvP3Bb5Knwd/M8Hh4e3g1e22KVvLItlbWpjSL4xsPDw7vAS8LcTYi8bwXYvBEPDw/vHi8vMuXhcj5DMs/smsHDw8O7wctbl2aNBW2SYpYE+eYvhoeHh3eUN2sO2FweeTojhxWdZXh4eHhrXnIo59fG7EyetSZE1wMeHh7eNd6+8N+W0PLwfTU/Hh4e3jVecijPXpDDZlvwzTx4eHh413gz2KzFanMB5EE5Hh4e3j3ebLRXwixB3G7QioSHh4cX85L0a7KITbmrfaao7OHh4eH9IC+HzZK27X11LBmBh4eHt+btg+a8maBNW5xKTODh4eGd5eW/3CYa2ssmmS2Zv6iw4eHh4R3l5VfCrLtpcyUUm46Hh4d3gTcrxudp1nzjZqWvaG14eHh4F3jtUZ4HvrMU7awlK8q14OHh4R3itYWu/PhuL4m8kavYSjw8PLwf4Z0KZ9skQpvsiN6Ch4eHd43XBsptemIDe5XjPyE1Hh4e3iHeLMCdbccmAZFfM3h4eHi3ee1ROwuOZ8WzYephNvDw8PBK3qa03x73mwRHm+TFw8PDu83LK0d5sjUp9u9TD6/NruPh4eH9OG/fdjCbs0hS4OHh4X0wL1/oLCncNmnh4eHh3eblRa92O9ow+nDLLB4eHt4FXvsffd5KtUlMtCW0YwkLPDw8vKfxFw+gNcoE8KZJAAAAAElFTkSuQmCC" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsUlEQVR42u3aQW7kMAwEwPz/09kHJBN3k9JgFiifBrFiqXSQCJJfX/Hz/eNJxue/f86SjD/24OHh4a2X/mqadqHJjPn2/T3+5f/i4eHhXePlh3s7QXKd5N/J14yHh4f3Obz8QG83aLYGPDw8vP+Ltw+U88QHHh4e3qfxkmREfhnMvpMH5VdyLXh4eHgxLz+sP+f3lfoeHh4e3rqqvknOJod4vobhavHw8PAu8PIDN8G0Ye6pMQ/rxMPDwzvK+x49f4PvpSfyNDEeHh7ePV5bAPv7aD4VmrfXz8P1hoeHh3eUNwtq26M536b8sokUeHh4eBd4SSjcBsqzJGwyS1Kc+8oH4eHh4Y14+VE+a35Klj4L0KMxeHh4eNd4bTqgTSK0ofmmCBfF2nh4eHhrXnvoJ2/b8De5luqNw8PDw7vGm4W/LWnWgtBux0NnBB4eHt4h3iwBkSd/Z+OTjXj4jYeHh3eZ1x7u7fXQtnO1Y6aFPzw8PLwJL28aaAv5bXJ2n9592VOGh4eHd4jXnqVJOb/dpvY7STr4oQ0LDw8Pb8FLkqdtmrVtRMjftgU5PDw8vNu8fRnsQOJ1UWwbNl3h4eHhjXjJItqlz8L0tiT2gMfDw8O7wMtLYm2Au2nMmpXQVhU/PDw8vJK3aYTKC/lJ6rZNgkSpEzw8PLzLvFmCIC+PbULndiQeHh7ee3h52T5P+LbBd1Tcytut8PDw8N7Cyw/lfSicfHP14OHh4R3lzcLiPMieRbmz7//yFg8PD+8Cb3PGzpabF8naRMbhKwQPDw8vyHNuSlNnWwRmqYeHZAQeHh7eBV5eGGsTGbPkxbFkCh4eHt4H8E6FxcmMbYPXL3/Hw8PD+xhejswZp1q78PDw8N7Dm7U9nQKf2u6XFwMeHh7eUd5mynzMvkX1AAMPDw9vy/sHlvBpzrqArQMAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 

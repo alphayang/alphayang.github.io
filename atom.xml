@@ -4,21 +4,21 @@
   <subtitle>Enjoy Geek Dev Life</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://alphayang.github.io/"/>
+  <link href="https://yangbo.tech/"/>
   <updated>2017-01-05T11:01:37.000Z</updated>
-  <id>http://alphayang.github.io/</id>
+  <id>https://yangbo.tech/</id>
   
   <author>
-    <name>Alpha Yang</name>
-    <email>imstnad@gmail.com</email>
+    <name>Yang Bo</name>
+    <email>me@yangbo.tech</email>
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
     <title>Tang+Daydream，刀剑合璧的Android VR开发</title>
-    <link href="http://alphayang.github.io/2017/01/03/2017-01-03-tango-with-daydream-is-coming/"/>
-    <id>http://alphayang.github.io/2017/01/03/2017-01-03-tango-with-daydream-is-coming/</id>
+    <link href="https://yangbo.tech/2017/01/03/2017-01-03-tango-with-daydream-is-coming/"/>
+    <id>https://yangbo.tech/2017/01/03/2017-01-03-tango-with-daydream-is-coming/</id>
     <published>2017-01-03T06:48:00.000Z</published>
     <updated>2017-01-05T11:01:37.000Z</updated>
     
@@ -212,24 +212,24 @@
     </summary>
     
     
-      <category term="Andorid Studio" scheme="http://alphayang.github.io/tags/Andorid-Studio/"/>
+      <category term="Andorid Studio" scheme="https://yangbo.tech/tags/Andorid-Studio/"/>
     
-      <category term="Gradle" scheme="http://alphayang.github.io/tags/Gradle/"/>
+      <category term="Gradle" scheme="https://yangbo.tech/tags/Gradle/"/>
     
-      <category term="Andorid" scheme="http://alphayang.github.io/tags/Andorid/"/>
+      <category term="Andorid" scheme="https://yangbo.tech/tags/Andorid/"/>
     
-      <category term="Tango" scheme="http://alphayang.github.io/tags/Tango/"/>
+      <category term="Tango" scheme="https://yangbo.tech/tags/Tango/"/>
     
-      <category term="Daydream" scheme="http://alphayang.github.io/tags/Daydream/"/>
+      <category term="Daydream" scheme="https://yangbo.tech/tags/Daydream/"/>
     
-      <category term="VR" scheme="http://alphayang.github.io/tags/VR/"/>
+      <category term="VR" scheme="https://yangbo.tech/tags/VR/"/>
     
   </entry>
   
   <entry>
     <title>Android Things-物联网开发</title>
-    <link href="http://alphayang.github.io/2016/12/24/android-things-for-iot-era/"/>
-    <id>http://alphayang.github.io/2016/12/24/android-things-for-iot-era/</id>
+    <link href="https://yangbo.tech/2016/12/24/android-things-for-iot-era/"/>
+    <id>https://yangbo.tech/2016/12/24/android-things-for-iot-era/</id>
     <published>2016-12-24T00:50:09.000Z</published>
     <updated>2017-01-06T13:29:41.000Z</updated>
     
@@ -287,7 +287,7 @@
                     <img src="/img/android-things/14825448372155.jpg" alt="" title="">
                 </div>
                 </figure></p>
-<p>它的愿景就是将无数的的设备连接起来，Android Things作为物联网的大脑，使用公开协议<a href="https://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/">Weave</a>与广大的传感器/外部设备进行对话。<br>不像Android其它系统，Android Things大多数情况下只在后台以服务方式运行，没有显示屏，默默的与打印机、门锁、烤箱、灯泡、插座这些设备一起提供服务。</p>
+<p>它的愿景就是将无数的的设备连接起来，Android Things作为物联网的大脑，使用公开协议<a href="https://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/" target="_blank" rel="external">Weave</a>与广大的传感器/外部设备进行对话。<br>不像Android其它系统，Android Things大多数情况下只在后台以服务方式运行，没有显示屏，默默的与打印机、门锁、烤箱、灯泡、插座这些设备一起提供服务。</p>
 <h1 id="Android-Things全解析"><a href="#Android-Things全解析" class="headerlink" title="Android Things全解析"></a>Android Things全解析</h1><p>##　Android Things架构</p>
 <p>先看Brillo和Android Things的架构图进行对比。<br>这是Brillo，<br><figure class="image-bubble">
                 <div class="img-lightbox">
@@ -428,16 +428,16 @@
     </summary>
     
     
-      <category term="Android" scheme="http://alphayang.github.io/tags/Android/"/>
+      <category term="Android" scheme="https://yangbo.tech/tags/Android/"/>
     
-      <category term="IOT" scheme="http://alphayang.github.io/tags/IOT/"/>
+      <category term="IOT" scheme="https://yangbo.tech/tags/IOT/"/>
     
   </entry>
   
   <entry>
     <title>利器系列-Web网络模拟工具，测试应用在低速不稳定网络中的表现</title>
-    <link href="http://alphayang.github.io/2016/08/21/test-low-speed-load-for-web/"/>
-    <id>http://alphayang.github.io/2016/08/21/test-low-speed-load-for-web/</id>
+    <link href="https://yangbo.tech/2016/08/21/test-low-speed-load-for-web/"/>
+    <id>https://yangbo.tech/2016/08/21/test-low-speed-load-for-web/</id>
     <published>2016-08-21T07:28:26.000Z</published>
     <updated>2016-08-21T08:54:25.000Z</updated>
     
@@ -533,20 +533,20 @@
     </summary>
     
     
-      <category term="Dev" scheme="http://alphayang.github.io/tags/Dev/"/>
+      <category term="Dev" scheme="https://yangbo.tech/tags/Dev/"/>
     
-      <category term="Web" scheme="http://alphayang.github.io/tags/Web/"/>
+      <category term="Web" scheme="https://yangbo.tech/tags/Web/"/>
     
-      <category term="Test" scheme="http://alphayang.github.io/tags/Test/"/>
+      <category term="Test" scheme="https://yangbo.tech/tags/Test/"/>
     
-      <category term="Tool" scheme="http://alphayang.github.io/tags/Tool/"/>
+      <category term="Tool" scheme="https://yangbo.tech/tags/Tool/"/>
     
   </entry>
   
   <entry>
     <title>1分钟搭建自定义域名的本地HTTPS开发服务器</title>
-    <link href="http://alphayang.github.io/2016/08/19/local-https-server-with-custom-domain-in-1-minute/"/>
-    <id>http://alphayang.github.io/2016/08/19/local-https-server-with-custom-domain-in-1-minute/</id>
+    <link href="https://yangbo.tech/2016/08/19/local-https-server-with-custom-domain-in-1-minute/"/>
+    <id>https://yangbo.tech/2016/08/19/local-https-server-with-custom-domain-in-1-minute/</id>
     <published>2016-08-19T09:32:30.000Z</published>
     <updated>2016-08-19T10:19:30.000Z</updated>
     
@@ -631,16 +631,16 @@
     </summary>
     
     
-      <category term="Dev" scheme="http://alphayang.github.io/tags/Dev/"/>
+      <category term="Dev" scheme="https://yangbo.tech/tags/Dev/"/>
     
-      <category term="OS X" scheme="http://alphayang.github.io/tags/OS-X/"/>
+      <category term="OS X" scheme="https://yangbo.tech/tags/OS-X/"/>
     
   </entry>
   
   <entry>
     <title>禁止Android File Transfer自动启动</title>
-    <link href="http://alphayang.github.io/2016/08/16/disable-android-file-transfer-auto-start/"/>
-    <id>http://alphayang.github.io/2016/08/16/disable-android-file-transfer-auto-start/</id>
+    <link href="https://yangbo.tech/2016/08/16/disable-android-file-transfer-auto-start/"/>
+    <id>https://yangbo.tech/2016/08/16/disable-android-file-transfer-auto-start/</id>
     <published>2016-08-16T11:18:08.000Z</published>
     <updated>2016-08-16T11:36:47.000Z</updated>
     
@@ -655,19 +655,19 @@
     
     </summary>
     
-      <category term="develop" scheme="http://alphayang.github.io/categories/develop/"/>
+      <category term="develop" scheme="https://yangbo.tech/categories/develop/"/>
     
     
-      <category term="Android" scheme="http://alphayang.github.io/tags/Android/"/>
+      <category term="Android" scheme="https://yangbo.tech/tags/Android/"/>
     
-      <category term="OSX" scheme="http://alphayang.github.io/tags/OSX/"/>
+      <category term="OSX" scheme="https://yangbo.tech/tags/OSX/"/>
     
   </entry>
   
   <entry>
     <title>Google IO 2016 地图开发技术回顾 - 一场地理数据开发创新博览会</title>
-    <link href="http://alphayang.github.io/2016/05/31/io-16-geo-redux/"/>
-    <id>http://alphayang.github.io/2016/05/31/io-16-geo-redux/</id>
+    <link href="https://yangbo.tech/2016/05/31/io-16-geo-redux/"/>
+    <id>https://yangbo.tech/2016/05/31/io-16-geo-redux/</id>
     <published>2016-05-31T11:30:35.000Z</published>
     <updated>2016-06-02T06:04:44.000Z</updated>
     
@@ -757,23 +757,23 @@
     
     </summary>
     
-      <category term="develop" scheme="http://alphayang.github.io/categories/develop/"/>
+      <category term="develop" scheme="https://yangbo.tech/categories/develop/"/>
     
     
-      <category term="Maps API" scheme="http://alphayang.github.io/tags/Maps-API/"/>
+      <category term="Maps API" scheme="https://yangbo.tech/tags/Maps-API/"/>
     
-      <category term="Cloud" scheme="http://alphayang.github.io/tags/Cloud/"/>
+      <category term="Cloud" scheme="https://yangbo.tech/tags/Cloud/"/>
     
-      <category term="Big Data" scheme="http://alphayang.github.io/tags/Big-Data/"/>
+      <category term="Big Data" scheme="https://yangbo.tech/tags/Big-Data/"/>
     
-      <category term="AI" scheme="http://alphayang.github.io/tags/AI/"/>
+      <category term="AI" scheme="https://yangbo.tech/tags/AI/"/>
     
   </entry>
   
   <entry>
     <title>client-security-from-google</title>
-    <link href="http://alphayang.github.io/2016/05/29/client-security-from-google/"/>
-    <id>http://alphayang.github.io/2016/05/29/client-security-from-google/</id>
+    <link href="https://yangbo.tech/2016/05/29/client-security-from-google/"/>
+    <id>https://yangbo.tech/2016/05/29/client-security-from-google/</id>
     <published>2016-05-29T09:32:30.000Z</published>
     <updated>2016-05-29T09:32:30.000Z</updated>
     
@@ -810,8 +810,8 @@
   
   <entry>
     <title>Android Studio 2.0</title>
-    <link href="http://alphayang.github.io/2015/11/28/android-studio-20/"/>
-    <id>http://alphayang.github.io/2015/11/28/android-studio-20/</id>
+    <link href="https://yangbo.tech/2015/11/28/android-studio-20/"/>
+    <id>https://yangbo.tech/2015/11/28/android-studio-20/</id>
     <published>2015-11-28T11:45:34.000Z</published>
     <updated>2015-11-29T07:49:00.000Z</updated>
     
@@ -947,18 +947,18 @@
     </summary>
     
     
-      <category term="Android" scheme="http://alphayang.github.io/tags/Android/"/>
+      <category term="Android" scheme="https://yangbo.tech/tags/Android/"/>
     
   </entry>
   
   <entry>
     <title>Android开发，不可不知的so文件知识大全</title>
-    <link href="http://alphayang.github.io/2015/11/27/so-files-guide/"/>
-    <id>http://alphayang.github.io/2015/11/27/so-files-guide/</id>
+    <link href="https://yangbo.tech/2015/11/27/so-files-guide/"/>
+    <id>https://yangbo.tech/2015/11/27/so-files-guide/</id>
     <published>2015-11-27T12:30:35.000Z</published>
     <updated>2015-11-27T14:36:44.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="引论"><a href="#引论" class="headerlink" title="引论"></a>引论</h1><p>如果你是做Android系统开发，对于so文件应该不会默认；如果是做应用开发，可能更了解jar或<a href="http://alphayang.github.io/2015/10/17/all-about-aar/">aar</a>文件，但你也会不经意的在开发中或是要用到的第三库/SDK中看到so的身影，那你应该往下看，全面了解Android应用在运行时的另一个重要文件类型so。</p>
+    <content type="html"><![CDATA[<h1 id="引论"><a href="#引论" class="headerlink" title="引论"></a>引论</h1><p>如果你是做Android系统开发，对于so文件应该不会默认；如果是做应用开发，可能更了解jar或<a href="http://alphayang.github.io/2015/10/17/all-about-aar/" target="_blank" rel="external">aar</a>文件，但你也会不经意的在开发中或是要用到的第三库/SDK中看到so的身影，那你应该往下看，全面了解Android应用在运行时的另一个重要文件类型so。</p>
 <h1 id="什么是so文件"><a href="#什么是so文件" class="headerlink" title="什么是so文件"></a>什么是so文件</h1><p>so是shared object的缩写，见名思义就是共享的对象，机器可以直接运行的二进制代码。大到操作系统，小到一个专用软件，都离不开so。参见<a href="https://en.wikipedia.org/wiki/Library_(computing" target="_blank" rel="external">https://en.wikipedia.org/wiki/Library_(computing</a>)<br>so主要存在于Unix和Linux系统中。</p>
 <h2 id="so-vs-a"><a href="#so-vs-a" class="headerlink" title=".so vs .a"></a>.so vs .a</h2><h3 id="a-archive"><a href="#a-archive" class="headerlink" title=".a:archive"></a>.a:archive</h3><p>存档的含义，是unix系统中对于静态库的文件后缀，在软件打包时和主程序表态链接在一起，表现形式是在链接成同一个文件。<a href="https://www.golang.org" target="_blank" rel="external">go lang</a>即广泛采用这一形式，对于软件分发只有一个文件。对于打包好的软件来讲，这是专属库，所有都在出厂前打包在一起了，好处是不受外界影响，坏处是任何改动要全部分发。对于安装应用的系统来讲，当然是共享的越多越好，既省内存又省硬盘。</p>
 <h3 id="so-shared-object"><a href="#so-shared-object" class="headerlink" title=".so:shared object"></a>.so:shared object</h3><p>共享库，用过Windows的同学应该都或多或少碰到过找不到DLL或DLL错误之类的问题，其中最为著名的问题就是DLL Hell（某个著名的库，软件a使用1.0，新装的软件b使用1.0.1，导致软件a运行异常），DLL即Dynamic Link Library的缩写，和shared object表示同样的事物，只是名字不同而已。运行时按需加载，不论是系统提供的共享库还是自带的共享库，最大化利用软件分治的原理，修Bug也是更新所在so文件，不需全部更新。</p>
@@ -995,7 +995,7 @@ Youtube:<figure class="image-bubble">
 <p>或者使用jniLibs.srcDir属性指定：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    <span class="built_in">source</span>Sets &#123;</div><div class="line">        main &#123;</div><div class="line">            jni.srcDirs = [] //<span class="built_in">disable</span> automatic ndk-build call</div><div class="line">            jniLibs.srcDir <span class="string">'main/libs'</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <ul>
 <li>eclipse中直接放到libs/ABI目录。</li>
-<li>在<a href="http://alphayang.github.io/2015/10/17/all-about-aar/">aar</a>文件中，so处于jni/ABI目录中，对于库开发者和应用开发者都不必关注，全部自动处理。</li>
+<li>在<a href="http://alphayang.github.io/2015/10/17/all-about-aar/" target="_blank" rel="external">aar</a>文件中，so处于jni/ABI目录中，对于库开发者和应用开发者都不必关注，全部自动处理。</li>
 <li>在生成的APK中，所有so文件对应于lib/ABI中。</li>
 <li>当APK安装到Android系统中时，so文件位置:<br><strong>Android&lt;5.0，/data/data/PACKAGE_NAME/lib</strong><br><strong>Android&gt;=5.0，/data/app/PACKAGE_NAME/lib/CPU_ARCH/和/data/data/PACKAGE_NAME/lib</strong></li>
 </ul>
@@ -1037,23 +1037,23 @@ Youtube:<figure class="image-bubble">
     
     </summary>
     
-      <category term="develope" scheme="http://alphayang.github.io/categories/develope/"/>
+      <category term="develope" scheme="https://yangbo.tech/categories/develope/"/>
     
-      <category term="android" scheme="http://alphayang.github.io/categories/develope/android/"/>
+      <category term="android" scheme="https://yangbo.tech/categories/develope/android/"/>
     
     
-      <category term="Andorid Studio" scheme="http://alphayang.github.io/tags/Andorid-Studio/"/>
+      <category term="Andorid Studio" scheme="https://yangbo.tech/tags/Andorid-Studio/"/>
     
-      <category term="Gradle" scheme="http://alphayang.github.io/tags/Gradle/"/>
+      <category term="Gradle" scheme="https://yangbo.tech/tags/Gradle/"/>
     
-      <category term="Andorid" scheme="http://alphayang.github.io/tags/Andorid/"/>
+      <category term="Andorid" scheme="https://yangbo.tech/tags/Andorid/"/>
     
   </entry>
   
   <entry>
     <title>Hack Andorid，使设备变身专用信息显示屏</title>
-    <link href="http://alphayang.github.io/2015/11/25/hack-android-for-display-only/"/>
-    <id>http://alphayang.github.io/2015/11/25/hack-android-for-display-only/</id>
+    <link href="https://yangbo.tech/2015/11/25/hack-android-for-display-only/"/>
+    <id>https://yangbo.tech/2015/11/25/hack-android-for-display-only/</id>
     <published>2015-11-25T11:30:35.000Z</published>
     <updated>2015-11-27T14:14:16.000Z</updated>
     
@@ -1114,17 +1114,17 @@ Youtube:<figure class="image-bubble">
     
     </summary>
     
-      <category term="develop" scheme="http://alphayang.github.io/categories/develop/"/>
+      <category term="develop" scheme="https://yangbo.tech/categories/develop/"/>
     
     
-      <category term="Android" scheme="http://alphayang.github.io/tags/Android/"/>
+      <category term="Android" scheme="https://yangbo.tech/tags/Android/"/>
     
   </entry>
   
   <entry>
     <title>利用 Street View API 制作街景小动画</title>
-    <link href="http://alphayang.github.io/2015/11/15/gif-movie-by-street-view-api/"/>
-    <id>http://alphayang.github.io/2015/11/15/gif-movie-by-street-view-api/</id>
+    <link href="https://yangbo.tech/2015/11/15/gif-movie-by-street-view-api/"/>
+    <id>https://yangbo.tech/2015/11/15/gif-movie-by-street-view-api/</id>
     <published>2015-11-15T11:30:35.000Z</published>
     <updated>2015-11-15T12:16:50.000Z</updated>
     
@@ -1148,14 +1148,14 @@ Youtube:<figure class="image-bubble">
     </summary>
     
     
-      <category term="Google Maps api" scheme="http://alphayang.github.io/tags/Google-Maps-api/"/>
+      <category term="Google Maps api" scheme="https://yangbo.tech/tags/Google-Maps-api/"/>
     
   </entry>
   
   <entry>
     <title>向Google学习，打造安全的服务</title>
-    <link href="http://alphayang.github.io/2015/11/14/service-side-security-from-google/"/>
-    <id>http://alphayang.github.io/2015/11/14/service-side-security-from-google/</id>
+    <link href="https://yangbo.tech/2015/11/14/service-side-security-from-google/"/>
+    <id>https://yangbo.tech/2015/11/14/service-side-security-from-google/</id>
     <published>2015-11-14T02:39:21.000Z</published>
     <updated>2015-11-15T10:34:39.000Z</updated>
     
@@ -1229,16 +1229,16 @@ Youtube:<figure class="image-bubble">
     </summary>
     
     
-      <category term="security" scheme="http://alphayang.github.io/tags/security/"/>
+      <category term="security" scheme="https://yangbo.tech/tags/security/"/>
     
-      <category term="cloud" scheme="http://alphayang.github.io/tags/cloud/"/>
+      <category term="cloud" scheme="https://yangbo.tech/tags/cloud/"/>
     
   </entry>
   
   <entry>
     <title>Android 应用开发模拟器的选用</title>
-    <link href="http://alphayang.github.io/2015/11/05/android-dev-emulator/"/>
-    <id>http://alphayang.github.io/2015/11/05/android-dev-emulator/</id>
+    <link href="https://yangbo.tech/2015/11/05/android-dev-emulator/"/>
+    <id>https://yangbo.tech/2015/11/05/android-dev-emulator/</id>
     <published>2015-11-05T03:33:28.000Z</published>
     <updated>2015-11-05T04:49:01.000Z</updated>
     
@@ -1296,14 +1296,14 @@ Youtube:<figure class="image-bubble">
     </summary>
     
     
-      <category term="Android" scheme="http://alphayang.github.io/tags/Android/"/>
+      <category term="Android" scheme="https://yangbo.tech/tags/Android/"/>
     
   </entry>
   
   <entry>
     <title>Android开发中处理 SVG 和 Material Design 相关的有小工具和链接</title>
-    <link href="http://alphayang.github.io/2015/10/31/useful-tools-and-links-for-svg-and-material-design/"/>
-    <id>http://alphayang.github.io/2015/10/31/useful-tools-and-links-for-svg-and-material-design/</id>
+    <link href="https://yangbo.tech/2015/10/31/useful-tools-and-links-for-svg-and-material-design/"/>
+    <id>https://yangbo.tech/2015/10/31/useful-tools-and-links-for-svg-and-material-design/</id>
     <published>2015-10-31T02:39:21.000Z</published>
     <updated>2015-10-31T03:30:17.000Z</updated>
     
@@ -1329,17 +1329,17 @@ Youtube:<figure class="image-bubble">
     
     </summary>
     
-      <category term="Android" scheme="http://alphayang.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://yangbo.tech/categories/Android/"/>
     
     
-      <category term="Android" scheme="http://alphayang.github.io/tags/Android/"/>
+      <category term="Android" scheme="https://yangbo.tech/tags/Android/"/>
     
   </entry>
   
   <entry>
     <title>关于 Brillo 和 Weave， 开发者应该知道的</title>
-    <link href="http://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/"/>
-    <id>http://alphayang.github.io/2015/10/30/all-about-brillo-and-weave/</id>
+    <link href="https://yangbo.tech/2015/10/30/all-about-brillo-and-weave/"/>
+    <id>https://yangbo.tech/2015/10/30/all-about-brillo-and-weave/</id>
     <published>2015-10-30T11:17:07.000Z</published>
     <updated>2015-10-31T02:48:49.000Z</updated>
     
@@ -1384,17 +1384,17 @@ Youtube:<figure class="image-bubble">
     
     </summary>
     
-      <category term="Android" scheme="http://alphayang.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://yangbo.tech/categories/Android/"/>
     
     
-      <category term="Android" scheme="http://alphayang.github.io/tags/Android/"/>
+      <category term="Android" scheme="https://yangbo.tech/tags/Android/"/>
     
   </entry>
   
   <entry>
     <title>国内 Android SDK 更新不用科学上网了</title>
-    <link href="http://alphayang.github.io/2015/10/29/android-sdk-ok/"/>
-    <id>http://alphayang.github.io/2015/10/29/android-sdk-ok/</id>
+    <link href="https://yangbo.tech/2015/10/29/android-sdk-ok/"/>
+    <id>https://yangbo.tech/2015/10/29/android-sdk-ok/</id>
     <published>2015-10-29T10:45:51.000Z</published>
     <updated>2015-10-29T11:03:08.000Z</updated>
     
@@ -1429,17 +1429,17 @@ Youtube:<figure class="image-bubble">
     
     </summary>
     
-      <category term="Android" scheme="http://alphayang.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://yangbo.tech/categories/Android/"/>
     
     
-      <category term="Android" scheme="http://alphayang.github.io/tags/Android/"/>
+      <category term="Android" scheme="https://yangbo.tech/tags/Android/"/>
     
   </entry>
   
   <entry>
     <title>15分钟，使用BigQuery和Google Sheets对Hacker News历史数据进行在线分析</title>
-    <link href="http://alphayang.github.io/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/"/>
-    <id>http://alphayang.github.io/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/</id>
+    <link href="https://yangbo.tech/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/"/>
+    <id>https://yangbo.tech/2015/10/25/using-bigquery-with-gas-on-hacker-news-dateset/</id>
     <published>2015-10-25T07:53:07.000Z</published>
     <updated>2016-12-31T02:30:04.000Z</updated>
     
@@ -1555,16 +1555,16 @@ Youtube:<figure class="image-bubble">
     </summary>
     
     
-      <category term="cloud" scheme="http://alphayang.github.io/tags/cloud/"/>
+      <category term="cloud" scheme="https://yangbo.tech/tags/cloud/"/>
     
-      <category term="big data" scheme="http://alphayang.github.io/tags/big-data/"/>
+      <category term="big data" scheme="https://yangbo.tech/tags/big-data/"/>
     
   </entry>
   
   <entry>
     <title>利用Google Maps API预测未来</title>
-    <link href="http://alphayang.github.io/2015/10/24/predict-future-travel-time/"/>
-    <id>http://alphayang.github.io/2015/10/24/predict-future-travel-time/</id>
+    <link href="https://yangbo.tech/2015/10/24/predict-future-travel-time/"/>
+    <id>https://yangbo.tech/2015/10/24/predict-future-travel-time/</id>
     <published>2015-10-24T08:43:47.000Z</published>
     <updated>2015-11-13T08:09:50.000Z</updated>
     
@@ -1630,17 +1630,17 @@ Youtube:<figure class="image-bubble">
     
     </summary>
     
-      <category term="google maps api" scheme="http://alphayang.github.io/categories/google-maps-api/"/>
+      <category term="google maps api" scheme="https://yangbo.tech/categories/google-maps-api/"/>
     
     
-      <category term="google maps api" scheme="http://alphayang.github.io/tags/google-maps-api/"/>
+      <category term="google maps api" scheme="https://yangbo.tech/tags/google-maps-api/"/>
     
   </entry>
   
   <entry>
     <title>找回Mac OSX El Captian默认隐藏的Dashboard</title>
-    <link href="http://alphayang.github.io/2015/10/20/re-enable-osx-el-captian-dashboard/"/>
-    <id>http://alphayang.github.io/2015/10/20/re-enable-osx-el-captian-dashboard/</id>
+    <link href="https://yangbo.tech/2015/10/20/re-enable-osx-el-captian-dashboard/"/>
+    <id>https://yangbo.tech/2015/10/20/re-enable-osx-el-captian-dashboard/</id>
     <published>2015-10-20T12:43:47.000Z</published>
     <updated>2015-10-20T12:53:24.000Z</updated>
     
@@ -1678,21 +1678,21 @@ Youtube:<figure class="image-bubble">
     
     </summary>
     
-      <category term="osx" scheme="http://alphayang.github.io/categories/osx/"/>
+      <category term="osx" scheme="https://yangbo.tech/categories/osx/"/>
     
     
-      <category term="osx" scheme="http://alphayang.github.io/tags/osx/"/>
+      <category term="osx" scheme="https://yangbo.tech/tags/osx/"/>
     
   </entry>
   
   <entry>
     <title>在Android Studio中发布Library到jCenter公共仓库</title>
-    <link href="http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/"/>
-    <id>http://alphayang.github.io/2015/10/19/distribute-android-library-to-jcetner/</id>
+    <link href="https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/"/>
+    <id>https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/</id>
     <published>2015-10-19T14:03:01.000Z</published>
     <updated>2015-10-19T14:03:40.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="引论"><a href="#引论" class="headerlink" title="引论"></a>引论</h1><p>在<a href="http://alphayang.github.io/2015/10/17/all-about-aar/">Android开发，关于aar你应该知道的</a>一文中掌握了如何引用本地的aar，更多情况下我们是直接从网络上获取公开的第三方库来进行开发，而这个网络位置就是<a href="https://bintray.com/bintray/jcenter" target="_blank" rel="external">jCenter</a>，在gradle中使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">        jcenter()</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+    <content type="html"><![CDATA[<h1 id="引论"><a href="#引论" class="headerlink" title="引论"></a>引论</h1><p>在<a href="http://alphayang.github.io/2015/10/17/all-about-aar/" target="_blank" rel="external">Android开发，关于aar你应该知道的</a>一文中掌握了如何引用本地的aar，更多情况下我们是直接从网络上获取公开的第三方库来进行开发，而这个网络位置就是<a href="https://bintray.com/bintray/jcenter" target="_blank" rel="external">jCenter</a>，在gradle中使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">        jcenter()</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
 <p>jCenter是Bintray提供的公开下载服务，使用自身开发的artifactory开源应用搭建，后绪会介绍如何使用artifactory来搭建团队内部的私有仓库。</p>
 <h1 id="什么是jCenter"><a href="#什么是jCenter" class="headerlink" title="什么是jCenter"></a>什么是jCenter</h1><p>artifactory其实就是带有版本管理的文件服务器，基本功能和FTP服务相同，公开服务是jCenter，还提供托管的私有仓库，同github一样，提供企业收费服务，更多的功能，更快的下载速度。</p>
 <p>开发者先将Library提交到自己的私有库，再同步到公共jCenter库，其它开发就可以简单的来添加依赖了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">compile <span class="string">'com.squareup.retrofit:retrofit:1.9.0'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -1810,25 +1810,25 @@ Youtube:<figure class="image-bubble">
     
     <summary type="html">
     
-      &lt;h1 id=&quot;引论&quot;&gt;&lt;a href=&quot;#引论&quot; class=&quot;headerlink&quot; title=&quot;引论&quot;&gt;&lt;/a&gt;引论&lt;/h1&gt;&lt;p&gt;在&lt;a href=&quot;http://alphayang.github.io/2015/10/17/all-about-aar/&quot;&gt;Androi
+      &lt;h1 id=&quot;引论&quot;&gt;&lt;a href=&quot;#引论&quot; class=&quot;headerlink&quot; title=&quot;引论&quot;&gt;&lt;/a&gt;引论&lt;/h1&gt;&lt;p&gt;在&lt;a href=&quot;http://alphayang.github.io/2015/10/17/all-about-aar/&quot; target
     
     </summary>
     
-      <category term="develop" scheme="http://alphayang.github.io/categories/develop/"/>
+      <category term="develop" scheme="https://yangbo.tech/categories/develop/"/>
     
     
-      <category term="Andorid Studio" scheme="http://alphayang.github.io/tags/Andorid-Studio/"/>
+      <category term="Andorid Studio" scheme="https://yangbo.tech/tags/Andorid-Studio/"/>
     
-      <category term="Gradle" scheme="http://alphayang.github.io/tags/Gradle/"/>
+      <category term="Gradle" scheme="https://yangbo.tech/tags/Gradle/"/>
     
-      <category term="Andorid" scheme="http://alphayang.github.io/tags/Andorid/"/>
+      <category term="Andorid" scheme="https://yangbo.tech/tags/Andorid/"/>
     
   </entry>
   
   <entry>
     <title>如何在Android Studio Project中集中管理Android Support Library依赖</title>
-    <link href="http://alphayang.github.io/2015/10/18/support-library-group-in-gradle/"/>
-    <id>http://alphayang.github.io/2015/10/18/support-library-group-in-gradle/</id>
+    <link href="https://yangbo.tech/2015/10/18/support-library-group-in-gradle/"/>
+    <id>https://yangbo.tech/2015/10/18/support-library-group-in-gradle/</id>
     <published>2015-10-18T13:33:52.000Z</published>
     <updated>2015-10-18T13:53:28.000Z</updated>
     
@@ -1846,21 +1846,21 @@ Youtube:<figure class="image-bubble">
     
     </summary>
     
-      <category term="develop" scheme="http://alphayang.github.io/categories/develop/"/>
+      <category term="develop" scheme="https://yangbo.tech/categories/develop/"/>
     
     
-      <category term="Andorid Studio" scheme="http://alphayang.github.io/tags/Andorid-Studio/"/>
+      <category term="Andorid Studio" scheme="https://yangbo.tech/tags/Andorid-Studio/"/>
     
-      <category term="Gradle" scheme="http://alphayang.github.io/tags/Gradle/"/>
+      <category term="Gradle" scheme="https://yangbo.tech/tags/Gradle/"/>
     
-      <category term="Andorid" scheme="http://alphayang.github.io/tags/Andorid/"/>
+      <category term="Andorid" scheme="https://yangbo.tech/tags/Andorid/"/>
     
   </entry>
   
   <entry>
     <title>Android开发，关于aar你应该知道的</title>
-    <link href="http://alphayang.github.io/2015/10/17/all-about-aar/"/>
-    <id>http://alphayang.github.io/2015/10/17/all-about-aar/</id>
+    <link href="https://yangbo.tech/2015/10/17/all-about-aar/"/>
+    <id>https://yangbo.tech/2015/10/17/all-about-aar/</id>
     <published>2015-10-17T11:45:17.000Z</published>
     <updated>2017-01-06T13:31:37.000Z</updated>
     
@@ -1927,21 +1927,21 @@ Youtube:<figure class="image-bubble">
     
     </summary>
     
-      <category term="develop" scheme="http://alphayang.github.io/categories/develop/"/>
+      <category term="develop" scheme="https://yangbo.tech/categories/develop/"/>
     
     
-      <category term="Andorid Studio" scheme="http://alphayang.github.io/tags/Andorid-Studio/"/>
+      <category term="Andorid Studio" scheme="https://yangbo.tech/tags/Andorid-Studio/"/>
     
-      <category term="Gradle" scheme="http://alphayang.github.io/tags/Gradle/"/>
+      <category term="Gradle" scheme="https://yangbo.tech/tags/Gradle/"/>
     
-      <category term="Andorid" scheme="http://alphayang.github.io/tags/Andorid/"/>
+      <category term="Andorid" scheme="https://yangbo.tech/tags/Andorid/"/>
     
   </entry>
   
   <entry>
     <title>加速Android Studio中的Gradle Build</title>
-    <link href="http://alphayang.github.io/2015/10/16/speed-up-android-studio-build/"/>
-    <id>http://alphayang.github.io/2015/10/16/speed-up-android-studio-build/</id>
+    <link href="https://yangbo.tech/2015/10/16/speed-up-android-studio-build/"/>
+    <id>https://yangbo.tech/2015/10/16/speed-up-android-studio-build/</id>
     <published>2015-10-16T06:45:17.000Z</published>
     <updated>2016-05-29T09:29:54.000Z</updated>
     
@@ -1986,17 +1986,17 @@ Youtube:<figure class="image-bubble">
     
     </summary>
     
-      <category term="develop" scheme="http://alphayang.github.io/categories/develop/"/>
+      <category term="develop" scheme="https://yangbo.tech/categories/develop/"/>
     
     
-      <category term="gradle" scheme="http://alphayang.github.io/tags/gradle/"/>
+      <category term="gradle" scheme="https://yangbo.tech/tags/gradle/"/>
     
   </entry>
   
   <entry>
     <title>Android Studio中Gradle依赖树查看</title>
-    <link href="http://alphayang.github.io/2015/10/15/gradle-dependence-tree/"/>
-    <id>http://alphayang.github.io/2015/10/15/gradle-dependence-tree/</id>
+    <link href="https://yangbo.tech/2015/10/15/gradle-dependence-tree/"/>
+    <id>https://yangbo.tech/2015/10/15/gradle-dependence-tree/</id>
     <published>2015-10-15T02:24:23.000Z</published>
     <updated>2015-10-16T14:37:12.000Z</updated>
     
@@ -2035,14 +2035,14 @@ Youtube:<figure class="image-bubble">
     </summary>
     
     
-      <category term="gradle" scheme="http://alphayang.github.io/tags/gradle/"/>
+      <category term="gradle" scheme="https://yangbo.tech/tags/gradle/"/>
     
   </entry>
   
   <entry>
     <title>Java，ruby，python包管理使用国内镜像</title>
-    <link href="http://alphayang.github.io/2015/10/14/package-manage-for-china/"/>
-    <id>http://alphayang.github.io/2015/10/14/package-manage-for-china/</id>
+    <link href="https://yangbo.tech/2015/10/14/package-manage-for-china/"/>
+    <id>https://yangbo.tech/2015/10/14/package-manage-for-china/</id>
     <published>2015-10-14T02:24:23.000Z</published>
     <updated>2015-10-31T02:26:03.000Z</updated>
     
@@ -2069,10 +2069,10 @@ Youtube:<figure class="image-bubble">
     
     </summary>
     
-      <category term="general" scheme="http://alphayang.github.io/categories/general/"/>
+      <category term="general" scheme="https://yangbo.tech/categories/general/"/>
     
     
-      <category term="tools" scheme="http://alphayang.github.io/tags/tools/"/>
+      <category term="tools" scheme="https://yangbo.tech/tags/tools/"/>
     
   </entry>
   

@@ -35,23 +35,23 @@ ga('send', 'pageview');
 什么是so文件so是shared object的缩写，见名思义就是共享的对象，机器可以直接运行的二进制代码。大到操作系统，小到一个专用软件，都">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android开发，不可不知的so文件知识大全">
-<meta property="og:url" content="http://alphayang.github.io/2015/11/27/so-files-guide/index.html">
+<meta property="og:url" content="https://yangbo.tech/2015/11/27/so-files-guide/index.html">
 <meta property="og:site_name" content="Geek Dev">
 <meta property="og:description" content="引论如果你是做Android系统开发，对于so文件应该不会默认；如果是做应用开发，可能更了解jar或aar文件，但你也会不经意的在开发中或是要用到的第三库/SDK中看到so的身影，那你应该往下看，全面了解Android应用在运行时的另一个重要文件类型so。
 什么是so文件so是shared object的缩写，见名思义就是共享的对象，机器可以直接运行的二进制代码。大到操作系统，小到一个专用软件，都">
-<meta property="og:image" content="http://alphayang.github.io/img/so_in_wechat.png">
-<meta property="og:image" content="http://alphayang.github.io/img/so_in_drive.png">
-<meta property="og:image" content="http://alphayang.github.io/img/so_in_youtube.png">
-<meta property="og:image" content="http://alphayang.github.io/img/gmaps_apk_size_info.png">
-<meta property="og:image" content="http://alphayang.github.io/img/multi_abi_apks.png">
-<meta property="og:image" content="http://alphayang.github.io/img/upload_apks_adv_mode.png">
-<meta property="og:image" content="http://alphayang.github.io/img/we_are_just_begining.png">
+<meta property="og:image" content="https://yangbo.tech/img/so_in_wechat.png">
+<meta property="og:image" content="https://yangbo.tech/img/so_in_drive.png">
+<meta property="og:image" content="https://yangbo.tech/img/so_in_youtube.png">
+<meta property="og:image" content="https://yangbo.tech/img/gmaps_apk_size_info.png">
+<meta property="og:image" content="https://yangbo.tech/img/multi_abi_apks.png">
+<meta property="og:image" content="https://yangbo.tech/img/upload_apks_adv_mode.png">
+<meta property="og:image" content="https://yangbo.tech/img/we_are_just_begining.png">
 <meta property="og:updated_time" content="2015-11-27T14:36:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android开发，不可不知的so文件知识大全">
 <meta name="twitter:description" content="引论如果你是做Android系统开发，对于so文件应该不会默认；如果是做应用开发，可能更了解jar或aar文件，但你也会不经意的在开发中或是要用到的第三库/SDK中看到so的身影，那你应该往下看，全面了解Android应用在运行时的另一个重要文件类型so。
 什么是so文件so是shared object的缩写，见名思义就是共享的对象，机器可以直接运行的二进制代码。大到操作系统，小到一个专用软件，都">
-<meta name="twitter:image" content="http://alphayang.github.io/img/so_in_wechat.png">
+<meta name="twitter:image" content="https://yangbo.tech/img/so_in_wechat.png">
     
         <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
     
@@ -74,7 +74,7 @@ ga('send', 'pageview');
           <img src="/img/profile.jpg">
         </a>
         <hgroup class="introduce">
-          <h5 class="nickname">Alpha Yang</h5>
+          <h5 class="nickname">Yang Bo</h5>
           <a href="mailto:imstand@gmail.com" title="imstand@gmail.com" class="mail">imstand@gmail.com</a>
         </hgroup>
       </div>
@@ -197,7 +197,7 @@ ga('send', 'pageview');
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="引论"><a href="#引论" class="headerlink" title="引论"></a>引论</h1><p>如果你是做Android系统开发，对于so文件应该不会默认；如果是做应用开发，可能更了解jar或<a href="http://alphayang.github.io/2015/10/17/all-about-aar/">aar</a>文件，但你也会不经意的在开发中或是要用到的第三库/SDK中看到so的身影，那你应该往下看，全面了解Android应用在运行时的另一个重要文件类型so。</p>
+            <h1 id="引论"><a href="#引论" class="headerlink" title="引论"></a>引论</h1><p>如果你是做Android系统开发，对于so文件应该不会默认；如果是做应用开发，可能更了解jar或<a href="http://alphayang.github.io/2015/10/17/all-about-aar/" target="_blank" rel="external">aar</a>文件，但你也会不经意的在开发中或是要用到的第三库/SDK中看到so的身影，那你应该往下看，全面了解Android应用在运行时的另一个重要文件类型so。</p>
 <h1 id="什么是so文件"><a href="#什么是so文件" class="headerlink" title="什么是so文件"></a>什么是so文件</h1><p>so是shared object的缩写，见名思义就是共享的对象，机器可以直接运行的二进制代码。大到操作系统，小到一个专用软件，都离不开so。参见<a href="https://en.wikipedia.org/wiki/Library_(computing" target="_blank" rel="external">https://en.wikipedia.org/wiki/Library_(computing</a>)<br>so主要存在于Unix和Linux系统中。</p>
 <h2 id="so-vs-a"><a href="#so-vs-a" class="headerlink" title=".so vs .a"></a>.so vs .a</h2><h3 id="a-archive"><a href="#a-archive" class="headerlink" title=".a:archive"></a>.a:archive</h3><p>存档的含义，是unix系统中对于静态库的文件后缀，在软件打包时和主程序表态链接在一起，表现形式是在链接成同一个文件。<a href="https://www.golang.org" target="_blank" rel="external">go lang</a>即广泛采用这一形式，对于软件分发只有一个文件。对于打包好的软件来讲，这是专属库，所有都在出厂前打包在一起了，好处是不受外界影响，坏处是任何改动要全部分发。对于安装应用的系统来讲，当然是共享的越多越好，既省内存又省硬盘。</p>
 <h3 id="so-shared-object"><a href="#so-shared-object" class="headerlink" title=".so:shared object"></a>.so:shared object</h3><p>共享库，用过Windows的同学应该都或多或少碰到过找不到DLL或DLL错误之类的问题，其中最为著名的问题就是DLL Hell（某个著名的库，软件a使用1.0，新装的软件b使用1.0.1，导致软件a运行异常），DLL即Dynamic Link Library的缩写，和shared object表示同样的事物，只是名字不同而已。运行时按需加载，不论是系统提供的共享库还是自带的共享库，最大化利用软件分治的原理，修Bug也是更新所在so文件，不需全部更新。</p>
@@ -234,7 +234,7 @@ Youtube:<figure class="image-bubble">
 <p>或者使用jniLibs.srcDir属性指定：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    <span class="built_in">source</span>Sets &#123;</div><div class="line">        main &#123;</div><div class="line">            jni.srcDirs = [] //<span class="built_in">disable</span> automatic ndk-build call</div><div class="line">            jniLibs.srcDir <span class="string">'main/libs'</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <ul>
 <li>eclipse中直接放到libs/ABI目录。</li>
-<li>在<a href="http://alphayang.github.io/2015/10/17/all-about-aar/">aar</a>文件中，so处于jni/ABI目录中，对于库开发者和应用开发者都不必关注，全部自动处理。</li>
+<li>在<a href="http://alphayang.github.io/2015/10/17/all-about-aar/" target="_blank" rel="external">aar</a>文件中，so处于jni/ABI目录中，对于库开发者和应用开发者都不必关注，全部自动处理。</li>
 <li>在生成的APK中，所有so文件对应于lib/ABI中。</li>
 <li>当APK安装到Android系统中时，so文件位置:<br><strong>Android&lt;5.0，/data/data/PACKAGE_NAME/lib</strong><br><strong>Android&gt;=5.0，/data/app/PACKAGE_NAME/lib/CPU_ARCH/和/data/data/PACKAGE_NAME/lib</strong></li>
 </ul>
@@ -279,12 +279,12 @@ Youtube:<figure class="image-bubble">
 </span><br>
 
 
-        这里写留言或版权声明：<a href="/2015/11/27/so-files-guide/" target="_blank" rel="external">http://alphayang.github.io/2015/11/27/so-files-guide/</a>
+        链接：<a href="/2015/11/27/so-files-guide/" target="_blank" rel="external">https://yangbo.tech/2015/11/27/so-files-guide/</a>
     </div>
     <footer>
-        <a href="http://alphayang.github.io">
-            <img src="/img/profile.jpg" alt="Alpha Yang">
-            Alpha Yang
+        <a href="https://yangbo.tech">
+            <img src="/img/profile.jpg" alt="Yang Bo">
+            Yang Bo
         </a>
     </footer>
 </blockquote>
@@ -308,7 +308,7 @@ Youtube:<figure class="image-bubble">
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/11/27/so-files-guide/&title=《Android开发，不可不知的so文件知识大全》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://yangbo.tech/2015/11/27/so-files-guide/&title=《Android开发，不可不知的so文件知识大全》 — Geek Dev&pic=https://yangbo.tech/img/profile.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -318,22 +318,22 @@ Youtube:<figure class="image-bubble">
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/11/27/so-files-guide/&title=《Android开发，不可不知的so文件知识大全》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://yangbo.tech/2015/11/27/so-files-guide/&title=《Android开发，不可不知的so文件知识大全》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/11/27/so-files-guide/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://yangbo.tech/2015/11/27/so-files-guide/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android开发，不可不知的so文件知识大全》 — Geek Dev&url=http://alphayang.github.io/2015/11/27/so-files-guide/&via=http://alphayang.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android开发，不可不知的so文件知识大全》 — Geek Dev&url=https://yangbo.tech/2015/11/27/so-files-guide/&via=https://yangbo.tech" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/11/27/so-files-guide/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://yangbo.tech/2015/11/27/so-files-guide/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -378,7 +378,7 @@ Youtube:<figure class="image-bubble">
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="so-files-guide" data-title="Android开发，不可不知的so文件知识大全" data-url="http://alphayang.github.io/2015/11/27/so-files-guide/"></div>
+    <div class="ds-thread" data-thread-key="so-files-guide" data-title="Android开发，不可不知的so文件知识大全" data-url="https://yangbo.tech/2015/11/27/so-files-guide/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -401,7 +401,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.3');
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <h3 class="reward-title">
         <i class="icon icon-quote-left"></i>
-        谢谢大爷~
+        多谢鼓励~
         <i class="icon icon-quote-right"></i>
     </h3>
     <ul class="reward-items">
@@ -451,7 +451,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.3');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alphayang.github.io/2015/11/27/so-files-guide/&title=《Android开发，不可不知的so文件知识大全》 — Geek Dev&pic=http://alphayang.github.io/img/profile.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://yangbo.tech/2015/11/27/so-files-guide/&title=《Android开发，不可不知的so文件知识大全》 — Geek Dev&pic=https://yangbo.tech/img/profile.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -461,22 +461,22 @@ lazyScripts.push('/js/embed.min.js?v=1.4.3');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alphayang.github.io/2015/11/27/so-files-guide/&title=《Android开发，不可不知的so文件知识大全》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://yangbo.tech/2015/11/27/so-files-guide/&title=《Android开发，不可不知的so文件知识大全》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alphayang.github.io/2015/11/27/so-files-guide/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://yangbo.tech/2015/11/27/so-files-guide/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android开发，不可不知的so文件知识大全》 — Geek Dev&url=http://alphayang.github.io/2015/11/27/so-files-guide/&via=http://alphayang.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android开发，不可不知的so文件知识大全》 — Geek Dev&url=https://yangbo.tech/2015/11/27/so-files-guide/&via=https://yangbo.tech" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alphayang.github.io/2015/11/27/so-files-guide/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://yangbo.tech/2015/11/27/so-files-guide/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -487,7 +487,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.3');
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3a204DMQxF0f7/Tw+vIJh0H3uKFGfnqZqWNAsk40teL7yuX4s///7kbue7n3p4yZAhY1vGtVzr4xJMf4f12WTIkHEOg4RCHojTQ6zx67PJkCFDRvqapHrrFFCGDBkynmWk+/DwLUOGDBm1IpYcjix+9I/U4jJkyNiQwbvu///6I/MNGTJkbMW4wsXb/XwkUDvJj91kyJAxmsEDHDkob7HV2nBvPilDhoyhjFpji3xZeqB0tPDAJEGGDBlbMfrFJB8tdJK/W54MGTIOY9QwvGTtjz//eFeGDBkHMHhi17nm1R9t3v6aZMiQMZpBKsHaNYuUR56gVFWGDBmjGbzd3yl6CZgf/fZdGTJkjGak1yPSgNtJN1sDAxkyZIxg8KYbb9/XhqZpAipDhozZjLThxUMnD9m1sjn4/yBDhozNGby5nw4P0iDLE1CUGsqQIWMQg48SyRF5idu/hIFmpDJkyBjESI+YlpqdyxkIJkOGjNGMzrgxvQyRhub0MzJkyJjNIA21zlCz1ryLS2IZMmQcxiheG+1ckgCjhTfJqwwZMo5kpOGvk1CmAwkZMmScw7jClQ4YeMOOX4e9/TvIkCFjKKOT8NWuU6SFay3FlCFDxjwGCZdpG64YEMM9ZciQcRrj2fhNStYaG9XiMmTIkFEKzWlCGV9TkyFDhoxGTcz3abXzZMiQcQCDhFEysExHlen44YF2mwwZMjZkpKUjb/d3Llh0hhAyZMgYxPgCWtBLqcnn4hoAAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACL0lEQVR42u3aQW7DMAwF0dz/0u62QWB1+OkUEDVeBYkj63lBkCJfL3xdH9fv79f3f965/ny35gOXDBkytmVcy2vNICuTFQjsjz3IkCHjAAbZBN/QGrx+ETygy5AhQ0aW2FXTSp5EypAhQ0YW+EjhSlI9UvrKkCFDBnnA3RJZqlc9gHusFpchQ8aGjOzg7H8+f6W/IUOGjK0YV/Gqpo8k+ct28raODBkyRjOeKlB5uOyvcPs6ZMiQMZTBF+0XnNmzUNksQ4aMAxgkESQJYjby1TnyQxmuDBkyNmeQ1iBfKHwkD6zZ6aAMGTI2Z/BUjP+Lh+9qeYzGLGTIkDGOwbuBnUZjtTzmYV2GDBmnMcitvKlZLYk7xbMMGTLOYWQDYXwIg7CzNFSGDBmzGVlA5L9mW18fvd1Oi8iQIWM0I9tK9iKyY77WzIgMGTI2Z/AithM6qwd5rQanDBkyRjM6RSxvHnyj8SBDhozZjGeHt/pBuRri347bZMiQMZRRPWLLgnV17LVT7sqQIWMqgxeWWRmZjWiUdyhDhoxjGLxCzL7P/osSRxkyZBzDqDYRqyG43xhAua0MGTIGMa7iRQD9cY0yVYYMGaMZ2cFZ1hjICuNsBESGDBnzGDzIVpO8LHSGDQkZMmQcwOCBki/NW5jVNWXIkCGDMKrBNNtuYfhDhgwZMvBoF7mHF66FtoQMGTIOYFSbAaQQrYba6rCFDBkyzmFUS8dsOOOpNLHV1JQhQ8Z+jB+zACy69nMFxgAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 
