@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yangbo.tech/"/>
-  <updated>2017-01-10T08:08:31.000Z</updated>
+  <updated>2017-01-15T12:59:19.000Z</updated>
   <id>https://yangbo.tech/</id>
   
   <author>
@@ -14,6 +14,221 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用Service worker实现加速/离线访问静态blog网站</title>
+    <link href="https://yangbo.tech/2017/01/15/2017-01-15-speedy-and-offline-site-by-service-worker/"/>
+    <id>https://yangbo.tech/2017/01/15/2017-01-15-speedy-and-offline-site-by-service-worker/</id>
+    <published>2017-01-15T12:59:00.000Z</published>
+    <updated>2017-01-15T12:59:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>现在很流行基于Github page和markdown的静态blog，非常适合技术的思维和习惯，针对不同的语言都有一些优秀的静态blog系统出现，如Jekyll/Ruby，Pelican/Python，Hexo/NodeJs，由于静态内容的特性非常适合做缓存来加速页面的访问，就利用<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>来实现加速，结果是除了PageSpeed，CDN这些常见的服务器和网络加速之外，通过客户端实现了更好的访问体验。</p>
+<h1 id="加速-离线访问只需三步"><a href="#加速-离线访问只需三步" class="headerlink" title="加速/离线访问只需三步"></a>加速/离线访问只需三步</h1><ul>
+<li>首页添加注册代码</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line"><span class="keyword">if</span> (<span class="string">'serviceWorker'</span> <span class="keyword">in</span> navigator) &#123;</div><div class="line"> navigator.serviceWorker.register(<span class="string">'/sw.js'</span>);</div><div class="line">&#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>复制代码</li>
+</ul>
+<p>将<a href="https://alphayang.github.io/sw.js" target="_blank" rel="external">https://alphayang.github.io/sw.js</a>保存到你的网站根目录下</p>
+<ul>
+<li>修改不缓存域名列表及离线状态页面</li>
+</ul>
+<p>在你的sw.js中修改<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> ignoreFetch = [</div><div class="line">  <span class="regexp">/https?:\/\/cdn.bootcss.com\//</span>,</div><div class="line">  /https?:\/\/<span class="keyword">static</span>.duoshuo.com\<span class="comment">//,</span></div><div class="line">  /https?:\/\/www.google-analytics.com\<span class="comment">//,</span></div><div class="line">  /https?:\/\/dn-lbstatics.qbox.me\<span class="comment">//,</span></div><div class="line">];</div></pre></td></tr></table></figure></p>
+<p>打开<code>Chrome Dev Tools-&gt;Source</code>，看看自己的blog都引用了哪些第三方资源，逐个加到忽略列表里。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/07/587046e64384a.png" alt="speedy-and-offline-site-by-service-worker/20170107093949130.png" title="">
+                </div>
+                </figure>
+<p>在根目录下添加offline.html，在没有网络且缓存中也没有时使用，效果如下：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/07/58704ddf03f18.png" alt="speedy-and-offline-site-by-service-worker/20170107100934328.png" title="">
+                </div>
+                </figure></p>
+<p>在根目录下添加offline.svg，在无网络时图片资源请求返回该文件。</p>
+<h1 id="加速效果"><a href="#加速效果" class="headerlink" title="加速效果"></a>加速效果</h1><p>首页加速后，网络请求从16降为1，加载时间从2.296s降为0.654s，得到了瞬间加载的结果。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/07/5870f7d71e8c6.png" alt="speedy-and-offline-site-by-service-worker/20170107221445109.png" title="">
+                </div>
+                </figure></p>
+<p>基于<a href="https://www.webpagetest.org" target="_blank" rel="external">webpagetest</a></p>
+<p>查看<a href="https://www.webpagetest.org/result/170107_CX_J7J/" target="_blank" rel="external">测试结果</a></p>
+<h1 id="加速-离线原理探索"><a href="#加速-离线原理探索" class="headerlink" title="加速/离线原理探索"></a>加速/离线原理探索</h1><h2 id="什么是-Service-worker"><a href="#什么是-Service-worker" class="headerlink" title="什么是 Service  worker"></a>什么是 Service  worker</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/05/586ddafe8e0c5.png" alt="speedy-and-offline-site-by-service-worker/20170105133456161.png" title="">
+                </div>
+                </figure>
+<p>如上图，<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a> 是一种由Javascript编写的浏览器端代理脚本，位于你的浏览器和服务器之间。当一个页面注册了一个 <a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>，它就可以注册一系列事件处理器来响应如网络请求和消息推送这些事件。<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a> 可以被用来管理缓存，当响应一个网络请求时可以配置为返回缓存还是从网络获取。由于<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a> <strong>是基于事件的，所以它只在处理这些事件的时候被调入内存，不用担心常驻内存占用资源导致系统变慢。</strong></p>
+<h3 id="Service-worker生命周期"><a href="#Service-worker生命周期" class="headerlink" title="Service worker生命周期"></a>Service worker生命周期</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/05/586de05e383cf.png" alt="speedy-and-offline-site-by-service-worker/20170105135752765.png" title="">
+                </div>
+                </figure>
+<p><a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a> 为网页添加一个类似于<strong>APP</strong>的生命周期，它只会响应<strong>系统</strong>事件，就算浏览器关闭时<strong>操作系统</strong>也可以唤醒<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>，这点非常<strong>重要</strong>，让web app与native app的能力变得类似了。</p>
+<p><a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>在Register时会触发Install事件，在Install时可以用来预先获取和缓存应用所需的资源并设置每个文件的缓存策略。</p>
+<p>一旦<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>处于activated状态，就可以完全控制应用的资源，对网络请求进行检查，修改网络请求，从网络上获取并返回内容或是返回由已安装的<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>预告获取并缓存好的资源，甚至还可以生成内容并返回给网络语法。</p>
+<p>所有的这些都用户都是透明的，事实上，一个设计优秀的<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>就像一个智能缓存系统，加强了网络和缓存功能，选择最优方式来响应网络请求，让应用更加稳定的运行，就算没有网络也没关系，因为你可以完全控制网络响应。</p>
+<h2 id="Service-worker的控制从第二次页面访问开始"><a href="#Service-worker的控制从第二次页面访问开始" class="headerlink" title="Service worker的控制从第二次页面访问开始"></a>Service worker的控制从第二次页面访问开始</h2><p>在首次加载页面时，所有资源都是从网络载的，<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a> 在首次加载时不会获取控制网络响应，它只会在后续访问页面时起作用。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/05/586de77f9297c.png" alt="speedy-and-offline-site-by-service-worker/20170105142817967.png" title="">
+                </div>
+                </figure><br>页面首次加载时完成install，并进入idle状态。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/05/586de7c4a0b34.png" alt="speedy-and-offline-site-by-service-worker/2017010514292700.png" title="">
+                </div>
+                </figure>
+<p>页面第二次加载时，进入activated状态，准备处理所有的事件，<strong>同时</strong> 浏览器会向服务器发送一个<strong>异步</strong> 请求来检查<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>本身是否有新的版本，构成了<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>的更新机制。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/05/586de951c6b2c.png" alt="speedy-and-offline-site-by-service-worker/20170105143604211.png" title="">
+                </div>
+                </figure><br>当<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>处理完所有的事件后，进入idle状态，最终进入terminated状态资源被释放，当有新的事件发生时再度被调用。</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>浏览器</li>
+</ul>
+<p>Google Chrome，Firefox，Opera以及国内的各种双核浏览器都支持，但是 safari 不支持，那么在不支持的浏览器里<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>不工作。</p>
+<ul>
+<li>https</li>
+</ul>
+<p>网站必须启用https来保证使用<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>页面的安全性，开发时localhost默认认为是安全的。</p>
+<ul>
+<li>non-block</li>
+</ul>
+<p><a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a> 中的 Javascript 代码必须是非阻塞的，因为 localStorage 是阻塞性，所以不应该在 Service Worker 代码中使用 localStorage。</p>
+<ul>
+<li>单独的执行环境</li>
+</ul>
+<p><a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>运行在自己的全局环境中，通常也运行在自己单独的线程中。</p>
+<ul>
+<li>没有绑定到特定页面</li>
+</ul>
+<p><em>service work</em>能控制它所加载的整个范围内的资源。</p>
+<ul>
+<li>不能操作DOM</li>
+</ul>
+<p>跟DOM所处的环境是相互隔离的。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/07/58701d73034db.png" alt="speedy-and-offline-site-by-service-worker/20170107064257269.png" title="">
+                </div>
+                </figure></p>
+<ul>
+<li>没有浏览页面时也可以运行</li>
+</ul>
+<p>接收系统事件，后台运行</p>
+<ul>
+<li>事件驱动，需要时运行，不需要时就终止</li>
+</ul>
+<p>按需执行，只在需要时加载到内存</p>
+<ul>
+<li>可升级</li>
+</ul>
+<p>执行时会异步获取最新的版本</p>
+<h2 id="实现加速-离线"><a href="#实现加速-离线" class="headerlink" title="实现加速/离线"></a>实现加速/离线</h2><h3 id="Cache"><a href="#Cache" class="headerlink" title="Cache"></a>Cache</h3><p>网页缓存有很多，如HTTP缓存，localStorage，sessionStorage和cacheStorage都可以灵活搭配进行缓存，但操作太繁琐，直接使用更高级<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a> –本文的主人公。</p>
+<h3 id="添加Service-worker入口"><a href="#添加Service-worker入口" class="headerlink" title="添加Service worker入口"></a>添加Service worker入口</h3><p>在web app的首页添加以下代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line"><span class="keyword">if</span> (<span class="string">'serviceWorker'</span> <span class="keyword">in</span> navigator) &#123;</div><div class="line"> navigator.serviceWorker.register(<span class="string">'/sw.js'</span>);</div><div class="line">&#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure></p>
+<p>如果浏览器支持<kbd>serviceWorker</kbd>就注册它，不支持还是正常浏览，没有<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>所提供的增强功能。</p>
+<p><kbd>Service worker控制范围：</kbd><br>简单情况下，将<code>sw.js</code>放在网站的根目录下，这样<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>可以控制网站所有的页面，，同理，如果把<code>sw.js</code>放在<code>/my-app/sw.js</code>那么它只能控制<code>my-app</code>目录下的页面。<br>把<code>sw.js</code>放在<code>/js/</code>目录呢？更好的目录结构和范围控制呢？<br>在注册时指定js位置并设置范围。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">navigator.serviceWorker.register(<span class="string">'/js/sw.js'</span>, &#123;<span class="attr">scope</span>: <span class="string">'/sw-test/'</span>&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">registration</span>) </span>&#123;</div><div class="line">      <span class="comment">// Registration was successful</span></div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'ServiceWorker registration successful with scope: '</span>, registration.scope);</div><div class="line">    &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</div><div class="line">      <span class="comment">// registration failed :(</span></div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'ServiceWorker registration failed: '</span>, err);</div><div class="line">    &#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="Service-worker实现"><a href="#Service-worker实现" class="headerlink" title="Service worker实现"></a>Service worker实现</h3><p>监听三个事件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">self.addEventListener(<span class="string">'install'</span>, onInstall);</div><div class="line"></div><div class="line">self.addEventListener(<span class="string">'fetch'</span>, onFetch);</div><div class="line"></div><div class="line">self.addEventListener(<span class="string">"activate"</span>, onActivate);</div></pre></td></tr></table></figure></p>
+<h4 id="install"><a href="#install" class="headerlink" title="install"></a>install</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//////////</span></div><div class="line"><span class="comment">// Install</span></div><div class="line"><span class="comment">//////////</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">onInstall</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">  log(<span class="string">'install event in progress.'</span>);</div><div class="line"></div><div class="line">  event.waitUntil(updateStaticCache());</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateStaticCache</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> caches</div><div class="line">    .open(cacheKey(<span class="string">'offline'</span>))</div><div class="line">    .then(<span class="function">(<span class="params">cache</span>) =&gt;</span> &#123;</div><div class="line">      <span class="keyword">return</span> cache.addAll(offlineResources);</div><div class="line">    &#125;)</div><div class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      log(<span class="string">'installation complete!'</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>install时将所有符合缓存策略的资源进行缓存。</p>
+<h4 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">////////</span></div><div class="line"><span class="comment">// Fetch</span></div><div class="line"><span class="comment">////////</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">onFetch</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> request = event.request;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (shouldAlwaysFetch(request)) &#123;</div><div class="line">    event.respondWith(networkedOrOffline(request));</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (shouldFetchAndCache(request)) &#123;</div><div class="line">    event.respondWith(networkedOrCached(request));</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  event.respondWith(cachedOrNetworked(request));</div><div class="line">&#125;</div><div class="line">onFetch做为浏览器网络请求的代理，根据需要返回网络或缓存内容，如果获取了网络内容，返回网络请求时同时进行缓存操作。</div></pre></td></tr></table></figure>
+<h4 id="activate"><a href="#activate" class="headerlink" title="activate"></a>activate</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">///////////</span></div><div class="line"><span class="comment">// Activate</span></div><div class="line"><span class="comment">///////////</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">onActivate</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">  log(<span class="string">'activate event in progress.'</span>);</div><div class="line">  event.waitUntil(removeOldCache());</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeOldCache</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> caches</div><div class="line">    .keys()</div><div class="line">    .then(<span class="function">(<span class="params">keys</span>) =&gt;</span> &#123;</div><div class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.all( <span class="comment">// We return a promise that settles when all outdated caches are deleted.</span></div><div class="line">        keys</div><div class="line">         .filter(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</div><div class="line">           <span class="keyword">return</span> !key.startsWith(version); <span class="comment">// Filter by keys that don't start with the latest version prefix.</span></div><div class="line">         &#125;)</div><div class="line">         .map(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</div><div class="line">           <span class="keyword">return</span> caches.delete(key); <span class="comment">// Return a promise that's fulfilled when each outdated cache is deleted.</span></div><div class="line">         &#125;)</div><div class="line">      );</div><div class="line">    &#125;)</div><div class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      log(<span class="string">'removeOldCache completed.'</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在activate时根据version值来删除过期的缓存。</p>
+<h2 id="管理-Service-worker"><a href="#管理-Service-worker" class="headerlink" title="管理 Service worker"></a>管理 Service worker</h2><h3 id="特定网站"><a href="#特定网站" class="headerlink" title="特定网站"></a>特定网站</h3><ol>
+<li>Google Chrome</li>
+</ol>
+<p><code>Developer Tools</code>-&gt;<code>Application</code>-&gt;<code>Service Workers</code>，<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/07/58704cdb8326b.png" alt="speedy-and-offline-site-by-service-worker/20170107100514876.png" title="">
+                </div>
+                </figure></p>
+<p>在这里还有三个非常有用的复选框：</p>
+<ul>
+<li>Offline</li>
+</ul>
+<p>模拟断网状态</p>
+<ul>
+<li><p>Update on reload<br>加载时更新</p>
+</li>
+<li><p>Bypass for network<br>总是使用网络内容</p>
+</li>
+</ul>
+<ol>
+<li>Firefox</li>
+</ol>
+<p>只有在Settings里有一个可以在HTTP环境中使用<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>的选项，适应于调试，没有单独网站下的<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>管理。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/07/587051f5ec951.png" alt="speedy-and-offline-site-by-service-worker/20170107102700440.png" title="">
+                </div>
+                </figure></p>
+<ol>
+<li>Opera及其它双核浏览器同Google  Chrome<br>如果看到多个相同范围内的多个<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>，说明<em>Service woker</em>更新后，而原有<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>还没有被terminated。</li>
+</ol>
+<h3 id="浏览器全局"><a href="#浏览器全局" class="headerlink" title="浏览器全局"></a>浏览器全局</h3><p>看看你的浏览器里都有哪些Service worker已经存在了</p>
+<ol>
+<li>Google Chrome</li>
+</ol>
+<p>在地址栏里输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chrome://serviceworker-internals/</div></pre></td></tr></table></figure></p>
+<p>可以看到已经有24个Service worker了，在这里可以手动Start让它工作，也可以Unregister卸载掉。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/06/586f9ca83b7a1.png" alt="speedy-and-offline-site-by-service-worker/20170106213323480.png" title="">
+                </div>
+                </figure></p>
+<ol>
+<li>Firefox</li>
+</ol>
+<p>有两种方式进入<a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers" target="_blank" rel="external"><em>Service worker</em></a>管理界面来手动Start或unregister。</p>
+<ul>
+<li><p>菜单栏，Tool-&gt;Web Developer-&gt;Service workers</p>
+</li>
+<li><p>地址栏中输入</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">about:debugging#workers</div></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/06/586f9d48f09a8.png" alt="speedy-and-offline-site-by-service-worker/20170106213558243.png" title="">
+                </div>
+                </figure>
+<ol>
+<li>Opera及其它双核浏览器同Google  Chrome</li>
+</ol>
+<h1 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h1><p>TODO:</p>
+<ul>
+<li><p><em>Service workers</em>的更新需要手动编辑version，每次发布新文章时需要编辑。</p>
+</li>
+<li><p>使用<a href="https://www.ampproject.org/" target="_blank" rel="external">AMP</a>让页面渲染速度达到最高。</p>
+</li>
+</ul>
+<h1 id="Ref-links"><a href="#Ref-links" class="headerlink" title="Ref links"></a>Ref links</h1><p><a href="https://serviceworke.rs/" target="_blank" rel="external">Service Worker Cookbook</a></p>
+<p><a href="https://jakearchibald.github.io/isserviceworkerready/" target="_blank" rel="external">Is service worker ready?</a></p>
+<p><a href="https://www.chromestatus.com/features" target="_blank" rel="external">Chrome service worker status page</a></p>
+<p><a href="https://platform-status.mozilla.org/#service-worker" target="_blank" rel="external">Firefox service worker status page</a></p>
+<p><a href="https://dev.windows.com/en-us/microsoft-edge/platform/status/serviceworker" target="_blank" rel="external">MS Edge service worker status page</a></p>
+<p><a href="https://webkit.org/status/#specification-service-workers" target="_blank" rel="external">WebKit service worker status page</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;现在很流行基于Github page和markdown的静态blog，非常适合技术的思维和习惯，针对不同的语言都有一些优秀的静态blog系统出现，如Jekyll/Ruby，Pelican/Python，Hexo/NodeJs，由于静态内容的特性非常适合做缓存来加速页面的访问
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Tango+Daydream，刀剑合璧的Android VR开发</title>
