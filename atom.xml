@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yangbo.tech/"/>
-  <updated>2017-01-15T12:59:19.000Z</updated>
+  <updated>2017-01-19T05:57:10.000Z</updated>
   <id>https://yangbo.tech/</id>
   
   <author>
@@ -14,6 +14,58 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在Android Studio中发布Library到jCenter本地仓库</title>
+    <link href="https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/"/>
+    <id>https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/</id>
+    <published>2017-01-19T05:53:00.000Z</published>
+    <updated>2017-01-19T05:57:10.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="引论"><a href="#引论" class="headerlink" title="引论"></a>引论</h1><p>在<a href="">在Android Studio中发布Library到jCenter公共仓库</a>中，我们知道了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">        jcenter()</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>是如何工作的，也知道了如何向全球公共仓库提交自己的Library。<br>有时我们在添加依赖时还可能添加jCenter之外的仓库，如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">        jcenter()</div><div class="line">        maven &#123; url <span class="string">"http://localhost:8081/artifactory/libs-release-local"</span> &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>在此处url是一个本地仓库，也可能是网络的某个位置。<br>就好像github是一个网上的git repo，本地开发环境也有一个完整的git repo一样，jCenter就是这样一个最大的网络repo，同时我们可以利用Bintray提供的开源应用artifactory来搭建本地或团队使用的repo。<br>下图是jFrog BinTray官方提供的artifactory架构图：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/19/588055288e190.png" alt="2017-01-19-distribute-android-library-to-local-jCenter/20170119135658729.png" title="">
+                </div>
+                </figure><br>可以看出，通过artifactory可以与非常多的开发工具进行集成，构建最优的开发流程，与内部用户权限管理整合，提供完整的应用包分发管理。还可以配置同步到jCenter，这也是BinTray设计artifactory的重要一环。</p>
+<p>还有其它的库管理应用，因为我们的开发与jCenter尝试整合，就不考虑其它的了，给出列表供参考。<br><a href="https://maven.apache.org/repository-management.html" target="_blank" rel="external">Repository Management Tools</a></p>
+<h1 id="搭建artifactory"><a href="#搭建artifactory" class="headerlink" title="搭建artifactory"></a>搭建artifactory</h1><h2 id="JDK"><a href="#JDK" class="headerlink" title="JDK"></a>JDK</h2><p>artifactory本身是一个开源的Java EE应用，确保机器上有JDK运行，推荐使用最新的JDK8，JDK7官方已不再更新，artifactory也对JDK7支持不好。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">➜  Downloads  java -version</div><div class="line">java version <span class="string">"1.8.0_60"</span></div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_60-b27)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.60-b23, mixed mode)</div></pre></td></tr></table></figure></p>
+<h2 id="artifactory"><a href="#artifactory" class="headerlink" title="artifactory"></a>artifactory</h2><p>下载<a href="http://www.jfrog.com/open-source/" target="_blank" rel="external">Artifactory</a>后解压zip包，可以直接运行，已包含Tomcat容器。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">➜  Downloads  ./artifactory-oss-4.1.3/bin/artifactory.sh</div></pre></td></tr></table></figure></p>
+<p>看到<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">###########################################################</span></div><div class="line"><span class="comment">### Artifactory successfully started (4.930 seconds)    ###</span></div><div class="line"><span class="comment">###########################################################</span></div></pre></td></tr></table></figure></p>
+<p>Done，本地的artifactory已经运行起来了，浏览器打开<a href="http://localhost:8081/artifactory/" target="_blank" rel="external">http://localhost:8081/artifactory/</a><br>默认的用户名密码是admin/password，可以进行管理，现在先不配置，继续我们的上传进程。</p>
+<h1 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h1><h2 id="配置Gradle"><a href="#配置Gradle" class="headerlink" title="配置Gradle"></a>配置Gradle</h2><p>在Project/build.gradle下添加：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">buildscript &#123;</div><div class="line">    dependencies &#123;</div><div class="line">    //添加引用位置</div><div class="line">        classpath <span class="string">"org.jfrog.buildinfo:build-info-extractor-gradle:3.1.1"</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在Library/build.gradle中添加：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">//plugin要添加到apply plugin: <span class="string">'com.android.library'</span>之后</div><div class="line">//添加上传所需的插件</div><div class="line">apply plugin: <span class="string">'com.jfrog.artifactory'</span></div><div class="line">apply plugin: <span class="string">'maven-publish'</span></div><div class="line">//定义包名和版本号</div><div class="line">def packageName = <span class="string">'com.geek.dev'</span></div><div class="line">def libraryVersion = <span class="string">'1.0.2'</span></div><div class="line"></div><div class="line">publishing &#123;</div><div class="line">    publications &#123;</div><div class="line">        aar(MavenPublication) &#123;</div><div class="line">            groupId packageName</div><div class="line">            version = libraryVersion</div><div class="line">            artifactId project.getName()</div><div class="line"></div><div class="line">            // Tell maven to prepare the generated <span class="string">"*.aar"</span> file <span class="keyword">for</span> publishing</div><div class="line">            artifact(<span class="string">"<span class="variable">$buildDir</span>/outputs/aar/<span class="variable">$&#123;project.getName()&#125;</span>-release.aar"</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">artifactory &#123;</div><div class="line">    contextUrl = <span class="string">'http://localhost:8081/artifactory'</span></div><div class="line">    publish &#123;</div><div class="line">        repository &#123;</div><div class="line">            // The Artifactory repository key to publish to</div><div class="line">            repoKey = <span class="string">'libs-release-local'</span></div><div class="line"></div><div class="line">            username = <span class="string">"admin"</span></div><div class="line">            password = <span class="string">"password"</span></div><div class="line">        &#125;</div><div class="line">        defaults &#123;</div><div class="line">            // Tell the Artifactory Plugin <span class="built_in">which</span> artifacts should be published to Artifactory.</div><div class="line">            publications(<span class="string">'aar'</span>)</div><div class="line">            publishArtifacts = <span class="literal">true</span></div><div class="line"></div><div class="line">            // Properties to be attached to the published artifacts.</div><div class="line">            properties = [<span class="string">'qa.level'</span>: <span class="string">'basic'</span>, <span class="string">'dev.team'</span>: <span class="string">'core'</span>]</div><div class="line">            // Publish generated POM files to Artifactory (<span class="literal">true</span> by default)</div><div class="line">            publishPom = <span class="literal">true</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="运行发布"><a href="#运行发布" class="headerlink" title="运行发布"></a>运行发布</h2><p>在Terminal Panel中运行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./gradle assembleRelease artifactoryPublish</div></pre></td></tr></table></figure></p>
+<p>看到发布结果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Deploying artifact: http://localhost:8081/artifactory/libs-release-local/com/geek/dev/weatherlib/1.0.2/weatherlib-1.0.2.aar</div><div class="line">Deploying artifact: http://localhost:8081/artifactory/libs-release-local/com/geek/dev/weatherlib/1.0.2/weatherlib-1.0.2.pom</div><div class="line">Deploying build descriptor to: http://localhost:8081/artifactory/api/build</div><div class="line">Build successfully deployed. Browse it <span class="keyword">in</span> Artifactory under http://localhost:8081/artifactory/webapp/builds/WeatherLibrary/1445153016002/2015-10-18T15:23:35.938+0800/</div><div class="line"></div><div class="line">BUILD SUCCESSFUL</div></pre></td></tr></table></figure></p>
+<p>到<a href="http://localhost:8081/artifactory/" target="_blank" rel="external">http://localhost:8081/artifactory/</a>里验证：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/distribute_local_artifactory_done.png" alt="distribute" title="">
+                </div>
+                </figure></p>
+<h1 id="使用本地库"><a href="#使用本地库" class="headerlink" title="使用本地库"></a>使用本地库</h1><p>在Project/build.gradle中添加本地库：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">allprojects &#123;</div><div class="line">    repositories &#123;</div><div class="line">        jcenter()</div><div class="line">        maven &#123; url <span class="string">"http://localhost:8081/artifactory/libs-release-local"</span> &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在Module/build.gradle中添加依赖，格式如上图：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">    compile fileTree(dir: <span class="string">'libs'</span>, include: [<span class="string">'*.jar'</span>])</div><div class="line">    compile <span class="string">'com.android.support:appcompat-v7:23.0.1'</span></div><div class="line">    compile(group: <span class="string">'com.geek.dev'</span>, name: <span class="string">'weatherlib'</span>, version: <span class="string">'1.0.2'</span>, ext: <span class="string">'aar'</span>)</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>通过本文的介绍，可以掌握为自己或团队搭建本地库以及让如何使用，系统跑起来了，流程走通了，再进行深入细化，artifactory权限、服务器管理等等。<br>由aar包引用到jcenter()，整个系列囊括了本地文件，网络公共库和本地库，可以将整个Android开发过程中的依赖管理理解的更加深刻，让开发过程变得越来越清晰，整个信息流向越来越透明。</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://www.jfrog.com/wp-content/uploads/2014/05/artifactory_overview_diagram.jpg" target="_blank" rel="external">https://www.jfrog.com/wp-content/uploads/2014/05/artifactory_overview_diagram.jpg</a></p>
+<p><a href="https://medium.com/@etiennelawlor/the-complete-guide-to-creating-an-android-library-46628b7fc879#.7nrzoxm1g" target="_blank" rel="external">distribute to maven centeral</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;引论&quot;&gt;&lt;a href=&quot;#引论&quot; class=&quot;headerlink&quot; title=&quot;引论&quot;&gt;&lt;/a&gt;引论&lt;/h1&gt;&lt;p&gt;在&lt;a href=&quot;&quot;&gt;在Android Studio中发布Library到jCenter公共仓库&lt;/a&gt;中，我们知道了&lt;br&gt;&lt;figur
+    
+    </summary>
+    
+    
+      <category term="Andorid" scheme="https://yangbo.tech/tags/Andorid/"/>
+    
+      <category term="Gradle" scheme="https://yangbo.tech/tags/Gradle/"/>
+    
+      <category term="Andorid Studio" scheme="https://yangbo.tech/tags/Andorid-Studio/"/>
+    
+  </entry>
   
   <entry>
     <title>使用Service worker实现加速/离线访问静态blog网站</title>
@@ -427,10 +479,6 @@
     </summary>
     
     
-      <category term="Andorid Studio" scheme="https://yangbo.tech/tags/Andorid-Studio/"/>
-    
-      <category term="Gradle" scheme="https://yangbo.tech/tags/Gradle/"/>
-    
       <category term="Andorid" scheme="https://yangbo.tech/tags/Andorid/"/>
     
       <category term="Tango" scheme="https://yangbo.tech/tags/Tango/"/>
@@ -438,6 +486,10 @@
       <category term="Daydream" scheme="https://yangbo.tech/tags/Daydream/"/>
     
       <category term="VR" scheme="https://yangbo.tech/tags/VR/"/>
+    
+      <category term="Gradle" scheme="https://yangbo.tech/tags/Gradle/"/>
+    
+      <category term="Andorid Studio" scheme="https://yangbo.tech/tags/Andorid-Studio/"/>
     
   </entry>
   
@@ -1257,11 +1309,11 @@ Youtube:<figure class="image-bubble">
       <category term="android" scheme="https://yangbo.tech/categories/develope/android/"/>
     
     
-      <category term="Andorid Studio" scheme="https://yangbo.tech/tags/Andorid-Studio/"/>
+      <category term="Andorid" scheme="https://yangbo.tech/tags/Andorid/"/>
     
       <category term="Gradle" scheme="https://yangbo.tech/tags/Gradle/"/>
     
-      <category term="Andorid" scheme="https://yangbo.tech/tags/Andorid/"/>
+      <category term="Andorid Studio" scheme="https://yangbo.tech/tags/Andorid-Studio/"/>
     
   </entry>
   
@@ -2032,11 +2084,11 @@ Youtube:<figure class="image-bubble">
       <category term="develop" scheme="https://yangbo.tech/categories/develop/"/>
     
     
-      <category term="Andorid Studio" scheme="https://yangbo.tech/tags/Andorid-Studio/"/>
+      <category term="Andorid" scheme="https://yangbo.tech/tags/Andorid/"/>
     
       <category term="Gradle" scheme="https://yangbo.tech/tags/Gradle/"/>
     
-      <category term="Andorid" scheme="https://yangbo.tech/tags/Andorid/"/>
+      <category term="Andorid Studio" scheme="https://yangbo.tech/tags/Andorid-Studio/"/>
     
   </entry>
   
@@ -2064,11 +2116,11 @@ Youtube:<figure class="image-bubble">
       <category term="develop" scheme="https://yangbo.tech/categories/develop/"/>
     
     
-      <category term="Andorid Studio" scheme="https://yangbo.tech/tags/Andorid-Studio/"/>
+      <category term="Andorid" scheme="https://yangbo.tech/tags/Andorid/"/>
     
       <category term="Gradle" scheme="https://yangbo.tech/tags/Gradle/"/>
     
-      <category term="Andorid" scheme="https://yangbo.tech/tags/Andorid/"/>
+      <category term="Andorid Studio" scheme="https://yangbo.tech/tags/Andorid-Studio/"/>
     
   </entry>
   
@@ -2145,11 +2197,11 @@ Youtube:<figure class="image-bubble">
       <category term="develop" scheme="https://yangbo.tech/categories/develop/"/>
     
     
-      <category term="Andorid Studio" scheme="https://yangbo.tech/tags/Andorid-Studio/"/>
+      <category term="Andorid" scheme="https://yangbo.tech/tags/Andorid/"/>
     
       <category term="Gradle" scheme="https://yangbo.tech/tags/Gradle/"/>
     
-      <category term="Andorid" scheme="https://yangbo.tech/tags/Andorid/"/>
+      <category term="Andorid Studio" scheme="https://yangbo.tech/tags/Andorid-Studio/"/>
     
   </entry>
   

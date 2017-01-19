@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-89567435-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="T2b7aWnJwkCSK7f74DprdaKaHYtwklpXSDkHbpN_rJ0">
+    
+    
+    
+    <title>在Android Studio中发布Library到jCenter本地仓库 | Geek Dev | Enjoy Geek Dev Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Andorid,Gradle,Andorid Studio">
+    <meta name="description" content="引论在在Android Studio中发布Library到jCenter公共仓库中，我们知道了123repositories &amp;#123;        jcenter()    &amp;#125;
+是如何工作的，也知道了如何向全球公共仓库提交自己的Library。有时我们在添加依赖时还可能添加jCenter之外的仓库，如：1234repositories &amp;#123;        jcenter()">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Android Studio中发布Library到jCenter本地仓库">
+<meta property="og:url" content="https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/index.html">
+<meta property="og:site_name" content="Geek Dev">
+<meta property="og:description" content="引论在在Android Studio中发布Library到jCenter公共仓库中，我们知道了123repositories &amp;#123;        jcenter()    &amp;#125;
+是如何工作的，也知道了如何向全球公共仓库提交自己的Library。有时我们在添加依赖时还可能添加jCenter之外的仓库，如：1234repositories &amp;#123;        jcenter()">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/01/19/588055288e190.png">
+<meta property="og:image" content="https://yangbo.tech/img/distribute_local_artifactory_done.png">
+<meta property="og:updated_time" content="2017-01-19T05:57:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在Android Studio中发布Library到jCenter本地仓库">
+<meta name="twitter:description" content="引论在在Android Studio中发布Library到jCenter公共仓库中，我们知道了123repositories &amp;#123;        jcenter()    &amp;#125;
+是如何工作的，也知道了如何向全球公共仓库提交自己的Library。有时我们在添加依赖时还可能添加jCenter之外的仓库，如：1234repositories &amp;#123;        jcenter()">
+<meta name="twitter:image" content="https://ooo.0o0.ooo/2017/01/19/588055288e190.png">
+    
+        <link rel="alternative" href="/atom.xml" title="Geek Dev" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.3">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/profile.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Yang Bo</h5>
+          <a href="mailto:me@yangbo.tech" title="me@yangbo.tech" class="mail">me@yangbo.tech</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/alphayang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://plus.google.com/u/0/+AlphaYang"  >
+                <i class="icon icon-lg icon-link"></i>
+                G+
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">在Android Studio中发布Library到jCenter本地仓库</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">在Android Studio中发布Library到jCenter本地仓库</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-01-19T05:53:00.000Z" itemprop="datePublished" class="page-time">
+  2017-01-19
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#引论"><span class="post-toc-number">1.</span> <span class="post-toc-text">引论</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#搭建artifactory"><span class="post-toc-number">2.</span> <span class="post-toc-text">搭建artifactory</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JDK"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">JDK</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#artifactory"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">artifactory</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#发布"><span class="post-toc-number">3.</span> <span class="post-toc-text">发布</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置Gradle"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">配置Gradle</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#运行发布"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">运行发布</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#使用本地库"><span class="post-toc-number">4.</span> <span class="post-toc-text">使用本地库</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">5.</span> <span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#References"><span class="post-toc-number">6.</span> <span class="post-toc-text">References</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-2017-01-19-distribute-android-library-to-local-jCenter"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">在Android Studio中发布Library到jCenter本地仓库</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年01月19日 13:53" datetime="2017-01-19T05:53:00.000Z"  itemprop="datePublished">2017-01-19</time>
+
+            
+
+
+            
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="引论"><a href="#引论" class="headerlink" title="引论"></a>引论</h1><p>在<a href="">在Android Studio中发布Library到jCenter公共仓库</a>中，我们知道了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">        jcenter()</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>是如何工作的，也知道了如何向全球公共仓库提交自己的Library。<br>有时我们在添加依赖时还可能添加jCenter之外的仓库，如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">        jcenter()</div><div class="line">        maven &#123; url <span class="string">"http://localhost:8081/artifactory/libs-release-local"</span> &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>在此处url是一个本地仓库，也可能是网络的某个位置。<br>就好像github是一个网上的git repo，本地开发环境也有一个完整的git repo一样，jCenter就是这样一个最大的网络repo，同时我们可以利用Bintray提供的开源应用artifactory来搭建本地或团队使用的repo。<br>下图是jFrog BinTray官方提供的artifactory架构图：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/01/19/588055288e190.png" alt="2017-01-19-distribute-android-library-to-local-jCenter/20170119135658729.png" title="">
+                </div>
+                </figure><br>可以看出，通过artifactory可以与非常多的开发工具进行集成，构建最优的开发流程，与内部用户权限管理整合，提供完整的应用包分发管理。还可以配置同步到jCenter，这也是BinTray设计artifactory的重要一环。</p>
+<p>还有其它的库管理应用，因为我们的开发与jCenter尝试整合，就不考虑其它的了，给出列表供参考。<br><a href="https://maven.apache.org/repository-management.html" target="_blank" rel="external">Repository Management Tools</a></p>
+<h1 id="搭建artifactory"><a href="#搭建artifactory" class="headerlink" title="搭建artifactory"></a>搭建artifactory</h1><h2 id="JDK"><a href="#JDK" class="headerlink" title="JDK"></a>JDK</h2><p>artifactory本身是一个开源的Java EE应用，确保机器上有JDK运行，推荐使用最新的JDK8，JDK7官方已不再更新，artifactory也对JDK7支持不好。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">➜  Downloads  java -version</div><div class="line">java version <span class="string">"1.8.0_60"</span></div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_60-b27)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.60-b23, mixed mode)</div></pre></td></tr></table></figure></p>
+<h2 id="artifactory"><a href="#artifactory" class="headerlink" title="artifactory"></a>artifactory</h2><p>下载<a href="http://www.jfrog.com/open-source/" target="_blank" rel="external">Artifactory</a>后解压zip包，可以直接运行，已包含Tomcat容器。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">➜  Downloads  ./artifactory-oss-4.1.3/bin/artifactory.sh</div></pre></td></tr></table></figure></p>
+<p>看到<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">###########################################################</span></div><div class="line"><span class="comment">### Artifactory successfully started (4.930 seconds)    ###</span></div><div class="line"><span class="comment">###########################################################</span></div></pre></td></tr></table></figure></p>
+<p>Done，本地的artifactory已经运行起来了，浏览器打开<a href="http://localhost:8081/artifactory/" target="_blank" rel="external">http://localhost:8081/artifactory/</a><br>默认的用户名密码是admin/password，可以进行管理，现在先不配置，继续我们的上传进程。</p>
+<h1 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h1><h2 id="配置Gradle"><a href="#配置Gradle" class="headerlink" title="配置Gradle"></a>配置Gradle</h2><p>在Project/build.gradle下添加：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">buildscript &#123;</div><div class="line">    dependencies &#123;</div><div class="line">    //添加引用位置</div><div class="line">        classpath <span class="string">"org.jfrog.buildinfo:build-info-extractor-gradle:3.1.1"</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在Library/build.gradle中添加：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">//plugin要添加到apply plugin: <span class="string">'com.android.library'</span>之后</div><div class="line">//添加上传所需的插件</div><div class="line">apply plugin: <span class="string">'com.jfrog.artifactory'</span></div><div class="line">apply plugin: <span class="string">'maven-publish'</span></div><div class="line">//定义包名和版本号</div><div class="line">def packageName = <span class="string">'com.geek.dev'</span></div><div class="line">def libraryVersion = <span class="string">'1.0.2'</span></div><div class="line"></div><div class="line">publishing &#123;</div><div class="line">    publications &#123;</div><div class="line">        aar(MavenPublication) &#123;</div><div class="line">            groupId packageName</div><div class="line">            version = libraryVersion</div><div class="line">            artifactId project.getName()</div><div class="line"></div><div class="line">            // Tell maven to prepare the generated <span class="string">"*.aar"</span> file <span class="keyword">for</span> publishing</div><div class="line">            artifact(<span class="string">"<span class="variable">$buildDir</span>/outputs/aar/<span class="variable">$&#123;project.getName()&#125;</span>-release.aar"</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">artifactory &#123;</div><div class="line">    contextUrl = <span class="string">'http://localhost:8081/artifactory'</span></div><div class="line">    publish &#123;</div><div class="line">        repository &#123;</div><div class="line">            // The Artifactory repository key to publish to</div><div class="line">            repoKey = <span class="string">'libs-release-local'</span></div><div class="line"></div><div class="line">            username = <span class="string">"admin"</span></div><div class="line">            password = <span class="string">"password"</span></div><div class="line">        &#125;</div><div class="line">        defaults &#123;</div><div class="line">            // Tell the Artifactory Plugin <span class="built_in">which</span> artifacts should be published to Artifactory.</div><div class="line">            publications(<span class="string">'aar'</span>)</div><div class="line">            publishArtifacts = <span class="literal">true</span></div><div class="line"></div><div class="line">            // Properties to be attached to the published artifacts.</div><div class="line">            properties = [<span class="string">'qa.level'</span>: <span class="string">'basic'</span>, <span class="string">'dev.team'</span>: <span class="string">'core'</span>]</div><div class="line">            // Publish generated POM files to Artifactory (<span class="literal">true</span> by default)</div><div class="line">            publishPom = <span class="literal">true</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="运行发布"><a href="#运行发布" class="headerlink" title="运行发布"></a>运行发布</h2><p>在Terminal Panel中运行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./gradle assembleRelease artifactoryPublish</div></pre></td></tr></table></figure></p>
+<p>看到发布结果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Deploying artifact: http://localhost:8081/artifactory/libs-release-local/com/geek/dev/weatherlib/1.0.2/weatherlib-1.0.2.aar</div><div class="line">Deploying artifact: http://localhost:8081/artifactory/libs-release-local/com/geek/dev/weatherlib/1.0.2/weatherlib-1.0.2.pom</div><div class="line">Deploying build descriptor to: http://localhost:8081/artifactory/api/build</div><div class="line">Build successfully deployed. Browse it <span class="keyword">in</span> Artifactory under http://localhost:8081/artifactory/webapp/builds/WeatherLibrary/1445153016002/2015-10-18T15:23:35.938+0800/</div><div class="line"></div><div class="line">BUILD SUCCESSFUL</div></pre></td></tr></table></figure></p>
+<p>到<a href="http://localhost:8081/artifactory/" target="_blank" rel="external">http://localhost:8081/artifactory/</a>里验证：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/distribute_local_artifactory_done.png" alt="distribute" title="">
+                </div>
+                </figure></p>
+<h1 id="使用本地库"><a href="#使用本地库" class="headerlink" title="使用本地库"></a>使用本地库</h1><p>在Project/build.gradle中添加本地库：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">allprojects &#123;</div><div class="line">    repositories &#123;</div><div class="line">        jcenter()</div><div class="line">        maven &#123; url <span class="string">"http://localhost:8081/artifactory/libs-release-local"</span> &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在Module/build.gradle中添加依赖，格式如上图：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">    compile fileTree(dir: <span class="string">'libs'</span>, include: [<span class="string">'*.jar'</span>])</div><div class="line">    compile <span class="string">'com.android.support:appcompat-v7:23.0.1'</span></div><div class="line">    compile(group: <span class="string">'com.geek.dev'</span>, name: <span class="string">'weatherlib'</span>, version: <span class="string">'1.0.2'</span>, ext: <span class="string">'aar'</span>)</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>通过本文的介绍，可以掌握为自己或团队搭建本地库以及让如何使用，系统跑起来了，流程走通了，再进行深入细化，artifactory权限、服务器管理等等。<br>由aar包引用到jcenter()，整个系列囊括了本地文件，网络公共库和本地库，可以将整个Android开发过程中的依赖管理理解的更加深刻，让开发过程变得越来越清晰，整个信息流向越来越透明。</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://www.jfrog.com/wp-content/uploads/2014/05/artifactory_overview_diagram.jpg" target="_blank" rel="external">https://www.jfrog.com/wp-content/uploads/2014/05/artifactory_overview_diagram.jpg</a></p>
+<p><a href="https://medium.com/@etiennelawlor/the-complete-guide-to-creating-an-android-library-46628b7fc879#.7nrzoxm1g" target="_blank" rel="external">distribute to maven centeral</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-01-19T05:57:10.000Z" itemprop="dateUpdated">2017年1月19日 13:57</time>
+</span><br>
+
+
+        链接：<a href="/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/" target="_blank" rel="external">https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/</a>
+    </div>
+    <footer>
+        <a href="https://yangbo.tech">
+            <img src="/img/profile.jpg" alt="Yang Bo">
+            Yang Bo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andorid/">Andorid</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andorid-Studio/">Andorid Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/&title=《在Android Studio中发布Library到jCenter本地仓库》 — Geek Dev&pic=https://yangbo.tech/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/&title=《在Android Studio中发布Library到jCenter本地仓库》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Android Studio中发布Library到jCenter本地仓库》 — Geek Dev&url=https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/&via=https://yangbo.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/01/15/2017-01-15-speedy-and-offline-site-by-service-worker/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">使用Service worker实现加速/离线访问静态blog网站</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="2017-01-19-distribute-android-library-to-local-jCenter" data-title="在Android Studio中发布Library到jCenter本地仓库" data-url="https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'geekdev', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.3');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        多谢鼓励~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议。转载请务必保留本页网址和作者信息，否则即为侵权。</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>Geek Dev &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/&title=《在Android Studio中发布Library到jCenter本地仓库》 — Geek Dev&pic=https://yangbo.tech/img/profile.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/&title=《在Android Studio中发布Library到jCenter本地仓库》 — Geek Dev&source=Of the Geek, By the Geek, For the Geek" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Android Studio中发布Library到jCenter本地仓库》 — Geek Dev&url=https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/&via=https://yangbo.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADNklEQVR42u3aQXKDMBAEwPz/0841h4BnVrgK5OaUSjCi5cNmd/TzE1+vP9f5b44+e/S02TPPn3/ZhY2Njf0Q9uv0Stjn4ORTyer5nef3YGNjY+/KPi8M50Uo+ezsFY9WOd+UqMhhY2NjfzF71nLMuoPPtUPY2NjY2G2ByRltmcTGxsbGzluCNkJI/poMp2Zfw2WzNGxsbOzbs/Mm4f4/fyTfxsbGxr4x+1VeK+P+pGlpj/gMFdjY2NgbsT/XZrTDpjbKvaBNwsbGxt6I3cauK0VuPXiYtU9LjQo2Njb2jdn5iyb/+ifFLCmB+Ubnln86MGxsbOyt2SuAvPglQ6VZZPvmnbGxsbE3YievmA+J2hF/vh0zajRLw8bGxn44uy0n7QKzcVKyoe3XEKUZ2NjY2A9kt8P6fHA/az/aY0MX1G1sbGzsh7PzwVBLyrcpb0KS7ajjAWxsbOwt2LPhexvHrpS0fPVo1IWNjY29ETsf3+SDm5VQth141YOk2cLY2NjYN2bPgtt86JNHxbNB1TDqwMbGxt6UHR1YLAPX/PezcdLsqBA2Njb2TuxZ0NuGBO0hnlnLkRdLbGxs7J3Y7VGYNrjNX/SqhqcYKmFjY2NvxM5JeYTQthPrQ6WipGFjY2Nvyk7aiaTs5YVn1kjkTc7hBmFjY2NvzV4ZIa0Exm2z1G5BkYpgY2NjP4qdvGJbMGbblG93Hhi8uQcbGxt7U/bsqM1snLTSVMwaoTf5NjY2NvYW7GScNGskkhFVsmIbGxy+JzY2NvYW7JWhUtIMXPWcWZk8vB8bGxt7I3Ye6Obha37Epy1dbQDw5q2wsbGxN2W3sUHbosxCgnr0n3wx2NjY2NuxZyUtXzLflJVw4oPxADY2NvYD2S2mXX4lNl4ZP2FjY2PvxF4/RtPGAG15a4dHRdCLjY2NvQW7LQBti5IfwZl9auU52NjY2DuxZ7FrOyRKgtt8CNUWMGxsbOxvYK+HsivblBSe2UDqzWgJGxsb+4vZbfnJV8m3qd1obGxsbOz2iM/shfIoIg+ksbGxsb+BPRvutIB2wJSHtR+cpWFjY2Pfnr1y/HHWNuSNykrZazcOGxsb+4HsX37U2YWElBrGAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.3"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.3" async></script>
+
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js');
+}
+</script>
+
+
+</body>
+</html>
