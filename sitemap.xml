@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/</loc>
+    <loc>https://yangbo.tech/sw.js</loc>
     
-    <lastmod>2017-01-19T05:57:10.000Z</lastmod>
+    <lastmod>2017-03-02T05:11:11.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yangbo.tech/sw.js</loc>
+    <loc>https://yangbo.tech/2017/03/02/2017-03-02-16-questions-on-autonomous-car/</loc>
     
-    <lastmod>2017-01-19T05:54:24.000Z</lastmod>
+    <lastmod>2017-03-02T05:08:15.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yangbo.tech/2017/01/19/2017-01-19-distribute-android-library-to-local-jCenter/</loc>
+    
+    <lastmod>2017-01-19T05:57:10.000Z</lastmod>
     
   </url>
   

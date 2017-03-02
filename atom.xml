@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yangbo.tech/"/>
-  <updated>2017-01-19T05:57:10.000Z</updated>
+  <updated>2017-03-02T05:08:15.000Z</updated>
   <id>https://yangbo.tech/</id>
   
   <author>
@@ -14,6 +14,241 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>自动驾驶汽车16问</title>
+    <link href="https://yangbo.tech/2017/03/02/2017-03-02-16-questions-on-autonomous-car/"/>
+    <id>https://yangbo.tech/2017/03/02/2017-03-02-16-questions-on-autonomous-car/</id>
+    <published>2017-03-02T05:08:00.000Z</published>
+    <updated>2017-03-02T05:08:15.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>构级VC机构Andreessen Horowitz的合伙人Frank Chen对自动驾驶汽车总结了16个问题，此文记录并进行技术解读。<br><a href="https://a16z.com/2017/01/06/selfdriving-cars-frank-chen/" target="_blank" rel="external">原文地址</a></p>
+<h2 id="先出观点"><a href="#先出观点" class="headerlink" title="先出观点"></a>先出观点</h2><p><strong>所有移动物体都将可以自动移动</strong>，包括但不限于小型客车，大货车，天上飞的无人机，玩具车以及购物车，直到人类对驾驶的插手成为初级、无必要、甚至非法的动作。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/25/58b14625508a5.png" alt="16-questions-on-autonomous-car/20170225165358307.png" title="">
+                </div>
+                </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/25/58b146303c0b7.png" alt="16-questions-on-autonomous-car/20170225165409923.png" title="">
+                </div>
+                </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/25/58b1463fc2ea2.png" alt="16-questions-on-autonomous-car/20170225165423481.png" title="">
+                </div>
+                </figure><br>巨大的市场机会,汽车市场2014年全球有12000亿美元销售额，远大于智能手机市场，也大于手机，电视，PC的市值总和。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/25/58b1475561c60.png" alt="16-questions-on-autonomous-car/20170225165902216.png" title="">
+                </div>
+                </figure></p>
+<h2 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h2><h3 id="Q1-自动驾驶分级"><a href="#Q1-自动驾驶分级" class="headerlink" title="Q1 自动驾驶分级"></a>Q1 自动驾驶分级</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/25/58b1491b467a5.png" alt="16-questions-on-autonomous-car/20170225170633702.png" title="">
+                </div>
+                </figure>
+<p>美国汽车工程师协会提出了自动驾驶的6个等级的分类系统：</p>
+<h4 id="Level-0：完全无自动"><a href="#Level-0：完全无自动" class="headerlink" title="Level 0：完全无自动"></a>Level 0：完全无自动</h4><p>这层很好理解，就是驾驶人需要完全手动掌控车辆。</p>
+<h4 id="Level-1：驾驶辅助"><a href="#Level-1：驾驶辅助" class="headerlink" title="Level 1：驾驶辅助"></a>Level 1：驾驶辅助</h4><p>今天的汽车基本上都处于这一级别，驾驶辅助汽车是指装有ABA防抱死刹车和定速巡航装置等的汽车，这些装置可以接管驾驶中一些非关键性的操作。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/25/58b149e7a2539.png" alt="16-questions-on-autonomous-car/20170225170958764.png" title="">
+                </div>
+                </figure></p>
+<h4 id="Level-2：部分自动化"><a href="#Level-2：部分自动化" class="headerlink" title="Level 2：部分自动化"></a>Level 2：部分自动化</h4><p>自动驾驶系统可以在特定的情形下接管控制汽车，但驾驶人需要随时监控着系统。这种情况适用于高速公路，汽车可以在高速公路上自动驾驶，驾驶人只需坐在旁边看着。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/25/58b14a121b9c2.png" alt="16-questions-on-autonomous-car/2017022517104173.png" title="">
+                </div>
+                </figure></p>
+<h4 id="Level-3：有条件自动化"><a href="#Level-3：有条件自动化" class="headerlink" title="Level 3：有条件自动化"></a>Level 3：有条件自动化</h4><p>这一等级的自动驾驶意味着驾驶人不必一直监视系统，但要处于随时能够接管操作系统的状态。也就是说，驾驶人不需要一直把手放在方向盘上，但是在系统识别到紧急情况并发出警报时，人类驾驶员需要马上接管。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/25/58b14a19e7994.png" alt="16-questions-on-autonomous-car/20170225171048856.png" title="">
+                </div>
+                </figure></p>
+<h4 id="Level-4：高度自动化"><a href="#Level-4：高度自动化" class="headerlink" title="Level 4：高度自动化"></a>Level 4：高度自动化</h4><p>当汽车能够自动停车就到达 Level 4了。这一等级的自动驾驶汽车在特定的使用情形或旅途的某一段路上，完全不需要驾驶人操作。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/25/58b14a20ee2c3.png" alt="16-questions-on-autonomous-car/20170225171055441.png" title="">
+                </div>
+                </figure></p>
+<h4 id="Level-5：完全自动化"><a href="#Level-5：完全自动化" class="headerlink" title="Level 5：完全自动化"></a>Level 5：完全自动化</h4><p>这一等级的自动驾驶汽车，系统能在整个旅程中自动处理所有的情况，完全不需要人的介入，这也意味着坐在车上的人并没有选择的余地。</p>
+<p>公司针对自己的业务发展会选择不同的发展路径，简单来说就两条：</p>
+<ul>
+<li>从Level 0到Level 5逐步发展，为汽车硬件添加智能</li>
+<li>直接到Level 5，主做软件<br>传统的汽车厂商如BMW，GM都是逐步发展，不断添加软件功能，而以Google为代表的软件互联网企业则直接高举高打，直接从Level 5入手。随着Waymo的成立，将自动驾驶汽车独立发展，一方面积累测试数据，一方面从公共领域和政府许可不断推进。</li>
+</ul>
+<h3 id="Q2-LIDAR还是其它？"><a href="#Q2-LIDAR还是其它？" class="headerlink" title="Q2 LIDAR还是其它？"></a>Q2 LIDAR还是其它？</h3><p>简单来说LIDAR（激光雷达）通过发出脉冲激光照射物体后的返回光来探测距离，即一处光学遥感技术。<br>LIDAR本身就是“light”和“radar”的合成词。<br>关于LIDAR还可以查看此YT<a href="https://youtu.be/nXlqv_k4P8Q" target="_blank" rel="external">视频</a>。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/27/58b3dbe3e8a51.png" alt="16-questions-on-autonomous-car/2017022715571036.png" title="">
+                </div>
+                </figure><br>虽然Waymo使用了LIDAR技术，但Tesla却使用了<a href="https://electrek.co/2016/10/20/tesla-new-autopilot-hardware-suite-camera-nvidia-tesla-vision/" target="_blank" rel="external">8个浏摄像头，超声波，GPS和雷达</a>来完成同样的功能。<br>目前Waymo把激光雷达的成本降至7500美元，只有原来成本的十分之一，算是一个重大利好，此处还可以配合具有<a href="/2017/01/03/2017-01-03-tango-with-daydream-is-coming/" title="[Tango]">[Tango]</a>功能的摄像头硬件来降低成本。</p>
+<h3 id="Q3-是使用预先计算好的高清地图还是实时绘制"><a href="#Q3-是使用预先计算好的高清地图还是实时绘制" class="headerlink" title="Q3 是使用预先计算好的高清地图还是实时绘制"></a>Q3 是使用预先计算好的高清地图还是实时绘制</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/27/58b3e07fd6eca.png" alt="16-questions-on-autonomous-car/20170227161700189.png" title="">
+                </div>
+                </figure>
+<p>手机上的地图应用已经成为了每个人都会用到的功能，GPS模块也是所有手机的标配，但现在我们看到的地图都是让人看的，还不足以满足自动驾驶汽车的功能，简单来讲就是地图精度还不够，虽然不论是Google Maps，Apple Maps或是国内的百度地图与高德地图都已经有了适应视网膜屏的高清图层，比如这些地图都不能告诉你什么地方有路障，什么地方该打远光灯了。<br>基于实时绘制所需的计算和能量消耗不经济，预先计算好的地图肯定是需要的，因为在不远的未来将会达到Level 5，不能选择进行手动驾驶，预先计算好的地图是基础设施，或许这也是Google和百度进行大量投资的重要考虑。</p>
+<p>另一方面，NVIDIA也是实时绘制方向进行着大量的<a href="https://blogs.nvidia.com/blog/2016/04/05/self-driving-cars-2/" target="_blank" rel="external">探索</a>。</p>
+<h3 id="Q4-软件技术"><a href="#Q4-软件技术" class="headerlink" title="Q4 软件技术"></a>Q4 软件技术</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/27/58b3e92d643cf.png" alt="16-questions-on-autonomous-car/20170227165404111.png" title="">
+                </div>
+                </figure>
+<p>深度学习，路径规划，云计算以及数据和规则这些当前最前沿的软件技术都将在自动驾驶技术中应用。</p>
+<h3 id="Q5-真实世界和虚拟世界"><a href="#Q5-真实世界和虚拟世界" class="headerlink" title="Q5 真实世界和虚拟世界"></a>Q5 真实世界和虚拟世界</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/27/58b3ea4263391.png" alt="16-questions-on-autonomous-car/20170227165838556.png" title="">
+                </div>
+                </figure>
+<p>大量的地图使用数据已经积累，可供机器学习来学习进行模拟驾驶，但问题是真实道路驾驶和模拟数据存在差异，如何缩小这种差异？</p>
+<h3 id="Q6-车联网V2X信号的作用？"><a href="#Q6-车联网V2X信号的作用？" class="headerlink" title="Q6 车联网V2X信号的作用？"></a>Q6 车联网V2X信号的作用？</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4e19945788.png" alt="16-questions-on-autonomous-car/20170228103347805.png" title="">
+                </div>
+                </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4e29f05ea4.png" alt="16-questions-on-autonomous-car/20170228103824251.png" title="">
+                </div>
+                </figure>
+<p>Vehicle to Vehicle让车和车可以沟通信息，Vehicle to X让车可以同周围的移动物体体进行信息交换，梅赛德斯2019年将使用V2X信息。</p>
+<p>V2X的使用情形包括：当周围没有其他汽车，而你的车在红绿灯前等了超过5分钟，这时自动驾驶系统就可以与红绿灯通信;又如在更危险的情况下，车辆之间需要紧急传递前方车祸之类的紧急情况。<br>近期有一则关于特斯拉的高级辅助驾驶系统避开一起车祸的视频，让V2X这项技术特别令人关注。时间在去年12月27日，车主开着特斯拉的Model X行驶在高速公路上。视频显示，车辆突然发出警报并全力刹车，在警报声响起约1秒后，前方一辆红车猛烈追尾更前方的一台黑色车辆，红车翻倒在路边，黑车严重损毁停在路上，而Model X已经在后边安全停下。车主称在警报响起的同时，自己还没反应过来车辆已经自动刹车，从而避免了事故。<br>想象一下，假如道路上的所有车辆都能够和周围环境在有需要时进行通信，可以避免多少事故。<br>这里主要的问题是协议兼容性和通信的效率，因为这样的决策往往是在毫秒内进行的，并没有时间由于通信中“语言”的不同进行额外的运算。<br>关于V2X如何运行的<a href="https://youtu.be/vU4eI3xsZA4" target="_blank" rel="external">视频</a></p>
+<h3 id="Q7-交通灯可以取消吗？"><a href="#Q7-交通灯可以取消吗？" class="headerlink" title="Q7 交通灯可以取消吗？"></a>Q7 交通灯可以取消吗？</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4e45d977e4.png" alt="16-questions-on-autonomous-car/20170228104549755.png" title="">
+                </div>
+                </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4e588978f5.png" alt="16-questions-on-autonomous-car/20170228105046799.png" title="">
+                </div>
+                </figure>
+<p>十字路口的交通信号灯十分恼人，假如汽车之间能够相互通信了，而且实现了完全自动驾驶，那么为什么不能取消交通灯呢?可能一开始会显得十分无序，不过，互联网数据包不也是以这样的方式移动的嘛?<br>这可能会造成需要为交叉路口设计智能的排列算法和严格的监控，但这完全是值得的，因为它将带来交通效率的极大提升。</p>
+<h3 id="Q8-汽车的本地化"><a href="#Q8-汽车的本地化" class="headerlink" title="Q8 汽车的本地化"></a>Q8 汽车的本地化</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4e597b2fb9.png" alt="16-questions-on-autonomous-car/20170228105100706.png" title="">
+                </div>
+                </figure>
+<p>每个城市都有不同的驾驶文化，所以自动驾驶汽车应该怎样处理各种不同的行驶路况呢?比如说，在印度班加罗尔是很安全的驾驶方式，到了美国波士顿可能会引发交通瘫痪。<br>“本地化”(localization)是一个计算机科学的术语，意思是软件以某种方式为不同的执行环境做好准备。那么用到自动驾驶领域，可以采用哪些形式进行本地化呢?有专为各个不同城市设计的不同类型的算法吗?我们会有适应各个城市的不同驾驶习惯的算法，比如波士顿版、班加罗尔版，等等?还是有一个通用的算法，只要花更多的时间熟悉路况，就能适应任何环境?<br>这就涉及到完全是另外一个领域的研究了，涉及通过观察周围的人和物的行为，创建新的学习规则。通过学习社会习俗和典型的人类行为，自动驾驶汽车应该能够表现得更好。</p>
+<p>一个很严肃的案例：一辆特斯拉Model S撞向一辆道路清扫车，导致23岁的驾车人死亡，据称就是因为为特斯拉的自动识别库中没有中国的道路清热车数据。</p>
+<p>MIT城市实验室的<a href="https://youtu.be/4CZc3erc_l4" target="_blank" rel="external">未来交通</a></p>
+<h2 id="商业"><a href="#商业" class="headerlink" title="商业"></a>商业</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4e74e523da.png" alt="16-questions-on-autonomous-car/20170228105824258.png" title="">
+                </div>
+                </figure>
+<h3 id="Q12-谁将成为赢家？"><a href="#Q12-谁将成为赢家？" class="headerlink" title="Q12 谁将成为赢家？"></a>Q12 谁将成为赢家？</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4e75e55f3c.png" alt="16-questions-on-autonomous-car/20170228105838802.png" title="">
+                </div>
+                </figure>
+<p>硅谷？中国？还是现在的大车厂？</p>
+<p>这里提出的一个主要假设是，现在的大车厂拥有最容易成功的方法，因为它们已经在造车，具有所有必要的基础设施。<br>这些汽车制造商纷纷在硅谷设立办公室，积极搜罗人才以更快地推动创新，因为他们知道自动驾驶汽车的实现主要还是软件的问题。但硅谷本地的汽车公司也有机会，例如特斯拉。中国的很多汽车制造商以及百度等技术公司也都非常积极地在推动这个领域，值得关注。</p>
+<h3 id="Q13-买车还是买出行服务？"><a href="#Q13-买车还是买出行服务？" class="headerlink" title="Q13 买车还是买出行服务？"></a>Q13 买车还是买出行服务？</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4e86246240.png" alt="16-questions-on-autonomous-car/20170228110300663.png" title="">
+                </div>
+                </figure>
+<p>出行服务 (UBER, Hailo , Lyft,滴滴，易到) 或 买车 ( Toyota, VW)。 对比航空业的空客和波音，会选择航空公司而不会关注飞机制造商.</p>
+<p>未来在大城市如London, NYC, Paris,北京/上海, 出行服务会胜出。 大多数人可以方便的使用到公共出行和个性化的私人出行服务，少数人会选择买车。</p>
+<h3 id="Q14-保险如何变化？"><a href="#Q14-保险如何变化？" class="headerlink" title="Q14 保险如何变化？"></a>Q14 保险如何变化？</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4e9f9ecd42.png" alt="16-questions-on-autonomous-car/20170228110947528.png" title="">
+                </div>
+                </figure>
+<p>车险市场将收缩。<br>自动驾驶技术将会改变的一个行业是保险业。现在车险的价格是用一个函数计算的，会考虑你的人口统计学数据，你的车的价格，以及你的居住地等等。但到了新的自动驾驶的时代，保险公司需要考虑的是哪些因素呢?算法的效率会成为核心的指标吗?会考虑汽车经理?汽车制造商?还是继续考虑购买或租赁汽车的车主?<br>以及，维修成本如何算?因为自动驾驶一定会使事故减少，可是修理汽车的激光系统、预计算地图、超级计算机分析器，以及其他的昂贵硬件，会有多复杂?</p>
+<h2 id="社会"><a href="#社会" class="headerlink" title="社会"></a>社会</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4eb56d5778.png" alt="16-questions-on-autonomous-car/2017022811153776.png" title="">
+                </div>
+                </figure>
+<h3 id="Q9-交通事故趋势"><a href="#Q9-交通事故趋势" class="headerlink" title="Q9 交通事故趋势"></a>Q9 交通事故趋势</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4eb853c397.png" alt="16-questions-on-autonomous-car/20170228111623264.png" title="">
+                </div>
+                </figure>
+<p>平常听到最多的事故原因无非是酒驾和疲劳驾驶，而自动驾驶就没有这些问题了，事故自然变少。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4ea876d84e.png" alt="16-questions-on-autonomous-car/20170228111209617.png" title="">
+                </div>
+                </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4ea8e9061f.png" alt="16-questions-on-autonomous-car/20170228111216596.png" title="">
+                </div>
+                </figure><br>假如所有汽车都变成完全自动驾驶汽车，事故率将变成0。因为大多数的交通事故都是人为原因，25起事故中24起都是人为错误引起的，比如超速、疲劳驾驶、醉驾、闯红灯，等等。</p>
+<p>但假如是自主汽车和普通汽车一半一半的混合状态会是怎样?由于仍然有一部分汽车是人操作的，可能会导致的意外事故是我们从未经历过的。</p>
+<h3 id="Q10-人为驾驶变为非法？"><a href="#Q10-人为驾驶变为非法？" class="headerlink" title="Q10 人为驾驶变为非法？"></a>Q10 人为驾驶变为非法？</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4ec3a01c6c.png" alt="16-questions-on-autonomous-car/20170228111921252.png" title="">
+                </div>
+                </figure>
+<p>假如从统计学上来说，算法真的比人类司机更好，那么就不应该让人类开车。但还是会有很多人喜欢开车，开车可能变成一个有趣的娱乐活动，但我们可不希望人类开的车行驶在路上。</p>
+<h3 id="Q14-通勤时间的变化？"><a href="#Q14-通勤时间的变化？" class="headerlink" title="Q14 通勤时间的变化？"></a>Q14 通勤时间的变化？</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4eccf8b45e.png" alt="16-questions-on-autonomous-car/20170228112153635.png" title="">
+                </div>
+                </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4ecc5cc146.png" alt="16-questions-on-autonomous-car/20170228112143898.png" title="">
+                </div>
+                </figure>
+<p>有一个观点是，通勤将变得需要更长时间，因为不管通勤需要多长时间对人们来说无关紧要了。到了所有汽车都完全自主的时候，没有交通灯，不会发生事故，在通勤路上人们可以做任何事情。</p>
+<p>甚至可以在通勤路上睡觉，就像在火车或者飞机上可以睡觉一样。通勤的过程肯定会变得更加舒适。</p>
+<p>另一方面，这也会释放更多的空间(停车场、汽车修理店)，因此人们会住到离工作地点更近的地方，通勤的距离会缩短。</p>
+<h3 id="Q15-城市的变化？"><a href="#Q15-城市的变化？" class="headerlink" title="Q15 城市的变化？"></a>Q15 城市的变化？</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4ed1195cca.png" alt="16-questions-on-autonomous-car/20170228112258968.png" title="">
+                </div>
+                </figure>
+<p>汽车价格可以预测，肯定是下降的。但自动驾驶将带来非常多的效应，但现在是不可能预测的。可以确定的是，它肯定将改变我们的社会，并创造前所未有的获利机会。</p>
+<h3 id="Q16-何时实现完全的自动驾驶？"><a href="#Q16-何时实现完全的自动驾驶？" class="headerlink" title="Q16 何时实现完全的自动驾驶？"></a>Q16 何时实现完全的自动驾驶？</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ooo.0o0.ooo/2017/02/28/58b4edf39ed09.png" alt="16-questions-on-autonomous-car/20170228112645516.png" title="">
+                </div>
+                </figure>
+<p>一些在造自动驾驶汽车的参与者预测说完全自主的汽车将出现在2020~2040年。我们将在有生之年见到这个美好世界，问题是我们需要做好充分的准备。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;构级VC机构Andreessen Horowitz的合伙人Frank Chen对自动驾驶汽车总结了16个问题，此文记录并进行技术解读。&lt;br
+    
+    </summary>
+    
+      <category term="应用" scheme="https://yangbo.tech/categories/%E5%BA%94%E7%94%A8/"/>
+    
+    
+      <category term="无人车" scheme="https://yangbo.tech/tags/%E6%97%A0%E4%BA%BA%E8%BD%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>在Android Studio中发布Library到jCenter本地仓库</title>
