@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yangbo.tech/"/>
-  <updated>2017-03-02T05:08:15.000Z</updated>
+  <updated>2017-03-04T10:01:12.000Z</updated>
   <id>https://yangbo.tech/</id>
   
   <author>
@@ -14,6 +14,487 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Web开发资源列表</title>
+    <link href="https://yangbo.tech/2017/03/03/2017-03-03-awesome-web/"/>
+    <id>https://yangbo.tech/2017/03/03/2017-03-03-awesome-web/</id>
+    <published>2017-03-03T09:28:00.000Z</published>
+    <updated>2017-03-04T10:01:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Web开发资源列表<br><a href="https://github.com/alphayang/awesome-web" target="_blank" rel="external">Github repo</a></p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- MarkdownTOC depth=4 -->
+<ul>
+<li><a href="#browser-tools">浏览器工具</a></li>
+<li><a href="#browser-capability">浏览器功能</a></li>
+<li><a href="#tutorial">文档和教程</a></li>
+<li><a href="#online-editor">在线代码编辑器</a></li>
+<li><a href="#hosting">托管</a></li>
+<li><a href="#lint-validator">代码检测和验证工具</a></li>
+<li><a href="#test">测试</a></li>
+<li><a href="#lib">库和包管理器</a></li>
+<li><a href="#spec">标准和规范</a></li>
+<li><a href="#books">书</a></li>
+<li><a href="#stats-archive">统计和归档数据</a></li>
+<li><a href="#other">其它</a></li>
+</ul>
+<!-- /MarkdownTOC -->
+<p><a name="browser-tools"></a></p>
+<h2 id="浏览器工具"><a href="#浏览器工具" class="headerlink" title="浏览器工具"></a>浏览器工具</h2><ul>
+<li><p><a href="http://code.google.com/chrome/devtools/docs/overview.html" target="_blank" rel="external">Chrome Dev Tools</a><br>Chrome浏览器内置开发工具，实时编辑HTML、CSS和JavaScript，还可在<br><a href="http://code.google.com/chrome/devtools/docs/console.html" target="_blank" rel="external">console</a>中运行代码.</p>
+</li>
+<li><p><a href="https://developer.mozilla.org/tools" target="_blank" rel="external">Firefox Developer Tools</a></p>
+</li>
+</ul>
+<p>Firefox的开发者工具:工具 -&gt; Web Developer。</p>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/documentation/f12-devtools-guide/" target="_blank" rel="external">Microsoft Edge Developer Tools (F12) Tools</a></li>
+</ul>
+<p>IE的开发者工具。</p>
+<ul>
+<li><a href="http://www.opera.com/dragonfly/" target="_blank" rel="external">Opera Dragonfly</a></li>
+</ul>
+<p>Opera 工具.</p>
+<p><a name="browser-capability"></a></p>
+<h2 id="浏览器功能"><a href="#浏览器功能" class="headerlink" title="浏览器功能"></a>浏览器功能</h2><ul>
+<li><a href="http://caniuse.com" target="_blank" rel="external">caniuse.com</a></li>
+</ul>
+<p>手机和桌面浏览器的功能，带链接到各自的文档。</p>
+<ul>
+<li><a href="http://chromestatus.com" target="_blank" rel="external">chromestatus.com</a></li>
+</ul>
+<p>Web平台特性支持和示例，能看到将要发布的功能，可以使用Chrome Canary进行测试。Blink作为Chromium的渲染引擎，在blink-dev论坛中也有一些非常有趣的讨论。</p>
+<ul>
+<li><a href="https://groups.google.com/a/chromium.org/forum/#!forum/blink-dev" target="_blank" rel="external">blink-dev</a></li>
+</ul>
+<p>可以查看Chrome将有哪些新功能。</p>
+<ul>
+<li><a href="http://status.modern.ie/" target="_blank" rel="external">status.modern.ie</a></li>
+</ul>
+<p>Internet Explorer的状态和路线图。</p>
+<ul>
+<li><a href="https://kangax.github.io/compat-table/es6/" target="_blank" rel="external">Kangax</a></li>
+</ul>
+<p>ECMAScript 兼容性一览.</p>
+<ul>
+<li><a href="https://whatwebcando.today/" target="_blank" rel="external">whatwebcando.today</a></li>
+</ul>
+<p>浏览器功能大全，带有示例链接和支持信息。</p>
+<ul>
+<li><a href="http://mobilehtml5.org/" target="_blank" rel="external">mobilehtml5.org</a></li>
+</ul>
+<p>手机浏览器的功能。</p>
+<ul>
+<li><a href="http://html5please.com" target="_blank" rel="external">html5please.com</a></li>
+</ul>
+<p>HTML、 CSS 和 JavaScript 特性: flux中有什么, 什么是flakey, 能用来做些什么。</p>
+<ul>
+<li><a href="http://css3test.com/" target="_blank" rel="external">css3test.com</a></li>
+</ul>
+<p>测试你的浏览器CSS3支持。</p>
+<ul>
+<li><a href="http://www.robohornet.org/" target="_blank" rel="external">Robohornet</a></li>
+</ul>
+<p>使用真实用例进行浏览器测试而不只是纯粹的JavaScript性能测试。</p>
+<ul>
+<li><p><a href="http://status.modern.ie/" target="_blank" rel="external">status modern ie</a><br>类似于Chrome Status但是针对 Edge 和 Internet Explorer，有当前状态和路线图。</p>
+</li>
+<li><p><a href="https://kangax.github.io/compat-table/es6/" target="_blank" rel="external">ES6 compatibility</a><br>从服务器端和浏览器的ECMAScript兼容性列表。</p>
+</li>
+</ul>
+<p><a name="tutorial"></a></p>
+<h2 id="文档和教程"><a href="#文档和教程" class="headerlink" title="文档和教程"></a>文档和教程</h2><ul>
+<li><a href="https://www.khanacademy.org/" target="_blank" rel="external">Khan Academy</a></li>
+</ul>
+<p>大量的计算机科技入门教程。</p>
+<ul>
+<li><a href="http://www.codecademy.com/tracks" target="_blank" rel="external">Code Academy</a></li>
+</ul>
+<p>简明的HTML、CSS和JavaScript互动课程。</p>
+<ul>
+<li><a href="https://www.codewars.com/?language=javascript" target="_blank" rel="external">Code Wars</a></li>
+</ul>
+<p>包括JavaScript的互动学习环境。</p>
+<ul>
+<li><a href="http://tutorials.codebar.io/" target="_blank" rel="external">Codebar</a></li>
+</ul>
+<p>关于HTML、CSS和JavaScript及其它语言的简单教程，适合龟速网络使用者查看。</p>
+<ul>
+<li>Udacity</li>
+</ul>
+<p>由很多制作精良的Web互动课程:</p>
+<ul>
+<li><p><a href="https://www.udacity.com/course/viewer#!/c-ud304/l-2617868617/m-2698138588" target="_blank" rel="external">HTML + CSS Intro</a></p>
+</li>
+<li><p><a href="https://www.udacity.com/course/javascript-basics--ud804" target="_blank" rel="external">JavaScript Basics</a></p>
+</li>
+<li><p><a href="http://www.20thingsilearned.com/en-US" target="_blank" rel="external">20 things I learned about the Web</a></p>
+</li>
+</ul>
+<p>非常好看的Web技术入门在线书籍。</p>
+<ul>
+<li><a href="http://www.2ality.com/2013/06/basic-javascript.html" target="_blank" rel="external">Basic JavaScript</a></li>
+</ul>
+<p>非常用心的介绍性文章。</p>
+<ul>
+<li><a href="http://stackoverflow.com" target="_blank" rel="external">stackoverflow.com</a></li>
+</ul>
+<p>询问或是查找web相关问题高质量答案的地方，没有之一。有技术问题第一个要先搜索的地方。</p>
+<ul>
+<li><a href="http://html5rocks.com" target="_blank" rel="external">html5rocks.com</a> and <a href="http://updates.html5rocks.com/" target="_blank" rel="external">updates.html5rocks.com</a></li>
+</ul>
+<p>有最新的HTML、CSS和JavaScript教程和示例。</p>
+<ul>
+<li><a href="http://www.w3.org/community/webed/wiki/HTML/Elements" target="_blank" rel="external">W3C list of elements</a></li>
+</ul>
+<p>最新最全面的组件、标记和事件列表，且都带有示例。</p>
+<ul>
+<li><a href="https://github.com/sw4/revert.css" target="_blank" rel="external">Default browser stylesheets</a></li>
+</ul>
+<p>HTML组件的默认样式。</p>
+<ul>
+<li><a href="http://developer.mozilla.org" target="_blank" rel="external">MDN</a></li>
+</ul>
+<p>Mozilla Developer Network: 由Mozilla员工和成百上千的志愿者维护，支持多个本地化语言的示例，教程和参考文档。</p>
+<ul>
+<li><a href="http://devdocs.io/" target="_blank" rel="external">devdocs.io</a></li>
+</ul>
+<p>可下载的web关键技术文档。</p>
+<ul>
+<li><a href="http://diveintohtml5.info" target="_blank" rel="external">diveintohtml5.info</a></li>
+</ul>
+<p>独一无二，精心编写的关于HTML5的一切，包括如何入门及发展历史。</p>
+<ul>
+<li><a href="https://developers.google.com/web/fundamentals/" target="_blank" rel="external">Web Fundamentals</a></li>
+</ul>
+<p>跨设备web开发的最佳实践。</p>
+<ul>
+<li><a href="http://html5doctor.com" target="_blank" rel="external">html5doctor.com</a></li>
+</ul>
+<p>HTML, CSS 和 JavaScript的文章和教程 .</p>
+<ul>
+<li><a href="http://www.quirksmode.org/" target="_blank" rel="external">Quirksmode</a></li>
+</ul>
+<p>精通浏览器，有一系列主题的深度文章。</p>
+<ul>
+<li><a href="http://reference.sitepoint.com/" target="_blank" rel="external">Sitepoint</a></li>
+</ul>
+<p>著名出版社的参考文档。</p>
+<ul>
+<li><a href="http://msdn.microsoft.com/en-us/ie/aa740476.aspx" target="_blank" rel="external">MSDN</a></li>
+</ul>
+<p>微软家的HTML、CSS和JavaScript文档。</p>
+<ul>
+<li><a href="http://css-tricks.com/" target="_blank" rel="external">CSS Tricks</a></li>
+</ul>
+<p>关于CSS的深度文章。</p>
+<ul>
+<li><a href="https://www.smashingmagazine.com/" target="_blank" rel="external">Smashing Magazine</a></li>
+</ul>
+<p>跨设备web设计、工具和技术。</p>
+<ul>
+<li><a href="https://sites.google.com/a/google.com/chrome-writers/ramping-up/external-materials" target="_blank" rel="external">Chrome Developer Docs Team Learning Materials</a></li>
+</ul>
+<p>重点关注由Chrome开发工程师维护的站点，每个链接的资源都进行了分类和评价。</p>
+<ul>
+<li><a href="http://html5search.com" target="_blank" rel="external">html5search.com</a></li>
+</ul>
+<p>由Googler Paul Kinlan创建的站点用来搜索高质量的web文档，如果有使用<a href="http://w3schools.com" target="_blank" rel="external">w3schools.com</a>, 牢记 <a href="http://w3fools.com" target="_blank" rel="external"> w3fools.com</a>上的警告。还要注意的是web标准和规范同样也是文档，看下看。</p>
+<ul>
+<li><a href="http://webplatform.org" target="_blank" rel="external">webplatform.org</a></li>
+</ul>
+<p>跨行业构建web文档的项目，虽已无人维护但还是有一些有用的信息。</p>
+<p><a name="online-editor"></a></p>
+<h2 id="在线代码编辑器"><a href="#在线代码编辑器" class="headerlink" title="在线代码编辑器"></a>在线代码编辑器</h2><ul>
+<li><a href="http://jsbin.com/" target="_blank" rel="external">JS Bin</a></li>
+</ul>
+<p>实时编辑HTML、CSS 和 JavaScript  – 可以保存或链接分享。</p>
+<ul>
+<li><a href="http://jsfiddle.net/" target="_blank" rel="external">jsFiddle</a></li>
+</ul>
+<p>HTML、CSS和JavaScript的在线编辑演示。</p>
+<ul>
+<li><a href="http://codepen.io/" target="_blank" rel="external">CodePen</a></li>
+</ul>
+<p>前端演示。</p>
+<ul>
+<li><a href="https://thimble.webmaker.org/" target="_blank" rel="external">Mozilla Thimble</a></li>
+</ul>
+<p>由Mozilla提供的在线网页编辑和发布工具。</p>
+<ul>
+<li><a href="http://www.codecademy.com/courses/programming-intro/" target="_blank" rel="external">Codecademy</a></li>
+</ul>
+<p>入门的好地方。</p>
+<ul>
+<li><a href="http://code.google.com/apis/ajax/playground/" target="_blank" rel="external">Google code playground</a></li>
+</ul>
+<p>Google的JavaScript APIs示例。</p>
+<p><a name="hosting"></a></p>
+<h2 id="托管"><a href="#托管" class="headerlink" title="托管"></a>托管</h2><ul>
+<li><a href="http://jmcglone.com/guides/github-pages/" target="_blank" rel="external">Creating and Hosting a Personal Site on GitHub</a></li>
+</ul>
+<p>介绍Git, GitHub, GitHub Pages 和 Jekyll.</p>
+<p><a name="lint-validator"></a></p>
+<h2 id="代码检测和验证工具"><a href="#代码检测和验证工具" class="headerlink" title="代码检测和验证工具"></a>代码检测和验证工具</h2><ul>
+<li><a href="http://validator.w3.org/" target="_blank" rel="external">W3C HTML validator</a></li>
+</ul>
+<p>HTML 验证工具。</p>
+<ul>
+<li><a href="http://htmlhint.com" target="_blank" rel="external">HTMLHint</a></li>
+</ul>
+<p>HTML 分析工具。</p>
+<ul>
+<li><a href="http://jigsaw.w3.org/css-validator/" target="_blank" rel="external">W3C CSS validator</a></li>
+</ul>
+<p>CSS 验证工具。</p>
+<ul>
+<li><a href="https://github.com/CSSLint/csslint" target="_blank" rel="external">CSSLint</a></li>
+</ul>
+<p>CSS 检测，有编辑器的插件。</p>
+<ul>
+<li><a href="http://cssbeautify.com/" target="_blank" rel="external">CSS Beautify</a></li>
+</ul>
+<p>由Sencha Labs提供的开源CSS格式化工具。</p>
+<ul>
+<li><a href="http://eslint.org/" target="_blank" rel="external">ESLint</a></li>
+</ul>
+<p>JavaScript 检测工具，可以Sublime等编辑器中作为插件使用，还可用于如Gulp和Grunt等构建工具中。</p>
+<ul>
+<li><a href="http://www.jshint.com/" target="_blank" rel="external">JSHint</a></li>
+</ul>
+<p>JavaScript 检测工具(类似 <a href="http://jslint.com" target="_blank" rel="external">JSLint</a>但更易配置，有编辑器和Grunt插件。)。</p>
+<ul>
+<li><a href="http://jsonlint.com/" target="_blank" rel="external">JSONLint</a></li>
+</ul>
+<p>JSON 验证工具.</p>
+<ul>
+<li><a href="http://jsbeautifier.org/" target="_blank" rel="external">JS Beautifier</a></li>
+</ul>
+<p>格式化JavaScript和HTML的开源工具。</p>
+<p><a name="test"></a></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><ul>
+<li><a href="http://code.google.com/speed/page-speed/" target="_blank" rel="external">Page Speed Tools</a></li>
+</ul>
+<p>Google提供的工具，应用web性能的最佳实践来帮助开发者优化网页，并有用户体验和移动测试。</p>
+<ul>
+<li><a href="http://www.webpagetest.org/" target="_blank" rel="external">Web Page Test</a></li>
+</ul>
+<p>跨浏览器页面加载测试，可指定使用分布在全球的不同地点和网络环境的服务器。</p>
+<ul>
+<li><a href="https://headspin.io" target="_blank" rel="external">headspin.io</a></li>
+</ul>
+<p>使用全球不同的移动网络进行测试和监控。</p>
+<ul>
+<li><a href="https://www.charlesproxy.com/" target="_blank" rel="external">Charles Proxy</a></li>
+</ul>
+<p>Web高度代理：可以用来 <a href="http://www.charlesproxy.com/documentation/proxying/throttling/" target="_blank" rel="external">设置带宽和延迟</a>.</p>
+<ul>
+<li><a href="http://facebook.github.io/augmented-traffic-control/" target="_blank" rel="external">Augmented Traffic Control (ATC)</a></li>
+</ul>
+<p>由Facebook提供的一整套开源应用，可用来是控制流量和模拟低速网络环境。</p>
+<ul>
+<li><a href="http://www.telerik.com/fiddler" target="_blank" rel="external">Fiddler</a></li>
+</ul>
+<p>Fiddler 基于<a href="http://www.geoedge.com/faq" target="_blank" rel="external">GeoEdge</a>进行代理，使用自定义规则可以模拟网络速度。</p>
+<ul>
+<li><a href="http://jsperf.com/" target="_blank" rel="external">jsPerf</a></li>
+</ul>
+<p>创建、分享和对比测试用例。</p>
+<ul>
+<li><a href="http://nshipster.com/network-link-conditioner/" target="_blank" rel="external">Network Link Conditioner</a></li>
+</ul>
+<p>OS X和iOS的网络模拟工具。</p>
+<ul>
+<li><a href="https://developer.chrome.com/devtools/docs/device-mode#network-conditions" target="_blank" rel="external">Chrome DevTools emulation mode throttling</a></li>
+</ul>
+<p>Chrome开发工具中的网络模拟模式</p>
+<ul>
+<li><a href="http://webdevchecklist.com/" target="_blank" rel="external">Web Developer Checklist</a></li>
+</ul>
+<p>高质量web应用和网站的检查列表。</p>
+<ul>
+<li><a href="https://www.browserstack.com/" target="_blank" rel="external">browserstack.com</a></li>
+</ul>
+<p>实时的在线浏览器测试 - 对于开源项目免费使用。</p>
+<ul>
+<li><a href="http://whatdoesmysitecost.com/" target="_blank" rel="external">whatdoesmysitecost.com/</a></li>
+</ul>
+<p>预估流量费用，对于新兴市场的用户来说流量费用的高低极其重要。</p>
+<ul>
+<li><a href="https://github.com/GoogleChrome/MiniMobileDeviceLab" target="_blank" rel="external">Google Mini Mobile Device Lab</a></li>
+</ul>
+<p>进行跨设备测试的框架，支持 Android, iOS, Windows (包括 phone, RT , desktop)和 Chrome OS。</p>
+<ul>
+<li><a href="https://github.com/openstf/stf" target="_blank" rel="external">openstf</a></li>
+</ul>
+<p>一个简单的web应用支持跨Android进行网页测试。<br><a name="lib"></a></p>
+<h2 id="库和包管理器"><a href="#库和包管理器" class="headerlink" title="库和包管理器"></a>库和包管理器</h2><ul>
+<li><a href="https://css-tricks.com/gulp-for-beginners/" target="_blank" rel="external">Gulp</a></li>
+</ul>
+<p>前端构建工具。</p>
+<ul>
+<li><a href="http://gruntjs.com/" target="_blank" rel="external">Grunt</a></li>
+</ul>
+<p>JavaScript任务启动器。</p>
+<p>注意参考<a href="http://blog.keithcirkel.co.uk/why-we-should-stop-using-grunt/" target="_blank" rel="external">Why we should stop using Grunt &amp; Gulp</a>.</p>
+<ul>
+<li><a href="http://yeoman.io/" target="_blank" rel="external">Yeoman</a></li>
+</ul>
+<p>构建最新web应用的工具流工具。</p>
+<ul>
+<li><a href="http://bower.io/" target="_blank" rel="external">Bower</a></li>
+</ul>
+<p>包管理器。</p>
+<ul>
+<li><a href="http://www.modernizr.com/" target="_blank" rel="external">Modernizr</a></li>
+</ul>
+<p>特性支持检测库。</p>
+<ul>
+<li><a href="http://jquery.com" target="_blank" rel="external">jQuery</a></li>
+</ul>
+<p>著名的带有UI和widget插件的跨平台JavaScript库。<br>但有时你可能更不需要它 <a href="http://youmightnotneedjquery.com/" target="_blank" rel="external">youmightnotneedjquery.com</a>。</p>
+<ul>
+<li><a href="https://developers.google.com/closure/" target="_blank" rel="external">Closure</a></li>
+</ul>
+<p>JavaScript优化检查工具。</p>
+<ul>
+<li><a href="http://sass-lang.com/" target="_blank" rel="external">Sass</a></li>
+</ul>
+<p>CSS变量、继承及混合等。</p>
+<ul>
+<li><a href="http://lesscss.org/" target="_blank" rel="external">Less</a></li>
+</ul>
+<p>跨浏览器 CSS 库。</p>
+<ul>
+<li><a href="http://backbone.js" target="_blank" rel="external">backbone.js</a></li>
+</ul>
+<p>MVC 框架。</p>
+<ul>
+<li><a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-Browser-Polyfills" target="_blank" rel="external">HTML5 cross-browser polyfills</a></li>
+</ul>
+<p>跨浏览器的HTML5特性支持，其实就是如果浏览器厂家没有用C/C++实现的功能在这里用JavaScript模拟出来。</p>
+<ul>
+<li><a href="http://www.sencha.com/" target="_blank" rel="external">Sencha and Ext JS</a></li>
+</ul>
+<p>跨浏览器HTML5 web应用框架。</p>
+<ul>
+<li><a href="http://sproutcore.com/" target="_blank" rel="external">Sproutcore</a></li>
+</ul>
+<p>Web应用框架</p>
+<p><a name="spec"></a></p>
+<h2 id="标准和规范"><a href="#标准和规范" class="headerlink" title="标准和规范"></a>标准和规范</h2><ul>
+<li><a href="http://www.w3.org/standards/" target="_blank" rel="external">W3C</a></li>
+</ul>
+<p>关于HTML、CSS。</p>
+<ul>
+<li><a href="http://www.whatwg.org/http://www.whatwg.org/specs/web-apps/current-work/multipage/" target="_blank" rel="external">WHATWG</a></li>
+</ul>
+<p>HTML最新标准。</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/ECMAScript" target="_blank" rel="external">ECMAScript</a></li>
+</ul>
+<p>JavaScript只是它的一种方言。</p>
+<p><a name="books"></a></p>
+<h2 id="书"><a href="#书" class="headerlink" title="书"></a>书</h2><ul>
+<li><a href="http://www.amazon.co.uk/JavaScript-Definitive-Guide-Guides/dp/0596805527/ref=sr_1_1?ie=UTF8&amp;qid=1326894097&amp;sr=8-1" target="_blank" rel="external">JavaScript: The Definitive Guide</a></li>
+</ul>
+<p>作者David Flanagan</p>
+<p>广受好评的经典书籍，纸版。</p>
+<ul>
+<li><a href="http://eloquentjavascript.net/" target="_blank" rel="external">Eloquent JavaScript</a></li>
+</ul>
+<p>作者Marijn Haverbeke (在线阅读或纸版)</p>
+<p>JavaScript编程的入门好书，并有大量的可编辑在线示例。</p>
+<ul>
+<li><a href="http://www.amazon.co.uk/Dont-Make-Me-Think-Usability/dp/0321344758" target="_blank" rel="external">Don’t Make Me Think</a></li>
+</ul>
+<p>作者Steve Krug</p>
+<p>用户界面设计的经典之作，纸版值得拥有和珍藏。</p>
+<ul>
+<li><a href="http://www.amazon.com/gp/product/0596517742/ref=as_li_ss_tl?ie=UTF8&amp;tag=jspro-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0596517742" target="_blank" rel="external">JavaScript: The Good Parts</a></li>
+</ul>
+<p>作者Douglas Crockford</p>
+<p>作者的文章都值得一读，特别是关于JavaScript的<a href="http://yuiblog.com/crockford/" target="_blank" rel="external">视频课程</a>。</p>
+<p><a name="stats-archive"></a></p>
+<h2 id="统计和归档数据"><a href="#统计和归档数据" class="headerlink" title="统计和归档数据"></a>统计和归档数据</h2><ul>
+<li><a href="http://en.wikipedia.org/wiki/Usage_share_of_web_browsers" target="_blank" rel="external">Wikipedia browser usage share</a></li>
+</ul>
+<p>多渠道的统计对比。</p>
+<ul>
+<li><a href="http://gs.statcounter.com" target="_blank" rel="external">Statcounter</a></li>
+</ul>
+<p>浏览器份额图表，多种维度。</p>
+<ul>
+<li><a href="https://www.appannie.com" target="_blank" rel="external">App Annie</a></li>
+</ul>
+<p>原生应用的统计和分析。</p>
+<ul>
+<li><a href="https://docs.google.com/document/d/1LV55gzhvvfIvCTrn9yx6kvRrtXgjxIrzbQT-hSLcHZ0/edit#heading=h.g19h01g1apr1" target="_blank" rel="external">Building for billions</a></li>
+</ul>
+<p>新兴市场的数据和资源。</p>
+<ul>
+<li><a href="http://httparchive.org/" target="_blank" rel="external">HTTP Archive</a></li>
+</ul>
+<p>Web技术的趋势，实用统计和网站性能。</p>
+<ul>
+<li><a href="http://archive.org/web/" target="_blank" rel="external">Wayback Machine</a></li>
+</ul>
+<p>包含4000亿页面的归档服务。</p>
+<ul>
+<li><a href="http://www.itu.int/net/pressoffice/press_releases/2015/17.aspx#.VboJhxNVjUA" target="_blank" rel="external">ITU stats</a></li>
+</ul>
+<p>2015年5月。</p>
+<ul>
+<li><a href="https://gsmaintelligence.com/" target="_blank" rel="external">GSMA</a></li>
+</ul>
+<p>全球移动数据 (需要登陆)。</p>
+<ul>
+<li><p><a href="http://mobileconnectivityindex.com" target="_blank" rel="external">GSMA Mobile Connectivity Index</a></p>
+<p>2016年6月。</p>
+</li>
+<li><p><a href="https://en.wikipedia.org/wiki/List_of_countries_by_number_of_Internet_users" target="_blank" rel="external">Wikipedia list of countries by number of Internet users</a></p>
+</li>
+<li><p><a href="http://gs.statcounter.com/#mobile+tablet-browser-ww-monthly-201502-201606" target="_blank" rel="external">StatCounter global browser share</a></p>
+</li>
+</ul>
+<p>数据中也包含功能机。</p>
+<ul>
+<li><a href="http://opensignal.com/reports/2015/08/android-fragmentation/" target="_blank" rel="external">opensignal.com/reports/2015/08/android-fragmentation</a></li>
+</ul>
+<p>2015年8月 (&gt;24000 单独设备数, &gt;1000 品牌)。</p>
+<ul>
+<li><a href="http://www.productchart.com/smartphones/" target="_blank" rel="external">Device chart</a></li>
+</ul>
+<p>根据屏幕尺寸和价格生成的设备图表。</p>
+<ul>
+<li><a href="http://www.internetlivestats.com/" target="_blank" rel="external">Internet Live Stats</a></li>
+</ul>
+<p>实时的网络统计。</p>
+<ul>
+<li><a href="http://www.internetsociety.org/map/global-internet-report/" target="_blank" rel="external">Global Internet penetration</a></li>
+</ul>
+<p>由互联网协会提供的全球互联网用户渗透率。</p>
+<ul>
+<li><a href="http://www.economist.com/content/big-mac-index" target="_blank" rel="external">The Big Mac Index</a></li>
+</ul>
+<p>麦当劳巨无霸指数，大于60个国家, 用来衡量 <a href="https://en.wikipedia.org/wiki/Purchasing_power_parity" target="_blank" rel="external">平均购买力</a>。</p>
+<p><a name="other"></a></p>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><ul>
+<li><a href="http://lorempixel.com/" target="_blank" rel="external">lorempixel</a></li>
+</ul>
+<p>免费的占位图片。</p>
+<h2 id="拾遗补缺"><a href="#拾遗补缺" class="headerlink" title="拾遗补缺"></a>拾遗补缺</h2><p> 欢迎发送PR到<a href="https://github.com/alphayang/awesome-web" target="_blank" rel="external">Github repo</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Web开发资源列表&lt;br&gt;&lt;a href=&quot;https://github.com/alphayang/awesome-web&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Github repo&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;目录&quot;&gt;&lt;a href=&quot;#
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>自动驾驶汽车16问</title>
